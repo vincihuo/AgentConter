@@ -1,0 +1,9 @@
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.IData.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.IData.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.Entity.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.Kernel.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.Utils.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\bin\Release\Game.Entity.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\obj\Release\Game.IData.csprojResolveAssemblyReference.cache
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\obj\Release\Game.IData.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.IData\obj\Release\Game.IData.pdb

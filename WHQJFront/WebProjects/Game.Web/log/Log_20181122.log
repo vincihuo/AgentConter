@@ -1,0 +1,10 @@
+[2018-11-22 17:58:11,567] [::1] [Agent_DataHandler] 	
+[消息]：下面一条为接口故障信息
+[2018-11-22 17:58:11,583] [::1] [Agent_DataHandler] 	
+[当前堆栈]：   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Game.Utils.EnumDescription.GetFieldTexts(Type enumType, SortType sortType)
+   在 Game.Utils.EnumDescription.GetFieldText(Object enumValue)
+   在 Game.Facade.Enum.EnumHelper.GetDesc(Object value) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Enum\EnumList.cs:行号 212
+   在 Game.Web.Card.DataHandler.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Card\DataHandler.ashx.cs:行号 96
+[错误]：未将对象引用设置到对象的实例。

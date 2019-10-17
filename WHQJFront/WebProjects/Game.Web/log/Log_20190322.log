@@ -1,0 +1,44 @@
+[2019-03-22 17:07:16,332] [::1] [LogInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-03-22 17:07:16,364] [::1] [LogInterface] 	
+[当前堆栈]：   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.get_Form()
+   在 Game.Web.WS.LogInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\LogInterface.ashx.cs:行号 31
+[错误]：从客户端(logtext="...:05:02 PM <?xml version="1.0" ...")中检测到有潜在危险的 Request.Form 值。
+[2019-03-22 17:09:54,645] [::1] [LogInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-03-22 17:09:54,666] [::1] [LogInterface] 	
+[当前堆栈]：   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.get_Form()
+   在 Game.Web.WS.LogInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\LogInterface.ashx.cs:行号 31
+[错误]：从客户端(logtext="...:05:02 PM <?xml version="1.0" ...")中检测到有潜在危险的 Request.Form 值。
+[2019-03-22 17:25:25,868] [::1] [LogInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-03-22 17:25:25,894] [::1] [LogInterface] 	
+[当前堆栈]：   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.get_Form()
+   在 Game.Web.WS.LogInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\LogInterface.ashx.cs:行号 32
+[错误]：从客户端(logtext="...:05:02 PM <?xml version="1.0" ...")中检测到有潜在危险的 Request.Form 值。
+[2019-03-22 17:34:37,310] [::1] [LogInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-03-22 17:34:37,335] [::1] [LogInterface] 	
+[当前堆栈]：   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.get_Form()
+   在 Game.Web.WS.LogInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\LogInterface.ashx.cs:行号 32
+[错误]：从客户端(logtext="...:05:02 PM <?xml version="1.0" ...")中检测到有潜在危险的 Request.Form 值。
+[2019-03-22 17:36:25,462] [::1] [LogInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-03-22 17:36:25,484] [::1] [LogInterface] 	
+[当前堆栈]：   在 System.Web.HttpRequest.ValidateString(String value, String collectionKey, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.ValidateHttpValueCollection(HttpValueCollection collection, RequestValidationSource requestCollection)
+   在 System.Web.HttpRequest.get_Form()
+   在 Game.Web.WS.LogInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\LogInterface.ashx.cs:行号 32
+[错误]：从客户端(logtext="...:05:02 PM <?xml version="1.0" ...")中检测到有潜在危险的 Request.Form 值。
+[2019-03-22 17:38:38,987] [::1] [http://localhost:32841/WS/LogInterface.ashx] 	
+[消息]：日志字符串长度：8139
+[2019-03-22 17:38:39,697] [::1] [http://localhost:32841/WS/LogInterface.ashx] 	
+[消息]：日志文件大小：8700

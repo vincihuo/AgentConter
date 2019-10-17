@@ -1,0 +1,13 @@
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Facade.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Facade.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Data.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Entity.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.IData.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Kernel.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Utils.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Data.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.Entity.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\bin\Debug\Game.IData.pdb
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\obj\Debug\Game.Facade.csprojResolveAssemblyReference.cache
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\obj\Debug\Game.Facade.dll
+F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Facade\obj\Debug\Game.Facade.pdb

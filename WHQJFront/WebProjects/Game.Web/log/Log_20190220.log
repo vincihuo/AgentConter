@@ -1,0 +1,6 @@
+[2019-02-20 15:28:21,905] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-20 15:28:21,914] [::1] [MobileInterface] 	
+[当前堆栈]：   在 Game.Web.WS.NewMoblieInterface.GetAgentInfo() 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1336
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 273
+[错误]：未将对象引用设置到对象的实例。

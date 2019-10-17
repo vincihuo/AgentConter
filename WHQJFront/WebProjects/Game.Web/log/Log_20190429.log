@@ -1,0 +1,181 @@
+[2019-04-29 14:43:04,914] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 14:43:04,925] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 Game.Kernel.DbHelper.ExecuteDataset(DbConnection connection, CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteDataset(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Data.AccountsDataProvider.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 322
+   在 Game.Facade.AccountsFacade.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 239
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1231
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：列名 'Mobile' 无效。
+列名 'date' 无效。
+列名 'date' 无效。
+[2019-04-29 14:43:07,437] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 14:43:07,438] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 Game.Kernel.DbHelper.ExecuteDataset(DbConnection connection, CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteDataset(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Data.AccountsDataProvider.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 322
+   在 Game.Facade.AccountsFacade.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 239
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1231
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：列名 'Mobile' 无效。
+列名 'date' 无效。
+列名 'date' 无效。
+[2019-04-29 14:55:37,094] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 14:55:37,095] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 Game.Kernel.DbHelper.ExecuteDataset(DbConnection connection, CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteDataset(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Data.AccountsDataProvider.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 322
+   在 Game.Facade.AccountsFacade.VaildSendOnTime(String mobile, Int32 minute) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 239
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1231
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：列名 'Mobile' 无效。
+列名 'date' 无效。
+列名 'date' 无效。
+[2019-04-29 14:57:49,449] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 14:57:49,462] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   在 Game.Kernel.DbHelper.ExecuteScalar(DbConnection connection, CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteScalar(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteScalarToStr(CommandType commandType, String commandText)
+   在 Game.Data.AccountsDataProvider.GetSMSLogCount(String Mobile) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 281
+   在 Game.Facade.AccountsFacade.GetSMSLogCount(String Mobile) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 214
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1245
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：列名 'Mobile' 无效。
+列名 'date' 无效。
+列名 'date' 无效。
+列名 'id' 无效。
+[2019-04-29 14:58:20,993] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 14:58:21,003] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteScalar()
+   在 Game.Kernel.DbHelper.ExecuteScalar(DbConnection connection, CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteScalar(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteScalarToStr(CommandType commandType, String commandText)
+   在 Game.Data.AccountsDataProvider.GetSMSLogCount(String Mobile) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 281
+   在 Game.Facade.AccountsFacade.GetSMSLogCount(String Mobile) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 214
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1245
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：列名 'Mobile' 无效。
+列名 'date' 无效。
+列名 'date' 无效。
+列名 'id' 无效。
+[2019-04-29 15:04:48,150] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-04-29 15:04:48,150] [127.0.0.1] [http://localhost:32841/Card/Index.aspx] 	
+[当前堆栈]：   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 Game.Kernel.DbHelper.ExecuteDataset(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteObject[T](String commandText, List`1 prams)
+   在 Game.Data.AccountsDataProvider.GetSystemStatusInfo(String key) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 41
+   在 Game.Facade.AccountsFacade.GetSystemStatusInfo(String key) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 43
+   在 Game.Web.Card.Index..ctor() 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Card\Index.aspx.cs:行号 16
+   在 ASP.card_index_aspx..ctor() 位置 c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\d482167b\1368014d\App_Web_l4scjpbo.1.cs:行号 0
+   在 __ASP.FastObjectFactory_app_web_l4scjpbo.Create_ASP_card_index_aspx() 位置 c:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\root\d482167b\1368014d\App_Web_l4scjpbo.2.cs:行号 0
+   在 System.Web.Compilation.BuildResultCompiledType.CreateInstance()
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   在 System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   在 System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   在 System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+[错误]：连接超时时间已到。在尝试使用预登录握手确认时超过了此超时时间。这可能是因为预登录握手失败或服务器未能及时响应。  尝试连接到此服务器时花费的持续时间是 - [Pre-Login] initialization=38599；handshake=34；
+[2019-04-29 15:04:48,158] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 Game.Kernel.DbHelper.ExecuteDataset(CommandType commandType, String commandText, DbParameter[] commandParameters)
+   在 Game.Kernel.DbHelper.ExecuteObject[T](String commandText, List`1 prams)
+   在 Game.Data.AccountsDataProvider.GetSystemStatusInfo(String key) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Data\AccountsDataProvider.cs:行号 41
+   在 Game.Facade.AccountsFacade.GetSystemStatusInfo(String key) 位置 F:\work\SVN\旗舰版\WHQJFront\Services\Game.Facade\Facade\AccountsFacade.cs:行号 43
+   在 Game.Web.WS.NewMoblieInterface.GetCode(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 1228
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 257
+[错误]：连接超时时间已到。在尝试使用预登录握手确认时超过了此超时时间。这可能是因为预登录握手失败或服务器未能及时响应。  尝试连接到此服务器时花费的持续时间是 - [Pre-Login] initialization=38599；handshake=34；

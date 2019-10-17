@@ -1,0 +1,30 @@
+[2019-02-21 09:54:31,714] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-21 09:54:31,727] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Convert.ToByte(Int32 value)
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 294
+[错误]：值对于无符号的字节太大或太小。
+[2019-02-21 09:54:50,293] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-21 09:54:50,303] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Convert.ToByte(Int32 value)
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 294
+[错误]：值对于无符号的字节太大或太小。
+[2019-02-21 09:54:58,808] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-21 09:54:58,809] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Convert.ToByte(Int32 value)
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 294
+[错误]：值对于无符号的字节太大或太小。
+[2019-02-21 09:55:13,463] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-21 09:55:13,463] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Convert.ToByte(Int32 value)
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 294
+[错误]：值对于无符号的字节太大或太小。
+[2019-02-21 09:56:02,991] [::1] [MobileInterface] 	
+[消息]：下面一条为接口故障信息
+[2019-02-21 09:56:02,992] [::1] [MobileInterface] 	
+[当前堆栈]：   在 System.Convert.ToByte(Int32 value)
+   在 Game.Web.WS.NewMoblieInterface.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\WS\NewMoblieInterface.ashx.cs:行号 294
+[错误]：值对于无符号的字节太大或太小。

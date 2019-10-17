@@ -1,0 +1,203 @@
+3/22/2019 5:05:01 PM AndroidImpl  ===>>>  AndroidImpl
+3/22/2019 5:05:01 PM AndroidImpl  ===>>>  InitSDK === 
+3/22/2019 5:05:01 PM AndroidImpl  ===>>>  SetPlatformConfig === {"22":{"AppSecret":"bb2ee0b0e0b7984678eaa256dcf7df7e", "path":"/page/API/pages/share/share", "userName":"gh_afb25ac019c9@app", "Enable":"true", "AppId":"wx69011f46f6601f45", "BypassApproval":"false", "SortId":"5"}, "23":{"AppSecret":"bb2ee0b0e0b7984678eaa256dcf7df7e", "Enable":"true", "AppId":"wx69011f46f6601f45", "BypassApproval":"false", "SortId":"6"}, "37":{"AppSecret":"bb2ee0b0e0b7984678eaa256dcf7df7e", "Enable":"true", "AppId":"wx69011f46f6601f45", "SortId":"7"}}
+3/22/2019 5:05:01 PM 17:05:01.783-1: Init lua state cost: 0.06566954
+3/22/2019 5:05:02 PM 17:05:02.41-1: Register lua type cost time: 0.2496824
+3/22/2019 5:05:02 PM 运行在安卓平台
+3/22/2019 5:05:02 PM <?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+  <Url url="http://172.16.3.210:6504/Download/U3D/Pro" />
+</ROOT>
+3/22/2019 5:05:02 PM 加载游戏配置! url=>http://172.16.3.210:6504/Download/U3D/Pro/Android/Config/gameconfig.xml?xRand=9739
+3/22/2019 5:05:02 PM <?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+	  <ZServer ip="172.16.3.211" port="6801" />
+	  <FServer ip="172.16.3.211" port="6802" />
+	  <HttpUrl url="http://172.16.3.211:6511" />
+	  <ResUrl url="http://172.16.3.211:6514" />	  
+	  <Pay WechatAlipay="true" LQ="true" ApplePay="false" />
+	  <Login GuestLogin="true" AccountLogin="true" />
+	  <Invite TextInvite="true" />
+</ROOT>
+3/22/2019 5:05:02 PM Util.DataPath:D:/Project/UnityProject/GameAndroid/JingHua_Platform/Assets/../luaframework/ isExists:True  DebugMode:True
+3/22/2019 5:05:02 PM Tiled GPU perf. warning: RenderTexture color surface  (1334x750) was not cleared/discarded, doing <run with profiler for info>
+3/22/2019 5:05:02 PM 资源初始化结束
+3/22/2019 5:05:02 PM 17:05:02.253-5: LuaState start
+3/22/2019 5:05:02 PM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!GetHeadManager null 
+3/22/2019 5:05:02 PM False
+3/22/2019 5:05:02 PM CtrlManager.Init----->>>
+3/22/2019 5:05:02 PM CreatePanel url:file:///D:/Project/UnityProject/GameAndroid/JingHua_Platform/Assets/../luaframework/login.unity3d
+3/22/2019 5:05:02 PM LuaFramework InitOK--->>>
+3/22/2019 5:05:02 PM LoginPanel.Awake lua<<---88--->>LoginPanel
+3/22/2019 5:05:02 PM False
+3/22/2019 5:05:02 PM OnInit---->>>LoginPanel text:>
+3/22/2019 5:05:02 PM Start lua--->>LoginPanel
+3/22/2019 5:05:02 PM key:Key_BindWeChatInt:0  value:False
+3/22/2019 5:05:02 PM ++++++++++++++++++ StartPlayHallAudio ++++++++++++++++
+3/22/2019 5:05:02 PM CreateGameRes url:file:///D:/Project/UnityProject/GameAndroid/JingHua_Platform/Assets/../luaframework/Audios/background0.unity3d
+3/22/2019 5:05:02 PM 编辑器下不定位
+3/22/2019 5:05:02 PM StartCreatePanel------>>>>LoginPanel
+3/22/2019 5:05:02 PM LoginPanel.Start lua<<---88--->>
+3/22/2019 5:05:02 PM False
+3/22/2019 5:05:02 PM http://172.16.3.211:6511/WS/NewMoblieInterface.ashx?action=GetMobileLoginData&time=20190322170502&sign=310846D1A0296BA2985C540DB3433147 www.text=>{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "apiVersion": 20171017,
+    "valid": true,
+    "systemConfig": {
+      "IsOpenMall": 0,
+      "IsPayBindSpread": 1,
+      "BindSpreadPresent": 3000,
+      "RankingListType": 3,
+      "PayChannel": 3,
+      "DiamondBuyPropCount": 0,
+      "RealNameAuthentPresent": 0,
+      "EffectiveFriendGame": 1,
+      "IOSNotStorePaySwitch": 0,
+      "GoldBuyPropCount": 0,
+      "EnjoinInsure": 0,
+      "TransferStauts": 0,
+      "MobileBattleRecordMask": 7,
+      "IsOpenGameSignIn": 0,
+      "IsOpenRedemptionCenter": 0
+    },
+    "Groupconfig": {
+      "MaxMemberCount": 3,
+      "MaxCreateGroupCount": 10,
+      "CreateGroupTakeIngot": 0,
+      "CreateGroupDeductIngot": 1,
+      "MaxJoinGroupCount": 10,
+      "GroupPayType": 2,
+      "GroupPayTypeChange": 1,
+      "GroupRoomType": 3
+    },
+    "customerService": {
+      "Phone": "400-000-7043",
+      "WeiXin": "4000007043",
+      "QQ": "4000007043",
+      "Link": "http://172.16.3.211:6514//site/qrcustomer.png"
+    },
+    "systemNotice": [
+      {
+        "NoticeID": 1,
+        "NoticeTitle": "净网行动",
+        "MoblieContent": "尊敬的玩家，您好!\r\n自成立以来,我们一直致力于打造绿色、健康的游戏平台,坚持做健康向上的精神文化产品,并严格遵守国家相关法律法规,遵守各项行业监管规定。\r\n为整治网络环境,积极响应国家有关部门净化网络环境、规范游戏市场”的重要部署,秉承“倡导绿色游戏,禁止私下交易”的原则,对于违反国家相关法律规定的行为坚决“零容忍”！\r\n特此向广大玩家郑重申明:\r\n",
+        "PublisherTime": "2017-09-01 09:27:04",
+        "PlatformType": 1
+      },
+      {
+        "NoticeID": 2,
+        "NoticeTitle": "健康游戏公告",
+        "MoblieContent": "亲爱的玩家\r\n一、本平台仅供玩家娱乐休闲使用,请遵守游戏规则健康游戏,抵制赌博活动；二、所有游戏每局结束后的比分(仅代表对局的比分记录,且每间房间游戏结束时清零)或剩余金币及钻石,皆不具有任何货币价值；\r\n三、所有游戏APP,禁止任何用户使用我司产品进行赌博行为,用户基于游戏产生的金币、钻石店等,官方均不提供任何形式的回购、直接或变相兑换；\r\n四、请勿相信任何非官方渠道发布的信息,避免造成个人财务损失本平台会积极配合公安等监管部门,对涉及赌博等违法违规行为监督和处理。力求为广大玩家提供全面健康绿色的娱乐平台,坚决抵制低俗、不健康或涉及赌博等违规行为。",
+        "PublisherTime": "2018-07-27 15:19:19",
+        "PlatformType": 1
+      },
+      {
+        "NoticeID": 3,
+        "NoticeTitle": "游戏公告",
+        "MoblieContent": "0727更新内容：\r\n1.更新游戏音效；\r\n2.更新游戏UI界面，动画；\r\n3.新增游戏",
+        "PublisherTime": "2018-07-27 15:23:17",
+        "PlatformType": 1
+      }
+    ],
+    "adsList": [
+      {
+        "Title": "大厅广告",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/ads_1.jpg",
+        "LinkURL": "ad_to_createroom_action",
+        "SortID": 0,
+        "PlatformType": 1
+      },
+      {
+        "Title": "大厅广告",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/ads_2.jpg",
+        "LinkURL": "ad_to_video_action",
+        "SortID": 1,
+        "PlatformType": 1
+      },
+      {
+        "Title": "大厅广告",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/ads_3.jpg",
+        "LinkURL": "ad_to_identify_action",
+        "SortID": 2,
+        "PlatformType": 1
+      }
+    ],
+    "adsAlertList": [],
+    "activityList": [
+      {
+        "Title": "推广分享",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/44(1).png",
+        "LinkURL": "1",
+        "SortID": 0,
+        "PlatformType": 3
+      },
+      {
+        "Title": "内部看的，跳转签到系统",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/42(1).png",
+        "LinkURL": "1",
+        "SortID": 1,
+        "PlatformType": 2
+      },
+      {
+        "Title": "签到",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/45(1).png",
+        "LinkURL": "1",
+        "SortID": 2,
+        "PlatformType": 3
+      },
+      {
+        "Title": "内部看的，跳转商城系统",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/41(1).png",
+        "LinkURL": "4",
+        "SortID": 3,
+        "PlatformType": 2
+      },
+      {
+        "Title": "优惠多多 豪礼大放送",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/39.png",
+        "LinkURL": "4",
+        "SortID": 4,
+        "PlatformType": 3
+      },
+      {
+        "Title": "内部看的，跳转比赛系统",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/40(1).png",
+        "LinkURL": "3",
+        "SortID": 4,
+        "PlatformType": 2
+      },
+      {
+        "Title": "推广分享",
+        "ResourceURL": "http://172.16.3.211:6514//Initialize/49.png",
+        "LinkURL": "2",
+        "SortID": 4,
+        "PlatformType": 2
+      }
+    ],
+    "imageServerHost": "http://172.16.3.211:6514/",
+    "MobileConfig": {
+      "ConfigKey": "MobilePlatformVersion",
+      "Field1": "http://172.16.3.211:6511/Download/Phone",
+      "Field2": "0",
+      "Field3": "60",
+      "Field4": "",
+      "Field5": "itms-services://?action=download-manifest&amp;url=https://qj.foxuc.net/Download/LuaMBClient_LY.plist",
+      "Field6": "http://172.16.3.211:6511/DownLoad/LuaMBClient_LY.apk",
+      "Field7": "2",
+      "Field8": "1",
+      "Field9": "itms-services://?action=download-manifest&amp;url=https://qj.foxuc.net/Download/LuaMBClient_LY.plist",
+      "Field10": "http://172.16.3.211:6511/DownLoad/LuaMBClient_LY.apk",
+      "ConfigID": 0,
+      "ConfigName": "",
+      "ConfigString": "",
+      "SortID": 0
+    }
+  }
+}
+3/22/2019 5:05:02 PM 编辑器不检查更新
+3/22/2019 5:05:02 PM szNewVersionURL=itms-services://?action=download-manifest&amp;url=https://qj.foxuc.net/Download/LuaMBClient_LY.plist
+3/22/2019 5:05:02 PM szServerVersionCode=1
+3/22/2019 5:05:02 PM szLocalVersionCode=10000
+3/22/2019 5:05:05 PM 上传当前日志

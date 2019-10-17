@@ -1,0 +1,27 @@
+[2018-11-15 14:00:09,182] [::1] [http://localhost:32841/Spread/DataHandle.ashx?action=userspreadhome&userid=100102] 	
+[当前堆栈]：   在 System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 System.Convert.ToInt32(Object value)
+   在 Game.Web.Spread.DataHandle.UserSpreadHome() 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 87
+   在 Game.Web.Spread.DataHandle.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 48
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+[错误]：对象不能从 DBNull 转换为其他类型。
+[2018-11-15 14:00:12,350] [::1] [http://localhost:32841/Spread/DataHandle.ashx?action=userspreadhome&userid=100102] 	
+[当前堆栈]：   在 System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 System.Convert.ToInt32(Object value)
+   在 Game.Web.Spread.DataHandle.UserSpreadHome() 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 87
+   在 Game.Web.Spread.DataHandle.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 48
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+[错误]：对象不能从 DBNull 转换为其他类型。
+[2018-11-15 14:01:03,774] [::1] [http://localhost:32841/Spread/DataHandle.ashx?action=userspreadhome&userid=100102] 	
+[当前堆栈]：   在 System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 System.Convert.ToInt32(Object value)
+   在 Game.Web.Spread.DataHandle.UserSpreadHome() 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 87
+   在 Game.Web.Spread.DataHandle.ProcessRequest(HttpContext context) 位置 F:\work\SVN\旗舰版\WHQJFront\WebProjects\Game.Web\Spread\DataHandle.ashx.cs:行号 48
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+[错误]：对象不能从 DBNull 转换为其他类型。

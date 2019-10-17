@@ -1,0 +1,16 @@
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\bin\Release\Functions.dll.config
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\bin\Release\Functions.dll
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\bin\Release\Functions.XmlSerializers.dll
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\bin\Release\Functions.pdb
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\obj\Release\Functions.csprojResolveAssemblyReference.cache
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\obj\Release\Functions.dll
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\obj\Release\Functions.pdb
+D:\网狐项目\项目\客户项目\荣耀版\安徽左荣军\网站源码\RYFront\Services\Functions\obj\Release\Functions.XmlSerializers.dll
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\bin\Release\Functions.dll.config
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\bin\Release\Functions.dll
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\bin\Release\Functions.XmlSerializers.dll
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\bin\Release\Functions.pdb
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\obj\Release\Functions.csprojResolveAssemblyReference.cache
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\obj\Release\Functions.dll
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\obj\Release\Functions.pdb
+F:\work\SVN\旗舰版\WHQJFront\Services\Functions\obj\Release\Functions.XmlSerializers.dll
