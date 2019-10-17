@@ -1,5 +1,0 @@
-F:\work\SVN\旗舰版\WHQJFront\Services\Game.Entity\bin\Debug\Game.Entity.dll
-F:\work\SVN\旗舰版\WHQJFront\Services\Game.Entity\bin\Debug\Game.Entity.pdb
-F:\work\SVN\旗舰版\WHQJFront\Services\Game.Entity\bin\Debug\Newtonsoft.Json.dll
-F:\work\SVN\旗舰版\WHQJFront\Services\Game.Entity\obj\Debug\Game.Entity.dll
-F:\work\SVN\旗舰版\WHQJFront\Services\Game.Entity\obj\Debug\Game.Entity.pdb
