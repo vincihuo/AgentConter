@@ -1,0 +1,12 @@
+WHQJAdmin/.vs/
+WHQJAdmin/Services/Game.Entity/obj/
+WHQJAdmin/Services/Game.Facade/obj/
+WHQJAdmin/Services/Game.IData/obj/
+WHQJAdmin/WebProjects/Game.Web/Game.Web.csproj.user
+WHQJAdmin/WebProjects/Game.Web/obj/
+WHQJAdmin/Services/Game.Data/bin/
+WHQJAdmin/Services/Game.Data/obj/
+WHQJAdmin/Services/Game.Entity/bin/
+WHQJAdmin/Services/Game.Facade/bin/
+WHQJAdmin/Services/Game.IData/bin/
+WHQJAdmin/WebProjects/Game.Web/bin/

@@ -1,6 +1,0 @@
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\bin\Debug\Game.Entity.dll
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\bin\Debug\Game.Entity.pdb
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\bin\Debug\Game.Utils.dll
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\obj\Debug\Game.Entity.dll
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\obj\Debug\Game.Entity.pdb
-F:\work\SVN\旗舰版\WHQJAdmin\Services\Game.Entity\obj\Debug\Game.Entity.csprojResolveAssemblyReference.cache
