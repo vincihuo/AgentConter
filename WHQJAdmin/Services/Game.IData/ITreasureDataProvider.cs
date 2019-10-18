@@ -25,6 +25,16 @@ namespace Game.IData
         PagerSet GetList(string tableName, string where, string order, int pageIndex, int pageSize, string[] fields = null);
         #endregion 公用分页
 
+
+
+        #region  线上充值配置
+        OnlinePayConfig GetOnlinePayConfig(int ID);
+        int SaveOnlinePayConfig(OnlinePayConfig config);
+        int DeleteOnlinePayConfig(string idlist);
+        bool IsExistOnlinePayConfig(string where);
+        #endregion
+
+
         #region 充值配置
         /// <summary>
         /// 获取充值产品

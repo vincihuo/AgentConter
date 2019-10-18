@@ -232,8 +232,10 @@
     <Content Include="Module\Diamond\TopOpenRoom.aspx" />
     <Content Include="Module\Diamond\TopExchangeGold.aspx" />
     <Content Include="Module\Diamond\TopOutDiamond.aspx" />
+    <Content Include="Module\FilledManager\AddOnlineChanel.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigInfo.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigList.aspx" />
+    <Content Include="Module\FilledManager\OnLinePayPage.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatInfo.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatList.aspx" />
     <Content Include="Module\FilledManager\RecordPayDiamond.aspx" />
@@ -3516,6 +3518,13 @@
     <Compile Include="Module\Diamond\TopOutDiamond.aspx.designer.cs">
       <DependentUpon>TopOutDiamond.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\FilledManager\AddOnlineChanel.aspx.cs">
+      <DependentUpon>AddOnlineChanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\AddOnlineChanel.aspx.designer.cs">
+      <DependentUpon>AddOnlineChanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\FilledManager\AppPayConfigInfo.aspx.cs">
       <DependentUpon>AppPayConfigInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3529,6 +3538,13 @@
     </Compile>
     <Compile Include="Module\FilledManager\AppPayConfigList.aspx.designer.cs">
       <DependentUpon>AppPayConfigList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\OnLinePayPage.aspx.cs">
+      <DependentUpon>OnLinePayPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\OnLinePayPage.aspx.designer.cs">
+      <DependentUpon>OnLinePayPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\OnLineWeChatInfo.aspx.cs">
       <DependentUpon>OnLineWeChatInfo.aspx</DependentUpon>

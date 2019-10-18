@@ -102,9 +102,15 @@ namespace Game.Web.WS
                     case "getpayproduct":
                         _ajv.SetDataItem("apiVersion", 20171028);
                         //获取参数
-                        int typeId = GameRequest.GetQueryInt("typeid", 0);
-                        GetPayProduct(typeId);
+                        GetPayProduct(typeid);
                         break;
+                    //获取线上充值列表
+                    case "getOnlinePay":
+                        _ajv.SetDataItem("apiVersion", 20171028);
+                        //获取参数
+                        GetOnLinePayList(typeid);
+                        break;
+
                     //领取推广有效好友奖励
                     case "receivespreadaward":
                         //参数验证
@@ -500,6 +506,12 @@ namespace Game.Web.WS
             _ajv.SetDataItem("rankconfig", rankconfig);
         }
 
+
+
+        private void GetOnLinePayList(int typeID)
+        {
+
+        }
         /// <summary>
         /// 获取充值产品列表
         /// </summary>

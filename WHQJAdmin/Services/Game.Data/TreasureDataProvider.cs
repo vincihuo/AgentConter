@@ -42,8 +42,79 @@ namespace Game.Data
         }
         #endregion 公用分页
 
-        #region 充值配置
+        #region 线上充值配置
+        public OnlinePayConfig GetOnlinePayConfig(int configId)
+        {
+            string sqlQuery = $"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE ID = '{configId}'";
+            return Database.ExecuteObject<OnlinePayConfig>(sqlQuery);
+        }
 
+        public int SaveOnlinePayConfig(OnlinePayConfig config)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("PayType", config.PayType),
+                Database.MakeInParam("PayName", config.PayName),
+                Database.MakeInParam("UID", config.UID),
+                Database.MakeInParam("Md5key", config.Md5key),
+                Database.MakeInParam("PrivateKey", config.PrivateKey),
+                Database.MakeInParam("PublicKey", config.PublicKey),
+                Database.MakeInParam("ShoutCut", config.ShoutCut),
+                Database.MakeInParam("PayIdentity", config.PayIdentity),
+                Database.MakeInParam("SortID", config.SortID),
+                Database.MakeInParam("PresentScore", config.PresentScore),
+                Database.MakeInParam("FristPresent", config.FristPresent),
+                Database.MakeInParam("ChanelID", config.ChanelID),
+                Database.MakeInParam("ChanelName", config.ChanelName),
+                Database.MakeInParam("AttaChStr", config.AttaChStr)
+            };
+            string sqlQuery;
+            if (config.ID == 0)
+            {
+                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,Md5key,PrivateKey,PublicKey,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttaChStr) 
+                                        VALUES(@PayType,@PayName,@UID,@Md5key,@PrivateKey,@PublicKey,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttaChStr)";
+            }
+            else
+            {
+                prams.Add(Database.MakeInParam("ID", config.ID));
+                StringBuilder sql = new StringBuilder();
+                sql.Append("UPDATE OnlinePayConfig SET ")
+                    .Append("PayType=@PayType, ")
+                    .Append("PayName=@PayName, ")
+                    .Append("UID=@UID, ")
+                    .Append("Md5key=@Md5key, ")
+                    .Append("PrivateKey=@PrivateKey, ")
+                    .Append("PublicKey=@PublicKey, ")
+                    .Append("ShoutCut=@ShoutCut, ")
+                    .Append("PayIdentity=@PayIdentity, ")
+                    .Append("SortID=@SortID, ")
+                    .Append("PresentScore=@PresentScore, ")
+                    .Append("FristPresent=@FristPresent, ")
+                    .Append("ChanelID=@ChanelID, ")
+                    .Append("ChanelName=@ChanelName, ")
+                    .Append("AttaChStr=@AttaChStr ")
+                    .Append("WHERE ID=@ID");
+                sqlQuery = sql.ToString();
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+
+        public int DeleteOnlinePayConfig(string idlist)
+        {
+            string sqlQuery = $"DELETE OnlinePayConfig WHERE ID IN({idlist})";
+            return Database.ExecuteNonQuery(sqlQuery);
+        }  
+
+        public bool IsExistOnlinePayConfig(string where)
+        {
+            string sqlQuery = $"SELECT ID FROM OnlinePayConfig WITH(NOLOCK) {where} ";
+            return Database.ExecuteScalar(CommandType.Text, sqlQuery) != null;
+        }
+
+        #endregion
+
+
+        #region 充值配置
         /// <summary>
         /// 获取充值产品
         /// </summary>
@@ -107,7 +178,7 @@ namespace Game.Data
             }
             else
             {
-                prams.Add(Database.MakeInParam("ConfigID",config.ConfigID));
+                prams.Add(Database.MakeInParam("ConfigID", config.ConfigID));
                 StringBuilder sql = new StringBuilder();
                 sql.Append("UPDATE AppPayConfig SET ")
                     .Append("AppleID=@AppleID, ")
@@ -334,7 +405,7 @@ namespace Game.Data
             };
             if (config.ConfigID > 0)
             {
-                prams.Add(Database.MakeInParam("ConfigID",config.ConfigID));
+                prams.Add(Database.MakeInParam("ConfigID", config.ConfigID));
                 sql =
                     "UPDATE SpreadReturnConfig SET SpreadLevel=@SpreadLevel,PresentScale=@PresentScale,Nullity=@Nullity,UpdateTime=@UpdateTime WHERE ConfigID=@ConfigID";
             }

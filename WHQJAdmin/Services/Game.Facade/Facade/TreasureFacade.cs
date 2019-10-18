@@ -50,6 +50,24 @@ namespace Game.Facade
         }
         #endregion 公用分页
 
+
+        #region 线上充值配置
+        public OnlinePayConfig GetOnlinePayConfig(int configId)
+        {
+            return aideTreasureData.GetOnlinePayConfig(configId);
+        }
+
+        public int SaveOnlinePayConfig(OnlinePayConfig config)
+        {
+            return aideTreasureData.SaveOnlinePayConfig(config);
+        }
+
+        public int DeleteOnlinePayConfig(string idlist)
+        {
+            return aideTreasureData.DeleteOnlinePayConfig(idlist);
+        }
+        #endregion
+
         #region 充值配置
         /// <summary>
         /// 获取充值产品
