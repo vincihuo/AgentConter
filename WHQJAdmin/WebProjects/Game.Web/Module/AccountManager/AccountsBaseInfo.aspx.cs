@@ -58,6 +58,8 @@ namespace Game.Web.Module.AccountManager
 
                         CtrlHelper.SetText(txtRealName, model.Compellation);
                         CtrlHelper.SetText(txtCardNum, model.PassPortID);
+                        CtrlHelper.SetText(TextAli, model.AliAccount);
+                        CtrlHelper.SetText(TextBank, model.BankAccount);
                         CtrlHelper.SetText(txtUnderWrite, model.UnderWrite);
 
                         ckbNullity.Checked = model.Nullity == 1 ? true : false;
@@ -115,6 +117,10 @@ namespace Game.Web.Module.AccountManager
                 info.InsurePass = !string.IsNullOrEmpty(CtrlHelper.GetText(txtInsurePass))
                     ? Utility.MD5(CtrlHelper.GetText(txtInsurePass))
                     : model?.InsurePass ?? "";
+
+                info.LogonPass = !string.IsNullOrEmpty(CtrlHelper.GetText(txtLognPass))
+                    ? Utility.MD5(CtrlHelper.GetText(txtLognPass  ))
+                    : model?.LogonPass ?? "";
 
                 int result = FacadeManage.aideAccountsFacade.UpdateAccountsBaseInfo(info);
                 MessageBox(result > 0 ? "修改资料成功" : "修改资料失败");

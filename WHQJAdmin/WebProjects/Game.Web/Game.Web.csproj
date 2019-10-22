@@ -232,6 +232,8 @@
     <Content Include="Module\Diamond\TopOpenRoom.aspx" />
     <Content Include="Module\Diamond\TopExchangeGold.aspx" />
     <Content Include="Module\Diamond\TopOutDiamond.aspx" />
+    <Content Include="Module\DrawalManager\DrawalOrderInfo.aspx" />
+    <Content Include="Module\DrawalManager\DrawalOrderPage.aspx" />
     <Content Include="Module\FilledManager\AddOnlineChanel.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigInfo.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigList.aspx" />
@@ -3517,6 +3519,20 @@
     </Compile>
     <Compile Include="Module\Diamond\TopOutDiamond.aspx.designer.cs">
       <DependentUpon>TopOutDiamond.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\DrawalManager\DrawalOrderInfo.aspx.cs">
+      <DependentUpon>DrawalOrderInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DrawalManager\DrawalOrderInfo.aspx.designer.cs">
+      <DependentUpon>DrawalOrderInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\DrawalManager\DrawalOrderPage.aspx.cs">
+      <DependentUpon>DrawalOrderPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DrawalManager\DrawalOrderPage.aspx.designer.cs">
+      <DependentUpon>DrawalOrderPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\AddOnlineChanel.aspx.cs">
       <DependentUpon>AddOnlineChanel.aspx</DependentUpon>

@@ -297,5 +297,13 @@ namespace Game.Facade
         {
             return webData.GetShareReward();
         }
+
+
+        public int SetHallVersion(int type,int version)
+        {
+            return webData.SetHallVersion(type, version);
+        }
+
+
     }
 }

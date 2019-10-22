@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2017/8/7 10:49:53
+ * 日期：2019/10/19 11:42:37
  * 
  * 描述：实体类
  * 
@@ -70,10 +70,14 @@ namespace Game.Entity.Accounts
         private string p_registermobile;
         private string p_registermachine;
         private byte p_registerorigin;
+        private byte p_clienttype;
         private Int16 p_platformid;
         private string p_useruin;
         private int p_rankid;
         private int p_agentid;
+        private string p_placename;
+        private string p_bankaccount;
+        private string p_aliaccount;
 
         #endregion
 
@@ -82,7 +86,7 @@ namespace Game.Entity.Accounts
         /// <summary>
         /// 初始化AccountsInfo
         /// </summary>
-        public AccountsInfo() 
+        public AccountsInfo()
         {
             p_userid = 0;
             p_gameid = 0;
@@ -126,10 +130,14 @@ namespace Game.Entity.Accounts
             p_registermobile = string.Empty;
             p_registermachine = string.Empty;
             p_registerorigin = 0;
+            p_clienttype = 0;
             p_platformid = 0;
             p_useruin = string.Empty;
             p_rankid = 0;
             p_agentid = 0;
+            p_placename = string.Empty;
+            p_bankaccount = string.Empty;
+            p_aliaccount = string.Empty;
         }
 
         #endregion
@@ -143,7 +151,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_userid=value;
+                p_userid = value;
             }
             get
             {
@@ -158,7 +166,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_gameid=value;
+                p_gameid = value;
             }
             get
             {
@@ -173,7 +181,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_spreaderid=value;
+                p_spreaderid = value;
             }
             get
             {
@@ -188,7 +196,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_accounts=value;
+                p_accounts = value;
             }
             get
             {
@@ -203,7 +211,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_nickname=value;
+                p_nickname = value;
             }
             get
             {
@@ -218,7 +226,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_regaccounts=value;
+                p_regaccounts = value;
             }
             get
             {
@@ -233,7 +241,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_underwrite=value;
+                p_underwrite = value;
             }
             get
             {
@@ -248,7 +256,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_passportid=value;
+                p_passportid = value;
             }
             get
             {
@@ -263,7 +271,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_compellation=value;
+                p_compellation = value;
             }
             get
             {
@@ -278,7 +286,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_logonpass=value;
+                p_logonpass = value;
             }
             get
             {
@@ -293,7 +301,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_insurepass=value;
+                p_insurepass = value;
             }
             get
             {
@@ -308,7 +316,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_dynamicpass=value;
+                p_dynamicpass = value;
             }
             get
             {
@@ -323,7 +331,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_dynamicpasstime=value;
+                p_dynamicpasstime = value;
             }
             get
             {
@@ -338,7 +346,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_faceid=value;
+                p_faceid = value;
             }
             get
             {
@@ -353,7 +361,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_customid=value;
+                p_customid = value;
             }
             get
             {
@@ -368,7 +376,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_userright=value;
+                p_userright = value;
             }
             get
             {
@@ -383,7 +391,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_masterright=value;
+                p_masterright = value;
             }
             get
             {
@@ -398,7 +406,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_serviceright=value;
+                p_serviceright = value;
             }
             get
             {
@@ -413,7 +421,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_masterorder=value;
+                p_masterorder = value;
             }
             get
             {
@@ -428,7 +436,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_memberorder=value;
+                p_memberorder = value;
             }
             get
             {
@@ -443,7 +451,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_memberoverdate=value;
+                p_memberoverdate = value;
             }
             get
             {
@@ -458,7 +466,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_memberswitchdate=value;
+                p_memberswitchdate = value;
             }
             get
             {
@@ -473,7 +481,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_customfacever=value;
+                p_customfacever = value;
             }
             get
             {
@@ -488,7 +496,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_gender=value;
+                p_gender = value;
             }
             get
             {
@@ -503,7 +511,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_nullity=value;
+                p_nullity = value;
             }
             get
             {
@@ -518,7 +526,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_nullityoverdate=value;
+                p_nullityoverdate = value;
             }
             get
             {
@@ -533,7 +541,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_stundown=value;
+                p_stundown = value;
             }
             get
             {
@@ -548,7 +556,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_moormachine=value;
+                p_moormachine = value;
             }
             get
             {
@@ -563,7 +571,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_isandroid=value;
+                p_isandroid = value;
             }
             get
             {
@@ -578,7 +586,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_weblogontimes=value;
+                p_weblogontimes = value;
             }
             get
             {
@@ -593,7 +601,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_gamelogontimes=value;
+                p_gamelogontimes = value;
             }
             get
             {
@@ -608,7 +616,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_playtimecount=value;
+                p_playtimecount = value;
             }
             get
             {
@@ -623,7 +631,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_onlinetimecount=value;
+                p_onlinetimecount = value;
             }
             get
             {
@@ -638,7 +646,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_lastlogonip=value;
+                p_lastlogonip = value;
             }
             get
             {
@@ -653,7 +661,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_lastlogondate=value;
+                p_lastlogondate = value;
             }
             get
             {
@@ -668,7 +676,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_lastlogonmobile=value;
+                p_lastlogonmobile = value;
             }
             get
             {
@@ -683,7 +691,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_lastlogonmachine=value;
+                p_lastlogonmachine = value;
             }
             get
             {
@@ -698,7 +706,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_registerip=value;
+                p_registerip = value;
             }
             get
             {
@@ -713,7 +721,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_registerdate=value;
+                p_registerdate = value;
             }
             get
             {
@@ -728,7 +736,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_registermobile=value;
+                p_registermobile = value;
             }
             get
             {
@@ -743,7 +751,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_registermachine=value;
+                p_registermachine = value;
             }
             get
             {
@@ -758,11 +766,26 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_registerorigin=value;
+                p_registerorigin = value;
             }
             get
             {
                 return p_registerorigin;
+            }
+        }
+
+        /// <summary>
+        /// ClientType
+        /// </summary>
+        public byte ClientType
+        {
+            set
+            {
+                p_clienttype = value;
+            }
+            get
+            {
+                return p_clienttype;
             }
         }
 
@@ -773,7 +796,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_platformid=value;
+                p_platformid = value;
             }
             get
             {
@@ -788,7 +811,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_useruin=value;
+                p_useruin = value;
             }
             get
             {
@@ -803,7 +826,7 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_rankid=value;
+                p_rankid = value;
             }
             get
             {
@@ -818,11 +841,56 @@ namespace Game.Entity.Accounts
         {
             set
             {
-                p_agentid=value;
+                p_agentid = value;
             }
             get
             {
                 return p_agentid;
+            }
+        }
+
+        /// <summary>
+        /// PlaceName
+        /// </summary>
+        public string PlaceName
+        {
+            set
+            {
+                p_placename = value;
+            }
+            get
+            {
+                return p_placename;
+            }
+        }
+
+        /// <summary>
+        /// BankAccount
+        /// </summary>
+        public string BankAccount
+        {
+            set
+            {
+                p_bankaccount = value;
+            }
+            get
+            {
+                return p_bankaccount;
+            }
+        }
+
+        /// <summary>
+        /// AliAccount
+        /// </summary>
+        public string AliAccount
+        {
+            set
+            {
+                p_aliaccount = value;
+            }
+            get
+            {
+                return p_aliaccount;
             }
         }
 

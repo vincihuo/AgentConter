@@ -25,7 +25,11 @@ namespace Game.IData
         PagerSet GetList(string tableName, string where, string order, int pageIndex, int pageSize, string[] fields = null);
         #endregion 公用分页
 
-
+        #region 提现
+        decimal GetTotleDrawalMoney(string where);
+        DrawalOrder GetOrderById(string orderid);
+        Message DealDralwalOrder(string orderid, int states, int master, string ip);
+        #endregion
 
         #region  线上充值配置
         OnlinePayConfig GetOnlinePayConfig(int ID);

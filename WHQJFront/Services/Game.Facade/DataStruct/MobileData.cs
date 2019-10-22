@@ -142,6 +142,18 @@ namespace Game.Facade.DataStruct
         public bool IsDayFristPay { get; set; }
     }
 
+
+    public class AppOnlinePayConfig
+    {
+        public int ID { get; set; }
+        public int PayType { get; set; }
+        public string PayName { get; set; }
+        public string ShoutCut { get; set; }
+        public int PresentScore { get; set; }
+        public int ChanelID { get; set; }
+    }
+
+
     public class TreasureStream
     {
         public string SerialNumber { get; set; }

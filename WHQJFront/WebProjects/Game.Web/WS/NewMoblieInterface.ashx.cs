@@ -82,6 +82,7 @@ namespace Game.Web.WS
 
                 switch (action)
                 {
+                    #region 老接口
                     case "webversion":
                         _ajv.SetDataItem("apiVersion", 20171220);
                         _ajv.SetDataItem("webVersion", "V1.0.1");
@@ -100,15 +101,11 @@ namespace Game.Web.WS
                         break;
                     //获取充值产品列表
                     case "getpayproduct":
-                        _ajv.SetDataItem("apiVersion", 20171028);
-                        //获取参数
-                        GetPayProduct(typeid);
-                        break;
-                    //获取线上充值列表
-                    case "getOnlinePay":
-                        _ajv.SetDataItem("apiVersion", 20171028);
-                        //获取参数
-                        GetOnLinePayList(typeid);
+                        WithDrawal();
+
+                        //_ajv.SetDataItem("apiVersion", 20171028);
+                        ////获取参数
+                        //GetPayProduct(typeid);
                         break;
 
                     //领取推广有效好友奖励
@@ -274,7 +271,7 @@ namespace Game.Web.WS
                     case "getsharereward":
                         GetShareReward(context);
                         break;
-
+                    #endregion
 
                     #region 代理接口模块
                     //获取代理商用户信息
@@ -341,8 +338,28 @@ namespace Game.Web.WS
                     case "getmytakegrantrecord":
                         GetMyTakeGrantRecord();
                         break;
-                    #endregion 
+                    #endregion
 
+                    #region 最帅的写的接口
+                    //获取线上充值列表
+                    case "getOnlinePay":
+                        _ajv.SetDataItem("apiVersion", 20191018);
+                        //获取参数
+                        GetOnLinePayList(typeid);
+                        break;
+                    case "withDrawal":
+                        _ajv.SetDataItem("apiVersion", 20191018);
+                        WithDrawal();
+                        break;
+                    case "HellHotFix":
+                        _ajv.SetDataItem("apiVersion", 20191019);
+                        SetHallHotFix();
+                        break;
+                    case "GameHotFix":
+                        _ajv.SetDataItem("apiVersion", 20191019);
+                        SetGameHotFix();
+                        break;
+                    #endregion
                     default:
                         _ajv.code = (int)ApiCode.VertyParamErrorCode;
                         _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " action 错误");
@@ -363,6 +380,88 @@ namespace Game.Web.WS
                 context.Response.Write(_ajv.SerializeToJson());
             }
             context.Response.End();
+        }
+
+        private void WithDrawal()
+        {
+            int drawalType = GameRequest.GetQueryInt("paytype", 1);
+            int amount = GameRequest.GetQueryInt("amount", 1000);
+            //判断玩家金币
+            ConfigInfo cfg = FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
+            int p = Convert.ToInt32(cfg.Field1);
+            int min = Convert.ToInt32(cfg.Field2);
+            int max = Convert.ToInt32(cfg.Field3);
+            if (amount < min || amount > max)
+            {
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"提现金额必须在{min}-{max}之间");
+                return;
+            }
+            GameScoreInfo info = FacadeManage.aideTreasureFacade.GetGameScoreInfoByUid(_userid);
+            //判断打码量
+            //TODO
+
+
+            if (info.Score < amount)
+            {
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"携带金额不足");
+                return;
+            }
+            //创建订单
+            int cost = amount * p / 100;
+            DrawalOrder order = new DrawalOrder();
+            order.OrderID = Fetch.GetOrderIDByPrefix("draw");
+            order.Amount = amount;
+            order.OrderCost = cost;
+            order.IP = GameRequest.GetUserIP();
+            order.UserID = _userid;
+            Message mm= FacadeManage.aideTreasureFacade.CreateDrawalOrder(order);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
+        }
+
+        private void SetHallHotFix()
+        {
+            int type = GameRequest.GetQueryInt("type", 2);
+            int version = GameRequest.GetQueryInt("version", 0);
+            if (type == 1 || type == 2)
+            {
+                int success = FacadeManage.aideNativeWebFacade.SetHallVersion(type, version);
+                if (success == 1)
+                {
+                    _ajv.SetValidDataValue(true);
+                }
+                else
+                {
+                    _ajv.SetValidDataValue(false);
+                    _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                    _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " 执行sql出错了");
+                }
+            }
+            else
+            {
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " 参数错误");
+            }
+        }
+
+        private void SetGameHotFix()
+        {
+            int gameId = GameRequest.GetQueryInt("gameId", 3);
+            int version = GameRequest.GetQueryInt("version", 5);
+            int success = FacadeManage.aidePlatformFacade.SetGameVerSion(gameId, version);
+            if (success == 1)
+            {
+                _ajv.SetValidDataValue(true);
+            }
+            else
+            {
+                _ajv.SetValidDataValue(false);
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " 更新游戏版本sql出错了");
+            }
+
         }
 
         /// <summary>
@@ -510,7 +609,22 @@ namespace Game.Web.WS
 
         private void GetOnLinePayList(int typeID)
         {
+            IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(typeID);
 
+            List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
+            for (int i = 0; i < list.Count; ++i)
+            {
+                AppOnlinePayConfig t = new AppOnlinePayConfig();
+                t.ChanelID = list[i].ChanelID;
+                t.ID = list[i].ID;
+                t.PayType = list[i].PayType;
+                t.PayName = list[i].PayName;
+                t.ShoutCut = list[i].ShoutCut;
+                t.PresentScore = list[i].PresentScore;
+                pp.Add(t);
+            }
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("list", pp);
         }
         /// <summary>
         /// 获取充值产品列表
@@ -1247,7 +1361,7 @@ namespace Game.Web.WS
             int CheckCodeTime = FacadeManage.aideAccountsFacade.GetSystemStatusInfo("CheckCodeValidTime").StatusValue;
             if (CheckCodeTime > 0)
             {
-                result = FacadeManage.aideAccountsFacade.VaildSendOnTime(Mobile,CheckCodeTime);
+                result = FacadeManage.aideAccountsFacade.VaildSendOnTime(Mobile, CheckCodeTime);
             }
 
             if (!result)
@@ -2223,7 +2337,7 @@ namespace Game.Web.WS
                     {
                         string[] domainStr = domain.Split('.');
                         shareLink = domainStr.Length != 3
-                            ? ( domain + "/Mobile/ShareLink.aspx?g=" + row["GameID"])
+                            ? (domain + "/Mobile/ShareLink.aspx?g=" + row["GameID"])
                             : ("http://" + row["GameID"] + "." + domainStr[1] + "." + domainStr[2] +
                                "/Mobile/ShareLink.aspx");
                     }
@@ -2232,11 +2346,11 @@ namespace Game.Web.WS
                 {
                     if (Convert.ToInt32(row["AgentID"]) > 0)
                     {
-                        shareLink =  domain + "/Mobile/AgentShareLinkLua.aspx?g=" + row["GameID"];
+                        shareLink = domain + "/Mobile/AgentShareLinkLua.aspx?g=" + row["GameID"];
                     }
                     else
                     {
-                        shareLink =  domain + "/Mobile/ShareLinkNew.aspx?g=" + row["GameID"];
+                        shareLink = domain + "/Mobile/ShareLinkNew.aspx?g=" + row["GameID"];
                     }
 
                 }
@@ -2261,11 +2375,11 @@ namespace Game.Web.WS
 
                 if (Convert.ToInt32(row["AgentID"]) > 0)
                 {
-                    shareLink =  domain + "/Mobile/AgentShareLink.aspx?g=" + row["GameID"] + "&y=u3d";
+                    shareLink = domain + "/Mobile/AgentShareLink.aspx?g=" + row["GameID"] + "&y=u3d";
                 }
                 else
                 {
-                    shareLink =  domain + "/Mobile/ShareLinkNew.aspx?g=" + row["GameID"] + "&y=u3d";
+                    shareLink = domain + "/Mobile/ShareLinkNew.aspx?g=" + row["GameID"] + "&y=u3d";
                 }
             }
             return shareLink;

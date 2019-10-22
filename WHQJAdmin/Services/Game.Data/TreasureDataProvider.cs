@@ -42,6 +42,35 @@ namespace Game.Data
         }
         #endregion 公用分页
 
+        #region
+        public decimal GetTotleDrawalMoney(string where)
+        {
+            string sql = $"SELECT ISNULL(SUM(Amount),0) AS Amount FROM DrawalOrder {where} AND OrderState=1";
+            return Convert.ToDecimal(Database.ExecuteScalar(CommandType.Text, sql));
+        }
+
+        public DrawalOrder GetOrderById(string orderid)
+        {
+            string sql = $"SELECT * FROM DrawalOrder WITH(NOLOCK) WHERE OrderID ='{orderid}'";
+            return Database.ExecuteObject<DrawalOrder>(sql);
+        }
+
+        public Message DealDralwalOrder(string orderid, int states, int master, string ip)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("masterID", master),
+                Database.MakeInParam("strOrdersID", orderid),
+                Database.MakeInParam("State", states),
+                Database.MakeInParam("strClientIP", ip),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_DealDrawarOrder", prams);
+        }
+
+        #endregion
+
+
         #region 线上充值配置
         public OnlinePayConfig GetOnlinePayConfig(int configId)
         {

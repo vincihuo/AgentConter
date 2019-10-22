@@ -452,5 +452,20 @@ namespace Game.Data
             return Database.ExecuteDataset(sql);
         }
         #endregion
+
+        public int SetHallVersion(int type, int version)
+        {
+            string t = "";
+            if (type == 1)
+            {
+                t = $"UPDATE ConfigInfo SET Field2={version} WHERE ConfigID=1";
+            }
+            else if (type==2)
+            {
+                t = $"UPDATE ConfigInfo SET Field3={version} WHERE ConfigID=1";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, t);
+        }
+
     }
 }

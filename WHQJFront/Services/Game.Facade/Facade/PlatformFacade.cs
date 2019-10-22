@@ -152,5 +152,10 @@ namespace Game.Facade
             return platformData.GetClubBattleRecord(userid, groupid, start, end);
         }
         #endregion
+
+        public int SetGameVerSion(int gameID,int version)
+        {
+            return platformData.SetGameVerSion(gameID, version);
+        }
     }
 }

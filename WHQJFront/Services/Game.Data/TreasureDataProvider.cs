@@ -39,6 +39,41 @@ namespace Game.Data
         }
         #endregion
 
+
+        #region 线上充值
+
+        public IList<OnlinePayConfig> GetOnLinePayList(int typeId)
+        {
+            const string sqlQuery =
+            @"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE PayType = @PayType ORDER BY PayIdentity DESC,SortID DESC";
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("PayType", typeId) };
+            return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery, parms);
+        }
+
+        public GameScoreInfo GetGameScoreInfoByUid(int uid)
+        {
+            string sql = $"SELECT * FROM GameScoreInfo where UserID={uid}";
+            return Database.ExecuteObject<GameScoreInfo>(sql);
+        }
+
+        public Message CreateDrawalOrder(DrawalOrder order)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", order.UserID),
+                Database.MakeInParam("strOrdersID", order.OrderID),
+                Database.MakeInParam("DrawalAmount", order.Amount),
+                Database.MakeInParam("OrderCost", order.OrderCost),
+                Database.MakeInParam("ClientIP", order.IP),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_CreateDrawarOrder", prams);
+        }
+
+        #endregion
+
+
+
         #region 充值产品
 
         /// <summary>

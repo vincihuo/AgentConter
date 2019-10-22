@@ -181,5 +181,11 @@ namespace Game.Data
             return GetPagerSet2(pagerPrams);
         }
         #endregion
+
+        public int SetGameVerSion(int gameID, int version)
+        {
+            string sql = $"UPDATE MobileKindItem SET ResVersion={version} WHERE KindID={gameID}";
+            return Database.ExecuteNonQuery(CommandType.Text, sql);
+        }
     }
 }

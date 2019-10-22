@@ -76,6 +76,15 @@ namespace Game.Web.Module.AccountManager {
         protected global::System.Web.UI.WebControls.Image imgFace;
         
         /// <summary>
+        /// txtLognPass 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLognPass;
+        
+        /// <summary>
         /// txtInsurePass 控件。
         /// </summary>
         /// <remarks>
@@ -119,6 +128,24 @@ namespace Game.Web.Module.AccountManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCardNum;
+        
+        /// <summary>
+        /// TextAli 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextAli;
+        
+        /// <summary>
+        /// TextBank 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBank;
         
         /// <summary>
         /// txtUnderWrite 控件。

@@ -26,6 +26,13 @@ namespace Game.IData
         PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby);
         #endregion
 
+        #region 一个字帅
+        IList<OnlinePayConfig> GetOnLinePayList(int typeId);
+        GameScoreInfo GetGameScoreInfoByUid(int uid);
+        Message CreateDrawalOrder(DrawalOrder order);
+        #endregion
+
+
         #region 充值产品
         /// <summary>
         /// 获取充值产品列表

@@ -51,6 +51,22 @@ namespace Game.Facade
         #endregion 公用分页
 
 
+        #region 提款
+        public decimal GetTotleDrawalMoney(string where)
+        {
+            return aideTreasureData.GetTotleDrawalMoney(where);
+        }
+
+        public DrawalOrder GetOrderById(string orderid)
+        {
+            return aideTreasureData.GetOrderById(orderid);
+        }
+        public Message DealDralwalOrder(string orderid, int states, int master, string ip)
+        {
+            return aideTreasureData.DealDralwalOrder(orderid, states, master, ip);
+        }
+        #endregion
+
         #region 线上充值配置
         public OnlinePayConfig GetOnlinePayConfig(int configId)
         {
@@ -104,7 +120,7 @@ namespace Game.Facade
         {
             return aideTreasureData.SaveAppPayConfig(config);
         }
-        
+
         /// <summary>
         /// 获取在线充值配置
         /// </summary>

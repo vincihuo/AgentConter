@@ -53,6 +53,25 @@ namespace Game.Facade
         }
         #endregion
 
+
+        #region 帅逼接口
+        public IList<OnlinePayConfig> GetOnlinePayList(int typeId)
+        {
+            return treasureData.GetOnLinePayList(typeId);
+        }
+
+        public GameScoreInfo GetGameScoreInfoByUid(int uid)
+        {
+            return treasureData.GetGameScoreInfoByUid(uid);
+        }
+
+        public Message CreateDrawalOrder(DrawalOrder order)
+        {
+            return treasureData.CreateDrawalOrder(order);
+        }
+
+        #endregion
+
         #region 充值产品
         /// <summary>
         /// 获取充值产品列表

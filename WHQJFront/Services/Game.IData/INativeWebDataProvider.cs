@@ -199,7 +199,6 @@ namespace Game.IData
         /// <returns></returns>
         DataSet GetShareReward();
 
-
-
+        int SetHallVersion(int type, int version);
     }
 }

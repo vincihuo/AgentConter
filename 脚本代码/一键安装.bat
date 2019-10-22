@@ -89,6 +89,7 @@ osql -E -i "%rootPath%钻石兑换金币.sql"
 osql -E -i "%rootPath%绑定手机.sql"
 osql -E -i "%rootPath%购买奖品.sql"
 osql -E -i "%rootPath%每日分享.sql"
+osql -E -i "%rootPath%提现下单.sql"
 
 set rootPath=3存储过程\3后台脚本\
 osql -E -i "%rootPath%菜单加载.sql"
@@ -113,6 +114,7 @@ osql -E -i "%rootPath%查询约战详情.sql"
 osql -E -i "%rootPath%用户显示游戏.sql"
 osql -E -i "%rootPath%用户配置游戏.sql"
 osql -E -i "%rootPath%后台赠送奖券.sql"
+osql -E -i "%rootPath%提现处理.sql"
 
 set rootPath=3存储过程\4作业脚本\
 osql -E -i "%rootPath%代理返利.sql"

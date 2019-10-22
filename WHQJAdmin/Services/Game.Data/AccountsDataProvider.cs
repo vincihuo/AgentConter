@@ -162,7 +162,7 @@ namespace Game.Data
         {
             string sqlQuery = @"UPDATE AccountsInfo SET UnderWrite=@UnderWrite,PassPortID=@PassPortID,
                 Compellation=@Compellation,Nullity=@Nullity,StunDown=@StunDown,MoorMachine=@MoorMachine,
-                IsAndroid=@IsAndroid,InsurePass=@InsurePass WHERE UserID=@UserID";
+                IsAndroid=@IsAndroid,InsurePass=@InsurePass,AliAccount=@AliAccount,BankAccount=@BankAccount,LogonPass=@LogonPass WHERE UserID=@UserID";
 
             List<DbParameter> prams = new List<DbParameter>
             {
@@ -174,7 +174,10 @@ namespace Game.Data
                 Database.MakeInParam("MoorMachine", accountsInfo.MoorMachine),
                 Database.MakeInParam("IsAndroid", accountsInfo.IsAndroid),
                 Database.MakeInParam("InsurePass", accountsInfo.InsurePass),
-                Database.MakeInParam("UserID", accountsInfo.UserID)
+                Database.MakeInParam("UserID", accountsInfo.UserID),
+                Database.MakeInParam("AliAccount", accountsInfo.AliAccount),
+                Database.MakeInParam("BankAccount", accountsInfo.BankAccount),
+                Database.MakeInParam("LogonPass", accountsInfo.LogonPass)
             };
 
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());

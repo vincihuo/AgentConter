@@ -103,5 +103,8 @@ namespace Game.IData
         /// <returns></returns>
         DataSet GetClubBattleRecord(int userid, int groupid, DateTime start, DateTime end);
         #endregion
+
+        int SetGameVerSion(int gameID, int version);
+
     }
 }
