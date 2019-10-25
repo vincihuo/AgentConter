@@ -39,7 +39,6 @@ namespace Game.Data
         }
         #endregion
 
-
         #region 线上充值
 
         public IList<OnlinePayConfig> GetOnLinePayList(int typeId)
@@ -55,7 +54,6 @@ namespace Game.Data
             string sql = $"SELECT * FROM GameScoreInfo where UserID={uid}";
             return Database.ExecuteObject<GameScoreInfo>(sql);
         }
-
         public Message CreateDrawalOrder(DrawalOrder order)
         {
             List<DbParameter> prams = new List<DbParameter>
@@ -69,10 +67,14 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PW_CreateDrawarOrder", prams);
         }
+        public UserValidBet GetValidBetByUid(int uid)
+        {
+            string sql = $"SELECT * FROM UserValidBet where UserID={uid}";
+
+            return Database.ExecuteObject<UserValidBet>(sql);
+        }
 
         #endregion
-
-
 
         #region 充值产品
 
@@ -120,67 +122,6 @@ namespace Game.Data
 
         #endregion
 
-        #region 订单信息
-
-        /// <summary>
-        /// 钻石充值下单
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        public Message CreatePayOrderInfo(OnLinePayOrder order, string device)
-        {
-            List<DbParameter> prams = new List<DbParameter>
-            {
-                Database.MakeInParam("dwUserID", order.UserID),
-                Database.MakeInParam("dwShareID", order.ShareID),
-                Database.MakeInParam("dwConfigID", order.ConfigID),
-                Database.MakeInParam("strOrderID", order.OrderID),
-                Database.MakeInParam("strIPAddress", order.OrderAddress),
-                Database.MakeInParam("strDevice", device),
-                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
-            };
-            return MessageHelper.GetMessageForObject<OnLinePayOrder>(Database, "NET_PW_CreateOnLineOrder", prams);
-        }
-
-        /// <summary>
-        /// 在线充值
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        public Message FinishOnLineOrder(OnLinePayOrder order)
-        {
-            var parms = new List<DbParameter>
-            {
-                Database.MakeInParam("strOrdersID", order.OrderID),
-                Database.MakeInParam("PayAmount", order.Amount),
-                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
-            };
-
-            return MessageHelper.GetMessage(Database, "NET_PW_FinishOnLineOrder", parms);
-        }
-
-        /// <summary>
-        /// 在线充值（苹果）
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <param name="appleid">苹果产品标识</param>
-        /// <returns></returns>
-        public Message FinishOnLineOrderIOS(OnLinePayOrder order, string appleid)
-        {
-            var parms = new List<DbParameter>
-            {
-                Database.MakeInParam("strOrdersID", order.OrderID),
-                Database.MakeInParam("PayAmount", order.Amount),
-                Database.MakeInParam("dwUserID", order.UserID),
-                Database.MakeInParam("strAppleID", appleid),
-                Database.MakeInParam("strIPAddress", order.OrderAddress),
-                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
-            };
-
-            return MessageHelper.GetMessage(Database, "NET_PW_FinishOnLineOrderIOS", parms);
-        }
-
-        #endregion
 
         #region 充值记录
 

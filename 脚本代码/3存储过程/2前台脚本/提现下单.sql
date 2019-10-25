@@ -10,6 +10,9 @@ GO
 
 CREATE PROCEDURE NET_PW_CreateDrawarOrder
 	@dwUserID			INT,						-- 操作用户
+
+	@DrawalType         DECIMAL(18,2),
+
 	@strOrdersID		NVARCHAR(32),
 	--	订单编号
 	@DrawalAmount		DECIMAL(18,2),
@@ -34,12 +37,12 @@ BEGIN
 	SELECT @Nullity=Nullity,@GameID=GameID FROM WHQJAccountsDBLink.WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK) WHERE UserID=@dwUserID
 	IF @Nullity IS NULL
 	BEGIN
-		SET @strErrorDescribe=N'抱歉，兑换用户不存在'
+		SET @strErrorDescribe=N'抱歉，提现用户不存在'
 		RETURN 1001
 	END
 	IF @Nullity=1
 	BEGIN
-		SET @strErrorDescribe=N'抱歉，兑换用户已冻结'
+		SET @strErrorDescribe=N'抱歉，提现用户不存在'
 		RETURN 1002
 	END
 
@@ -62,7 +65,6 @@ BEGIN
 		SET @strErrorDescribe=N'有线上提款订单未处理'
 		RETURN 1005
 	END
-
 	BEGIN TRAN
 	--扣钱
 	UPDATE GameScoreInfo SET Score = Score - @DrawalAmount WHERE UserID = @dwUserID
@@ -82,8 +84,8 @@ BEGIN
 		RETURN 2004
 	END
 	--写订单
-	INSERT INTO DrawalOrder(OrderID,UserID,GameID,MasterID,Amount,OrderState,OrderCost,IP,CurrentTime)
-	VALUES(@strOrdersID,@dwUserID,@GameID,0,@DrawalAmount,0,@OrderCost,@ClientIP,GETDATE())
+	INSERT INTO DrawalOrder(OrderID,DrawalType,UserID,GameID,MasterID,Amount,OrderState,OrderCost,IP,CurrentTime)
+	VALUES(@strOrdersID,@DrawalType,@dwUserID,@GameID,0,@DrawalAmount,0,@OrderCost,@ClientIP,GETDATE())
 	IF @@ROWCOUNT<>1
 	BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'

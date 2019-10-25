@@ -39,6 +39,7 @@ namespace Game.Web.Module.DrawalManager
                 TextState.Text = order.OrderState == 1 ? "同意" : "拒绝";
                 BtnN.Visible = BtnY.Visible = false;
             }
+            TxtDrawalType.Text = order.drawalType == 1 ? "微信" : "支付宝";
         }
 
         protected void OnBtnY(object sender, EventArgs e)

@@ -85,6 +85,7 @@ namespace Game.Data
                 Database.MakeInParam("PayType", config.PayType),
                 Database.MakeInParam("PayName", config.PayName),
                 Database.MakeInParam("UID", config.UID),
+                Database.MakeInParam("PayUrl", config.PayUrl),
                 Database.MakeInParam("Md5key", config.Md5key),
                 Database.MakeInParam("PrivateKey", config.PrivateKey),
                 Database.MakeInParam("PublicKey", config.PublicKey),
@@ -95,13 +96,14 @@ namespace Game.Data
                 Database.MakeInParam("FristPresent", config.FristPresent),
                 Database.MakeInParam("ChanelID", config.ChanelID),
                 Database.MakeInParam("ChanelName", config.ChanelName),
-                Database.MakeInParam("AttaChStr", config.AttaChStr)
+                Database.MakeInParam("AttachStr1", config.AttachStr1),
+                Database.MakeInParam("AttachStr2", config.AttachStr1)
             };
             string sqlQuery;
             if (config.ID == 0)
             {
-                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,Md5key,PrivateKey,PublicKey,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttaChStr) 
-                                        VALUES(@PayType,@PayName,@UID,@Md5key,@PrivateKey,@PublicKey,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttaChStr)";
+                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,PayUrl,Md5key,PrivateKey,PublicKey,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttachStr1) 
+                                        VALUES(@PayType,@PayName,@UID,@PayUrl,@Md5key,@PrivateKey,@PublicKey,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttachStr1)";
             }
             else
             {
@@ -111,6 +113,7 @@ namespace Game.Data
                     .Append("PayType=@PayType, ")
                     .Append("PayName=@PayName, ")
                     .Append("UID=@UID, ")
+                    .Append("PayUrl=@PayUrl, ")
                     .Append("Md5key=@Md5key, ")
                     .Append("PrivateKey=@PrivateKey, ")
                     .Append("PublicKey=@PublicKey, ")
@@ -121,7 +124,8 @@ namespace Game.Data
                     .Append("FristPresent=@FristPresent, ")
                     .Append("ChanelID=@ChanelID, ")
                     .Append("ChanelName=@ChanelName, ")
-                    .Append("AttaChStr=@AttaChStr ")
+                    .Append("AttaChStr1=@AttachStr1, ")
+                    .Append("AttaChStr2=@AttachStr2 ")
                     .Append("WHERE ID=@ID");
                 sqlQuery = sql.ToString();
             }
@@ -132,13 +136,20 @@ namespace Game.Data
         {
             string sqlQuery = $"DELETE OnlinePayConfig WHERE ID IN({idlist})";
             return Database.ExecuteNonQuery(sqlQuery);
-        }  
+        }
 
         public bool IsExistOnlinePayConfig(string where)
         {
             string sqlQuery = $"SELECT ID FROM OnlinePayConfig WITH(NOLOCK) {where} ";
             return Database.ExecuteScalar(CommandType.Text, sqlQuery) != null;
         }
+
+        public IList<pay_chanel> GetPay_ChanelsByType(int type)
+        {
+            string sqlQuery = $"SELECT * FROM pay_chanel WITH(NOLOCK) WHERE  bankType={type}";
+            return Database.ExecuteObjectList<pay_chanel>(sqlQuery);
+        }
+
 
         #endregion
 
@@ -303,7 +314,18 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery.ToString(), prams.ToArray());
         }
 
-
+        public Message FinshOnlineOrder(string orderid, byte type, int payAmount, string address)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("strOrdersID", orderid),
+                Database.MakeInParam("callType", type),
+                Database.MakeInParam("PayAmount", payAmount),
+                Database.MakeInParam("OrderAddress",address),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_FinishOnLineOrder", prams);
+        }
 
         #endregion
 
@@ -548,7 +570,7 @@ namespace Game.Data
         /// <returns></returns>
         public decimal GetTotalPayAmount(string where)
         {
-            string sql = $"SELECT ISNULL(SUM(Amount),0) AS Amount FROM OnLinePayOrder {where} AND OrderStatus>0";
+            string sql = $"SELECT ISNULL(SUM(PayAmount),0) AS Amount FROM OnLinePayOrder {where} AND OrderStates>0";
             return Convert.ToDecimal(Database.ExecuteScalar(CommandType.Text, sql));
         }
 
@@ -559,7 +581,7 @@ namespace Game.Data
         /// <returns></returns>
         public long GetTotalPayOrderCount(string where)
         {
-            string sql = $"SELECT COUNT(1) AS [COUNT] FROM OnLinePayOrder {where} AND OrderStatus>0";
+            string sql = $"SELECT COUNT(1) AS [COUNT] FROM OnLinePayOrder {where} AND OrderStates>0";
             return Convert.ToInt64(Database.ExecuteScalar(CommandType.Text, sql));
         }
 

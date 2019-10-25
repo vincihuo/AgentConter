@@ -17,7 +17,7 @@ namespace Game.Web.Mobile.Pay
 
             OnLinePayOrder order = FacadeManage.aideTreasureFacade.GetPayOnLinePayOrder(orderId);
 
-            if (order != null && order.OrderStatus == 1)
+            if (order != null && order.OrderStates == 1)
             {
                 string msg = "【" + orderId + "】充值成功！";
                 Response.Redirect("/Mobile/Index.aspx?action=payreturn&msg=" + msg);

@@ -35,6 +35,15 @@ namespace Game.Web.Module.DrawalManager
             return "未处理";
         }
 
+        protected string GetDorawalType(int type)
+        {
+            if (type == 1)
+            {
+                return "微信";
+            }
+            return "支付宝";
+        }
+
         private void OrderDataBind()
         {
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetList(DrawalOrder.Tablename,

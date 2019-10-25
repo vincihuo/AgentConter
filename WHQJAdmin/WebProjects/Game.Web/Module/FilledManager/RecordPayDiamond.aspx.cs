@@ -5,7 +5,8 @@ using Game.Kernel;
 using Game.Utils;
 using Game.Facade;
 using Game.Entity.Treasure;
-using System.Collections.Generic;
+using System.Web.UI.WebControls;
+
 
 namespace Game.Web.Module.FilledManager
 {
@@ -33,6 +34,21 @@ namespace Game.Web.Module.FilledManager
             ShareInfoDataBind();
         }
 
+
+        /// <summary>
+        /// 数据绑定
+        /// </summary>
+        private void ShareInfoDataBind()
+        {
+            PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetList(OnLinePayOrder.Tablename,
+                 SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
+            anpNews.RecordCount = pagerSet.RecordCount;
+            litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
+            ltTotal.Text = $"已支付金额：{FacadeManage.aideTreasureFacade.GetTotalPayAmount(SearchItems)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(SearchItems)} (当前条件统计)";
+            rptShareInfo.DataSource = pagerSet.PageSet;
+            rptShareInfo.DataBind();
+        }
+
         /// <summary>
         /// 设置查询条件
         /// </summary>
@@ -44,11 +60,11 @@ namespace Game.Web.Module.FilledManager
             StringBuilder condition = new StringBuilder("WHERE 1=1");
             if (service > 0)
             {
-                condition.AppendFormat(" AND ShareID={0} ", service);
+                condition.AppendFormat(" AND PayType={0} ", service);
             }
             if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
             {
-                condition.AppendFormat(" AND OrderDate BETWEEN '{0}' AND '{1}'", startDate, endDate);
+                condition.AppendFormat(" AND PayTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
             }
             ViewState["SearchItems"] = condition.ToString();
         }
@@ -61,6 +77,22 @@ namespace Game.Web.Module.FilledManager
             SetCondition();
             ShareInfoDataBind();
         }
+
+        protected void btnAgree_Click(object sender, EventArgs e)
+        {
+            string oid = ((Button)sender).CommandArgument;
+            Message result= FacadeManage.aideTreasureFacade.FinshOnlineOrder(oid,2,0,"0.0.0.0");
+            if (result.MessageID == 0)
+            {
+                ShowInfo("补单成功");
+            }
+            else
+            {
+                ShowError("补单失败");
+            }
+            ShareInfoDataBind();
+        }
+
 
         /// <summary>
         /// 查询今天
@@ -159,20 +191,12 @@ namespace Game.Web.Module.FilledManager
         {
             switch (shareId)
             {
-                case 101:
-                    return "手机微信充值";
-                case 102:
-                    return "H5微信充值";
-                case 201:
-                    return "手机支付宝充值";
-                case 301:
-                    return "手机零钱充值";
-                case 302:
-                    return "竣付通微信充值";
-                case 303:
-                    return "竣付通支付宝充值";
-                case 800:
-                    return "手机苹果充值";
+                case 1:
+                    return "微信";
+                case 2:
+                    return "支付宝";
+                case 3:
+                    return "云闪付";
                 default:
                     return "未知类型";
             }
@@ -188,27 +212,28 @@ namespace Game.Web.Module.FilledManager
             switch (status)
             {
                 case 2:
-                    return "<span>已完成</span>";
+                    return "补单";
                 case 1:
-                    return "<span class='hong'>已支付，未处理</span>";
+                    return "已支付";
                 default:
-                    return "<span class='hong'>未支付</span>";
+                    return "未支付";
             }
         }
 
-        /// <summary>
-        /// 数据绑定
-        /// </summary>
-        private void ShareInfoDataBind()
+
+        protected string GetArrvieStatus(int status)
         {
-            PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetList(OnLinePayOrder.Tablename,
-                 SearchItems, Orderby,anpNews.CurrentPageIndex, anpNews.PageSize);
-            anpNews.RecordCount = pagerSet.RecordCount;
-            litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            ltTotal.Text = $"已支付金额：{FacadeManage.aideTreasureFacade.GetTotalPayAmount(SearchItems)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(SearchItems)} (当前条件统计)";
-            rptShareInfo.DataSource = pagerSet.PageSet;
-            rptShareInfo.DataBind();
+            switch (status)
+            {
+                case 1:
+                    return "金币到账";
+                case 2:
+                    return "银行到账";
+                default:
+                    return "未到账";
+            }
         }
+
 
         /// <summary>
         /// 查询条件
@@ -235,7 +260,7 @@ namespace Game.Web.Module.FilledManager
             {
                 if (ViewState["Orderby"] == null)
                 {
-                    ViewState["Orderby"] = "ORDER BY OnLineID DESC";
+                    ViewState["Orderby"] = "ORDER BY PayTime DESC";
                 }
                 return (string) ViewState["Orderby"];
             }

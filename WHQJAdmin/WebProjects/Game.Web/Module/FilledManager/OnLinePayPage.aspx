@@ -46,6 +46,8 @@
                     </td>
                     <td class="listTitle2">用户ID
                     </td>
+                    <td class="listTitle2">支付网关
+                    </td>
                     <td class="listTitle2">md5密钥
                     </td>
                     <td class="listTitle2">对称公钥
@@ -84,6 +86,10 @@
                             <td>
                                 <%# Eval("UID")%>
                             </td>
+                            <td>
+                                <%# Eval("PayUrl")%>
+                            </td>
+
                             <td>
                                 <%# Eval("Md5key")%>
                             </td>

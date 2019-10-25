@@ -44,13 +44,9 @@
 
                     <asp:DropDownList ID="ddlGlobalShareInfo" runat="server">
                         <asp:ListItem Text="全部充值" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="手机微信充值" Value="101"></asp:ListItem>
-                        <asp:ListItem Text="H5微信充值" Value="102"></asp:ListItem>
-                        <asp:ListItem Text="手机支付宝充值" Value="201"></asp:ListItem>
-                        <asp:ListItem Text="手机零钱充值" Value="301"></asp:ListItem>
-                        <asp:ListItem Text="竣付通微信充值" Value="302"></asp:ListItem>
-                        <asp:ListItem Text="竣付通支付宝充值" Value="303"></asp:ListItem>
-                        <asp:ListItem Text="手机苹果充值" Value="800"></asp:ListItem>
+                        <asp:ListItem Text="微信" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="支付宝" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="云闪" Value="3"></asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                     <asp:Button ID="btnQueryTD" runat="server" Text="今天" CssClass="btn wd1" OnClick="btnQueryTD_Click" />
@@ -94,21 +90,23 @@
                     </td>
                     <td class="listTitle2">玩家昵称
                     </td>
-                    <td class="listTitle2">支付金额
+                    <td class="listTitle2">充值金额
                     </td>
-                    <td class="listTitle2">充值货币类型
+                    <td class="listTitle2">到账金额
                     </td>
-                    <td class="listTitle2">充值前数值
-                    </td>
-                    <td class="listTitle2">充值数值
-                    </td>
-                    <td class="listTitle2">额外赠送
-                    </td>
-                    <td class="listTitle2">充值后数值
+                    <td class="listTitle2">赠送
                     </td>
                     <td class="listTitle2">充值状态
                     </td>
+                    <td class="listTitle2">到账状态
+                    </td>
+                    <td class="listTitle2">操作ID
+                    </td>
+                    <td class="listTitle">到账时间
+                    </td>
                     <td class="listTitle2">订单地址
+                    </td>
+                    <td class="listTitle2">补单
                     </td>
                 </tr>
                 <asp:Repeater ID="rptShareInfo" runat="server">
@@ -116,13 +114,13 @@
                         <tr align="center" class="list" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
                             onmouseout="this.style.backgroundColor=currentcolor">
                             <td>
-                                <%# Eval("OrderDate")%>
+                                <%# Eval("PayTime")%>
                             </td>
                             <td>
                                 <%# Eval("OrderID")%>
                             </td>
                             <td>
-                                <%# GetOrderShareName(Convert.ToInt32(Eval("ShareID")))%>
+                                <%# GetOrderShareName(Convert.ToInt32(Eval("PayType")))%>
                             </td>
                             <td>
                                 <%# Eval("GameID")%>
@@ -136,74 +134,31 @@
                                 <%# Eval("Amount")%>
                             </td>
                             <td>
-                                <%# Eval("ScoreType").ToString()=="1" ? "钻石" :"游戏币" %>
+                                <%# Eval("PayAmount")%>
                             </td>
                             <td>
-                                <%# Convert.ToInt32(Eval("OrderStatus"))==2?Eval("BeforeScore"):"——"%>
+                                <%# Eval("PresentScore")%>
                             </td>
                             <td>
-                                <%# Eval("Score")%>
+                                <%#  GetPayStatus(Convert.ToInt32(Eval("OrderStates")))%>
                             </td>
                             <td>
-                                <%# Eval("OtherPresent")%>
+                                <%# GetArrvieStatus(Convert.ToInt32(Eval("CheckOut")))%>
                             </td>
                             <td>
-                                <%# Convert.ToInt32(Eval("OrderStatus"))==2?""+(Convert.ToInt32(Eval("BeforeScore"))+Convert.ToInt32(Eval("Score"))+Convert.ToInt32(Eval("OtherPresent"))):"——"%>
+                                <%# Eval("MasterId")%>
                             </td>
                             <td>
-                                <%# GetPayStatus(Convert.ToInt32(Eval("OrderStatus"))) %>
+                                <%# Eval("CallTime")%>
                             </td>
                             <td>
-                                <%# Eval("OrderAddress")%>
+                                <%# Eval("Addrstr")%>
+                            </td>
+                            <td>
+                                <asp:Button runat="server" Text="补单" CssClass="btn wd1" OnClick="btnAgree_Click" CommandArgument='<%# Eval("OrderID")%>' Enabled='<%#Convert.ToInt32(Eval("OrderStates"))>0?false:true%>' />
                             </td>
                         </tr>
                     </ItemTemplate>
-                    <AlternatingItemTemplate>
-                        <tr align="center" class="list" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
-                            onmouseout="this.style.backgroundColor=currentcolor">
-                            <td>
-                                <%# Eval("OrderDate")%>
-                            </td>
-                            <td>
-                                <%# Eval("OrderID")%>
-                            </td>
-                            <td>
-                                <%# GetOrderShareName(Convert.ToInt32(Eval("ShareID")))%>
-                            </td>
-                            <td>
-                                <%# Eval("GameID")%>
-                            </td>
-                            <td>
-                                <a class="l" href="javascript:void(0);" onclick="openWindowOwn('/Module/AccountManager/AccountsBaseInfo.aspx?param=<%#Eval("UserID").ToString() %>','<%#Eval("UserID").ToString() %>',850,790);">
-                                    <%# Eval("NickName")%>
-                                </a>
-                            </td>
-                            <td>
-                                <%# Eval("Amount")%>
-                            </td>
-                            <td>
-                                <%# Eval("ScoreType").ToString()=="1" ? "钻石" :"游戏币" %>
-                            </td>
-                            <td>
-                                <%# Convert.ToInt32(Eval("OrderStatus"))==1?Eval("BeforeScore"):"——"%>
-                            </td>
-                            <td>
-                                <%# Eval("Score")%>
-                            </td>
-                            <td>
-                                <%# Eval("OtherPresent")%>
-                            </td>
-                            <td>
-                                <%# Convert.ToInt32(Eval("OrderStatus"))==1?""+(Convert.ToInt32(Eval("BeforeScore"))+Convert.ToInt32(Eval("Score"))+Convert.ToInt32(Eval("OtherPresent"))):"——"%>
-                            </td>
-                            <td>
-                                <%# GetPayStatus(Convert.ToInt32(Eval("OrderStatus"))) %>
-                            </td>
-                            <td>
-                                <%# Eval("OrderAddress")%>
-                            </td>
-                        </tr>
-                    </AlternatingItemTemplate>
                 </asp:Repeater>
                 <asp:Literal runat="server" ID="litNoData" Visible="false" Text="<tr class='tdbg'><td colspan='100' align='center'><br>没有任何信息!<br><br></td></tr>"></asp:Literal>
             </table>

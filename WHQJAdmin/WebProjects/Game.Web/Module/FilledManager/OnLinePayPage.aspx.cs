@@ -46,13 +46,13 @@ namespace Game.Web.Module.FilledManager
         {
             switch (type)
             {
-                case 0:
-                    return "微信";
                 case 1:
-                    return "支付宝";
+                    return "微信";
                 case 2:
-                    return "云闪付";
+                    return "支付宝";
                 case 3:
+                    return "云闪付";
+                case 4:
                     return "网银转账";
             }
             return "其他类型";

@@ -30,8 +30,8 @@ namespace Game.IData
         IList<OnlinePayConfig> GetOnLinePayList(int typeId);
         GameScoreInfo GetGameScoreInfoByUid(int uid);
         Message CreateDrawalOrder(DrawalOrder order);
+        UserValidBet GetValidBetByUid(int uid);
         #endregion
-
 
         #region 充值产品
         /// <summary>
@@ -47,28 +47,6 @@ namespace Game.IData
         /// <param name="userid">首充用户</param>
         /// <returns></returns>
         DataSet GetAppPayConfigList(int typeId, int userid);
-        #endregion
-
-        #region 订单信息
-        /// <summary>
-        /// 钻石充值下单
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        Message CreatePayOrderInfo(OnLinePayOrder order, string device);
-        /// <summary>
-        /// 在线充值
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        Message FinishOnLineOrder(OnLinePayOrder order);
-        /// <summary>
-        /// 在线充值（苹果）
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <param name="appleid">苹果产品标识</param>
-        /// <returns></returns>
-        Message FinishOnLineOrderIOS(OnLinePayOrder order, string appleid);
         #endregion
 
         #region 充值记录

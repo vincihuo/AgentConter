@@ -1,6 +1,6 @@
 ﻿/*
  * 版本： 4.0
- * 日期：2019/10/18 14:38:01
+ * 日期：2019/10/25 10:27:07
  * 
  * 描述：实体类
  * 
@@ -42,7 +42,11 @@ namespace Game.Entity.Treasure
         private int p_presentscore;
         private int p_chanelid;
         private string p_chanelname;
-        private string p_attachstr;
+        private string p_attachstr1;
+        private string p_attachstr2;
+        private string p_attachstr3;
+        private string p_attachstr4;
+        private string p_payurl;
 
         #endregion
 
@@ -67,7 +71,11 @@ namespace Game.Entity.Treasure
             p_presentscore = 0;
             p_chanelid = 0;
             p_chanelname = string.Empty;
-            p_attachstr = string.Empty;
+            p_attachstr1 = string.Empty;
+            p_attachstr2 = string.Empty;
+            p_attachstr3 = string.Empty;
+            p_attachstr4 = string.Empty;
+            p_payurl = string.Empty;
         }
 
         #endregion
@@ -285,17 +293,77 @@ namespace Game.Entity.Treasure
         }
 
         /// <summary>
-        /// AttaChStr
+        /// AttachStr1
         /// </summary>
-        public string AttaChStr
+        public string AttachStr1
         {
             set
             {
-                p_attachstr = value;
+                p_attachstr1 = value;
             }
             get
             {
-                return p_attachstr;
+                return p_attachstr1;
+            }
+        }
+
+        /// <summary>
+        /// AttachStr2
+        /// </summary>
+        public string AttachStr2
+        {
+            set
+            {
+                p_attachstr2 = value;
+            }
+            get
+            {
+                return p_attachstr2;
+            }
+        }
+
+        /// <summary>
+        /// AttachStr3
+        /// </summary>
+        public string AttachStr3
+        {
+            set
+            {
+                p_attachstr3 = value;
+            }
+            get
+            {
+                return p_attachstr3;
+            }
+        }
+
+        /// <summary>
+        /// AttachStr4
+        /// </summary>
+        public string AttachStr4
+        {
+            set
+            {
+                p_attachstr4 = value;
+            }
+            get
+            {
+                return p_attachstr4;
+            }
+        }
+
+        /// <summary>
+        /// PayUrl
+        /// </summary>
+        public string PayUrl
+        {
+            set
+            {
+                p_payurl = value;
+            }
+            get
+            {
+                return p_payurl;
             }
         }
 

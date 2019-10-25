@@ -96,40 +96,40 @@ namespace Game.Web.Helper
 
             public LQPayRequest(OnLinePayOrder onlineOrder, string uuid, string userid) : this(onlineOrder.OrderID)
             {
-                LQPrePayContent content = new LQPrePayContent()
-                {
-                    code = "001",
-                    comment = $"{onlineOrder.Score} 颗 {EnumDescription.GetFieldText(AppConfig.PayScoreType.Diamond)}",
-                    name = "钻石",
-                    price = (onlineOrder.Amount / onlineOrder.Score * 100).ToString("F0"),
-                    quality = onlineOrder.Score.ToString(),
-                    realMoney = (onlineOrder.Amount * 100).ToString("F0"),
-                    rebateMoney = "0",
-                    totalMoney = (onlineOrder.Amount * 100).ToString("F0"),
-                    showUrl = "",
-                    unit = "颗"
-                };
-                AddParamValue("uuid", uuid);
-                AddParamValue("user_id", userid);
-                AddParamValue("total_money", (onlineOrder.Amount * 100).ToString("F0"));
-                AddParamValue("rebate_money", "0");
-                AddParamValue("real_money", (onlineOrder.Amount * 100).ToString("F0"));
-                AddParamValue("pay_content", "[" + content + "]");
+                //LQPrePayContent content = new LQPrePayContent()
+                //{
+                //    code = "001",
+                //    comment = $"{onlineOrder.Score} 颗 {EnumDescription.GetFieldText(AppConfig.PayScoreType.Diamond)}",
+                //    name = "钻石",
+                //    price = (onlineOrder.Amount / onlineOrder.Score * 100).ToString("F0"),
+                //    quality = onlineOrder.Score.ToString(),
+                //    realMoney = (onlineOrder.Amount * 100).ToString("F0"),
+                //    rebateMoney = "0",
+                //    totalMoney = (onlineOrder.Amount * 100).ToString("F0"),
+                //    showUrl = "",
+                //    unit = "颗"
+                //};
+                //AddParamValue("uuid", uuid);
+                //AddParamValue("user_id", userid);
+                //AddParamValue("total_money", (onlineOrder.Amount * 100).ToString("F0"));
+                //AddParamValue("rebate_money", "0");
+                //AddParamValue("real_money", (onlineOrder.Amount * 100).ToString("F0"));
+                //AddParamValue("pay_content", "[" + content + "]");
             }
 
             public LQPayRequest(OnLinePayOrder onLinePayOrder, string type = "weixin") : this(onLinePayOrder.OrderID)
             {
-                LQPayContent content = new LQPayContent()
-                {
-                    channelType = type,
-                    body = $"{onLinePayOrder.Score} 颗 {EnumDescription.GetFieldText(AppConfig.PayScoreType.Diamond)}",
-                    money = (onLinePayOrder.Amount * 100).ToString("F0"),
-                    userId = onLinePayOrder.GameID.ToString(),
-                    userIp = GameRequest.GetUserIP(),
-                    userSourceType = "Android",
-                    channelCode = ""
-                };
-                AddParamValue("pay_content", content.ToString().Replace("\\", ""));
+                //LQPayContent content = new LQPayContent()
+                //{
+                //    channelType = type,
+                //    body = $"{onLinePayOrder.Score} 颗 {EnumDescription.GetFieldText(AppConfig.PayScoreType.Diamond)}",
+                //    money = (onLinePayOrder.Amount * 100).ToString("F0"),
+                //    userId = onLinePayOrder.GameID.ToString(),
+                //    userIp = GameRequest.GetUserIP(),
+                //    userSourceType = "Android",
+                //    channelCode = ""
+                //};
+                //AddParamValue("pay_content", content.ToString().Replace("\\", ""));
             }
 
             public LQPayRequest(string orderId)

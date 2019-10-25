@@ -6,6 +6,7 @@ using Game.Facade;
 using Game.Entity.Enum;
 using System.Web.UI.WebControls;
 using Game.Utils;
+using System.Collections.Generic;
 
 namespace Game.Web.Module.FilledManager
 {
@@ -45,7 +46,9 @@ namespace Game.Web.Module.FilledManager
             config.PresentScore = Convert.ToInt32(txtPresentScore.Text);
             config.ChanelID = Convert.ToInt32(DropDownList2.SelectedValue);
             config.ChanelName = DropDownList2.SelectedItem.Text;
-            config.AttaChStr = CtrlHelper.GetText(AttaBox);
+            config.AttachStr1 = CtrlHelper.GetText(AttaBox1);
+            config.AttachStr2 = CtrlHelper.GetText(AttaBox2);
+            config.PayUrl= CtrlHelper.GetText(TexPayUrl);
             if (IntParam > 0)
             {
                 config.ID = IntParam;
@@ -69,33 +72,19 @@ namespace Game.Web.Module.FilledManager
 
         private void ChangePayType(int typeid)
         {
-            string s = "";
-            switch (typeid)
-            {
-                case 0:
-                    s = "微信";
-                    break;
-                case 1:
-                    s = "支付宝";
-                    break;
-                case 2:
-                    s = "云闪付";
-                    break;
-                case 3:
-                    s = "网银转账";
-                    break;
-            }
-
-
             DropDownList2.Items.Clear();
             //搜索数据得到
-            int t = typeid * 100;
-            for (int i = 0; i < 6; ++i)
+            IList<pay_chanel> list = FacadeManage.aideTreasureFacade.GetPay_ChanelsByType(typeid);
+            if (list == null)
             {
-                t += i;
-                DropDownList2.Items.Add(new ListItem(s + i.ToString(), t.ToString()));
+                return;  
             }
-            DropDownList2.SelectedValue = (typeid * 100).ToString();
+
+            for (int i = 0; i < list.Count; ++i)
+            {
+                DropDownList2.Items.Add(new ListItem(list[i].name, list[i].id.ToString()));
+            }
+            DropDownList2.SelectedValue = list[0].id.ToString();
         }
 
 
@@ -120,7 +109,9 @@ namespace Game.Web.Module.FilledManager
                     txtFristPresent.Text = config.FristPresent.ToString();
                     txtPresentScore.Text = config.PresentScore.ToString();
                     SortID.Text = config.SortID.ToString();
-                    AttaBox.Text = config.AttaChStr;
+                    TexPayUrl.Text = config.PayUrl;
+                    AttaBox1.Text = config.AttachStr1;
+                    AttaBox2.Text = config.AttachStr2;
                 }
             }
         }

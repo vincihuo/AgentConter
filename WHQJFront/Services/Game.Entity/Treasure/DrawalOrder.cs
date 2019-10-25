@@ -1,6 +1,6 @@
 ﻿/*
  * 版本： 4.0
- * 日期：2019/10/21 17:09:48
+ * 日期：2019/10/23 19:41:00
  * 
  * 描述：实体类
  * 
@@ -29,6 +29,7 @@ namespace Game.Entity.Treasure
         #region 私有变量
 
         private string p_orderid;
+        private byte p_drawaltype;
         private int p_userid;
         private int p_gameid;
         private int p_masterid;
@@ -49,6 +50,7 @@ namespace Game.Entity.Treasure
         public DrawalOrder()
         {
             p_orderid = string.Empty;
+            p_drawaltype = 0;
             p_userid = 0;
             p_gameid = 0;
             p_masterid = 0;
@@ -76,6 +78,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_orderid;
+            }
+        }
+
+        /// <summary>
+        /// drawalType
+        /// </summary>
+        public byte drawalType
+        {
+            set
+            {
+                p_drawaltype = value;
+            }
+            get
+            {
+                return p_drawaltype;
             }
         }
 

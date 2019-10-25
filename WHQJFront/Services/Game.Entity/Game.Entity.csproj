@@ -114,6 +114,7 @@
     <Compile Include="Treasure\RecordSpreadAward.cs" />
     <Compile Include="Treasure\RecordVideoInfo.cs" />
     <Compile Include="Treasure\SpreadConfig.cs" />
+    <Compile Include="Treasure\UserValidBet.cs" />
     <Compile Include="Treasure\UserWealth.cs" />
     <Compile Include="Treasure\UserCurrency.cs" />
   </ItemGroup>

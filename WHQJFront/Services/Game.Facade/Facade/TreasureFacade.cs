@@ -65,6 +65,11 @@ namespace Game.Facade
             return treasureData.GetGameScoreInfoByUid(uid);
         }
 
+        public UserValidBet GetValidBetByUid(int uid)
+        {
+            return treasureData.GetValidBetByUid(uid);
+        }
+
         public Message CreateDrawalOrder(DrawalOrder order)
         {
             return treasureData.CreateDrawalOrder(order);
@@ -91,37 +96,6 @@ namespace Game.Facade
         public DataSet GetAppPayConfigList(int typeId, int userid)
         {
             return treasureData.GetAppPayConfigList(typeId, userid);
-        }
-        #endregion
-
-        #region 订单信息
-        /// <summary>
-        /// 钻石充值下单
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        public Message CreatePayOrderInfo(OnLinePayOrder order, string device="")
-        {
-            return treasureData.CreatePayOrderInfo(order, device);
-        }
-        /// <summary>
-        /// 在线充值
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <returns></returns>
-        public Message FinishOnLineOrder(OnLinePayOrder order)
-        {
-            return treasureData.FinishOnLineOrder(order);
-        }
-        /// <summary>
-        /// 在线充值（苹果）
-        /// </summary>
-        /// <param name="order">订单信息</param>
-        /// <param name="appleid">苹果产品标识</param>
-        /// <returns></returns>
-        public Message FinishOnLineOrderIOS(OnLinePayOrder order, string appleid)
-        {
-            return treasureData.FinishOnLineOrderIOS(order, appleid);
         }
         #endregion
 

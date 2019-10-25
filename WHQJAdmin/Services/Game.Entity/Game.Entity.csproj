@@ -170,6 +170,7 @@
     <Compile Include="Treasure\OnlinePayConfig.cs" />
     <Compile Include="Treasure\OnLinePayOrder.cs" />
     <Compile Include="Treasure\OnLineWeChat.cs" />
+    <Compile Include="Treasure\pay_chanel.cs" />
     <Compile Include="Treasure\RecordDrawInfo.cs" />
     <Compile Include="Treasure\RecordDrawScore.cs" />
     <Compile Include="Treasure\RecordInsure.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="Treasure\SpreadReturnConfig.cs" />
     <Compile Include="Treasure\SpreadConfig.cs" />
     <Compile Include="Treasure\UserCurrency.cs" />
+    <Compile Include="Treasure\UserValidBet.cs" />
+    <Compile Include="Treasure\ValiBetRecord.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

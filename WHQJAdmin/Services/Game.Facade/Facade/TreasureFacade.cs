@@ -68,6 +68,12 @@ namespace Game.Facade
         #endregion
 
         #region 线上充值配置
+
+        public IList<pay_chanel> GetPay_ChanelsByType(int type)
+        {
+            return aideTreasureData.GetPay_ChanelsByType(type);
+        }
+
         public OnlinePayConfig GetOnlinePayConfig(int configId)
         {
             return aideTreasureData.GetOnlinePayConfig(configId);
@@ -81,6 +87,11 @@ namespace Game.Facade
         public int DeleteOnlinePayConfig(string idlist)
         {
             return aideTreasureData.DeleteOnlinePayConfig(idlist);
+        }
+
+        public Message FinshOnlineOrder(string orderid,byte type,int payAmount,string address)
+        {
+            return aideTreasureData.FinshOnlineOrder(orderid, type, payAmount, address);
         }
         #endregion
 

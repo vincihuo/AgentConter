@@ -10,40 +10,55 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AspNetPager.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:20:01</publishTime>
     </File>
     <File Include="bin/Game.Data.dll">
-      <publishTime>04/24/2019 17:59:37</publishTime>
+      <publishTime>10/25/2019 15:47:54</publishTime>
+    </File>
+    <File Include="bin/Game.Data.pdb">
+      <publishTime>10/25/2019 15:47:54</publishTime>
     </File>
     <File Include="bin/Game.Entity.dll">
-      <publishTime>04/24/2019 17:59:36</publishTime>
+      <publishTime>10/25/2019 15:47:54</publishTime>
+    </File>
+    <File Include="bin/Game.Entity.pdb">
+      <publishTime>10/25/2019 15:47:54</publishTime>
     </File>
     <File Include="bin/Game.Facade.dll">
-      <publishTime>04/24/2019 17:59:37</publishTime>
+      <publishTime>10/25/2019 15:47:54</publishTime>
+    </File>
+    <File Include="bin/Game.Facade.pdb">
+      <publishTime>10/25/2019 15:47:54</publishTime>
     </File>
     <File Include="bin/Game.IData.dll">
-      <publishTime>04/24/2019 17:59:37</publishTime>
+      <publishTime>10/25/2019 15:47:54</publishTime>
+    </File>
+    <File Include="bin/Game.IData.pdb">
+      <publishTime>10/25/2019 15:47:54</publishTime>
     </File>
     <File Include="bin/Game.Kernel.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:31:16</publishTime>
     </File>
     <File Include="bin/Game.Uploader.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:20:01</publishTime>
     </File>
     <File Include="bin/Game.Utils.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:20:01</publishTime>
     </File>
     <File Include="bin/Game.Web.dll">
-      <publishTime>04/24/2019 17:59:38</publishTime>
+      <publishTime>10/25/2019 15:47:54</publishTime>
+    </File>
+    <File Include="bin/Game.Web.pdb">
+      <publishTime>10/25/2019 15:47:54</publishTime>
     </File>
     <File Include="bin/LitJSON.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:20:01</publishTime>
     </File>
     <File Include="bin/YYControls.dll">
-      <publishTime>11/02/2018 17:46:45</publishTime>
+      <publishTime>10/17/2019 14:20:01</publishTime>
     </File>
     <File Include="config/power.config">
-      <publishTime>02/22/2019 09:15:15</publishTime>
+      <publishTime>10/17/2019 14:20:05</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>11/02/2018 17:44:00</publishTime>
@@ -124,7 +139,7 @@
       <publishTime>03/29/2019 11:23:51</publishTime>
     </File>
     <File Include="ipconfig/ipdata.config">
-      <publishTime>11/02/2018 17:44:00</publishTime>
+      <publishTime>10/17/2019 14:20:05</publishTime>
     </File>
     <File Include="Left.aspx">
       <publishTime>11/02/2018 17:44:00</publishTime>
@@ -1237,13 +1252,13 @@
       <publishTime>11/02/2018 17:44:00</publishTime>
     </File>
     <File Include="Tools/KindEditorFileManager.ashx">
-      <publishTime>11/02/2018 17:44:00</publishTime>
+      <publishTime>10/17/2019 14:20:02</publishTime>
     </File>
     <File Include="Tools/KindEditorUpload.ashx">
-      <publishTime>11/02/2018 17:44:00</publishTime>
+      <publishTime>10/17/2019 14:20:02</publishTime>
     </File>
     <File Include="Tools/Operating.ashx">
-      <publishTime>11/02/2018 17:44:00</publishTime>
+      <publishTime>10/17/2019 14:20:02</publishTime>
     </File>
     <File Include="Tools/VerifyImagePage.aspx">
       <publishTime>11/02/2018 17:44:00</publishTime>

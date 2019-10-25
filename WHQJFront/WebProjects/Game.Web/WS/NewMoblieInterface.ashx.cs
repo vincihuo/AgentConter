@@ -101,8 +101,6 @@ namespace Game.Web.WS
                         break;
                     //获取充值产品列表
                     case "getpayproduct":
-                        WithDrawal();
-
                         //_ajv.SetDataItem("apiVersion", 20171028);
                         ////获取参数
                         //GetPayProduct(typeid);
@@ -124,25 +122,6 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20171107);
                         GetGameIntroList();
                         break;
-                    //钻石充值下单
-                    case "createpayorder":
-                        _ajv.SetDataItem("apiVersion", 20180327);
-                        //获取参数
-                        string paytype = GameRequest.GetQueryString("paytype");
-                        string openid = GameRequest.GetQueryString("openid");
-                        string subtype = GameRequest.GetQueryString("subtype");
-
-                        //参数验证
-                        if (configid <= 0 || paytype.Equals(""))
-                        {
-                            _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                            _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), "");
-                            context.Response.Write(_ajv.SerializeToJson());
-                            return;
-                        }
-                        context.Response.Write(CreatePayOrder(configid, paytype, openid, subtype).SerializeToJson());
-                        return;
-
                     //在线充值列表
                     case "getonlinewechatlist":
                         GetOnLineWeChatList();
@@ -351,11 +330,11 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-                    case "HellHotFix":
+                    case "hellHotFix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetHallHotFix();
                         break;
-                    case "GameHotFix":
+                    case "gameHotFix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetGameHotFix();
                         break;
@@ -384,7 +363,7 @@ namespace Game.Web.WS
 
         private void WithDrawal()
         {
-            int drawalType = GameRequest.GetQueryInt("paytype", 1);
+            int drawalType = GameRequest.GetQueryInt("drawalType", 1);
             int amount = GameRequest.GetQueryInt("amount", 1000);
             //判断玩家金币
             ConfigInfo cfg = FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
@@ -399,8 +378,13 @@ namespace Game.Web.WS
             }
             GameScoreInfo info = FacadeManage.aideTreasureFacade.GetGameScoreInfoByUid(_userid);
             //判断打码量
-            //TODO
-
+            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
+            if (validBet.CurrentValidBet < validBet.TargetBet)
+            {
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"打码量不足，目标打码量{validBet.TargetBet}，当前打码量{validBet.CurrentValidBet}");
+                return;
+            }
 
             if (info.Score < amount)
             {
@@ -416,7 +400,8 @@ namespace Game.Web.WS
             order.OrderCost = cost;
             order.IP = GameRequest.GetUserIP();
             order.UserID = _userid;
-            Message mm= FacadeManage.aideTreasureFacade.CreateDrawalOrder(order);
+            order.drawalType = (byte)drawalType;
+            Message mm = FacadeManage.aideTreasureFacade.CreateDrawalOrder(order);
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
@@ -604,9 +589,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("wincountrank", winCountRank);
             _ajv.SetDataItem("rankconfig", rankconfig);
         }
-
-
-
         private void GetOnLinePayList(int typeID)
         {
             IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(typeID);
@@ -682,123 +664,6 @@ namespace Game.Web.WS
             }
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("ruleList", ruleList);
-        }
-
-        /// <summary>
-        /// 钻石充值下单
-        /// </summary>
-        /// <param name="configid"></param>
-        /// <param name="paytype"></param>
-        /// <param name="openid"></param>
-        /// <param name="subtype"></param>
-        /// <returns>AjaxJsonValid</returns>
-        private AjaxJsonValid CreatePayOrder(int configid, string paytype, string openid, string subtype)
-        {
-            //下单信息
-            OnLinePayOrder order = new OnLinePayOrder
-            {
-                UserID = _userid,
-                ConfigID = configid,
-                OrderAddress = GameRequest.GetUserIP()
-            };
-            switch (paytype)
-            {
-                case "wx":
-                    order.ShareID = 101;
-                    order.OrderID = Fetch.GetOrderIDByPrefix("WXAPP");
-                    break;
-                case "zfb":
-                    order.ShareID = 201;
-                    order.OrderID = Fetch.GetOrderIDByPrefix("ZFBAPP");
-                    break;
-                case "hwx":
-                    order.ShareID = 102;
-                    order.OrderID = Fetch.GetOrderIDByPrefix("HWX");
-                    break;
-                case "lq":
-                    order.ShareID = 301;
-                    order.OrderID = Fetch.GetOrderIDByPrefix("360LQ");
-                    break;
-                case "jft":
-                    switch (subtype)
-                    {
-                        case "wx":
-                            order.ShareID = 302;
-                            order.OrderID = Fetch.GetOrderIDByPrefix("JFTH5WX");
-                            break;
-                        case "zfb":
-                            order.ShareID = 303;
-                            order.OrderID = Fetch.GetOrderIDByPrefix("JFTH5ZFB");
-                            break;
-                        default:
-                            order.ShareID = 300;
-                            order.OrderID = Fetch.GetOrderIDByPrefix("JFT");
-                            break;
-                    }
-                    break;
-                //case "pays":
-                //    switch (subtype)
-                //    {
-                //        case "wx":
-                //            order.ShareID = 401;
-                //            order.OrderID = Fetch.GetOrderIDByPrefix("PaysWX");
-                //            break;
-                //        case "zfb":
-                //            order.ShareID = 402;
-                //            order.OrderID = Fetch.GetOrderIDByPrefix("PaysZFB");
-                //            break;
-                //        default:
-                //            order.ShareID = 400;
-                //            order.OrderID = Fetch.GetOrderIDByPrefix("Pays");
-                //            break;
-                //    }
-                //    break;
-                default:
-                    _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                    _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " paytype（充值类型） 错误");
-                    return _ajv;
-            }
-
-            //下单操作
-            Message umsg = FacadeManage.aideTreasureFacade.CreatePayOrderInfo(order, _device);
-            if (umsg.Success)
-            {
-                OnLinePayOrder orderReturn = umsg.EntityList[0] as OnLinePayOrder;
-                if (paytype == "wx" || paytype == "hwx")
-                {
-                    _ajv.SetDataItem("PayPackage",
-                    GetWxPayPackage(orderReturn, paytype, openid, GameRequest.GetCurrentFullHost()));
-                }
-                else if (paytype == "lq")
-                {
-                    LQPay.LQPayRequest request =
-                        new LQPay.LQPayRequest(orderReturn, subtype == "zfb" ? "alipay" : "weixin");
-                    _ajv.SetDataItem("PayUrl", HttpUtility.UrlDecode(LQPay.GetPayPackage(request.ToUrl("PayUrl"))));
-                }
-                else if (paytype == "jft")
-                {
-                    JFTPay.JFTH5Request request =
-                        new JFTPay.JFTH5Request(orderReturn?.OrderID, orderReturn?.Amount.ToString("F2"),
-                            subtype == "zfb" ? "ZFB" : "WX", orderReturn?.GameID.ToString(),
-                            Utility.UserIP.Replace(".", "_"))
-                        {
-                            p25_terminal = string.IsNullOrEmpty(GameRequest.GetString("terminaltype")) ? "3" : GameRequest.GetString("terminaltype")
-                        };
-                    //request.SetTerminal(Fetch.GetTerminalType(GameRequest.Request));
-                    if (AppConfig.Mode == AppConfig.CodeMode.Dev)
-                    {
-                        request.paytype = "ZZ"; //测试服用，正式时请注释掉此行
-                    }
-                    _ajv.SetDataItem("testUrl", request.ToUrl());
-                    _ajv.SetDataItem("PayUrl", JFTPay.Config.JFTH5Url);
-                    _ajv.SetDataItem("Params", request.UrlParams());
-                }
-                _ajv.SetDataItem("OrderID", orderReturn?.OrderID ?? "");
-            }
-            _ajv.SetValidDataValue(umsg.Success);
-            _ajv.code = umsg.MessageID;
-            _ajv.msg = umsg.Content;
-            return _ajv;
         }
 
         /// <summary>
@@ -1071,24 +936,24 @@ namespace Game.Web.WS
         private void GetPayOrderStatus(string orderid)
         {
             OnLinePayOrder olOrder = FacadeManage.aideTreasureFacade.GetPayOnLinePayOrder(orderid);
-            UserWealth userwealth = FacadeManage.aideTreasureFacade.GetUserWealth(olOrder.UserID);
+            UserWealth userwealth = FacadeManage.aideTreasureFacade.GetUserWealth(olOrder.UserId);
 
 
-            if (olOrder == null || olOrder.OrderStatus != 1)
-            {
-                _ajv.SetDataItem("OrderID", orderid);
-                _ajv.SetDataItem("PayStatus", olOrder != null ? "未支付" : "订单不存在");
-            }
-            else
-            {
-                _ajv.SetDataItem("OrderID", orderid);
-                _ajv.SetDataItem("PayStatus", "已支付");
-                _ajv.SetDataItem("PayAmount", olOrder.Amount);
-                _ajv.SetDataItem("ScoreType", olOrder.ScoreType);
-                _ajv.SetDataItem("Score", olOrder.Score);
-                _ajv.SetDataItem("CurScore", userwealth.Score);
-                _ajv.SetDataItem("CurDiomand", userwealth.Diamond);
-            }
+            //if (olOrder == null || olOrder.OrderStatus != 1)
+            //{
+            //    _ajv.SetDataItem("OrderID", orderid);
+            //    _ajv.SetDataItem("PayStatus", olOrder != null ? "未支付" : "订单不存在");
+            //}
+            //else
+            //{
+            //    _ajv.SetDataItem("OrderID", orderid);
+            //    _ajv.SetDataItem("PayStatus", "已支付");
+            //    _ajv.SetDataItem("PayAmount", olOrder.Amount);
+            //    _ajv.SetDataItem("ScoreType", olOrder.ScoreType);
+            //    _ajv.SetDataItem("Score", olOrder.Score);
+            //    _ajv.SetDataItem("CurScore", userwealth.Score);
+            //    _ajv.SetDataItem("CurDiomand", userwealth.Diamond);
+            //}
             _ajv.SetValidDataValue(true);
         }
 

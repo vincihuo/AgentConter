@@ -83,6 +83,8 @@
                     </td>
                     <td class="listTitle2">手续费
                     </td>
+                    <td class="listTitle2">提现类型
+                    </td>
                     <td class="listTitle2">处理账号
                     </td>
                     <td class="listTitle2">订单状态
@@ -114,6 +116,10 @@
 
                             <td>
                                 <%# Eval("OrderCost")%>
+                            </td>
+
+                             <td>
+                                <%#GetDorawalType(Convert.ToInt32(Eval("DrawalType")))%>
                             </td>
 
                             <td>

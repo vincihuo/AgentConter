@@ -29,6 +29,7 @@ namespace Game.IData
         decimal GetTotleDrawalMoney(string where);
         DrawalOrder GetOrderById(string orderid);
         Message DealDralwalOrder(string orderid, int states, int master, string ip);
+        IList<pay_chanel> GetPay_ChanelsByType(int type);
         #endregion
 
         #region  线上充值配置
@@ -36,6 +37,7 @@ namespace Game.IData
         int SaveOnlinePayConfig(OnlinePayConfig config);
         int DeleteOnlinePayConfig(string idlist);
         bool IsExistOnlinePayConfig(string where);
+        Message FinshOnlineOrder(string orderid, byte type, int payAmount, string address);
         #endregion
 
 

@@ -51,10 +51,10 @@
                         </td>
                         <td>
                             <asp:DropDownList ID="ddlProductType" runat="server" Width="155" Height="24" CssClass="text" AutoPostBack="True" OnSelectedIndexChanged="ddlProductType_SelectedIndexChanged">
-                                <asp:ListItem Text="微信" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="支付宝" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="云闪付" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="网银转账" Value="3"></asp:ListItem>
+                                <asp:ListItem Text="微信" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="支付宝" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="云闪付" Value="3"></asp:ListItem>
+                                <asp:ListItem Text="网银转账" Value="4"></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>
@@ -85,6 +85,18 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入商户ID" Display="Dynamic" ControlToValidate="txtPrice" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td class="listTdLeft">支付网关：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TexPayUrl" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
+                            <span class="hong">*</span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="请输入支付网关" Display="Dynamic" ControlToValidate="txtPrice" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+
                     <tr>
                         <td class="listTdLeft">Md5密钥：
                         </td>
@@ -154,10 +166,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">预留字段：
+                        <td class="listTdLeft">预留字段1：
                         </td>
                         <td>
-                            <asp:TextBox ID="AttaBox" runat="server" CssClass="text" MaxLength="100"></asp:TextBox>
+                            <asp:TextBox ID="AttaBox1" runat="server" CssClass="text" MaxLength="100"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="listTdLeft">预留字段2：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AttaBox2" runat="server" CssClass="text" MaxLength="100"></asp:TextBox>
                         </td>
                     </tr>
                 </table>

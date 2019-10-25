@@ -156,17 +156,10 @@
     <Content Include="Mobile\MoblieVideoInfo.aspx" />
     <Content Include="Mobile\ShareLinkNew.aspx" />
     <Content Include="Mobile\WebPay.aspx" />
-    <Content Include="Notify\H5Alipay.aspx" />
-    <Content Include="Notify\JftPay.aspx" />
     <Content Include="Mobile\Pay\LqReturn.aspx" />
     <Content Include="Mobile\RoomLink.aspx" />
     <Content Include="Mobile\ShareLink.aspx" />
     <Content Include="Mobile\WxRegister.aspx" />
-    <Content Include="Notify\Alipay.aspx" />
-    <Content Include="Notify\Apple.aspx" />
-    <Content Include="Notify\LqPay.aspx" />
-    <Content Include="Notify\WxApp.aspx" />
-    <Content Include="Notify\WxWeb.aspx" />
     <Content Include="Shop\WHShop.ashx" />
     <Content Include="Spread\assets\css\agent\proxy.css" />
     <Content Include="Spread\assets\css\reset.css" />
@@ -290,20 +283,6 @@
     <Compile Include="Mobile\WebPay.aspx.designer.cs">
       <DependentUpon>WebPay.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Notify\H5Alipay.aspx.cs">
-      <DependentUpon>H5Alipay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\H5Alipay.aspx.designer.cs">
-      <DependentUpon>H5Alipay.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\JftPay.aspx.cs">
-      <DependentUpon>JftPay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\JftPay.aspx.designer.cs">
-      <DependentUpon>JftPay.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Mobile\Pay\LqReturn.aspx.cs">
       <DependentUpon>LqReturn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -331,41 +310,6 @@
     </Compile>
     <Compile Include="Mobile\WxRegister.aspx.designer.cs">
       <DependentUpon>WxRegister.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\Alipay.aspx.cs">
-      <DependentUpon>Alipay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\Alipay.aspx.designer.cs">
-      <DependentUpon>Alipay.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\Apple.aspx.cs">
-      <DependentUpon>Apple.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\Apple.aspx.designer.cs">
-      <DependentUpon>Apple.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\LqPay.aspx.cs">
-      <DependentUpon>LqPay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\LqPay.aspx.designer.cs">
-      <DependentUpon>LqPay.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\WxApp.aspx.cs">
-      <DependentUpon>WxApp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\WxApp.aspx.designer.cs">
-      <DependentUpon>WxApp.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Notify\WxWeb.aspx.cs">
-      <DependentUpon>WxWeb.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Notify\WxWeb.aspx.designer.cs">
-      <DependentUpon>WxWeb.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop\WHShop.ashx.cs">

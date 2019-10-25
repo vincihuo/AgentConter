@@ -68,6 +68,14 @@
             </tr>
 
             <tr>
+                <td class="listTdLeft">提款类型：
+                </td>
+                <td>
+                    <asp:Literal ID="TxtDrawalType" runat="server"></asp:Literal>
+                </td>
+            </tr>
+
+            <tr>
                 <td class="listTdLeft">处理账号：
                 </td>
                 <td>
@@ -80,8 +88,8 @@
                 </td>
                 <td>
                     <asp:Literal ID="TextState" runat="server"></asp:Literal>
-                    <asp:Button ID="BtnY" Text="同意"  runat="server" OnClick="OnBtnY" />
-                    <asp:Button ID="BtnN" Text="拒绝"  runat="server" OnClick="OnBtnN" />
+                    <asp:Button ID="BtnY" Text="同意" runat="server" OnClick="OnBtnY" />
+                    <asp:Button ID="BtnN" Text="拒绝" runat="server" OnClick="OnBtnN" />
                 </td>
             </tr>
 
