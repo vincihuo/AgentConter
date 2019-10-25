@@ -351,7 +351,7 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-                    case "HellHotFix":
+                    case "HallHotFix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetHallHotFix();
                         break;
