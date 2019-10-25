@@ -321,20 +321,20 @@ namespace Game.Web.WS
 
                     #region 最帅的写的接口
                     //获取线上充值列表
-                    case "getOnlinePay":
+                    case "getonlinepay":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
                         GetOnLinePayList(typeid);
                         break;
-                    case "withDrawal":
+                    case "withdrawal":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-                    case "hellHotFix":
+                    case "hallhotfix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetHallHotFix();
                         break;
-                    case "gameHotFix":
+                    case "gamehotfix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetGameHotFix();
                         break;
