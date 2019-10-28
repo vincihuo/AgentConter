@@ -123,7 +123,7 @@
                         <td class="listTdLeft">充值上限：
                         </td>
                         <td>
-                            <asp:TextBox ID="TextMax" runat="server" CssClass="text" TextMode="MultiLine" Width="450px" Height="150px"></asp:TextBox>
+                            <asp:TextBox ID="TextMax" runat="server" CssClass="text"></asp:TextBox>
                         </td>
                     </tr>
 
@@ -131,7 +131,7 @@
                         <td class="listTdLeft">充值下限：
                         </td>
                         <td>
-                            <asp:TextBox ID="TextMin" runat="server" CssClass="text" TextMode="MultiLine" Width="450px" Height="150px"></asp:TextBox>
+                            <asp:TextBox ID="TextMin" runat="server" CssClass="text"></asp:TextBox>
                         </td>
                     </tr>
 

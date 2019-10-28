@@ -27,7 +27,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnNew1" type="button" class="btn wd1" value="新增" onclick="Redirect('ChannelConfig.aspx')" />
+                    <input id="btnNew1" type="button" class="btn wd1" value="新增" onclick="Redirect('OfficalImgPayInfo.aspx')" />
                     <input class="btnLine" type="button" />
                     <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="btn wd1" OnClick="btnDelete_Click" OnClientClick="return deleteop()" />
                 </td>
@@ -60,21 +60,17 @@
                                 <%# "<input name='cid' type='checkbox' value='" + Eval("id").ToString() + "'/>" %>
                             </td>
                             <td>
-                                <a href="ChannelConfig.aspx?param=<%# Eval( "id" ).ToString( )%>" class="l">编辑</a>
+                                <a href="OfficalImgPayInfo.aspx?param=<%# Eval( "id" ).ToString( )%>" class="l">编辑</a>
                             </td>
                             <td>
                                 <%# Eval("ConfigName")%>
                             </td>
                             <td>
-                                <%# Eval("MerchantName")%>
+                                <%# GetTypeStr(Convert.ToInt32(Eval("PayType")))%>
                             </td>
                             <td>
-                                <%# Eval("BankName")%>
+                                <%# Eval("PayUrl")%>
                             </td>
-                            <td>
-                                <%# Eval("BankNumber")%>
-                            </td>
-
                             <td>
                                 <%# Eval("MinAmount")%>
                             </td>

@@ -69,7 +69,7 @@
                                 <%# Eval("name")%>
                             </td>
                             <td>
-                                <%# getTypeStr(Convert.ToInt32(Eval("bankType")))%>
+                                <%# GetTypeStr(Convert.ToInt32(Eval("bankType")))%>
                             </td>
                         </tr>
                     </ItemTemplate>

@@ -3,9 +3,7 @@ using Game.Web.UI;
 using Game.Entity.Treasure;
 using Game.Facade;
 using Game.Entity.Enum;
-using System.Web.UI.WebControls;
-using Game.Utils;
-using System.Collections.Generic;
+
 
 namespace Game.Web.Module.FilledManager
 {

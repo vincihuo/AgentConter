@@ -243,7 +243,10 @@
     <Content Include="Module\FilledManager\MerchaChanel.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigInfo.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigList.aspx" />
+    <Content Include="Module\FilledManager\OfficalBankPayInfo.aspx" />
     <Content Include="Module\FilledManager\OfficalBankPayList.aspx" />
+    <Content Include="Module\FilledManager\OfficalImgPayInfo.aspx" />
+    <Content Include="Module\FilledManager\OfficalImgPayList.aspx" />
     <Content Include="Module\FilledManager\OnLinePayPage.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatInfo.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatList.aspx" />
@@ -3590,12 +3593,33 @@
     <Compile Include="Module\FilledManager\AppPayConfigList.aspx.designer.cs">
       <DependentUpon>AppPayConfigList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\FilledManager\OfficalBankPayInfo.aspx.cs">
+      <DependentUpon>OfficalBankPayInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalBankPayInfo.aspx.designer.cs">
+      <DependentUpon>OfficalBankPayInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\FilledManager\OfficalBankPayList.aspx.cs">
       <DependentUpon>OfficalBankPayList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Module\FilledManager\OfficalBankPayList.aspx.designer.cs">
       <DependentUpon>OfficalBankPayList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalImgPayInfo.aspx.cs">
+      <DependentUpon>OfficalImgPayInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalImgPayInfo.aspx.designer.cs">
+      <DependentUpon>OfficalImgPayInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalImgPayList.aspx.cs">
+      <DependentUpon>OfficalImgPayList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalImgPayList.aspx.designer.cs">
+      <DependentUpon>OfficalImgPayList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\OnLinePayPage.aspx.cs">
       <DependentUpon>OnLinePayPage.aspx</DependentUpon>

@@ -33,7 +33,6 @@ namespace Game.Web.Module.FilledManager
                 ShowInfo("删除失败");
             }
         }
-
         private void BindData()
         {
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetList(OfficalBankPay.Tablename, "WHERE 1=1", "ORDER BY SortId DESC", anpNews.CurrentPageIndex, anpNews.PageSize);
@@ -42,5 +41,10 @@ namespace Game.Web.Module.FilledManager
             rptDataList.DataSource = pagerSet.PageSet;
             rptDataList.DataBind();
         }
+        protected void anpNews_PageChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
     }
 }

@@ -115,6 +115,8 @@
                         </td>
                         <td>
                             <asp:TextBox ID="TexSort" runat="server" CssClass="text" MaxLength="5"></asp:TextBox>
+                            <span class="hong">*</span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="请输入开户地址" Display="Dynamic" ControlToValidate="TexSort" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
 

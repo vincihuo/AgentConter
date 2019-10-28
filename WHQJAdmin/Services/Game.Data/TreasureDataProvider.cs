@@ -141,7 +141,7 @@ namespace Game.Data
             var prams = new List<DbParameter>
             {
                 Database.MakeInParam("ConfigName", officalImgPay.ConfigName),
-                Database.MakeInParam("payType", officalImgPay.payType),
+                Database.MakeInParam("payType", officalImgPay.PayType),
                 Database.MakeInParam("PayUrl", officalImgPay.PayUrl),
                 Database.MakeInParam("MaxAmount", officalImgPay.MaxAmount),
                 Database.MakeInParam("MinAmount", officalImgPay.MinAmount),
@@ -166,6 +166,7 @@ namespace Game.Data
             var prams = new List<DbParameter>
             {
                 Database.MakeInParam("ConfigName", officalBankPay.ConfigName),
+                Database.MakeInParam("MerchantName", officalBankPay.MerchantName),
                 Database.MakeInParam("BankName", officalBankPay.BankName),
                 Database.MakeInParam("BankNumber", officalBankPay.BankNumber),
                 Database.MakeInParam("BankAddr", officalBankPay.BankAddr),
@@ -177,13 +178,13 @@ namespace Game.Data
             string sqlQuery;
             if (officalBankPay.id == 0)
             {
-                sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId], [Description]) 
-                                                           VALUES (@ConfigName,@BankName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
+                sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [MerchantName],[BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId], [Description]) 
+                                                           VALUES (@ConfigName,@MerchantName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
             }
             else
             {
                 prams.Add(Database.MakeInParam("id", officalBankPay.id));
-                sqlQuery = @"UPDATE [dbo].[officalBankPay] SET ConfigName=@ConfigName,BankName=@BankName,BankNumber=@BankNumber,BankAddr=@BankAddr,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
+                sqlQuery = @"UPDATE [dbo].[officalBankPay] SET ConfigName=@ConfigName,MerchantName=@MerchantName,BankName=@BankName,BankNumber=@BankNumber,BankAddr=@BankAddr,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }

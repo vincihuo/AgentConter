@@ -83,7 +83,7 @@ namespace Game.Web.Module.FilledManager
             }
         }
 
-        protected string getTypeStr(int type)
+        protected string GetTypeStr(int type)
         {
             switch (type)
             {

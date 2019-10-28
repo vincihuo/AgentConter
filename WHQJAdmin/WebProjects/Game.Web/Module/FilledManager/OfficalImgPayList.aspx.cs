@@ -43,5 +43,28 @@ namespace Game.Web.Module.FilledManager
             rptDataList.DataBind();
         }
 
+        protected string GetTypeStr(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return "微信";
+                case 2:
+                    return "qq";
+                case 3:
+                    return "支付宝";
+                case 4:
+                    return "云闪付";
+                default:
+                    return "未知类型";
+
+            }
+        }
+
+        protected void anpNews_PageChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
     }
 }
