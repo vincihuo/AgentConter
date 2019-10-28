@@ -93,6 +93,46 @@ namespace Game.Facade
         {
             return aideTreasureData.FinshOnlineOrder(orderid, type, payAmount, address);
         }
+
+        public pay_chanel GetPay_ChanelsByID(int id)
+        {
+            return aideTreasureData.GetPay_ChanelsByID(id);
+        }
+
+        public IList<signtype> GetSignList()
+        {
+            return aideTreasureData.GetSignList();
+        }
+
+        public signtype GetSignById(int id)
+        {
+            return aideTreasureData.GetSignById(id);
+        }
+
+        public int SavePayChanel(pay_chanel chanel)
+        {
+            return aideTreasureData.SavePayChanel(chanel);
+        }
+
+        public int SaveEncryption(signtype mm)
+        {
+            return aideTreasureData.SaveEncryption(mm);
+        }
+
+        #endregion
+
+        #region 官方充值
+        public OfficalBankPay GetBankPayById(int id)
+        {
+            return aideTreasureData.GetBankPayById(id);
+        }
+
+        public OfficalImgPay GetImgPayById(int id)
+        {
+            return aideTreasureData.GetImgPayById(id);
+        }
+
+
         #endregion
 
         #region 充值配置
@@ -113,6 +153,33 @@ namespace Game.Facade
         {
             return aideTreasureData.DeleteAppPayConfig(idlist);
         }
+
+        public int DeletePayChanel(string idlist)
+        {
+            return aideTreasureData.DeletePayChanel(idlist);
+        }
+        public int DeleteEncrytion(string idlist)
+        {
+            return aideTreasureData.DeleteEncrytion(idlist);
+        }
+        public int DeleteBankPay(string idlist)
+        {
+            return aideTreasureData.DeleteBankPay(idlist);
+        }
+        public int DeleteImgPay(string idlist)
+        { 
+            return aideTreasureData.DeleteImgPay(idlist);
+        }
+        public int SaveBankPay(OfficalBankPay officalBankPay)
+        {
+            return aideTreasureData.SaveBankPay(officalBankPay);
+        }
+        public int SaveImgPay(OfficalImgPay officalImgPay)
+        {
+            return aideTreasureData.SaveImgPay(officalImgPay);
+        }
+
+
         /// <summary>
         /// 判断充值产品是否存在
         /// </summary>

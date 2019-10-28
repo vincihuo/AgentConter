@@ -167,6 +167,8 @@
     <Compile Include="Treasure\DrawalOrder.cs" />
     <Compile Include="Treasure\GameScoreInfo.cs" />
     <Compile Include="Treasure\GameScoreLocker.cs" />
+    <Compile Include="Treasure\OfficalBankPay.cs" />
+    <Compile Include="Treasure\OfficalImgPay.cs" />
     <Compile Include="Treasure\OnlinePayConfig.cs" />
     <Compile Include="Treasure\OnLinePayOrder.cs" />
     <Compile Include="Treasure\OnLineWeChat.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Treasure\RecordInsure.cs" />
     <Compile Include="Treasure\RecordSpreadAward.cs" />
     <Compile Include="Treasure\RecordUserInout.cs" />
+    <Compile Include="Treasure\signtype.cs" />
     <Compile Include="Treasure\SpreadReturnConfig.cs" />
     <Compile Include="Treasure\SpreadConfig.cs" />
     <Compile Include="Treasure\UserCurrency.cs" />

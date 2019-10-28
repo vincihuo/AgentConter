@@ -475,7 +475,7 @@ namespace Game.Web.UI
 
         #endregion
 
-            #region 管理员信息
+        #region 管理员信息
 
             /// <summary>
             /// 获取管理员帐号

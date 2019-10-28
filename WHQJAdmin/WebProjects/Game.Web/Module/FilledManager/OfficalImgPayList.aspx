@@ -1,9 +1,9 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OnLinePayConfig.aspx.cs" Inherits="Game.Web.Module.FilledManager.OnLinePayPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OfficalImgPayList.aspx.cs" Inherits="Game.Web.Module.FilledManager.OfficalImgPayList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<head runat="server">
     <link href="../../styles/layout.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="../../scripts/common.js"></script>
@@ -23,10 +23,11 @@
                 </td>
             </tr>
         </table>
+
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnNew1" type="button" class="btn wd1" value="新增" onclick="Redirect('MerchaChanel.aspx')" />
+                    <input id="btnNew1" type="button" class="btn wd1" value="新增" onclick="Redirect('ChannelConfig.aspx')" />
                     <input class="btnLine" type="button" />
                     <asp:Button ID="btnDelete" runat="server" Text="删除" CssClass="btn wd1" OnClick="btnDelete_Click" OnClientClick="return deleteop()" />
                 </td>
@@ -40,33 +41,15 @@
                         <input type="checkbox" name="chkAll" onclick="SelectAll(this.checked);" /></td>
                     <td class="listTitle1">管理
                     </td>
-                    <td class="listTitle2">充值类型
-                    </td>
-                    <td class="listTitle2">通道名称
-                    </td>
-                    <td class="listTitle2">用户ID
-                    </td>
-                    <td class="listTitle2">支付网关
-                    </td>
-                    <td class="listTitle2">md5密钥
-                    </td>
-                    <td class="listTitle2">对称公钥
-                    </td>
-                    <td class="listTitle2">对称私钥
-                    </td>
-                     <td class="listTitle2">充值限制
-                    </td>
-                    <td class="listTitle2">快捷金额
-                    </td>
-                    <td class="listTitle2">首充奖励
-                    </td>
-                    <td class="listTitle2">首充类型
-                    </td>
-                    <td class="listTitle2">优惠金额
-                    </td>
                     <td class="listTitle2">渠道名称
                     </td>
-                    <td class="listTitle2">排序标识
+                    <td class="listTitle2">类型
+                    </td>
+                    <td class="listTitle2">支付链接
+                    </td>
+                    <td class="listTitle2">最低入款
+                    </td>
+                    <td class="listTitle2">最高入款
                     </td>
                 </tr>
                 <asp:Repeater ID="rptDataList" runat="server">
@@ -74,59 +57,29 @@
                         <tr align="center" class="list" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
                             onmouseout="this.style.backgroundColor=currentcolor">
                             <td>
-                                <%# "<input name='cid' type='checkbox' value='" + Eval("ID").ToString() + "'/>" %>
+                                <%# "<input name='cid' type='checkbox' value='" + Eval("id").ToString() + "'/>" %>
                             </td>
                             <td>
-                                <a href="MerchaChanel.aspx?param=<%# Eval( "ID" ).ToString( )%>" class="l">编辑</a>
+                                <a href="ChannelConfig.aspx?param=<%# Eval( "id" ).ToString( )%>" class="l">编辑</a>
                             </td>
                             <td>
-                                <%# GetPayTypeName(Convert.ToInt32(Eval("PayType").ToString())) %>
+                                <%# Eval("ConfigName")%>
                             </td>
                             <td>
-                                <%# Eval("PayName")%>
+                                <%# Eval("MerchantName")%>
                             </td>
                             <td>
-                                <%# Eval("UID")%>
+                                <%# Eval("BankName")%>
                             </td>
                             <td>
-                                <%# Eval("PayUrl")%>
-                            </td>
-
-                            <td>
-                                <%# Eval("Md5key")%>
-                            </td>
-                            <td>
-                                <div width="80">
-                                    <%# Eval("PrivateKey")%>
-                                </div>
-                            </td>
-                            <td>
-                                <div width="80">
-                                    <%# Eval("PublicKey")%>
-                                </div>
+                                <%# Eval("BankNumber")%>
                             </td>
 
                             <td>
-                                <%# Eval("MinAmount")%> - <%# Eval("MaxAmount")%>
-                            </td>
-
-                            <td>
-                                <%# Eval("ShoutCut")%>
+                                <%# Eval("MinAmount")%>
                             </td>
                             <td>
-                                <%# Eval("FristPresent") %> 
-                            </td>
-                            <td>
-                                <%#Convert.ToInt32( Eval("PayIdentity").ToString())==0?"普通充值":Convert.ToInt32( Eval("PayIdentity").ToString())==1?"首冲":Convert.ToInt32( Eval("PayIdentity").ToString())==2?"每日":Convert.ToInt32( Eval("PayIdentity").ToString())==3?"热卖":"人气"%>
-                            </td>
-                            <td>
-                                <%# Eval("PresentScore") %>
-                            </td>
-                            <td>
-                                <%# Eval("chanelName").ToString()%>
-                            </td>
-                            <td>
-                                <%# Eval("SortID").ToString()%>
+                                <%# Eval("MaxAmount")%>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -134,7 +87,6 @@
                 <asp:Literal runat="server" ID="litNoData" Visible="false" Text="<tr class='tdbg'><td colspan='100' align='center'><br>没有任何信息!<br><br></td></tr>"></asp:Literal>
             </table>
         </div>
-
 
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
@@ -149,7 +101,6 @@
                 </td>
             </tr>
         </table>
-
 
     </form>
 </body>

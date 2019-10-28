@@ -36,8 +36,22 @@ namespace Game.IData
         OnlinePayConfig GetOnlinePayConfig(int ID);
         int SaveOnlinePayConfig(OnlinePayConfig config);
         int DeleteOnlinePayConfig(string idlist);
+        int DeletePayChanel(string idlist);
         bool IsExistOnlinePayConfig(string where);
         Message FinshOnlineOrder(string orderid, byte type, int payAmount, string address);
+        pay_chanel GetPay_ChanelsByID(int id);
+        IList<signtype> GetSignList();
+        signtype GetSignById(int id);
+        int SavePayChanel(pay_chanel chanel);
+        int DeleteEncrytion(string idlist);
+        int DeleteBankPay(string idlist);
+        int DeleteImgPay(string idlist);
+        int SaveEncryption(signtype mm);
+        int SaveBankPay(OfficalBankPay officalBankPay);
+        int SaveImgPay(OfficalImgPay officalImgPay);
+        OfficalBankPay GetBankPayById(int id);
+        OfficalImgPay GetImgPayById(int id);
+
         #endregion
 
 

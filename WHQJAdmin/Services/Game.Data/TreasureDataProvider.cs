@@ -89,6 +89,8 @@ namespace Game.Data
                 Database.MakeInParam("Md5key", config.Md5key),
                 Database.MakeInParam("PrivateKey", config.PrivateKey),
                 Database.MakeInParam("PublicKey", config.PublicKey),
+                Database.MakeInParam("MaxAmount", config.MaxAmount),
+                Database.MakeInParam("MinAmount", config.MinAmount),
                 Database.MakeInParam("ShoutCut", config.ShoutCut),
                 Database.MakeInParam("PayIdentity", config.PayIdentity),
                 Database.MakeInParam("SortID", config.SortID),
@@ -102,8 +104,8 @@ namespace Game.Data
             string sqlQuery;
             if (config.ID == 0)
             {
-                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,PayUrl,Md5key,PrivateKey,PublicKey,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttachStr1) 
-                                        VALUES(@PayType,@PayName,@UID,@PayUrl,@Md5key,@PrivateKey,@PublicKey,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttachStr1)";
+                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,PayUrl,Md5key,PrivateKey,PublicKey,MinAmount,MaxAmount,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttachStr1) 
+                                        VALUES(@PayType,@PayName,@UID,@PayUrl,@Md5key,@PrivateKey,@PublicKey,@MinAmount,@MaxAmount,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttachStr1)";
             }
             else
             {
@@ -117,6 +119,8 @@ namespace Game.Data
                     .Append("Md5key=@Md5key, ")
                     .Append("PrivateKey=@PrivateKey, ")
                     .Append("PublicKey=@PublicKey, ")
+                    .Append("MinAmount=@MinAmount, ")
+                    .Append("MaxAmount=@MaxAmount, ")
                     .Append("ShoutCut=@ShoutCut, ")
                     .Append("PayIdentity=@PayIdentity, ")
                     .Append("SortID=@SortID, ")
@@ -132,10 +136,99 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
 
+        public int SaveImgPay(OfficalImgPay officalImgPay)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("ConfigName", officalImgPay.ConfigName),
+                Database.MakeInParam("payType", officalImgPay.payType),
+                Database.MakeInParam("PayUrl", officalImgPay.PayUrl),
+                Database.MakeInParam("MaxAmount", officalImgPay.MaxAmount),
+                Database.MakeInParam("MinAmount", officalImgPay.MinAmount),
+                Database.MakeInParam("SortId", officalImgPay.SortId),
+                Database.MakeInParam("Description", officalImgPay.Description)
+            };
+            string sqlQuery;
+            if (officalImgPay.id == 0)
+            {
+                sqlQuery = @"INSERT INTO [dbo].[OfficalImgPay]( [ConfigName], [payType], [PayUrl], [MaxAmount], [MinAmount], [SortId], [Description]) 
+                                                           VALUES (@ConfigName,@payType,@PayUrl,@MaxAmount,@MinAmount,@SortId,@Description)";
+            }
+            else
+            {
+                prams.Add(Database.MakeInParam("id", officalImgPay.id));
+                sqlQuery = @"UPDATE [dbo].[OfficalImgPay] SET ConfigName=@ConfigName,payType=@payType,PayUrl=@PayUrl,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+        public int SaveBankPay(OfficalBankPay officalBankPay)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("ConfigName", officalBankPay.ConfigName),
+                Database.MakeInParam("BankName", officalBankPay.BankName),
+                Database.MakeInParam("BankNumber", officalBankPay.BankNumber),
+                Database.MakeInParam("BankAddr", officalBankPay.BankAddr),
+                Database.MakeInParam("MaxAmount", officalBankPay.MaxAmount),
+                Database.MakeInParam("MinAmount", officalBankPay.MinAmount),
+                Database.MakeInParam("SortId", officalBankPay.SortId),
+                Database.MakeInParam("Description", officalBankPay.Description)
+            };
+            string sqlQuery;
+            if (officalBankPay.id == 0)
+            {
+                sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId], [Description]) 
+                                                           VALUES (@ConfigName,@BankName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
+            }
+            else
+            {
+                prams.Add(Database.MakeInParam("id", officalBankPay.id));
+                sqlQuery = @"UPDATE [dbo].[officalBankPay] SET ConfigName=@ConfigName,BankName=@BankName,BankNumber=@BankNumber,BankAddr=@BankAddr,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+
+
         public int DeleteOnlinePayConfig(string idlist)
         {
             string sqlQuery = $"DELETE OnlinePayConfig WHERE ID IN({idlist})";
             return Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public int DeletePayChanel(string idlist)
+        {
+            string sqlQuery = $"DELETE pay_chanel WHERE id IN({idlist})";
+            return Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public int DeleteEncrytion(string idlist)
+        {
+            string sqlQuery = $"DELETE signtype WHERE id IN({idlist})";
+            return Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public int DeleteBankPay(string idlist)
+        {
+            string sqlQuery = $"DELETE OfficalBankPay WHERE id IN({idlist})";
+            return Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public int DeleteImgPay(string idlist)
+        {
+            string sqlQuery = $"DELETE OfficalImg  Pay WHERE id IN({idlist})";
+            return Database.ExecuteNonQuery(sqlQuery);
+        }
+
+        public OfficalBankPay GetBankPayById(int id)
+        {
+            string sqlQuery = $"SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE ID = '{id}'";
+            return Database.ExecuteObject<OfficalBankPay>(sqlQuery);
+        }
+
+        public OfficalImgPay GetImgPayById(int id)
+        {
+            string sqlQuery = $"SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE ID = '{id}'";
+            return Database.ExecuteObject<OfficalImgPay>(sqlQuery);
         }
 
         public bool IsExistOnlinePayConfig(string where)
@@ -150,6 +243,94 @@ namespace Game.Data
             return Database.ExecuteObjectList<pay_chanel>(sqlQuery);
         }
 
+        public pay_chanel GetPay_ChanelsByID(int id)
+        {
+            string sqlQuery = $"SELECT * FROM pay_chanel WITH(NOLOCK) WHERE  id={id}";
+            return Database.ExecuteObject<pay_chanel>(sqlQuery);
+        }
+
+        public IList<signtype> GetSignList()
+        {
+            string sqlQuery = $"SELECT * FROM signtype WITH(NOLOCK)";
+            return Database.ExecuteObjectList<signtype>(sqlQuery);
+        }
+
+        public signtype GetSignById(int id)
+        {
+            string sqlQuery = $"SELECT * FROM signtype WITH(NOLOCK) WHERE  id={id}";
+            return Database.ExecuteObject<signtype>(sqlQuery);
+        }
+
+        public int SavePayChanel(pay_chanel chanel)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("sendpamar", chanel.sendpamar),
+                Database.MakeInParam("moneyPre", chanel.moneyPre),
+                Database.MakeInParam("singpos", chanel.singpos),
+                Database.MakeInParam("method", chanel.method),
+                Database.MakeInParam("respSign", chanel.respSign),
+                Database.MakeInParam("respCode", chanel.respCode),
+                Database.MakeInParam("successCode", chanel.successCode),
+                Database.MakeInParam("infoName", chanel.infoName),
+                Database.MakeInParam("infoType", chanel.infoType),
+                Database.MakeInParam("orderkey", chanel.orderkey),
+                Database.MakeInParam("signkey", chanel.signkey),
+                Database.MakeInParam("moneykey", chanel.moneykey),
+                Database.MakeInParam("codekey", chanel.codekey),
+                Database.MakeInParam("codeSuccess", chanel.codeSuccess),
+                Database.MakeInParam("backstring", chanel.backstring),
+                Database.MakeInParam("sendSign", chanel.sendSign),
+                Database.MakeInParam("backSign", chanel.backSign),
+                Database.MakeInParam("callSign", chanel.callSign),
+                Database.MakeInParam("name", chanel.name),
+                Database.MakeInParam("bankType", chanel.bankType)
+            };
+            string sqlQuery;
+            if (chanel.id == 0)
+            {
+                sqlQuery = @"INSERT INTO [dbo].[pay_chanel]( [sendpamar], [moneyPre], [singpos], [method], [respSign], [respCode], [successCode], [infoName], [infoType], [orderkey], [signkey], [moneykey], [codekey], [codeSuccess], [backstring], [sendSign], [backSign], [callSign], [name], [bankType]) 
+                                                           VALUES (@sendpamar,@moneyPre,@singpos,@method,@respSign,@respCode,@successCode,@infoName,@infoType,@orderkey,@signkey,@moneykey,@codekey,@codeSuccess,@backstring,@sendSign,@backSign,@callSign,@name,@bankType)";
+            }
+            else
+            {
+                prams.Add(Database.MakeInParam("id", chanel.id));
+                sqlQuery = @"UPDATE [dbo].[pay_chanel] SET sendpamar=@sendpamar,moneyPre=@moneyPre,singpos=@singpos,method=@method,respSign=@respSign,respCode=@respCode,successCode=@successCode,infoName=@infoName,
+                                    infoType=@infoType,orderkey=@orderkey,signkey=@signkey,moneykey=@moneykey,codekey=@codekey,codeSuccess=@codeSuccess,backstring=@backstring,callSign=@callSign,name=@name,bankType=@bankType WHERE id=@id";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+
+        public int SaveEncryption(signtype mm)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("keyName", mm.keyName),
+                Database.MakeInParam("signArray", mm.signArray),
+                Database.MakeInParam("splicetype", mm.splicetype),
+                Database.MakeInParam("joiner1", mm.joiner1),
+                Database.MakeInParam("joiner2", mm.joiner2),
+                Database.MakeInParam("type", mm.type),
+                Database.MakeInParam("updown", mm.updown),
+                Database.MakeInParam("mapPos", mm.mapPos),
+                Database.MakeInParam("cyphertext", mm.cyphertext),
+                Database.MakeInParam("cypType", mm.cypType),
+                Database.MakeInParam("name", mm.name)
+            };
+            string sqlQuery;
+            if (mm.id == 0)
+            {
+                sqlQuery = @"INSERT INTO [dbo].[signtype]( [keyName], [signArray], [splicetype], [joiner1], [joiner2], [type], [updown], [mapPos], [cyphertext], [cypType], [name]) 
+                                                           VALUES (@keyName,@signArray,@splicetype,@joiner1,@joiner2,@type,@updown,@mapPos,@cyphertext,@cypType,@name)";
+            }
+            else
+            {
+                prams.Add(Database.MakeInParam("id", mm.id));
+                sqlQuery = @"UPDATE [dbo].[signtype] SET keyName=@keyName,signArray=@signArray,splicetype=@splicetype,joiner1=@joiner1,joiner2=@joiner2,type=@type,
+                                        updown=@updown,mapPos=@mapPos,cyphertext=@cyphertext,cypType=@cypType,name=@name WHERE id=@id";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
 
         #endregion
 

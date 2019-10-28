@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddOnlineChanel.aspx.cs" Inherits="Game.Web.Module.FilledManager.AddOnlineChanel" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MerchaChanel.aspx.cs" Inherits="Game.Web.Module.FilledManager.AddOnlineChanel" %>
 
 <!DOCTYPE html>
 
@@ -82,7 +82,7 @@
                         <td>
                             <asp:TextBox ID="tetUID" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
                             <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入商户ID" Display="Dynamic" ControlToValidate="txtPrice" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入商户ID" Display="Dynamic" ControlToValidate="tetUID" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
 
@@ -92,7 +92,7 @@
                         <td>
                             <asp:TextBox ID="TexPayUrl" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
                             <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="请输入支付网关" Display="Dynamic" ControlToValidate="txtPrice" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="请输入支付网关" Display="Dynamic" ControlToValidate="TexPayUrl" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
 
@@ -118,6 +118,23 @@
                             <asp:TextBox ID="TxtPublicKey" runat="server" CssClass="text" TextMode="MultiLine" Width="450px" Height="150px"></asp:TextBox>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td class="listTdLeft">充值上限：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextMax" runat="server" CssClass="text" TextMode="MultiLine" Width="450px" Height="150px"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="listTdLeft">充值下限：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextMin" runat="server" CssClass="text" TextMode="MultiLine" Width="450px" Height="150px"></asp:TextBox>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class="listTdLeft">快捷金额：
                         </td>

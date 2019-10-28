@@ -236,9 +236,14 @@
     <Content Include="Module\Diamond\TopOutDiamond.aspx" />
     <Content Include="Module\DrawalManager\DrawalOrderInfo.aspx" />
     <Content Include="Module\DrawalManager\DrawalOrderPage.aspx" />
-    <Content Include="Module\FilledManager\AddOnlineChanel.aspx" />
+    <Content Include="Module\FilledManager\ChanelPage.aspx" />
+    <Content Include="Module\FilledManager\ChannelConfig.aspx" />
+    <Content Include="Module\FilledManager\EncryptionInfo.aspx" />
+    <Content Include="Module\FilledManager\EncryptionList.aspx" />
+    <Content Include="Module\FilledManager\MerchaChanel.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigInfo.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigList.aspx" />
+    <Content Include="Module\FilledManager\OfficalBankPayList.aspx" />
     <Content Include="Module\FilledManager\OnLinePayPage.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatInfo.aspx" />
     <Content Include="Module\FilledManager\OnLineWeChatList.aspx" />
@@ -3536,12 +3541,40 @@
     <Compile Include="Module\DrawalManager\DrawalOrderPage.aspx.designer.cs">
       <DependentUpon>DrawalOrderPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Module\FilledManager\AddOnlineChanel.aspx.cs">
-      <DependentUpon>AddOnlineChanel.aspx</DependentUpon>
+    <Compile Include="Module\FilledManager\ChanelPage.aspx.cs">
+      <DependentUpon>ChanelPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Module\FilledManager\AddOnlineChanel.aspx.designer.cs">
-      <DependentUpon>AddOnlineChanel.aspx</DependentUpon>
+    <Compile Include="Module\FilledManager\ChanelPage.aspx.designer.cs">
+      <DependentUpon>ChanelPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\ChannelConfig.aspx.cs">
+      <DependentUpon>ChannelConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\ChannelConfig.aspx.designer.cs">
+      <DependentUpon>ChannelConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\EncryptionInfo.aspx.cs">
+      <DependentUpon>EncryptionInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\EncryptionInfo.aspx.designer.cs">
+      <DependentUpon>EncryptionInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\EncryptionList.aspx.cs">
+      <DependentUpon>EncryptionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\EncryptionList.aspx.designer.cs">
+      <DependentUpon>EncryptionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\MerchaChanel.aspx.cs">
+      <DependentUpon>MerchaChanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\MerchaChanel.aspx.designer.cs">
+      <DependentUpon>MerchaChanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\AppPayConfigInfo.aspx.cs">
       <DependentUpon>AppPayConfigInfo.aspx</DependentUpon>
@@ -3556,6 +3589,13 @@
     </Compile>
     <Compile Include="Module\FilledManager\AppPayConfigList.aspx.designer.cs">
       <DependentUpon>AppPayConfigList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalBankPayList.aspx.cs">
+      <DependentUpon>OfficalBankPayList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\OfficalBankPayList.aspx.designer.cs">
+      <DependentUpon>OfficalBankPayList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\OnLinePayPage.aspx.cs">
       <DependentUpon>OnLinePayPage.aspx</DependentUpon>

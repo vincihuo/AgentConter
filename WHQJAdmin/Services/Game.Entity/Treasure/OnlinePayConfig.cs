@@ -1,6 +1,6 @@
 ﻿/*
  * 版本： 4.0
- * 日期：2019/10/25 10:27:07
+ * 日期：2019/10/28 16:25:16
  * 
  * 描述：实体类
  * 
@@ -32,10 +32,13 @@ namespace Game.Entity.Treasure
         private byte p_paytype;
         private string p_payname;
         private string p_uid;
+        private string p_payurl;
         private string p_md5key;
         private string p_privatekey;
         private string p_publickey;
         private string p_shoutcut;
+        private int p_maxamount;
+        private int p_minamount;
         private byte p_payidentity;
         private int p_sortid;
         private int p_fristpresent;
@@ -46,7 +49,6 @@ namespace Game.Entity.Treasure
         private string p_attachstr2;
         private string p_attachstr3;
         private string p_attachstr4;
-        private string p_payurl;
 
         #endregion
 
@@ -61,10 +63,13 @@ namespace Game.Entity.Treasure
             p_paytype = 0;
             p_payname = string.Empty;
             p_uid = string.Empty;
+            p_payurl = string.Empty;
             p_md5key = string.Empty;
             p_privatekey = string.Empty;
             p_publickey = string.Empty;
             p_shoutcut = string.Empty;
+            p_maxamount = 0;
+            p_minamount = 0;
             p_payidentity = 0;
             p_sortid = 0;
             p_fristpresent = 0;
@@ -75,7 +80,6 @@ namespace Game.Entity.Treasure
             p_attachstr2 = string.Empty;
             p_attachstr3 = string.Empty;
             p_attachstr4 = string.Empty;
-            p_payurl = string.Empty;
         }
 
         #endregion
@@ -143,6 +147,21 @@ namespace Game.Entity.Treasure
         }
 
         /// <summary>
+        /// PayUrl
+        /// </summary>
+        public string PayUrl
+        {
+            set
+            {
+                p_payurl = value;
+            }
+            get
+            {
+                return p_payurl;
+            }
+        }
+
+        /// <summary>
         /// Md5key
         /// </summary>
         public string Md5key
@@ -199,6 +218,36 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_shoutcut;
+            }
+        }
+
+        /// <summary>
+        /// MaxAmount
+        /// </summary>
+        public int MaxAmount
+        {
+            set
+            {
+                p_maxamount = value;
+            }
+            get
+            {
+                return p_maxamount;
+            }
+        }
+
+        /// <summary>
+        /// MinAmount
+        /// </summary>
+        public int MinAmount
+        {
+            set
+            {
+                p_minamount = value;
+            }
+            get
+            {
+                return p_minamount;
             }
         }
 
@@ -349,21 +398,6 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_attachstr4;
-            }
-        }
-
-        /// <summary>
-        /// PayUrl
-        /// </summary>
-        public string PayUrl
-        {
-            set
-            {
-                p_payurl = value;
-            }
-            get
-            {
-                return p_payurl;
             }
         }
 
