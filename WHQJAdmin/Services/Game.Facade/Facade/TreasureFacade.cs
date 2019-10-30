@@ -50,6 +50,17 @@ namespace Game.Facade
         }
         #endregion 公用分页
 
+        #region     打码量
+
+        public Message AddValiBet(int valiBet, int userID, byte type, int DepositID, string DepositName)
+        {
+            return aideTreasureData.AddValiBet(valiBet, userID, type, DepositID, DepositName);
+        }
+        public UserValidBet GetUserVailBet(int userId)
+        {
+            return aideTreasureData.GetUserVailBet(userId);
+        }
+        #endregion
 
         #region 提款
         public decimal GetTotleDrawalMoney(string where)
@@ -136,8 +147,6 @@ namespace Game.Facade
         {
             return aideTreasureData.GetImgPayById(id);
         }
-
-
         #endregion
 
         #region 充值配置

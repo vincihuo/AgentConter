@@ -342,6 +342,27 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
 
+
+        public Message AddValiBet(int valiBet, int userID, byte type, int DepositID, string DepositName)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("ValidBet", valiBet),
+                Database.MakeInParam("DepositType", type),
+                Database.MakeInParam("UserID", userID),
+                Database.MakeInParam("DepositID", DepositID),
+                Database.MakeInParam("DepositName", DepositName),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PB_Deposit", prams);
+        }
+
+        public UserValidBet GetUserVailBet(int UserId)
+        {
+            string sqlQuery = $"SELECT * FROM UserValidBet WITH(NOLOCK) WHERE  UserID={UserId}";
+            return Database.ExecuteObject<UserValidBet>(sqlQuery);
+        }
+
         #endregion
 
 

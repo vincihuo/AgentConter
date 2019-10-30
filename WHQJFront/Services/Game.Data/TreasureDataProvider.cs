@@ -47,6 +47,17 @@ namespace Game.Data
             return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery);
         }
 
+        public IList<OfficalBankPay> GetBankPayList()
+        {
+            string sqlQuery = "SELECT * FROM OfficalBankPay WITH(NOLOCK)  ORDER BY SortId DESC";
+            return Database.ExecuteObjectList<OfficalBankPay>(sqlQuery);
+        }
+        public IList<OfficalImgPay> GetImgPayList()
+        {
+            string sqlQuery = "SELECT * FROM OnlinePayConfig WITH(NOLOCK)  ORDER BY SortId DESC";
+            return Database.ExecuteObjectList<OfficalImgPay>(sqlQuery);
+        }
+
         public GameScoreInfo GetGameScoreInfoByUid(int uid)
         {
             string sql = $"SELECT * FROM GameScoreInfo where UserID={uid}";

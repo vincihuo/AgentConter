@@ -138,7 +138,7 @@ BEGIN
     SET @VileBet =@Amount*@PayMultiple/100+@PresentScore*@SendMultiple/100;
     DECLARE @ErrorDescribe	NVARCHAR(127)
     DECLARE @Return INT
-    EXEC @Return=NET_PB_Deposit 1,@UserID,1,@strOrdersID,@VileBet,@ErrorDescribe OUTPUT
+    EXEC @Return=NET_PB_Deposit 2,@UserID,1,@strOrdersID,@VileBet,@ErrorDescribe OUTPUT
     IF @Return!=0
 	BEGIN
         SET @strErrorDescribe = @ErrorDescribe

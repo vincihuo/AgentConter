@@ -53,11 +53,20 @@ namespace Game.Web.Module.GoldManager
                 ClientIP = ip,
                 Reason = strReason
             };
-
             Message msg = FacadeManage.aideTreasureFacade.GrantTreasure(rgt);
             if(msg.Success)
             {
-                if(flag)
+                int valiBet = Convert.ToInt32(VileBet.Text);
+                if (valiBet > 0)
+                {
+                    Message msg1 = FacadeManage.aideTreasureFacade.AddValiBet(valiBet, IntParam, 3, 1, strReason);
+                    if (!msg1.Success)
+                    {
+                        MessageBox("怎加打码量失败");
+                        return;
+                    }
+                }
+                if (flag)
                 {
                     AccountsUmeng umeng = FacadeManage.aideAccountsFacade.GetAccountsUmeng(IntParam);
                     if(!string.IsNullOrEmpty(umeng?.DeviceToken))
@@ -92,6 +101,8 @@ namespace Game.Web.Module.GoldManager
                 {
                     MessageBox("赠送成功");
                 }
+             
+
             }
             else
             {

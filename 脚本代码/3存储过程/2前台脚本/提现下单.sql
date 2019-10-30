@@ -1,6 +1,8 @@
 USE [WHQJTreasureDB]
 GO
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[dbo].NET_PW_CreateDrawarOrder') AND OBJECTPROPERTY(ID, N'IsProcedure') = 1)
+IF EXISTS (SELECT *
+FROM DBO.SYSOBJECTS
+WHERE ID = OBJECT_ID(N'[dbo].NET_PW_CreateDrawarOrder') AND OBJECTPROPERTY(ID, N'IsProcedure') = 1)
 DROP PROCEDURE [dbo].NET_PW_CreateDrawarOrder
 GO
 SET ANSI_NULLS ON
@@ -9,7 +11,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE NET_PW_CreateDrawarOrder
-	@dwUserID			INT,						-- 操作用户
+	@dwUserID			INT,
+	-- 操作用户
 
 	@DrawalType         DECIMAL(18,2),
 
@@ -22,7 +25,7 @@ CREATE PROCEDURE NET_PW_CreateDrawarOrder
 	@ClientIP			NVARCHAR(15),
 
 	@strErrorDescribe	NVARCHAR(127) OUTPUT
-	--	输出信息
+--	输出信息
 WITH
 	ENCRYPTION
 AS
@@ -30,11 +33,12 @@ AS
 DECLARE @CurScore  BIGINT
 DECLARE @Nullity   TINYINT
 DECLARE @GameID    INT
-
 DECLARE @CurInsureScore BIGINT
 BEGIN
 	-- 获取用户信息
-	SELECT @Nullity=Nullity,@GameID=GameID FROM WHQJAccountsDBLink.WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK) WHERE UserID=@dwUserID
+	SELECT @Nullity=Nullity, @GameID=GameID
+	FROM WHQJAccountsDBLink.WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK)
+	WHERE UserID=@dwUserID
 	IF @Nullity IS NULL
 	BEGIN
 		SET @strErrorDescribe=N'抱歉，提现用户不存在'
@@ -47,24 +51,43 @@ BEGIN
 	END
 
 
-	IF EXISTS(SELECT 1 FROM GameScoreLocker WHERE UserID=@dwUserID) 
+	IF EXISTS(SELECT 1
+	FROM GameScoreLocker
+	WHERE UserID=@dwUserID) 
 	BEGIN
 		SET @strErrorDescribe=N'提现时请离开游戏房间'
 		RETURN 1003
 	END
 	--查询金币
-	SELECT @CurScore=Score,@CurInsureScore=InsureScore FROM GameScoreInfo WHERE UserID = @dwUserID
+	SELECT @CurScore=Score, @CurInsureScore=InsureScore
+	FROM GameScoreInfo
+	WHERE UserID = @dwUserID
 	IF @CurScore<@DrawalAmount
 	BEGIN
 		SET @strErrorDescribe=N'金币不足'
 		RETURN 1004
 	END
-	
-	IF EXISTS(SELECT 1 FROM DrawalOrder WITH(NOLOCK) WHERE UserID=@dwUserID AND OrderState=0)
+
+	IF EXISTS(SELECT 1
+	FROM DrawalOrder WITH(NOLOCK)
+	WHERE UserID=@dwUserID AND OrderState=0)
 	BEGIN
 		SET @strErrorDescribe=N'有线上提款订单未处理'
 		RETURN 1005
 	END
+	--查询打码量
+	DECLARE @TagetValiBet BIGINT
+	DECLARE @CurreValiBet BIGINT
+	SELECT @TagetValiBet=TargetBet, @CurreValiBet=CurrentValidBet
+	FROM UserValidBet
+	WHERE UserID=@dwUserID
+	IF @CurreValiBet<@TagetValiBet
+	BEGIN
+		SET @strErrorDescribe=N'有线上提款订单未处理'
+		RETURN 1005
+	END
+
+
 	BEGIN TRAN
 	--扣钱
 	UPDATE GameScoreInfo SET Score = Score - @DrawalAmount WHERE UserID = @dwUserID
@@ -75,8 +98,9 @@ BEGIN
 		RETURN 2003
 	END
 	--金币流水
-	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-	VALUES(dbo.WF_GetSerialNumber(),0,@dwUserID,6,@CurScore,@CurInsureScore,@DrawalAmount,@ClientIP,GETDATE())
+	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
+		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
+	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 6, @CurScore, @CurInsureScore, @DrawalAmount, @ClientIP, GETDATE())
 	IF @@ROWCOUNT<>1
 	BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'
@@ -84,8 +108,9 @@ BEGIN
 		RETURN 2004
 	END
 	--写订单
-	INSERT INTO DrawalOrder(OrderID,DrawalType,UserID,GameID,MasterID,Amount,OrderState,OrderCost,IP,CurrentTime)
-	VALUES(@strOrdersID,@DrawalType,@dwUserID,@GameID,0,@DrawalAmount,0,@OrderCost,@ClientIP,GETDATE())
+	INSERT INTO DrawalOrder
+		(OrderID,DrawalType,UserID,GameID,MasterID,Amount,OrderState,OrderCost,IP,CurrentTime)
+	VALUES(@strOrdersID, @DrawalType, @dwUserID, @GameID, 0, @DrawalAmount, 0, @OrderCost, @ClientIP, GETDATE())
 	IF @@ROWCOUNT<>1
 	BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'

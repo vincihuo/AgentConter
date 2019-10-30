@@ -61,6 +61,7 @@
       </td>
     </tr>
   </table>
+
   <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="listBg2" style="height: 136px;">
     <tr runat="server" id="trGameID">
       <td class="listTdLeft">
@@ -85,6 +86,19 @@
        <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="赠送金币格式不正确" Display="Dynamic" ControlToValidate="txtGold" ForeColor="Red" ></asp:RegularExpressionValidator>--%>
       </td>
     </tr>
+
+    <tr>
+      <td class="listTdLeft">
+        增加打码量：
+      </td>
+      <td>
+        <asp:TextBox ID="VileBet" runat="server" CssClass="text wd4" ></asp:TextBox>
+        <span class="hong">*</span>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="输入打码量" Display="Dynamic" ControlToValidate="txtGold" ForeColor="Red"></asp:RequiredFieldValidator>
+      </td>
+    </tr>
+
+
     <tr>
       <td class="listTdLeft">
         推送消息提醒：
@@ -102,6 +116,7 @@
       </td>
     </tr>
   </table>
+
   <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
       <td class="titleOpBg Lpd10">

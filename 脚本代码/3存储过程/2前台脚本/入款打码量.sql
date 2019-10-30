@@ -50,8 +50,8 @@ BEGIN
 		RETURN 2002
 	    END
     --写入打码量记录
-    INSERT INTO ValiBetRecord(DepositType,UserID,DepositID,DepositName,CurrentValidBet,LastValiBet,TotalValiBet)
-    VALUES(@DepositType,@UserID,@DepositID,@DepositName,@ValidBet,@Banlance,@Banlance+@ValidBet)
+    INSERT INTO ValiBetRecord(DepositType,UserID,DepositID,DepositName,CurrentValidBet,LastValiBet,TotalValiBet,DepositTime)
+    VALUES(@DepositType,@UserID,@DepositID,@DepositName,@ValidBet,@Banlance,@Banlance+@ValidBet,GETDATE())
     IF @@ROWCOUNT<>1
         BEGIN
 		SET @strErrorDescribe=N'订单处理异常，重试'

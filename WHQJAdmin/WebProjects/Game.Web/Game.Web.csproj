@@ -264,6 +264,7 @@
     <Content Include="Module\GoldManager\RecordGoldBuyProp.aspx" />
     <Content Include="Module\GoldManager\RecordGoldExch.aspx" />
     <Content Include="Module\GoldManager\RecordUserGame.aspx" />
+    <Content Include="Module\GoldManager\VilaBetList.aspx" />
     <Content Include="Module\MallManager\MallInfo.aspx" />
     <Content Include="Module\MallManager\MallInfoList.aspx" />
     <Content Include="Module\MallManager\MallOrder.aspx" />
@@ -3741,6 +3742,13 @@
     </Compile>
     <Compile Include="Module\GoldManager\RecordUserGame.aspx.designer.cs">
       <DependentUpon>RecordUserGame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\GoldManager\VilaBetList.aspx.cs">
+      <DependentUpon>VilaBetList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\GoldManager\VilaBetList.aspx.designer.cs">
+      <DependentUpon>VilaBetList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\MallManager\MallInfo.aspx.cs">
       <DependentUpon>MallInfo.aspx</DependentUpon>

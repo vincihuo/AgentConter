@@ -390,7 +390,6 @@ namespace Game.Web.WS
                 _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"提现金额必须在{min}-{max}之间");
                 return;
             }
-            GameScoreInfo info = FacadeManage.aideTreasureFacade.GetGameScoreInfoByUid(_userid);
             //判断打码量
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
             if (validBet.CurrentValidBet < validBet.TargetBet)
@@ -400,12 +399,6 @@ namespace Game.Web.WS
                 return;
             }
 
-            if (info.Score < amount)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"携带金额不足");
-                return;
-            }
             //创建订单
             int cost = amount * p / 100;
             DrawalOrder order = new DrawalOrder();
@@ -650,7 +643,17 @@ namespace Game.Web.WS
                     _ajv.SetValidDataValue(true);
                     _ajv.SetDataItem("list", pp);
                     break;
-         
+                case 2:
+                    IList<OfficalBankPay> list1 = FacadeManage.aideTreasureFacade.GetBankPayList();
+                    _ajv.SetValidDataValue(true);
+                    _ajv.SetDataItem("list", list1);
+                    break;
+                case 3:
+                    IList<OfficalImgPay> list2 = FacadeManage.aideTreasureFacade.GetImgPayList();
+                    _ajv.SetValidDataValue(true);
+                    _ajv.SetDataItem("list", list2);
+                    break;
+
 
 
             }

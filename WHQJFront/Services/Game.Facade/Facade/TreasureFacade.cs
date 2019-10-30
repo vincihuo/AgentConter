@@ -59,6 +59,14 @@ namespace Game.Facade
         {
             return treasureData.GetOnLinePayList();
         }
+        public IList<OfficalBankPay> GetBankPayList()
+        {
+            return treasureData.GetBankPayList();
+        }
+        public IList<OfficalImgPay> GetImgPayList()
+        {
+            return treasureData.GetImgPayList();
+        }
 
         public GameScoreInfo GetGameScoreInfoByUid(int uid)
         {

@@ -28,6 +28,8 @@ namespace Game.IData
 
         #region 一个字帅
         IList<OnlinePayConfig> GetOnLinePayList();
+        IList<OfficalBankPay> GetBankPayList();
+        IList<OfficalImgPay> GetImgPayList();
         GameScoreInfo GetGameScoreInfoByUid(int uid);
         Message CreateDrawalOrder(DrawalOrder order);
         UserValidBet GetValidBetByUid(int uid);
