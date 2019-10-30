@@ -53,21 +53,24 @@ namespace Game.Web.WS
                     ? Convert.ToInt64(GameRequest.GetString("groupid"))
                     : 0;
                 _ajv = new AjaxJsonValid();
-                //#if !DEBUG //DEBUG情况下不验证
-                //            string time = GameRequest.GetQueryString("time");
-                //            string sign = GameRequest.GetQueryString("sign");
+                string sign = GameRequest.GetQueryString("&sign");
+                string parama = context.Request.Url.Query;
+                int pos = parama.LastIndexOf("&sign=");
+                if (pos < 1)
+                {
+                    _ajv.code = (int)ApiCode.VertySignErrorCode;
+                    _ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
+                    return;
+                }
+                parama= parama.Substring(0,pos);
+                _ajv=Fetch.VerifySignData(parama, sign);
+                if (_ajv.code == (int)ApiCode.VertySignErrorCode)
+                {
+                    context.Response.Write(_ajv.SerializeToJson());
+                    return;
+                }
 
-                //            //签名验证
-                //            _ajv =
-                //Fetch.VerifySignData((context.Request.QueryString["userid"] == null ? "" : _userid.ToString()) + AppConfig.MoblieInterfaceKey + time,
-                //                sign);
-                ////            Log4Net.WriteInfoLog("signStr:"+(context.Request.QueryString["userid"] == null ? "" : _userid.ToString()) + AppConfig.MoblieInterfaceKey + time + " sign:"+sign);
-                //            if (_ajv.code == (int)ApiCode.VertySignErrorCode)
-                //            {
-                //                context.Response.Write(_ajv.SerializeToJson());
-                //                return;
-                //            }
-                //#endif
+
                 //参数验证
                 if (context.Request.QueryString["userid"] != null && _userid <= 0)
                 {
@@ -79,7 +82,6 @@ namespace Game.Web.WS
                 //获取其他参数
                 int configid = GameRequest.GetQueryInt("configid", 0);
                 int typeid = GameRequest.GetQueryInt("typeid", 0);
-
                 switch (action)
                 {
                     #region 老接口
@@ -104,6 +106,9 @@ namespace Game.Web.WS
                         //_ajv.SetDataItem("apiVersion", 20171028);
                         ////获取参数
                         //GetPayProduct(typeid);
+
+                        _ajv.SetDataItem("apiVersion", 20191029);
+                        CreatBankPayOrder();
                         break;
 
                     //领取推广有效好友奖励
@@ -324,11 +329,20 @@ namespace Game.Web.WS
                     case "getonlinepay":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
-                        GetOnLinePayList(typeid);
+                        GetPayList(typeid);
                         break;
                     case "withdrawal":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
+                        break;
+
+                    case "imgPay":
+                        _ajv.SetDataItem("apiVersion", 20191029);
+                        CreatImgPayOrder();
+                        break;
+                    case "bankPay":
+                        _ajv.SetDataItem("apiVersion", 20191029);
+                        CreatBankPayOrder();
                         break;
                     case "hallhotfix":
                         _ajv.SetDataItem("apiVersion", 20191019);
@@ -406,6 +420,31 @@ namespace Game.Web.WS
             _ajv.msg = mm.Content;
         }
 
+        private void CreatImgPayOrder()
+        {
+            int cfgID = GameRequest.GetQueryInt("cfgID", 1);
+            string payLink = GameRequest.GetQueryString("payLink");
+            int amount = GameRequest.GetQueryInt("amount", 0);
+            string payName = GameRequest.GetQueryString("payName");
+            string orderID= Fetch.GetOrderIDByPrefix("QRPay");
+            Message mm = FacadeManage.aideTreasureFacade.CreatImgPayOrder(_userid, cfgID, payLink, amount, payName, orderID);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
+        }
+
+        private void CreatBankPayOrder()
+        {
+            int cfgID = GameRequest.GetQueryInt("cfgID", 1);
+            string bankAcc = GameRequest.GetQueryString("bankAcc");
+            int trsfType = GameRequest.GetQueryInt("trsfType", 1);
+            string bankName = GameRequest.GetQueryString("bankAcc");
+            int amount = GameRequest.GetQueryInt("amount", 0);
+            string payName = GameRequest.GetQueryString("payName");
+            string orderID = Fetch.GetOrderIDByPrefix("BKPay");
+            Message mm = FacadeManage.aideTreasureFacade.CreatBankPayOrder(_userid, cfgID, bankAcc, amount, payName, bankName, trsfType, orderID);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
+        }
         private void SetHallHotFix()
         {
             int type = GameRequest.GetQueryInt("type", 2);
@@ -589,24 +628,34 @@ namespace Game.Web.WS
             _ajv.SetDataItem("wincountrank", winCountRank);
             _ajv.SetDataItem("rankconfig", rankconfig);
         }
-        private void GetOnLinePayList(int typeID)
+        private void GetPayList(int typeID)
         {
-            IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(typeID);
-
-            List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
-            for (int i = 0; i < list.Count; ++i)
+            switch (typeID)
             {
-                AppOnlinePayConfig t = new AppOnlinePayConfig();
-                t.ChanelID = list[i].ChanelID;
-                t.ID = list[i].ID;
-                t.PayType = list[i].PayType;
-                t.PayName = list[i].PayName;
-                t.ShoutCut = list[i].ShoutCut;
-                t.PresentScore = list[i].PresentScore;
-                pp.Add(t);
+                case 1:          //线上充值
+                    IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList();
+
+                    List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
+                    for (int i = 0; i < list.Count; ++i)
+                    {
+                        AppOnlinePayConfig t = new AppOnlinePayConfig();
+                        t.ChanelID = list[i].ChanelID;
+                        t.ID = list[i].ID;
+                        t.PayType = list[i].PayType;
+                        t.PayName = list[i].PayName;
+                        t.ShoutCut = list[i].ShoutCut;
+                        t.PresentScore = list[i].PresentScore;
+                        pp.Add(t);
+                    }
+                    _ajv.SetValidDataValue(true);
+                    _ajv.SetDataItem("list", pp);
+                    break;
+         
+
+
             }
-            _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("list", pp);
+            
+   
         }
         /// <summary>
         /// 获取充值产品列表
@@ -1268,6 +1317,7 @@ namespace Game.Web.WS
                     return;
                 }
             }
+
             string code = Facade.GetMobileCode.MyGetCode(Mobile);
             if (!string.IsNullOrEmpty(code))
             {

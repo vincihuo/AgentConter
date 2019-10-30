@@ -55,9 +55,9 @@ namespace Game.Facade
 
 
         #region 帅逼接口
-        public IList<OnlinePayConfig> GetOnlinePayList(int typeId)
+        public IList<OnlinePayConfig> GetOnlinePayList()
         {
-            return treasureData.GetOnLinePayList(typeId);
+            return treasureData.GetOnLinePayList();
         }
 
         public GameScoreInfo GetGameScoreInfoByUid(int uid)
@@ -73,6 +73,16 @@ namespace Game.Facade
         public Message CreateDrawalOrder(DrawalOrder order)
         {
             return treasureData.CreateDrawalOrder(order);
+        }
+
+        public Message CreatImgPayOrder(int uid,int cfgId,string payLink,int amount,string payName,string orderID)
+        {
+            return treasureData.CreatImgPayOrder(uid, cfgId, payLink, amount, payName, orderID);
+        }
+
+        public Message CreatBankPayOrder(int uid, int cfgId, string BankAcc, int amount, string payName, string payBank, int TransferType, string orderID)
+        {
+            return treasureData.CreatBankPayOrder(uid, cfgId, BankAcc, amount, payName, payBank, TransferType, orderID);
         }
 
         #endregion

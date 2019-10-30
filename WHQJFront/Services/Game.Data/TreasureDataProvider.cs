@@ -41,12 +41,10 @@ namespace Game.Data
 
         #region 线上充值
 
-        public IList<OnlinePayConfig> GetOnLinePayList(int typeId)
+        public IList<OnlinePayConfig> GetOnLinePayList()
         {
-            const string sqlQuery =
-            @"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE PayType = @PayType ORDER BY PayIdentity DESC,SortID DESC";
-            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("PayType", typeId) };
-            return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery, parms);
+            const string sqlQuery = "SELECT * FROM OnlinePayConfig WITH(NOLOCK)  ORDER BY PayIdentity DESC,SortID DESC";
+            return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery);
         }
 
         public GameScoreInfo GetGameScoreInfoByUid(int uid)
@@ -67,6 +65,38 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PW_CreateDrawarOrder", prams);
         }
+        public Message CreatImgPayOrder(int uid, int cfgId, string payLink, int amount, string payName, string orderID)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("cfgID", cfgId),
+                Database.MakeInParam("PayLink", payLink),
+                Database.MakeInParam("amount", amount),
+                Database.MakeInParam("payName", payName),
+                Database.MakeInParam("strOrderID", orderID),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_CreateImgPayOrder", prams);
+        }
+        public Message CreatBankPayOrder(int uid, int cfgId, string BankAcc, int amount, string payName, string payBank, int TransferType, string orderID)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("cfgID", cfgId),
+                Database.MakeInParam("Number", BankAcc),
+                Database.MakeInParam("amount", amount),
+                Database.MakeInParam("payName", payName),
+                Database.MakeInParam("payBank", payBank),
+                Database.MakeInParam("TransferType", TransferType),
+                Database.MakeInParam("strOrderID", orderID),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_CreateBankPayOrder", prams);
+        }
+
+
         public UserValidBet GetValidBetByUid(int uid)
         {
             string sql = $"SELECT * FROM UserValidBet where UserID={uid}";
@@ -87,7 +117,7 @@ namespace Game.Data
         {
             const string sqlQuery =
                 @"SELECT * FROM AppPayConfig WITH(NOLOCK) WHERE PayType = @PayType ORDER BY PayIdentity DESC,SortID DESC";
-            List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("PayType", typeId)};
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("PayType", typeId) };
             return Database.ExecuteObjectList<AppPayConfig>(sqlQuery, parms);
         }
 
@@ -158,9 +188,10 @@ namespace Game.Data
         public PagerSet GetPayDiamondRecord(string whereQuery, int pageIndex, int pageSize, string[] returnField = null)
         {
             const string orderQuery = "ORDER By OrderDate DESC";
-            returnField = returnField ?? new[] {"Amount", "Diamond", "OtherPresent", "BeforeDiamond", "PayDate"};
+            returnField = returnField ?? new[] { "Amount", "Diamond", "OtherPresent", "BeforeDiamond", "PayDate" };
             PagerParameters pager = new PagerParameters("OnLinePayOrder", orderQuery, whereQuery, pageIndex, pageSize,
-                returnField) {CacherSize = 2};
+                returnField)
+            { CacherSize = 2 };
 
             return GetPagerSet2(pager);
         }
@@ -180,7 +211,7 @@ namespace Game.Data
                     Database.MakeInParam("OrderID", orderid)
                 };
 
-            return  Database.ExecuteObject<OnLinePayOrder>(sqlQuery, parms);
+            return Database.ExecuteObject<OnLinePayOrder>(sqlQuery, parms);
         }
         #endregion
 
@@ -234,7 +265,7 @@ namespace Game.Data
         public UserCurrency GetUserCurrency(int userId)
         {
             const string sqlQuery = "SELECT * FROM UserCurrency WHERE UserID=@UserID";
-            List<DbParameter> prams = new List<DbParameter> {Database.MakeInParam("UserID", userId)};
+            List<DbParameter> prams = new List<DbParameter> { Database.MakeInParam("UserID", userId) };
             return Database.ExecuteObject<UserCurrency>(sqlQuery, prams);
         }
 
@@ -296,9 +327,9 @@ namespace Game.Data
 
             const string sqlQuery =
                 @"select * from CurrencyExchConfig WITH(NOLOCK) order by SortID DESC";
-            List<DbParameter> parms = new List<DbParameter>() ;
+            List<DbParameter> parms = new List<DbParameter>();
             return Database.ExecuteObjectList<CurrencyExchConfig>(sqlQuery);
-          
+
         }
 
         #endregion
@@ -314,7 +345,7 @@ namespace Game.Data
         {
             const string sqlQuery =
                 "SELECT VideoData FROM RecordVideoInfo WITH(NOLOCK) WHERE VideoNumber = @VideoNumber";
-            List<DbParameter> param = new List<DbParameter> {Database.MakeInParam("VideoNumber", number)};
+            List<DbParameter> param = new List<DbParameter> { Database.MakeInParam("VideoNumber", number) };
 
             object obj = Database.ExecuteScalar(CommandType.Text, sqlQuery, param.ToArray());
             return obj as byte[];

@@ -94,6 +94,11 @@ namespace Game.Facade
             return aideTreasureData.FinshOnlineOrder(orderid, type, payAmount, address);
         }
 
+        public Message FinshOfficalOrder(string orderid, byte type,int masterId)
+        {
+            return aideTreasureData.FinshOfficalOrder(orderid, type, masterId);
+        }
+
         public pay_chanel GetPay_ChanelsByID(int id)
         {
             return aideTreasureData.GetPay_ChanelsByID(id);
@@ -375,7 +380,7 @@ namespace Game.Facade
             return aideTreasureData.GetStatInfo();
         }
         /// <summary>
-        /// 按条件获取已支付总数
+        /// 按条件获取线上已支付总数
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
@@ -383,15 +388,24 @@ namespace Game.Facade
         {
             return aideTreasureData.GetTotalPayAmount(where);
         }
+
+        public decimal GetTotalAmount(string table, string where)
+        {
+            return aideTreasureData.GetTotalAmount(table, where);
+        }
+
         /// <summary>
         /// 按条件获取已支付订单数
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public long GetTotalPayOrderCount(string where)
+        public long GetTotalPayOrderCount(string table,string where)
         {
-            return aideTreasureData.GetTotalPayOrderCount(where);
+            return aideTreasureData.GetTotalPayOrderCount(table,where);
         }
+
+
+
         /// <summary>
         /// 获取钻石统计
         /// </summary>

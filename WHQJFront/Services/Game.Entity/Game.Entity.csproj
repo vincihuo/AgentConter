@@ -105,6 +105,7 @@
     <Compile Include="Treasure\CurrencyExchConfig.cs" />
     <Compile Include="Treasure\DrawalOrder.cs" />
     <Compile Include="Treasure\GameScoreInfo.cs" />
+    <Compile Include="Treasure\OfficalPayOrder.cs" />
     <Compile Include="Treasure\OnlinePayConfig.cs" />
     <Compile Include="Treasure\OnLinePayOrder.cs" />
     <Compile Include="Treasure\OnLineWeChat.cs" />

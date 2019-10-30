@@ -2,14 +2,11 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using Functions;
 using System.Security.Cryptography;
-using System.Web;
+using System.Xml;
 
 namespace Game.Facade
 {
@@ -22,21 +19,20 @@ namespace Game.Facade
            
             string tmp = RndNum(6);
             string uid = ApplicationSettings.Get("SMS_uid");			//用户名
+            string acc = ApplicationSettings.Get("SMS_acc");
             string pass = ApplicationSettings.Get("SMS_pwd");	//密码
-            string extno = ApplicationSettings.Get("SMS_extno");//接入码
             string strContent = string.Format(ApplicationSettings.Get("SMS_content"), tmp);
             strContent = strContent.Replace("{0}", tmp);
-          
-            string pwd = getMD5(pass+ extno + strContent+ mobile);
-            strContent = HttpUtility.UrlEncode(strContent, Encoding.UTF8);
-            string url = string.Format("http://118.190.211.36:7862/sms");
-            var param = string.Format("action=send&account={0}&password={1}&mobile={2}&content={3}&extno={4}&rt=json", uid, pwd, mobile, strContent, extno);
+
+            //strContent = HttpUtility.UrlEncode(strContent, Encoding.UTF8);
+            string url = string.Format("http://60.205.220.32:8888/sms.aspx?action=send&userid={0}&account={1}&password={2}&mobile={3}&content={4}&sendTime=&extno=", uid, acc, pass, mobile, strContent);
             try
             {
-                //string rs = Function.MdSmsSend_u(uid, pwd, mobile, strContent, "", "", "");
-                string rs = RequestUri(url, param);
-               JObject jd = (JObject)JsonConvert.DeserializeObject(rs);
-                if ((string)jd["status"] == "0")
+                string rs = RequestUri(url, "");
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(rs);
+                XmlNode node = xmlDoc.SelectSingleNode("returnsms/message");
+                if (node.InnerText == "ok")
                 {
                     return tmp;
                 }

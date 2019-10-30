@@ -62,7 +62,7 @@
                                 <%# "<input name='cid' type='checkbox' value='" + Eval("id").ToString() + "'/>" %>
                             </td>
                             <td>
-                                <a href="ChannelConfig.aspx?param=<%# Eval( "id" ).ToString( )%>" class="l">编辑</a>
+                                <a href="OfficalBankPayInfo.aspx?param=<%# Eval( "id" ).ToString( )%>" class="l">编辑</a>
                             </td>
                             <td>
                                 <%# Eval("ConfigName")%>

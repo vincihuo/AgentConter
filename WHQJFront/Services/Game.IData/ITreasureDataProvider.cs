@@ -27,10 +27,12 @@ namespace Game.IData
         #endregion
 
         #region 一个字帅
-        IList<OnlinePayConfig> GetOnLinePayList(int typeId);
+        IList<OnlinePayConfig> GetOnLinePayList();
         GameScoreInfo GetGameScoreInfoByUid(int uid);
         Message CreateDrawalOrder(DrawalOrder order);
         UserValidBet GetValidBetByUid(int uid);
+        Message CreatImgPayOrder(int uid, int cfgId, string payLink, int amount, string payName, string orderID);
+        Message CreatBankPayOrder(int uid, int cfgId, string BankAcc, int amount, string payName, string payBank, int TransferType, string orderID);
         #endregion
 
         #region 充值产品

@@ -68,7 +68,17 @@
                         <td>
                             <asp:TextBox ID="BankNumber" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
                             <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入银行卡号" Display="Dynamic" ControlToValidate="BankNumber" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="请输入银行卡号" Display="Dynamic" ControlToValidate="BankNumber" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="listTdLeft">银行：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="BankName" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
+                            <span class="hong">*</span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入银行" Display="Dynamic" ControlToValidate="BankNumber" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
 

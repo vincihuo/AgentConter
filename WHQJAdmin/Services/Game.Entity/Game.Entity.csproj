@@ -163,12 +163,15 @@
     <Compile Include="Record\RecordTask.cs" />
     <Compile Include="Record\RecordTreasureSerial.cs" />
     <Compile Include="Treasure\AppPayConfig.cs" />
+    <Compile Include="Treasure\BankPayOrder.cs" />
     <Compile Include="Treasure\CurrencyExchConfig.cs" />
     <Compile Include="Treasure\DrawalOrder.cs" />
     <Compile Include="Treasure\GameScoreInfo.cs" />
     <Compile Include="Treasure\GameScoreLocker.cs" />
+    <Compile Include="Treasure\ImgPayOrder.cs" />
     <Compile Include="Treasure\OfficalBankPay.cs" />
     <Compile Include="Treasure\OfficalImgPay.cs" />
+    <Compile Include="Treasure\OfficalPayOrder.cs" />
     <Compile Include="Treasure\OnlinePayConfig.cs" />
     <Compile Include="Treasure\OnLinePayOrder.cs" />
     <Compile Include="Treasure\OnLineWeChat.cs" />

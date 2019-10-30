@@ -236,10 +236,12 @@
     <Content Include="Module\Diamond\TopOutDiamond.aspx" />
     <Content Include="Module\DrawalManager\DrawalOrderInfo.aspx" />
     <Content Include="Module\DrawalManager\DrawalOrderPage.aspx" />
+    <Content Include="Module\FilledManager\BankOrderList.aspx" />
     <Content Include="Module\FilledManager\ChanelPage.aspx" />
     <Content Include="Module\FilledManager\ChannelConfig.aspx" />
     <Content Include="Module\FilledManager\EncryptionInfo.aspx" />
     <Content Include="Module\FilledManager\EncryptionList.aspx" />
+    <Content Include="Module\FilledManager\ImgOrderList.aspx" />
     <Content Include="Module\FilledManager\MerchaChanel.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigInfo.aspx" />
     <Content Include="Module\FilledManager\AppPayConfigList.aspx" />
@@ -3544,6 +3546,13 @@
     <Compile Include="Module\DrawalManager\DrawalOrderPage.aspx.designer.cs">
       <DependentUpon>DrawalOrderPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\FilledManager\BankOrderList.aspx.cs">
+      <DependentUpon>BankOrderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\BankOrderList.aspx.designer.cs">
+      <DependentUpon>BankOrderList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\FilledManager\ChanelPage.aspx.cs">
       <DependentUpon>ChanelPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3571,6 +3580,13 @@
     </Compile>
     <Compile Include="Module\FilledManager\EncryptionList.aspx.designer.cs">
       <DependentUpon>EncryptionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\FilledManager\ImgOrderList.aspx.cs">
+      <DependentUpon>ImgOrderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\FilledManager\ImgOrderList.aspx.designer.cs">
+      <DependentUpon>ImgOrderList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\FilledManager\MerchaChanel.aspx.cs">
       <DependentUpon>MerchaChanel.aspx</DependentUpon>

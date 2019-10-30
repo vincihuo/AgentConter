@@ -179,7 +179,7 @@ namespace Game.Data
             if (officalBankPay.id == 0)
             {
                 sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [MerchantName],[BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId], [Description]) 
-                                                           VALUES (@ConfigName,@MerchantName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
+                                                           VALUES (@ConfigName,@MerchantName,@BankName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
             }
             else
             {
@@ -188,8 +188,17 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
-
-
+        public Message FinshOfficalOrder(string orderid, byte type, int masterId)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("strOrdersID", orderid),
+                Database.MakeInParam("OrderType", type),
+                Database.MakeInParam("MatserID", masterId),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_FinishOfficalOrder", prams);
+        }
         public int DeleteOnlinePayConfig(string idlist)
         {
             string sqlQuery = $"DELETE OnlinePayConfig WHERE ID IN({idlist})";
@@ -222,13 +231,13 @@ namespace Game.Data
 
         public OfficalBankPay GetBankPayById(int id)
         {
-            string sqlQuery = $"SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE ID = '{id}'";
+            string sqlQuery = $"SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE id = '{id}'";
             return Database.ExecuteObject<OfficalBankPay>(sqlQuery);
         }
 
         public OfficalImgPay GetImgPayById(int id)
         {
-            string sqlQuery = $"SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE ID = '{id}'";
+            string sqlQuery = $"SELECT * FROM OfficalImgPay WITH(NOLOCK) WHERE id = '{id}'";
             return Database.ExecuteObject<OfficalImgPay>(sqlQuery);
         }
 
@@ -746,7 +755,7 @@ namespace Game.Data
         }
 
         /// <summary>
-        /// 按条件获取已支付总数
+        /// 按条件线上获取到账总数
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
@@ -755,15 +764,21 @@ namespace Game.Data
             string sql = $"SELECT ISNULL(SUM(PayAmount),0) AS Amount FROM OnLinePayOrder {where} AND OrderStates>0";
             return Convert.ToDecimal(Database.ExecuteScalar(CommandType.Text, sql));
         }
+        //获取充值总数
+        public decimal GetTotalAmount(string table, string where)
+        {
+            string sql = $"SELECT ISNULL(SUM(Amount),0) AS Amount FROM {table} {where} AND OrderStates>0";
+            return Convert.ToDecimal(Database.ExecuteScalar(CommandType.Text, sql));
+        }
 
         /// <summary>
         /// 按条件获取已支付订单数
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public long GetTotalPayOrderCount(string where)
+        public long GetTotalPayOrderCount(string table ,string where)
         {
-            string sql = $"SELECT COUNT(1) AS [COUNT] FROM OnLinePayOrder {where} AND OrderStates>0";
+            string sql = $"SELECT COUNT(1) AS [COUNT] FROM {table} {where} AND OrderStates>0";
             return Convert.ToInt64(Database.ExecuteScalar(CommandType.Text, sql));
         }
 

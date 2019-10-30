@@ -128,7 +128,7 @@ BEGIN
 	VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 12, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, @OrderAddress, @DateTime)
 	--增加打码量
 
-		--  充值打码量倍数
+	--  充值打码量倍数
 	DECLARE @PayMultiple INT
 	-- 	充值送打码倍数
 	DECLARE @SendMultiple INT

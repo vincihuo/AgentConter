@@ -52,6 +52,7 @@ namespace Game.IData
         OfficalBankPay GetBankPayById(int id);
         OfficalImgPay GetImgPayById(int id);
 
+        Message FinshOfficalOrder(string orderid, byte type, int masterId);
         #endregion
 
 
@@ -204,12 +205,13 @@ namespace Game.IData
         /// <param name="where"></param>
         /// <returns></returns>
         decimal GetTotalPayAmount(string where);
+        decimal GetTotalAmount(string where, string table);
         /// <summary>
         /// 按条件获取已支付订单数
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        long GetTotalPayOrderCount(string where);
+        long GetTotalPayOrderCount(string table, string where);
         /// <summary>
         /// 获取钻石统计
         /// </summary>

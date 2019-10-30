@@ -24,6 +24,7 @@ namespace Game.Web.Module.FilledManager
                 OfficalBankPay chanel = FacadeManage.aideTreasureFacade.GetBankPayById(IntParam);
                 TxtName.Text = chanel.ConfigName;
                 MerchantName.Text = chanel.MerchantName;
+                BankName.Text = chanel.BankName;
                 BankNumber.Text = chanel.BankNumber;
                 BankAddr.Text = chanel.BankAddr;
                 TexMax.Text = chanel.MaxAmount.ToString();
@@ -49,6 +50,7 @@ namespace Game.Web.Module.FilledManager
             chanel.MerchantName = MerchantName.Text;
             chanel.BankNumber = BankNumber.Text;
             chanel.BankAddr = BankAddr.Text;
+            chanel.BankName = BankName.Text;
             chanel.MinAmount = Convert.ToInt32(TexMin.Text);
             chanel.MaxAmount = Convert.ToInt32(TexMax.Text);
             chanel.Description = TexDescription.Text;
