@@ -40,7 +40,7 @@ namespace Game.Facade
         {
             AjaxJsonValid ajv = new AjaxJsonValid();
             var md5Str = Utility.MD5(signStr + "&szwhkj56dt90gfpjskdw3p4qm");
-            if (!string.IsNullOrEmpty(signData) && md5Str == signData) return ajv;
+            if (!string.IsNullOrEmpty(signData) && md5Str.ToLower() == signData.ToLower()) return ajv;
             ajv.code = (int) ApiCode.VertySignErrorCode;
             ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
             return ajv;
