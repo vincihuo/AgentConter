@@ -53,10 +53,6 @@ DECLARE @RegisterIP NVARCHAR(15)
 DECLARE @RegisterDate DATETIME
 DECLARE @RegisterMachine NVARCHAR(32)
 DECLARE @DateTime DATETIME
---¥Ú¬Î¡ø≈‰÷√
-
-
-
 -- ÷¥––¬ﬂº≠
 BEGIN
 	SET @DateTime=GETDATE()

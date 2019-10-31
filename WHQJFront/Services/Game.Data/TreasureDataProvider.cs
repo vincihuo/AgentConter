@@ -114,6 +114,16 @@ namespace Game.Data
 
             return Database.ExecuteObject<UserValidBet>(sql);
         }
+        public Message BuyDiam(int uid, int number)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("Number", number),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_GoldExchangeDiamond", prams);
+        }
 
         #endregion
 

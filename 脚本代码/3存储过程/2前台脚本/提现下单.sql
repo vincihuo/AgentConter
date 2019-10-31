@@ -75,19 +75,6 @@ BEGIN
 		SET @strErrorDescribe=N'有线上提款订单未处理'
 		RETURN 1005
 	END
-	--查询打码量
-	DECLARE @TagetValiBet BIGINT
-	DECLARE @CurreValiBet BIGINT
-	SELECT @TagetValiBet=TargetBet, @CurreValiBet=CurrentValidBet
-	FROM UserValidBet
-	WHERE UserID=@dwUserID
-	IF @CurreValiBet<@TagetValiBet
-	BEGIN
-		SET @strErrorDescribe=N'有线上提款订单未处理'
-		RETURN 1005
-	END
-
-
 	BEGIN TRAN
 	--扣钱
 	UPDATE GameScoreInfo SET Score = Score - @DrawalAmount WHERE UserID = @dwUserID

@@ -93,6 +93,11 @@ namespace Game.Facade
             return treasureData.CreatBankPayOrder(uid, cfgId, BankAcc, amount, payName, payBank, TransferType, orderID);
         }
 
+        public Message BuyDiam(int uid,int number)
+        {
+            return treasureData.BuyDiam(uid, number);
+        }
+
         #endregion
 
         #region 充值产品

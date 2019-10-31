@@ -335,7 +335,10 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-
+                    case "":
+                        _ajv.SetDataItem("apiVersion", 20191031);
+                        BuyDiam();
+                        break;
                     case "imgPay":
                         _ajv.SetDataItem("apiVersion", 20191029);
                         CreatImgPayOrder();
@@ -344,7 +347,7 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191029);
                         CreatBankPayOrder();
                         break;
-                    case "hallhotfix":
+                    case "hallhotfix": 
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetHallHotFix();
                         break;
@@ -412,7 +415,17 @@ namespace Game.Web.WS
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
-
+        private void BuyDiam()
+        {
+            int number= GameRequest.GetQueryInt("number", 0);
+            if (number <= 0)
+            {
+                _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"兑换量必须大于0");
+                return;
+            }
+            Message mm = FacadeManage.aideTreasureFacade.BuyDiam(_userid, number);
+        }
         private void CreatImgPayOrder()
         {
             int cfgID = GameRequest.GetQueryInt("cfgID", 1);
