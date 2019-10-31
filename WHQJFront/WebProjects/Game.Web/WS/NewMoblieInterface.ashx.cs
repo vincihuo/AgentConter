@@ -53,7 +53,7 @@ namespace Game.Web.WS
                     ? Convert.ToInt64(GameRequest.GetString("groupid"))
                     : 0;
                 _ajv = new AjaxJsonValid();
-                string sign = GameRequest.GetQueryString("&sign");
+                string sign = GameRequest.GetQueryString("sign");
                 string parama = context.Request.Url.Query;
                 int pos = parama.LastIndexOf("&sign=");
                 if (pos < 1)
