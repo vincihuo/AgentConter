@@ -20,7 +20,7 @@ CREATE PROCEDURE NET_PW_GoldExchangeDiamond
 WITH
     ENCRYPTION
 AS
-
+SET NOCOUNT ON
 --账号信息
 DECLARE @Nullity TINYINT
 DECLARE @BeforeScore BIGINT
@@ -38,12 +38,12 @@ BEGIN
     WHERE UserID = @dwUserID
     IF @Nullity IS NULL
 	BEGIN
-        SET @strErrorDescribe=N'抱歉！充值账号不存在！'
+        SET @strErrorDescribe=N'抱歉！账号不存在！'
         RETURN 1004
     END
     IF @Nullity=1
 	BEGIN
-        SET @strErrorDescribe=N'抱歉！充值账号已冻结状态！'
+        SET @strErrorDescribe=N'抱歉！账号已冻结状态！'
         RETURN 1005
     END
 

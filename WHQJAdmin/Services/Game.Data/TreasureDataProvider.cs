@@ -447,7 +447,6 @@ namespace Game.Data
                     .Append("WHERE ConfigID=@ConfigID");
                 sqlQuery = sql.ToString();
             }
-
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
 

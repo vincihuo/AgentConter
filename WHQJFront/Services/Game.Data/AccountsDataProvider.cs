@@ -37,14 +37,24 @@ namespace Game.Data
         {
             const string sqlQuery =
                 @"SELECT StatusValue FROM SystemStatusInfo WITH(NOLOCK) WHERE StatusName = @StatusName";
-            List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("StatusName", key)};
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("StatusName", key) };
             return Database.ExecuteObject<SystemStatusInfo>(sqlQuery, parms);
         }
 
         #endregion
 
         #region 用户信息
-
+        public Message BandingPayee(int userid,byte type, string acc)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                    Database.MakeInParam("dwUserID", userid),
+                    Database.MakeInParam("Type", type),
+                    Database.MakeInParam("Acc", acc),
+                    Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_BindPayee", prams);
+        }
         /// <summary>
         /// 用户注册
         /// </summary>
@@ -56,7 +66,6 @@ namespace Game.Data
             prams.Add(Database.MakeInParam("strSpreader", parentAccount));
             prams.Add(Database.MakeInParam("strAccounts", user.Accounts));
             prams.Add(Database.MakeInParam("strNickname", user.NickName));
-
             prams.Add(Database.MakeInParam("strLogonPass", user.LogonPass));
             prams.Add(Database.MakeInParam("strInsurePass", user.InsurePass));
             prams.Add(Database.MakeInParam("strDynamicPass", user.DynamicPass));
@@ -122,7 +131,7 @@ namespace Game.Data
         {
             const string sqlQuery =
                 @"SELECT UserID,GameID,SpreaderID,NickName,PassPortID,Compellation,FaceID,CustomID,RegisterOrigin,AgentID,RegisterIP,LastLogonIP,UnderWrite,PlaceName,UserUin,AgentID,RegisterMobile FROM AccountsInfo WITH(NOLOCK) WHERE UserID = @UserID";
-            List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("UserID", userid)};
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("UserID", userid) };
             return Database.ExecuteObject<AccountsInfo>(sqlQuery, parms);
         }
 
@@ -135,7 +144,7 @@ namespace Game.Data
         {
             const string sqlQuery =
                 @"SELECT UserID FROM AccountsInfo WITH(NOLOCK) WHERE GameID = @GameID";
-            List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("GameID", gameid)};
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("GameID", gameid) };
             object result = Database.ExecuteScalar(CommandType.Text, sqlQuery, parms.ToArray());
             return result != null ? GetAccountsInfoByUserID(Convert.ToInt32(result)) : null;
         }
@@ -163,7 +172,7 @@ namespace Game.Data
         {
             const string sqlQuery =
                 @"SELECT UserID FROM AccountsInfo WITH(NOLOCK) WHERE UserUin = @UserUin";
-            List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("UserUin", useruin)};
+            List<DbParameter> parms = new List<DbParameter> { Database.MakeInParam("UserUin", useruin) };
             object result = Database.ExecuteScalar(CommandType.Text, sqlQuery, parms.ToArray());
             return result != null ? GetAccountsInfoByUserID(Convert.ToInt32(result)) : null;
         }
@@ -249,7 +258,7 @@ namespace Game.Data
         /// <returns></returns>
         public DataSet GetMobileLoginLaterData(int userid)
         {
-            List<DbParameter> prams = new List<DbParameter> {Database.MakeInParam("dwUserID", userid)};
+            List<DbParameter> prams = new List<DbParameter> { Database.MakeInParam("dwUserID", userid) };
 
             return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_PW_GetMobileLoginLater", prams.ToArray());
         }
@@ -267,7 +276,7 @@ namespace Game.Data
         {
             const string sqlQuery = "SELECT UserID,FaceUrl FROM AccountsFace WITH(NOLOCK) WHERE ID=@ID";
 
-            List<DbParameter> prams = new List<DbParameter> {Database.MakeInParam("ID", customId)};
+            List<DbParameter> prams = new List<DbParameter> { Database.MakeInParam("ID", customId) };
 
             return Database.ExecuteObject<AccountsFace>(sqlQuery, prams);
         }
@@ -294,8 +303,8 @@ namespace Game.Data
         /// <returns></returns>
         public string GetSMSLogCount(string Mobile)
         {
-            string sql = string.Format(" select  isnull(count(id),0) from SMSLog where Mobile='{0}' and date>='{1} 00:00:00' and date<'{1} 23:59:59'", Mobile,DateTime.Now.ToShortDateString());
-            return Database.ExecuteScalarToStr(CommandType.Text,sql);
+            string sql = string.Format(" select  isnull(count(id),0) from SMSLog where Mobile='{0}' and date>='{1} 00:00:00' and date<'{1} 23:59:59'", Mobile, DateTime.Now.ToShortDateString());
+            return Database.ExecuteScalarToStr(CommandType.Text, sql);
         }
 
 
@@ -331,12 +340,12 @@ namespace Game.Data
         {
             string sql = "SELECT TOP 1 * FROM dbo.CheckCode WHERE PhoneNum=@Mobile AND GETDATE()<DATEADD(MINUTE,@Minute,CollectTime) ORDER BY CollectTime DESC ";
 
-            DbParameter[] prams =new DbParameter[]
+            DbParameter[] prams = new DbParameter[]
             {
                 Database.MakeInParam("Mobile", mobile),
                 Database.MakeInParam("Minute",minute)
             };
-            DataSet ds= Database.ExecuteDataset(CommandType.Text, sql, prams);
+            DataSet ds = Database.ExecuteDataset(CommandType.Text, sql, prams);
             return ds.Tables[0].Rows.Count <= 0;
         }
 

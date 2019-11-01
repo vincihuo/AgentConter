@@ -22,6 +22,7 @@ namespace Game.IData
         #endregion
 
         #region 用户信息
+        Message BandingPayee(int userId,byte type, string acc);
         /// <summary>
         /// 用户注册
         /// </summary>

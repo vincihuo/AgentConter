@@ -53,22 +53,24 @@ namespace Game.Web.WS
                     ? Convert.ToInt64(GameRequest.GetString("groupid"))
                     : 0;
                 _ajv = new AjaxJsonValid();
-                string sign = GameRequest.GetQueryString("sign");
-                string parama = context.Request.Url.Query;
-                int pos = parama.LastIndexOf("&sign=");
-                if (pos < 1)
-                {
-                    _ajv.code = (int)ApiCode.VertySignErrorCode;
-                    _ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
-                    return;
-                }
-                parama= parama.Substring(0,pos);
-                _ajv=Fetch.VerifySignData(parama, sign);
-                if (_ajv.code == (int)ApiCode.VertySignErrorCode)
-                {
-                    context.Response.Write(_ajv.SerializeToJson());
-                    return;
-                }
+
+                //string sign = GameRequest.GetQueryString("sign");
+                //string parama = context.Request.Url.Query;
+                //int pos = parama.LastIndexOf("&sign=");
+                //if (pos < 1)
+                //{
+                //    _ajv.code = (int)ApiCode.VertySignErrorCode;
+                //    _ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
+                //    return;
+                //}
+
+                //parama = parama.Substring(0, pos);
+                //_ajv = Fetch.VerifySignData(parama, sign);
+                //if (_ajv.code == (int)ApiCode.VertySignErrorCode)
+                //{
+                //    context.Response.Write(_ajv.SerializeToJson());
+                //    return;
+                //}
 
 
                 //参数验证
@@ -106,9 +108,11 @@ namespace Game.Web.WS
                         //_ajv.SetDataItem("apiVersion", 20171028);
                         ////获取参数
                         //GetPayProduct(typeid);
+                        _ajv.SetDataItem("apiVersion", 20191101);
+                        BinDingPayee();
 
-                        _ajv.SetDataItem("apiVersion", 20191029);
-                        CreatBankPayOrder();
+                        //_ajv.SetDataItem("apiVersion", 20191029);
+                        //CreatBankPayOrder();
                         break;
 
                     //领取推广有效好友奖励
@@ -331,11 +335,15 @@ namespace Game.Web.WS
                         //获取参数
                         GetPayList(typeid);
                         break;
+                    case "BinDingPayee":
+                        _ajv.SetDataItem("apiVersion", 20191101);
+                        BinDingPayee();
+                        break;
                     case "withdrawal":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-                    case "":
+                    case "buyDiam":
                         _ajv.SetDataItem("apiVersion", 20191031);
                         BuyDiam();
                         break;
@@ -347,7 +355,7 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191029);
                         CreatBankPayOrder();
                         break;
-                    case "hallhotfix": 
+                    case "hallhotfix":
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetHallHotFix();
                         break;
@@ -378,6 +386,16 @@ namespace Game.Web.WS
             context.Response.End();
         }
 
+        private void BinDingPayee()
+        {
+            int type = GameRequest.GetQueryInt("type", 0);
+            string acc = GameRequest.GetQueryString("account");
+            acc = "51343545464846464646";
+            type = 5;
+            Message mm = FacadeManage.aideAccountsFacade.BandingPayee(_userid, (byte)type, acc);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
+        }
         private void WithDrawal()
         {
             int drawalType = GameRequest.GetQueryInt("drawalType", 1);
@@ -417,7 +435,7 @@ namespace Game.Web.WS
         }
         private void BuyDiam()
         {
-            int number= GameRequest.GetQueryInt("number", 0);
+            int number = GameRequest.GetQueryInt("number", 0);
             if (number <= 0)
             {
                 _ajv.code = (int)ApiCode.VertyParamErrorCode;
@@ -425,6 +443,8 @@ namespace Game.Web.WS
                 return;
             }
             Message mm = FacadeManage.aideTreasureFacade.BuyDiam(_userid, number);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
         }
         private void CreatImgPayOrder()
         {
@@ -432,7 +452,7 @@ namespace Game.Web.WS
             string payLink = GameRequest.GetQueryString("payLink");
             int amount = GameRequest.GetQueryInt("amount", 0);
             string payName = GameRequest.GetQueryString("payName");
-            string orderID= Fetch.GetOrderIDByPrefix("QRPay");
+            string orderID = Fetch.GetOrderIDByPrefix("QRPay");
             Message mm = FacadeManage.aideTreasureFacade.CreatImgPayOrder(_userid, cfgID, payLink, amount, payName, orderID);
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
@@ -619,9 +639,13 @@ namespace Game.Web.WS
             // 获取排行榜奖励配置 上210需注释
             IList<RankingConfig> rankconfig =
                 DataHelper.ConvertDataTableToObjects<RankingConfig>(ds.Tables[6]);
+            //获取提现
+
+            ConfigInfo drawalConfig=FacadeManage.aideNativeWebFacade.GetConfigInfo("");
 
             //输出信息
             _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("drawalConfig", drawalConfig);
             _ajv.SetDataItem("sharelink", shareLink);
             _ajv.SetDataItem("U3DShareLink", U3DShareLink);
             _ajv.SetDataItem("hasGrant", grantDiamond > 0 || grantGold > 0);
@@ -666,12 +690,14 @@ namespace Game.Web.WS
                     _ajv.SetValidDataValue(true);
                     _ajv.SetDataItem("list", list2);
                     break;
-
-
-
+                case 4:
+                    IList<OnLineWeChat> list3 = FacadeManage.aideTreasureFacade.GetOnLineWeChatList();
+                    _ajv.SetValidDataValue(true);
+                    _ajv.SetDataItem("List", list3);
+                    break;
             }
-            
-   
+
+
         }
         /// <summary>
         /// 获取充值产品列表
@@ -686,7 +712,6 @@ namespace Game.Web.WS
             bool flag = (table != null && table.Rows.Count == 0);
             //获取充值产品列表
             IList<AppPayConfigMoile> list = DataHelper.ConvertDataTableToObjects<AppPayConfigMoile>(ds.Tables[1]);
-
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", list);
         }

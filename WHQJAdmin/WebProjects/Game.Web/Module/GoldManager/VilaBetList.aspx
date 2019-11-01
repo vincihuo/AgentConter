@@ -86,7 +86,7 @@
                                 <%# Eval("DepositTime")%>
                             </td>
                             <td>
-                                <%# Eval("DepositType")%>
+                                <%#  DepositName(Convert.ToInt32(Eval("DepositType")))%>
                             </td>
                             <td>
                                 <%# Eval("LastValiBet")%>

@@ -45,6 +45,11 @@ namespace Game.Facade
         #endregion
 
         #region 用户信息
+        public Message BandingPayee(int userid, byte type, string acc)
+        {
+            return accountsData.BandingPayee(userid, type, acc);
+        }
+
         /// <summary>
         /// 用户注册
         /// </summary>
@@ -91,7 +96,7 @@ namespace Game.Facade
         /// <returns></returns>
         public int GetGameIDByUserID(int userid)
         {
-            return GetAccountsInfoByUserID(userid)?.GameID??0;
+            return GetAccountsInfoByUserID(userid)?.GameID ?? 0;
         }
         /// <summary>
         /// 根据账号获取用户信息

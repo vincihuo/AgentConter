@@ -53,7 +53,6 @@ namespace Game.Facade
         }
         #endregion
 
-
         #region 帅逼接口
         public IList<OnlinePayConfig> GetOnlinePayList()
         {

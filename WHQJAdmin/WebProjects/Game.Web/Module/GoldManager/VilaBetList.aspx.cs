@@ -37,7 +37,23 @@ namespace Game.Web.Module.GoldManager
             SetUerBet();
             SetCondition();
             ShareInfoDataBind();
+        }
 
+        protected string DepositName(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return "线上入款";
+                case 2:
+                    return "官方入款";
+                case 3:
+                    return "代理入款";
+                case 4:
+                    return "每日分享";
+                default:
+                    return "未知类型";
+            }
         }
 
         private void ShareInfoDataBind()
