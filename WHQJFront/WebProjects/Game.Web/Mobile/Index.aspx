@@ -20,7 +20,7 @@
             <img src="<%= Mobilebg %>" class="ui-bg"/>
             <img src="<%= Mobilelogo %>" class="ui-logo" />
             <img src="<%= MobileQrcode %>" class="ui-qrcode" />
-            <a id ="ui-btn" href="<%= PlatformDownloadUrl %>" class="ui-btn"><img src="<%= Mobiledown %>" /></a>
+            <a id ="ui-btn" class="ui-btn"><img src="<%= Mobiledown %>" /></a>
             <img src="<%= MobileCase %>" class="ui-product" />
           </div>
 

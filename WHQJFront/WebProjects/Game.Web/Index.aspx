@@ -25,7 +25,7 @@
     <img src="<%= Mobilebg %>" class="ui-bg" alt=""/>
     <img src="<%= Mobilelogo %>" class="ui-logo" alt=""/>
     <img src="<%= MobileQrcode %>" class="ui-qrcode" alt=""/>
-    <a id="ui-btn" href="<%= PlatformDownloadUrl %>" class="ui-btn">
+    <a id="ui-btn" class="ui-btn">
        <img src="<%= Mobiledown %>" alt=""/>
     </a>
     <img src="<%= MobileCase %>" class="ui-product" alt=""/>
