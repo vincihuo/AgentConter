@@ -39,7 +39,8 @@ namespace Game.Facade
         public static AjaxJsonValid VerifySignData(string signStr, string signData)
         {
             AjaxJsonValid ajv = new AjaxJsonValid();
-            if (!string.IsNullOrEmpty(signData) && Utility.MD5(signStr) == signData) return ajv;
+            var md5Str = Utility.MD5(signStr + "&szwhkj56dt90gfpjskdw3p4qm");
+            if (!string.IsNullOrEmpty(signData) && md5Str.ToLower() == signData.ToLower()) return ajv;
             ajv.code = (int) ApiCode.VertySignErrorCode;
             ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
             return ajv;
