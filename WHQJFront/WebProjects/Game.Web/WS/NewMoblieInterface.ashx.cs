@@ -11,11 +11,10 @@ using Game.Kernel;
 using Game.Entity.Platform;
 using Game.Web.Helper;
 using System.Data;
-using System.Linq;
 using Game.Entity.Accounts;
-using Game.Entity.Group;
 using System.Text.RegularExpressions;
 using Game.Entity.Agent;
+using System.Media;
 
 namespace Game.Web.WS
 {
@@ -30,7 +29,7 @@ namespace Game.Web.WS
         private int _userid;
         private string _device;
         private long _groupid;
-
+        private SoundPlayer sound;
         /// <summary>
         /// 统一处理入口（主要验证）
         /// </summary>
@@ -71,6 +70,7 @@ namespace Game.Web.WS
                 //    context.Response.Write(_ajv.SerializeToJson());
                 //    return;
                 //}
+               // SoundPlayer sound = new SoundPlayer();
 
 
                 //参数验证
@@ -330,28 +330,33 @@ namespace Game.Web.WS
 
                     #region 最帅的写的接口
                     //获取线上充值列表
-                    case "getonlinepay":
+                    case "paylist":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
                         GetPayList(typeid);
                         break;
-                    case "BinDingPayee":
+                    case "bindingpayee":
                         _ajv.SetDataItem("apiVersion", 20191101);
                         BinDingPayee();
                         break;
+                    case "getvilabet":
+                        _ajv.SetDataItem("apiVersion", 20191101);
+                        GetVilaBet();
+                        break;
+
                     case "withdrawal":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
                         break;
-                    case "buyDiam":
+                    case "buydiam":
                         _ajv.SetDataItem("apiVersion", 20191031);
                         BuyDiam();
                         break;
-                    case "imgPay":
+                    case "imgpay":
                         _ajv.SetDataItem("apiVersion", 20191029);
                         CreatImgPayOrder();
                         break;
-                    case "bankPay":
+                    case "bankpay":
                         _ajv.SetDataItem("apiVersion", 20191029);
                         CreatBankPayOrder();
                         break;
@@ -390,12 +395,18 @@ namespace Game.Web.WS
         {
             int type = GameRequest.GetQueryInt("type", 0);
             string acc = GameRequest.GetQueryString("account");
-            acc = "51343545464846464646";
-            type = 5;
             Message mm = FacadeManage.aideAccountsFacade.BandingPayee(_userid, (byte)type, acc);
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
+        private void GetVilaBet()
+        {
+            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("tagVilaBet", validBet.TargetBet);
+            _ajv.SetDataItem("currVilaBet", validBet.CurrentValidBet);
+        }
+
         private void WithDrawal()
         {
             int drawalType = GameRequest.GetQueryInt("drawalType", 1);

@@ -1,11 +1,8 @@
 ﻿using System;
 using Game.Web.UI;
-using System.Text;
 using Game.Kernel;
-using Game.Utils;
 using Game.Facade;
 using Game.Entity.Treasure;
-using System.Web.UI.WebControls;
 
 namespace Game.Web.Module.DrawalManager
 {
@@ -23,10 +20,10 @@ namespace Game.Web.Module.DrawalManager
         {
             DrawalOrder order = FacadeManage.aideTreasureFacade.GetOrderById(StrParam);
             TxtOrderId.Text = order.OrderID;
-            TxtAmount.Text = order.Amount.ToString();
+            TxtAmount.Text = FacadeManage.ConversionMoneyToShow((long)order.Amount).ToString();
             TxtGameID.Text = order.GameID.ToString();
             TxtMasterID.Text = order.MasterID.ToString();
-            TxtOrderCost.Text = order.OrderCost.ToString();
+            TxtOrderCost.Text = FacadeManage.ConversionMoneyToShow((long)order.OrderCost).ToString();
             TxtCurrTime.Text = order.CurrentTime.ToString();
             TxtDealTime.Text = order.DealTime.ToString();
             IP.Text = order.IP;
@@ -39,7 +36,7 @@ namespace Game.Web.Module.DrawalManager
                 TextState.Text = order.OrderState == 1 ? "同意" : "拒绝";
                 BtnN.Visible = BtnY.Visible = false;
             }
-            TxtDrawalType.Text = order.drawalType == 1 ? "微信" : "支付宝";
+            TxtDrawalType.Text = order.drawalType == 1 ? "支付宝" : "银行卡";
         }
 
         protected void OnBtnY(object sender, EventArgs e)

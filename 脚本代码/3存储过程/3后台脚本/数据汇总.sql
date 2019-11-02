@@ -71,15 +71,13 @@ BEGIN
 
 	-- 游戏币信息
 	SELECT @Score=ISNULL(SUM(Score),0),@InsureScore=ISNULL(SUM(InsureScore),0) FROM GameScoreInfo(NOLOCK) 
-	SELECT @PayScore=ISNULL(SUM(Score),0),@PayScoreAmount=ISNULL(SUM(Amount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND ScoreType=0 AND OrderStatus>0
-
+	SELECT @PayScore=ISNULL(SUM(Amount),0),@PayScoreAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates>0
 	-- 钻石信息
-	SELECT @Diamond=ISNULL(SUM(Diamond),0) FROM UserCurrency(NOLOCK) 
-	SELECT @PayDiamond=ISNULL(SUM(Score),0),@PayDiamondAmount=ISNULL(SUM(Amount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND ScoreType=1 AND OrderStatus>0
+	SELECT @Diamond=ISNULL(SUM(Diamond),0) FROM UserCurrency(NOLOCK)
 
 	-- 充值信息
-	SELECT @Amount=ISNULL(SUM(Amount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND OrderStatus>0
-	SELECT @TotalAmount=ISNULL(SUM(Amount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderStatus>0
+	SELECT @Amount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates>0
+	SELECT @TotalAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderStates>0
 
 	-- 税收信息
 	SELECT @TotalRevenue=ISNULL(SUM(Revenue),0),@TotalWaste=ISNULL(SUM(Waste),0) FROM RecordDrawInfo(NOLOCK)

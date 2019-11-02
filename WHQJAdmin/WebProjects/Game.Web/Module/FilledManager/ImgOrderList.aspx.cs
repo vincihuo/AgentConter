@@ -40,7 +40,8 @@ namespace Game.Web.Module.FilledManager
                  SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            ltTotal.Text = $"已充值金额：{FacadeManage.aideTreasureFacade.GetTotalAmount(ImgPayOrder.Tablename, SearchItems)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(OnLinePayOrder.Tablename, SearchItems)} (当前条件统计)";
+            long mm =(long)FacadeManage.aideTreasureFacade.GetTotalAmount(ImgPayOrder.Tablename, SearchItems);
+            ltTotal.Text = $"已充值金额：{FacadeManage.ConversionMoneyToShow(mm)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(OnLinePayOrder.Tablename, SearchItems)} (当前条件统计)";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
         }

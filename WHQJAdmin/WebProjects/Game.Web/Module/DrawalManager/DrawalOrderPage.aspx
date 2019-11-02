@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DrawalOrderPage.aspx.cs" Inherits="Game.Web.Module.DrawalManager.DrawalOrderPage" %>
 
+<%@ Import Namespace="Game.Facade" %>
 <%@ Import Namespace="Game.Utils" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -111,14 +112,14 @@
                                 <%# Eval("GameID")%>
                             </td>
                             <td>
-                                <%# Eval("Amount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("Amount").ToString())%>  
                             </td>
 
                             <td>
-                                <%# Eval("OrderCost")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("OrderCost").ToString())%>
                             </td>
 
-                             <td>
+                            <td>
                                 <%#GetDorawalType(Convert.ToInt32(Eval("DrawalType")))%>
                             </td>
 

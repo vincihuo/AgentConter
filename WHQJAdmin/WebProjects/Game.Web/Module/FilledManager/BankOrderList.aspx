@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BankOrderList.aspx.cs" Inherits="Game.Web.Module.FilledManager.BankOrderList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -123,10 +123,10 @@
                                 </a>
                             </td>
                             <td>
-                                <%# Eval("Amount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("Amount").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("PresentScore")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("PresentScore").ToString())%>
                             </td>
                             <td>
                                 <%# Eval("PayBank")%>

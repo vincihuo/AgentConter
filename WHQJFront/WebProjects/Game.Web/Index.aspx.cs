@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Configuration;
 using Game.Facade;
 using Game.Entity.NativeWeb;
-using Game.Utils;
 using System.Web.UI.HtmlControls;
 using System.Web;
+using System.Web.UI;
 
 namespace Game.Web
 {
@@ -28,7 +27,6 @@ namespace Game.Web
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-
             if (Fetch.GetTerminalType(Page.Request) != 0)
             {
                 Response.Redirect("/Mobile/Index.aspx");
@@ -58,7 +56,7 @@ namespace Game.Web
                 IList<ConfigInfo> list = FacadeManage.aideNativeWebFacade.GetConfigInfoList();
                 foreach (var item in list)
                 {
-                    if(item.ConfigKey == AppConfig.SiteConfigKey.MobilePlatformVersion.ToString())
+                    if (item.ConfigKey == AppConfig.SiteConfigKey.MobilePlatformVersion.ToString())
                     {
                         PlatformDownloadUrl = terminalType == 2 ? item.Field5 : item.Field6;
                     }

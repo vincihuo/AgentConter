@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecordPayDiamond.aspx.cs" Inherits="Game.Web.Module.FilledManager.RecordPayDiamond" %>
 
-<%@ Import Namespace="Game.Utils" %>
+<%@ Import Namespace="Game.Facade" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -130,14 +130,15 @@
                                     <%# Eval("NickName")%>
                                 </a>
                             </td>
+
                             <td>
-                                <%# Eval("Amount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("Amount").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("PayAmount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("PayAmount").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("PresentScore")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("PresentScore").ToString())%>
                             </td>
                             <td>
                                 <%#  GetPayStatus(Convert.ToInt32(Eval("OrderStates")))%>

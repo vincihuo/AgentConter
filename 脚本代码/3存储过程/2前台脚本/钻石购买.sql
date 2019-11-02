@@ -105,15 +105,15 @@ BEGIN
         RETURN 2004
     END
     --写兑换记录
-    -- INSERT INTO WHQJRecordDB.DBO.RecordCurrencyExch
-    --     (UserID,TypeID,CurDiamond,ExchDiamond,CurScore,CurInsureScore,PresentGold,ClientIP,CollectDate)
-    -- VALUES(@dwUserID, 0, @BeforeDiamond, @Number, @BeforeScore, @BeforeInsure, 0, '0.0.0.0', GETDATE())
-    -- IF @@ROWCOUNT<=0
-	-- BEGIN
-    --     SET @strErrorDescribe=N'抱歉，购买异常，请稍后重试'
-    --     ROLLBACK TRAN
-    --     RETURN 2005
-    -- END
+    INSERT INTO WHQJRecordDB.DBO.RecordCurrencyExch
+        (UserID,TypeID,CurDiamond,ExchDiamond,CurScore,CurInsureScore,PresentGold,ClientIP,CollectDate)
+    VALUES(@dwUserID, 0, @BeforeDiamond, @Number, @BeforeScore, @BeforeInsure, 0, '0.0.0.0', GETDATE())
+    IF @@ROWCOUNT<=0
+	BEGIN
+        SET @strErrorDescribe=N'抱歉，购买异常，请稍后重试'
+        ROLLBACK TRAN
+        RETURN 2005
+    END
     --写钻石记录
     INSERT INTO WHQJRecordDB.dbo.RecordDiamondSerial
         (SerialNumber,MasterID,UserID,TypeID,CurDiamond,ChangeDiamond,ClientIP,CollectDate)

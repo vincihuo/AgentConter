@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ImgOrderList.aspx.cs" Inherits="Game.Web.Module.FilledManager.ImgOrderList" %>
 
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <head runat="server">
@@ -128,10 +129,10 @@
                                 </a>
                             </td>
                             <td>
-                                <%# Eval("Amount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("Amount").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("PresentScore")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("PresentScore").ToString())%>
                             </td>
                             <td>
                                 <%#  GetPayStatus(Convert.ToInt32(Eval("OrderStates")))%>

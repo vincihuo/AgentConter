@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountsGoldList.aspx.cs" Inherits="Game.Web.Module.GoldManager.AccountsGoldList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -102,13 +102,13 @@
                         onmouseout="this.style.backgroundColor=currentcolor">
                         <%# GetAccountsInfo(Convert.ToInt32(Eval("UserID")))  %>
                         <td>
-                            <%# Convert.ToInt64( Eval( "Score" ) ).ToString( "N0" )%>
+                            <%# FacadeManage.ConversionMoneyToShow(Eval( "Score" ).ToString())%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "InsureScore" ) ).ToString( "N0" )%>
+                            <%# FacadeManage.ConversionMoneyToShow(Eval( "InsureScore" ).ToString())%>
                         </td>
                         <td>
-                            <%# (long.Parse( Eval( "InsureScore" ).ToString() ) + long.Parse( Eval( "Score" ).ToString() ) ).ToString( "N0" )%>
+                            <%#  FacadeManage.ConversionMoneyToShow((long.Parse( Eval( "InsureScore" ).ToString() ) + long.Parse( Eval( "Score" ).ToString() ) ))%>
                         </td>
                         <td>
                             <%# Eval( "Revenue" ).ToString( )%>
