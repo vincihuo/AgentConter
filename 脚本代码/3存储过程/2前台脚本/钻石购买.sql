@@ -54,6 +54,9 @@ BEGIN
         SET @strErrorDescribe=N'购买时请离开游戏房间'
         RETURN 1003
     END
+    
+    DECLARE @Cost BIGINT
+    SET @Cost = @Number*1000
 
     --获取用户金额
     SELECT @BeforeScore = Score, @BeforeInsure=InsureScore
@@ -69,7 +72,7 @@ BEGIN
         SET @BeforeInsure =0
     END
 
-    IF @Number>@BeforeScore
+    IF @Cost>@BeforeScore
     BEGIN
         SET @strErrorDescribe=N'抱歉！金币不足！'
         RETURN 1006
@@ -89,7 +92,7 @@ BEGIN
 
     BEGIN TRAN
     --减金币
-    UPDATE GameScoreInfo SET Score = Score - @Number WHERE UserID = @dwUserID
+    UPDATE GameScoreInfo SET Score = Score - @Cost WHERE UserID = @dwUserID
     IF @@ROWCOUNT<>1
 	BEGIN
         SET @strErrorDescribe=N'抱歉，购买异常，请稍后重试'
@@ -127,7 +130,7 @@ BEGIN
     --金币流水
     INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
         (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-    VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 5, @BeforeScore, @BeforeInsure, -@Number, '0.0.0.0', GETDATE())
+    VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 5, @BeforeScore, @BeforeInsure, -@Cost, '0.0.0.0', GETDATE())
     IF @@ROWCOUNT<=0
 	BEGIN
         SET @strErrorDescribe=N'抱歉，购买异常，请稍后重试'
@@ -150,7 +153,7 @@ BEGIN
         SET @CVileBet =0
     END
     SET @Spli=0
-    SET @CVileBet+=@Number
+    SET @CVileBet+=@Cost
     IF @CVileBet>@TVileBet
     BEGIN
         SET @Spli=@CVileBet-@TVileBet
