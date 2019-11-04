@@ -51,6 +51,10 @@ namespace Game.Web.Module.GoldManager
                     return "代理入款";
                 case 4:
                     return "每日分享";
+                case 5:
+                    return "注册送";
+                case 6:
+                    return "签到奖励";
                 default:
                     return "未知类型";
             }

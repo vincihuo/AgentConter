@@ -39,10 +39,22 @@ namespace Game.Facade
                     sb.AppendFormat("\"appkey\":\"{0}\",", AppKey_IOS);
                     sb.AppendFormat("\"timestamp\":\"{0}\",", timestamp);
                     sb.AppendFormat("\"type\":\"{0}\",", SendType);
+                    if(SendType != "broadcast")
+                    {
+                        sb.AppendFormat("\"device_tokens\":\"{0}\",", token);
+                    }
                     sb.Append("\"payload\":{");
                     sb.Append("\"aps\":{");
                     sb.AppendFormat("\"alert\":\"{0}\"", Text);
                     sb.Append("}");
+                    sb.Append("},");
+                    sb.Append("\"policy\":{");
+                    sb.AppendFormat("\"start_time\":\"{0}\",", startTime);
+                    sb.AppendFormat("\"expire_time\":\"{0}\",", endTime);
+                    sb.Append("},");
+                    sb.Append("\"policy\":{");
+                    sb.AppendFormat("\"start_time\":\"{0}\",", startTime);
+                    sb.AppendFormat("\"expire_time\":\"{0}\",", endTime);
                     sb.Append("},");
                     sb.AppendFormat("\"production_mode\":\"{0}\",", UmengProductionMode);
                     sb.AppendFormat("\"description\":\"{0}\"", Text);
@@ -66,10 +78,10 @@ namespace Game.Facade
                     sb.AppendFormat("\"after_open\":\"{0}\"", "go_app");
                     sb.Append("}");
                     sb.Append("},");
-                    //sb.Append("\"policy\":{");
-                    //sb.AppendFormat("\"start_time\":\"{0}\",", startTime);
-                    //sb.AppendFormat("\"expire_time\":\"{0}\",", endTime);
-                    //sb.Append("},");
+                    sb.Append("\"policy\":{");
+                    sb.AppendFormat("\"start_time\":\"{0}\",", startTime);
+                    sb.AppendFormat("\"expire_time\":\"{0}\",", endTime);
+                    sb.Append("},");
                     sb.AppendFormat("\"production_mode\":\"{0}\",", UmengProductionMode);
                     sb.AppendFormat("\"description\":\"{0}\"", Text);
                     sb.Append("}");

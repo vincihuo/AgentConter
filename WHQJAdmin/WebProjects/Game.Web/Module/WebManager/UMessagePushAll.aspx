@@ -44,12 +44,9 @@
                 <td>
                     <asp:DropDownList ID="ddlType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlType_SelectedIndexChanged">
                         <asp:ListItem Text="全部用户" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="代理商用户" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="普通用户" Value="2"></asp:ListItem>
                         <asp:ListItem Text="安卓用户" Value="3"></asp:ListItem>
                         <asp:ListItem Text="苹果用户" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="注册时间" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="未登录天数" Value="6"></asp:ListItem>
+
                     </asp:DropDownList>
                 </td>
             </tr>

@@ -61,7 +61,6 @@ namespace Game.Web.Module.WebManager
                     return;
                 }
                 DateTime endTime = time.AddHours(5);
-                IList<AccountsUmeng> list = new List<AccountsUmeng>();
                 if(typeID == 0)
                 {
                     bool flag = false;
@@ -77,7 +76,6 @@ namespace Game.Web.Module.WebManager
                         MessageBox("推送消息失败，请前往友盟后台绑定系统后台ip");
                         return;
                     }
-                    list = FacadeManage.aideAccountsFacade.GetAccountsUmengList("");
                 }
                 else
                 {
@@ -86,134 +84,25 @@ namespace Game.Web.Module.WebManager
                     switch(typeID)
                     {
                         case 1:
-                            int gameid = CtrlHelper.GetInt(txtGameID, 0);
-                            if(gameid != 0)
+                            flag = Umeng.SendMessage(0, content, "broadcast", time.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), "");
+                            if (!flag)
                             {
-                                AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(gameid);
-                                if(info == null)
-                                {
-                                    MessageBox("推送消息失败，代理商游戏id不存在");
-                                    return;
-                                }
-                                if(info.AgentID <= 0)
-                                {
-                                    MessageBox("推送消息失败，游戏id为非代理商");
-                                    return;
-                                }
-                                where = "WHERE UserID IN(SELECT UserID FROM AccountsInfo WHERE SpreaderID=" + info.UserID.ToString() + ")";
-                            }
-                            else
-                            {
-                                where = "WHERE UserID IN(SELECT UserID FROM AccountsInfo WHERE AgentID>0)";
+                                MessageBox("推送消息失败，请前往友盟后台绑定系统后台ip");
+                                return;
                             }
                             break;
                         case 2:
-                            where = "WHERE UserID IN(SELECT UserID FROM AccountsInfo WHERE AgentID=0)";
-                            break;
-                        case 3:
-                            where = "WHERE DeviceType=0";
-                            break;
-                        case 4:
-                            where = "WHERE DeviceType=1";
-                            break;
-                        case 5:
-                            string start = CtrlHelper.GetText(txtStartDate);
-                            string end = CtrlHelper.GetText(txtEndDate);
-                            if(!string.IsNullOrEmpty(start) && !string.IsNullOrEmpty(end))
+                            flag = Umeng.SendMessage(1, content, "broadcast", time.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), "");
+                            if (!flag)
                             {
-                                where = "WHERE UserID IN(SELECT UserID FROM AccountsInfo WHERE RegisterDate BETWEEN '" + start + "' AND '" + end + "')";
-                            }
-                            else
-                            {
-                                where = "WHERE 1=1";
-                            }
-                            break;
-                        case 6:
-                            int nologin = CtrlHelper.GetInt(txtNoLoginDay, 0);
-                            if(nologin > 0)
-                            {
-                                where = "WHERE DATEDIFF(DAY,UpdateTime,GETDATE())>=" + nologin.ToString();
-                            }
-                            else
-                            {
-                                where = "WHERE 1=1";
+                                MessageBox("推送消息失败，请前往友盟后台绑定系统后台ip");
+                                return;
                             }
                             break;
                         default:
                             break;
                     }
-                    list = FacadeManage.aideAccountsFacade.GetAccountsUmengList(where);
-                    if(list == null || list.Count <= 0)
-                    {
-                        MessageBox("推送用户未绑定设备，无法推送");
-                        return;
-                    }
-
-                    //获取安卓用户
-                    IList<AccountsUmeng> android = list.Where(a => a.DeviceType == 0).ToList<AccountsUmeng>();
-                    if(android != null && android.Count > 0)
-                    {
-                        StringBuilder android_sb = new StringBuilder();
-                        int i = 1, j = 1;
-                        string android_tokens = string.Empty;
-                        foreach(AccountsUmeng item in android)
-                        {
-                            if(!string.IsNullOrEmpty(item.DeviceToken))
-                            {
-                                android_sb.AppendFormat("{0},", item.DeviceToken);
-                            }
-
-                            if(i == 400 || j == android.Count)
-                            {
-                                android_tokens = android_sb.ToString();
-                                android_tokens = android_tokens.Substring(0, (android_tokens.Length - 1));
-                                flag = Umeng.SendMessage(0, content, "listcast", time.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), android_tokens);
-                                if(!flag)
-                                {
-                                    MessageBox("推送消息失败，请前往友盟后台绑定系统后台ip");
-                                    return;
-                                }
-                                i = 0;
-                                android_sb = new StringBuilder();
-                                android_tokens = string.Empty;
-                            }
-                            i++;
-                            j++;
-                        }
-                    }
-
-                    //获取苹果用户
-                    IList<AccountsUmeng> iphone = list.Where(a => a.DeviceType == 1).ToList<AccountsUmeng>();
-                    if(iphone != null & iphone.Count > 0)
-                    {
-                        StringBuilder iphone_sb = new StringBuilder();
-                        int i = 1, j = 1;
-                        string iphone_tokens = string.Empty;
-                        foreach(AccountsUmeng item in iphone)
-                        {
-                            if(!string.IsNullOrEmpty(item.DeviceToken))
-                            {
-                                iphone_sb.AppendFormat("{0},", item.DeviceToken);
-                            }
-
-                            if(i == 500 || j == iphone.Count)
-                            {
-                                iphone_tokens = iphone_sb.ToString();
-                                iphone_tokens = iphone_tokens.Substring(0, (iphone_tokens.Length - 1));
-                                flag = Umeng.SendMessage(1, content, "listcast", time.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"), iphone_tokens);
-                                if(!flag)
-                                {
-                                    MessageBox("推送消息失败，请前往友盟后台绑定系统后台ip");
-                                    return;
-                                }
-                                i = 0;
-                                iphone_sb = new StringBuilder();
-                                iphone_tokens = string.Empty;
-                            }
-                            i++;
-                            j++;
-                        }
-                    }
+         
                 }
 
                 //批量写入记录
@@ -240,18 +129,6 @@ namespace Game.Web.Module.WebManager
                 dr[5] = addTime;
                 dr[6] = ip;
                 table.Rows.Add(dr);
-                //for (int i = 0; i < list.Count; i++)
-                //{
-                //    DataRow dr = table.NewRow();
-                //    dr[0] = 0;
-                //    dr[1] = masterid;
-                //    dr[2] = list[i].UserID;
-                //    dr[3] = list[i].DeviceType;
-                //    dr[4] = content;
-                //    dr[5] = addTime;
-                //    dr[6] = ip;
-                //    table.Rows.Add(dr);
-                //}
                 int result = FacadeManage.aideRecordFacade.AddRecordAccountsUmeng(table, connStr);
                 if(result > 0)
                 {
