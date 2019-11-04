@@ -37,7 +37,7 @@ namespace Game.Facade
                     //苹果参数集合体
                     sb.Append("{");
                     sb.AppendFormat("\"appkey\":\"{0}\",", AppKey_IOS);
-                    sb.AppendFormat("\"timestamp\":{0},", timestamp);
+                    sb.AppendFormat("\"timestamp\":\"{0}\",", timestamp);
                     sb.AppendFormat("\"type\":\"{0}\",", SendType);
                     if(SendType != "broadcast")
                     {
@@ -62,7 +62,7 @@ namespace Game.Facade
                     //安卓参数集合体
                     sb.Append("{");
                     sb.AppendFormat("\"appkey\":\"{0}\",", AppKey_Android);
-                    sb.AppendFormat("\"timestamp\":{0},", timestamp);
+                    sb.AppendFormat("\"timestamp\":\"{0}\",", timestamp);
                     sb.AppendFormat("\"type\":\"{0}\",", SendType);
                     if(SendType != "broadcast")
                     {

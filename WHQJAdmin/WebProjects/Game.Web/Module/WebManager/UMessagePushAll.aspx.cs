@@ -231,18 +231,27 @@ namespace Game.Web.Module.WebManager
                 DateTime addTime = DateTime.Now;
                 string ip = GameRequest.GetUserIP();
                 string connStr = ApplicationSettings.Get("DBRecord");
-                for(int i = 0; i < list.Count; i++)
-                {
-                    DataRow dr = table.NewRow();
-                    dr[0] = 0;
-                    dr[1] = masterid;
-                    dr[2] = list[i].UserID;
-                    dr[3] = list[i].DeviceType;
-                    dr[4] = content;
-                    dr[5] = addTime;
-                    dr[6] = ip;
-                    table.Rows.Add(dr);
-                }
+                DataRow dr = table.NewRow();
+                dr[0] = 0;
+                dr[1] = masterid;
+                dr[2] = 0;
+                dr[3] = 0;
+                dr[4] = content;
+                dr[5] = addTime;
+                dr[6] = ip;
+                table.Rows.Add(dr);
+                //for (int i = 0; i < list.Count; i++)
+                //{
+                //    DataRow dr = table.NewRow();
+                //    dr[0] = 0;
+                //    dr[1] = masterid;
+                //    dr[2] = list[i].UserID;
+                //    dr[3] = list[i].DeviceType;
+                //    dr[4] = content;
+                //    dr[5] = addTime;
+                //    dr[6] = ip;
+                //    table.Rows.Add(dr);
+                //}
                 int result = FacadeManage.aideRecordFacade.AddRecordAccountsUmeng(table, connStr);
                 if(result > 0)
                 {

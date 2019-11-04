@@ -853,7 +853,7 @@ namespace Game.Web.WS
         }
 
         /// <summary>
-        /// 领取排行榜奖励
+        ///    
         /// </summary>
         /// <param name="dateid"></param>
         /// <param name="typeid"></param>
@@ -1009,25 +1009,25 @@ namespace Game.Web.WS
         /// <param name="typeid"></param>
         private void DiamondExchGold(int configid, int typeid)
         {
-            Message msg =
-                FacadeManage.aideTreasureFacade.DiamondExchangeGold(_userid, configid, typeid, GameRequest.GetUserIP());
-            if (msg.Success)
-            {
-                var dataSet = msg.EntityList[0] as DataSet;
-                if (dataSet != null)
-                {
-                    DiamondExchRecord record =
-                        DataHelper.ConvertRowToObject<DiamondExchRecord>(dataSet.Tables[0].Rows[0]);
-                    if (record == null) return;
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("afterDiamond", record.AfterDiamond);
-                    _ajv.SetDataItem("afterInsure", record.AfterInsureScore);
-                    _ajv.SetDataItem("afterScore", record.AfterScore);
-                    _ajv.SetDataItem("exchDiamond", record.ExchDiamond);
-                    _ajv.SetDataItem("presentGold", record.PresentGold);
-                }
-            }
-            _ajv.msg = msg.Content;
+            //Message msg =
+            //    FacadeManage.aideTreasureFacade.DiamondExchangeGold(_userid, configid, typeid, GameRequest.GetUserIP());
+            //if (msg.Success)
+            //{
+            //    var dataSet = msg.EntityList[0] as DataSet;
+            //    if (dataSet != null)
+            //    {
+            //        DiamondExchRecord record =
+            //            DataHelper.ConvertRowToObject<DiamondExchRecord>(dataSet.Tables[0].Rows[0]);
+            //        if (record == null) return;
+            //        _ajv.SetValidDataValue(true);
+            //        _ajv.SetDataItem("afterDiamond", record.AfterDiamond);
+            //        _ajv.SetDataItem("afterInsure", record.AfterInsureScore);
+            //        _ajv.SetDataItem("afterScore", record.AfterScore);
+            //        _ajv.SetDataItem("exchDiamond", record.ExchDiamond);
+            //        _ajv.SetDataItem("presentGold", record.PresentGold);
+            //    }
+            //}
+            //_ajv.msg = msg.Content;
         }
 
         /// <summary>
