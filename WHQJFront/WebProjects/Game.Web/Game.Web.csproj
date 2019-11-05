@@ -161,7 +161,6 @@
     <Content Include="Mobile\ShareLink.aspx" />
     <Content Include="Mobile\WxRegister.aspx" />
     <Content Include="Shop\WHShop.ashx" />
-    <Content Include="Sound\elpx.wav" />
     <Content Include="Spread\assets\css\agent\proxy.css" />
     <Content Include="Spread\assets\css\reset.css" />
     <Content Include="Spread\assets\js\fontReset.js" />
