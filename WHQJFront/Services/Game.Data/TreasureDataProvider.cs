@@ -37,6 +37,13 @@ namespace Game.Data
             PagerParameters pagerPrams = new PagerParameters(tableName, orderby, condition, pageIndex, pageSize);
             return GetPagerSet2(pagerPrams);
         }
+
+        public PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby, string[] fields, string[] fieldAlias)
+        {
+            PagerParameters pagerPrams = new PagerParameters(tableName, orderby, condition, pageIndex, pageSize, fields, fieldAlias);
+            return GetPagerSet2(pagerPrams);
+        }
+
         #endregion
 
         #region 线上充值
@@ -258,7 +265,25 @@ namespace Game.Data
 
             return MessageHelper.GetMessage(Database, "NET_PJ_ReceiveSpreadAward", parms);
         }
-
+        public DataSet GetAgentInfo(int uid)
+        {
+            List<DbParameter> parms =
+            new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid)
+            };
+            return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_PW_GetAgentInfo", parms.ToArray());
+        }
+        public Message GetReward(int uid)
+        {
+            List<DbParameter> parms =
+            new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PJ_GetReward", parms);
+        }
         #endregion
 
         #region 钻石信息

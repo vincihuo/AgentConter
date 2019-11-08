@@ -51,6 +51,12 @@ namespace Game.Facade
         {
             return treasureData.GetList(tableName, pageIndex, pageSize, condition, orderby);
         }
+
+        public PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby,string[] fields, string[] fieldAlias)
+        {
+            return treasureData.GetList(tableName, pageIndex, pageSize, condition, orderby, fields, fieldAlias);
+        }
+
         #endregion
 
         #region 帅逼接口
@@ -164,6 +170,16 @@ namespace Game.Facade
         #endregion
 
         #region 推广信息
+
+        public DataSet GetAgentInfo(int uid)
+        {
+            return treasureData.GetAgentInfo(uid);
+        }
+        public Message GetReward(int uid)
+        {
+            return treasureData.GetReward(uid);
+        }
+
         /// <summary>
         /// 领取推广人有效好友奖励
         /// </summary>
@@ -175,6 +191,8 @@ namespace Game.Facade
         {
             return treasureData.ReceiveSpreadAward(userid, configid, ip);
         }
+
+
         #endregion
 
         #region 钻石信息

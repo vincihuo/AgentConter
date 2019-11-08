@@ -13,8 +13,8 @@ using Game.Web.Helper;
 using System.Data;
 using Game.Entity.Accounts;
 using System.Text.RegularExpressions;
-using Game.Entity.Agent;
 using System.Media;
+using Game.Entity.Record;
 
 namespace Game.Web.WS
 {
@@ -29,7 +29,6 @@ namespace Game.Web.WS
         private int _userid;
         private string _device;
         private long _groupid;
-        private SoundPlayer sound;
         /// <summary>
         /// 统一处理入口（主要验证）
         /// </summary>
@@ -177,7 +176,8 @@ namespace Game.Web.WS
                         break;
                     //获取游戏列表
                     case "getgamelist":
-                        GetGameList();
+                        RewardDrawalBill();
+                        //GetGameList();
                         break;
                     //领取注册赠送奖励
                     case "receiveregistergrant":
@@ -264,67 +264,16 @@ namespace Game.Web.WS
                     #region 代理接口模块
                     //获取代理商用户信息
                     case "getagentinfo":
-                        _ajv.SetDataItem("apiVersion", 20190220);
+                        _ajv.SetDataItem("apiVersion", 20191108);
                         GetAgentInfo();
                         break;
-                    //根据GameID查询用户昵称（检查对象存在用）
-                    case "getnicknamebygameid":
-                        GetNickNameByGameID(GameRequest.GetInt("gameid", 0));
+                    case "getreward":
+                        _ajv.SetDataItem("apiVersion", 20191108);
+                        GetReward();
                         break;
-                    //获取记录列表 by type
-                    case "getrecord": //1.3
-                        GetRecord(GameRequest.GetString("type"));
-                        break;
-                    //用户代理列表获取接口
-                    case "getbelowlist": //1.4
-                        GetBelowList(GameRequest.GetString("type"), GameRequest.GetString("query"));
-                        break;
-                    // 代理返利情况
-                    case "getawardinfo": //1.5
-                        GetAwardInfo();
-                        break;
-                    //提取钻石返利或金币返利
-                    case "presentscore": //1.6
-                        TakeScoreORDiamond(GameRequest.GetInt("gameid", 0), GameRequest.GetString("password"),
-                            GameRequest.GetInt("count", 0), Convert.ToByte(GameRequest.GetInt("type", 0)));
-                        break;
-                    //赠送身上钻石或金币接口
-                    case "presentdiamondorscore":
-                        PresentDiamondOrScore(GameRequest.GetInt("gameid", 0), GameRequest.GetString("password"),
-                          GameRequest.GetInt("count", 0), Convert.ToByte(GameRequest.GetInt("type", 0)));
-                        break;
-                    //设置安全密码
-                    case "setpassword": //1.7
-                        SetSafePass(GameRequest.GetString("password"));
-                        break;
-                    //修改安全密码接口
-                    case "updatepassword": //1.8
-                        UpdateSafePass(GameRequest.GetString("oldPassword"), GameRequest.GetString("newPassword"));
-                        break;
-                    //修改代理信息接口
-                    case "updateinfo": //1.9
-                        UpdateAgentInfo(GameRequest.GetString("address"), GameRequest.GetString("phone"),
-                            GameRequest.GetString("qq"));
-                        break;
-                    //添加下级代理
-                    case "addagent": //1.10
-                        AddBelowAgent(GameRequest.GetInt("gameid", 0), GameRequest.GetString("agentDomain"),
-                            GameRequest.GetString("compellation"),
-                            "", GameRequest.GetString("phone"),
-                            ""
-                        );
-                        break;
-                    //获取返利配置信息列表
-                    case "getreturnawardconfig":
-                        GetReturnAwardConfig(context);
-                        break;
-                    //绑定上级代理
-                    case "bindagent":
-                        BindAgent();
-                        break;
-                    //获取我的提取赠送列表
-                    case "getmytakegrantrecord":
-                        GetMyTakeGrantRecord();
+                    case "rewardrecord":
+                        _ajv.SetDataItem("apiVersion", 20191108);
+                        RewardRecord();
                         break;
                     #endregion
 
@@ -343,7 +292,6 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191101);
                         GetVilaBet();
                         break;
-
                     case "withdrawal":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         WithDrawal();
@@ -374,7 +322,6 @@ namespace Game.Web.WS
                         _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " action 错误");
                         break;
                 }
-
                 context.Response.Write(_ajv.SerializeToJson());
             }
             catch (Exception ex)
@@ -1506,668 +1453,77 @@ namespace Game.Web.WS
         /// <summary>
         /// 获取代理信息汇总
         /// </summary>
-        protected void GetAgentInfo()
+        private void GetAgentInfo()
         {
-            Entity.Agent.SystemStatusInfo diamondSave =
-                FacadeManage.aideAgentFacade.GetSystemStatusInfo(AppConfig.AgentConfig.ReceiveDiamondSave.ToString());
-            Entity.Agent.SystemStatusInfo goldSave =
-                FacadeManage.aideAgentFacade.GetSystemStatusInfo(AppConfig.AgentConfig.ReceiveGoldSave.ToString());
 
-
-            AccountsInfo userInfo = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-            //AccountsFace face = FacadeManage.aideAccountsFacade.GetAccountsFace(userInfo.CustomID);
-            Entity.Agent.AgentInfo agentInfo =
-                FacadeManage.aideAgentFacade.GetAgentInfo(userInfo.AgentID, _userid);
-            if (agentInfo == null)
+            DataSet ds = FacadeManage.aideTreasureFacade.GetAgentInfo(_userid);
+            DataRow row = (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0) ? ds.Tables[0].Rows[0] : null;
+            if (row != null)
             {
-                _ajv.SetValidDataValue(false);
-                _ajv.code = -1;
-                _ajv.msg = "该账号还不是代理";
-                return;
-            }
-
-            int ParentAgentGameID = 0;
-            AccountsInfo ParentAgentUser = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(userInfo.SpreaderID);
-            if (ParentAgentUser != null)
-            {
-                ParentAgentGameID = ParentAgentUser.GameID;
-            }
-
-            Card.DataStruct.AgentInfo info = new Card.DataStruct.AgentInfo
-            {
-                //来源用户表
-                UserID = userInfo.UserID,
-                GameID = userInfo.GameID,
-                AgentID = userInfo.AgentID,
-                //FaceUrl = "",
-                NickName = userInfo.NickName,
-                //来源代理表
-                AgentLevel = agentInfo.AgentLevel == 1 ? "一级代理" : (agentInfo.AgentLevel == 2 ? "二级代理" : "三级代理"),
-                AgentDomain = agentInfo.AgentDomain,
-                Compellation = agentInfo.Compellation,
-                ContactAddress = agentInfo.ContactAddress,
-                ContactPhone = agentInfo.ContactPhone,
-                WCNickName = agentInfo.WCNickName,
-                QQAccount = agentInfo.QQAccount,
-                //来源各种统计
-                BelowAgent = FacadeManage.aideAgentFacade.GetBelowAgentsAgent(userInfo.AgentID),
-                BelowUser = FacadeManage.aideAgentFacade.GetBelowAgentsUser(userInfo.AgentID),
-                DiamondAward = agentInfo.DiamondAward,
-                GoldAward = agentInfo.GoldAward,
-                TotalDiamondAward = FacadeManage.aideAgentFacade.GetTotalDiamondAward(_userid),
-                TotalGoldAward = FacadeManage.aideAgentFacade.GetTotalGoldAward(_userid),
-                BelowAgentsUser = FacadeManage.aideAgentFacade.GetBelowAgentsAllUser(userInfo.AgentID),
-                BelowAgentsAgent = FacadeManage.aideAgentFacade.GetBelowAgentsAllAgent(userInfo.AgentID) - 1,
-                IsHasPassword = !agentInfo.Password.Equals(""),
-                ParentAgentID = agentInfo.ParentAgent,
-                ParentGameID = ParentAgentGameID
-            };
-            _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("info", info);
-            _ajv.SetDataItem("DiamondSave", diamondSave?.StatusValue ?? 0);
-            _ajv.SetDataItem("GoldSave", goldSave?.StatusValue ?? 0);
-        }
-
-
-        /// <summary>
-        /// 根据GameID查询用户昵称（检查对象存在用）
-        /// </summary>
-        /// <param name="gameId"></param>
-        protected void GetNickNameByGameID(int gameId)
-        {
-            if (gameId == 0)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " gameid 缺失");
-                return;
-            }
-            AccountsInfo userInfo = FacadeManage.aideAccountsFacade.GetAccountsInfoByGameID(gameId);
-            if (userInfo?.UserID > 0)
-            {
-                _ajv.SetDataItem("NickName", userInfo.NickName);
+                _ajv.SetValidDataValue(true);
+                _ajv.SetDataItem("Allperson", row["Allperson"]);
+                _ajv.SetDataItem("Immediateperson", row["Immediateperson"]);
+                _ajv.SetDataItem("ImmediateMoney", row["ImmediateMoney"]);
+                _ajv.SetDataItem("OtherMoney", row["OtherMoney"]);
+                _ajv.SetDataItem("CurrReward", row["CurrReward"]);
+                _ajv.SetDataItem("HisMoney", row["HisMoney"]);
             }
             else
             {
-                _ajv.msg = "所查询的GameID不存在";
+                _ajv.SetValidDataValue(true);
             }
-            _ajv.SetValidDataValue(true);
+
+           
         }
-
-        /// <summary>
-        /// 获取记录列表 by type
-        /// </summary>
-        /// <param name="type"></param>
-        protected void GetRecord(string type)
-        {
-            int number = GameRequest.GetInt("pagesize", 10);
-            int page = GameRequest.GetInt("pageindex", 1);
-            string query = GameRequest.GetString("query");
-            string startDate = GameRequest.GetString("startdate");
-            string endDate = GameRequest.GetString("enddate");
-            PagerSet ps;
-            string where;
-            string sqlUserId = "";
-            if (!string.IsNullOrEmpty(query))
-            {
-                sqlUserId = " AND SourceUserID IN (SELECT UserID FROM WHQJAccountsDB.DBO.AccountsInfo(NOLOCK) " +
-                            (Validate.IsPositiveInt(query)
-                                ? $"WHERE GameID={query} OR NickName='{query}') "
-                                : $"WHERE NickName = '{query}') ");
-            }
-            string sqlDate = "";
-            if (!string.IsNullOrEmpty(startDate))
-                sqlDate = $" AND CollectDate >= '{startDate} 00:00:00'";
-            if (!string.IsNullOrEmpty(endDate))
-                sqlDate += $"AND CollectDate <= '{endDate} 23:59:59' ";
-
-            switch (type)
-            {
-                case "pay": //获取充值返利记录
-                    where = $" WHERE TargetUserID = {_userid} AND AwardType  = 1 {sqlDate} {sqlUserId}";
-                    ps = FacadeManage.aideAgentFacade.GetList(ReturnAwardRecord.Tablename, page, number, where,
-                        $"ORDER BY {ReturnAwardRecord._CollectDate} DESC");
-                    IList<ReturnAwardRecord> payList = new List<ReturnAwardRecord>();
-                    if (ps?.RecordCount > 0)
-                    {
-                        foreach (DataRow dr in ps.PageSet.Tables[0].Rows)
-                        {
-                            int userId = Convert.ToInt32(dr["SourceUserID"].ToString());
-                            AccountsInfo ai = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(userId);
-                            payList.Add(new ReturnAwardRecord
-                            {
-                                CollectDate = Convert.ToDateTime(dr["CollectDate"]),
-                                ReturnBase = Convert.ToInt64(dr["ReturnBase"]),
-                                SourceUserID = Convert.ToInt32(dr["SourceUserID"].ToString()),
-                                NickName = ai?.NickName ?? "",
-                                GameID = ai?.GameID ?? 0,
-                                IsAgent = ai?.AgentID > 0,
-                                Award = Convert.ToInt32(dr["Award"].ToString())
-                            });
-                        }
-                    }
-                    _ajv.SetDataItem("record", payList);
-                    break;
-                case "revenue": //获取税收返利记录
-                    where = $" WHERE TargetUserID = {_userid} AND AwardType  = 2 {sqlDate} {sqlUserId}";
-                    ps = FacadeManage.aideAgentFacade.GetList(ReturnAwardRecord.Tablename, page, number, where,
-                        $"ORDER BY {ReturnAwardRecord._CollectDate} DESC");
-                    IList<ReturnAwardRecord> revenueList = new List<ReturnAwardRecord>();
-                    if (ps?.RecordCount > 0)
-                    {
-                        foreach (DataRow dr in ps.PageSet.Tables[0].Rows)
-                        {
-                            int userId = Convert.ToInt32(dr["SourceUserID"].ToString());
-                            AccountsInfo ai = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(userId);
-                            revenueList.Add(new ReturnAwardRecord
-                            {
-                                CollectDate = Convert.ToDateTime(dr["CollectDate"]),
-                                ReturnBase = Convert.ToInt64(dr["ReturnBase"]),
-                                SourceUserID = Convert.ToInt32(dr["SourceUserID"].ToString()),
-                                NickName = ai?.NickName ?? "",
-                                GameID = ai?.GameID ?? 0,
-                                IsAgent = ai?.AgentID > 0,
-                                Award = Convert.ToInt32(dr["Award"].ToString())
-                            });
-                        }
-                    }
-                    _ajv.SetDataItem("record", revenueList);
-                    break;
-                default:
-                    _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                    _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " type 无对应记录");
-                    return;
-            }
-
-            _ajv.SetDataItem("pageCount", ps?.PageCount);
-            _ajv.SetDataItem("recordCount", ps?.RecordCount);
-            _ajv.SetValidDataValue(true);
+        //领取奖励
+        private void GetReward()
+        { 
+            Message mm= FacadeManage.aideTreasureFacade.GetReward(2);
+            _ajv.SetValidDataValue(mm.Success);
+            _ajv.msg = mm.Content;
         }
-
-        /// <summary>
-        /// 用户代理列表获取接口
-        /// </summary>
-        protected void GetBelowList(string type, string query)
+        private void RewardRecord()
         {
-            int number = GameRequest.GetInt("pagesize", 15);
-            int page = GameRequest.GetInt("pageindex", 1);
-            long pCount = 0;
-            BelowList list = new BelowList();
-            string sqlUserId = "";
-            if (!string.IsNullOrEmpty(query))
+            int index = GameRequest.GetQueryInt("index",1);
+
+            string[] fields = { "A.GameID", "A.NickName", "R.BeggarNumber", "R.AllReward", "R.Reward" , "R.BackMoney" };
+            string[] fieldAlias = { "GameID", "NickName", "BeggarNumber", "AllReward", "Reward", "BackMoney" };
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(" WHQJAccountsDB.dbo.AccountsInfo A INNER JOIN WHQJTreasureDB.dbo.AgentInfo R ON A.UserID = R.UserID ", index, 6, $" WHERE R.ParentID = {_userid} ",
+                " ORDER BY BackMoney DESC ", fields, fieldAlias);
+
+            IList<AgentReward> list = new List<AgentReward>();
+            DataTable table = ps.PageSet.Tables[0];
+            if (table != null && table.Rows.Count > 0)
             {
-                sqlUserId = " AND UserID IN (SELECT UserID FROM WHQJAccountsDB.DBO.AccountsInfo(NOLOCK) " +
-                            (Validate.IsPositiveInt(query)
-                                ? $"WHERE GameID={query} OR NickName='{query}') "
-                                : $"WHERE NickName = '{query}') ");
-            }
-            string sqlWhere = $"WHERE AgentID IN (SELECT AgentID FROM AgentInfo(NOLOCK) WHERE UserID={_userid})";
-            if (!string.IsNullOrEmpty(type))
-            {
-                sqlWhere += type == "agent"
-                    ? " AND UserID IN (SELECT UserID FROM AgentInfo(NOLOCK)) "
-                    : " AND UserID NOT IN (SELECT UserID FROM AgentInfo(NOLOCK)) ";
-            }
-            sqlWhere += sqlUserId;
-            var ps = FacadeManage.aideAgentFacade.GetBelowListPagerSet(sqlWhere, page, number);
-            if (ps?.PageCount > 0)
-            {
-                foreach (DataRow dr in ps.PageSet.Tables[0].Rows)
+                foreach (DataRow item in table.Rows)
                 {
-                    AccountsInfo ai =
-                        FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(
-                            Convert.ToInt32(dr["UserID"].ToString()));
-                    BelowDetail detail = new BelowDetail
+                    AgentReward stream = new AgentReward
                     {
-                        UserID = ai.UserID,
-                        GameID = ai.GameID,
-                        NickName = ai.NickName,
-                        AgentID = ai.AgentID,
-                        RegisterDate = Convert.ToDateTime(dr["CollectDate"]).ToString("yyyy/MM/dd HH:mm:ss"),
-                        TotalDiamond = FacadeManage.aideAgentFacade.GetTotalDiamondAward(_userid, ai.UserID),
-                        TotalGold = FacadeManage.aideAgentFacade.GetTotalGoldAward(_userid, ai.UserID)
+                        NicekName = item["NickName"].ToString(),
+                        GameId = Convert.ToInt32(item["GameID"]),
+                        person= Convert.ToInt32(item["BeggarNumber"]),
+                        personMoney = Convert.ToInt32(item["AllReward"])+ Convert.ToInt32(item["Reward"]),
+                        AllMoney = Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])+ Convert.ToInt32(item["BackMoney"]),
                     };
-                    pCount++;
-                    list.dataList.Add(detail);
+                    list.Add(stream);
                 }
             }
-            _ajv.SetDataItem("list", list.dataList);
-            _ajv.SetDataItem("total", ps?.RecordCount ?? 0);
-            _ajv.SetDataItem("count", pCount);
-            _ajv.SetDataItem("pageCount", ps?.PageCount ?? 0);
-            _ajv.SetValidDataValue(true);
-        }
-
-
-        /// <summary>
-        /// 代理返利情况
-        /// </summary>
-        protected void GetAwardInfo()
-        {
-            Dictionary<string, long> dicGoldDetail = new Dictionary<string, long>
-            {
-                {"TotalAward", FacadeManage.aideAgentFacade.GetTotalGoldAward(_userid)},
-                {"MonthAward", FacadeManage.aideAgentFacade.GetTotalGoldAward(_userid, Fetch.GetMonthTime())},
-                {"LastMonthAward", FacadeManage.aideAgentFacade.GetTotalGoldAward(_userid, Fetch.GetLastMonthTime())},
-                {"TotalReceive", FacadeManage.aideAgentFacade.GetTotalGoldReceive(_userid)}
-            };
-            Dictionary<string, long> dicDiamondDetail = new Dictionary<string, long>
-            {
-                {"TotalAward", FacadeManage.aideAgentFacade.GetTotalDiamondAward(_userid)},
-                {"MonthAward", FacadeManage.aideAgentFacade.GetTotalDiamondAward(_userid, Fetch.GetMonthTime())},
-                {"LastMonthAward", FacadeManage.aideAgentFacade.GetTotalDiamondAward(_userid, Fetch.GetLastMonthTime())},
-                {"TotalReceive", FacadeManage.aideAgentFacade.GetTotalDiamondReceive(_userid)}
-            };
-            Dictionary<string, object> dicAwardInfo =
-                new Dictionary<string, object> { { "Gold", dicGoldDetail }, { "Diamond", dicDiamondDetail } };
-            _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("info", dicAwardInfo);
-        }
-
-
-        /// <summary>
-        /// 提取钻石返利或金币返利
-        /// </summary>
-        /// <param name="gameId"></param>
-        /// <param name="pass"></param>
-        /// <param name="count"></param>
-        /// <param name="type"></param>
-        protected void TakeScoreORDiamond(int gameId, string pass, int count, byte type)
-        {
-            if (count == 0)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " count 缺失");
-                return;
-            }
-            if (gameId > 0 && string.IsNullOrEmpty(pass))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " pass 转赠时安全密码必填");
-                return;
-            }
-            if (gameId > 0 && !IsPassChecked(pass))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " pass 安全密码不正确");
-                return;
-            }
-
-            //代理领取返利
-            Message msg =
-                FacadeManage.aideAgentFacade.ReceiveAgentAward(_userid, type, count);
-            if (msg.Success && gameId > 0) //当填写了别人的GameID为转赠功能
-            {
-                //代理转赠返利
-                msg = FacadeManage.aideAgentFacade.GiveAgentAward(_userid, gameId, type, count, pass);
-                if (!msg.Success)
-                {
-                    _ajv.SetValidDataValue(true);
-                    _ajv.msg = msg.Content + "，已成功提取到自己账号";
-                    return;
-                }
-            }
-
-            if (msg.Success)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = gameId > 0 ? "提取并转赠成功" : "提取成功";
-            }
-            else
-            {
-                _ajv.code = msg.MessageID;
-                _ajv.msg = msg.Content;
-            }
-        }
-
-        /// <summary>
-        /// 赠送身上钻石或金币接口
-        /// </summary>
-        /// <param name="gameId"></param>
-        /// <param name="pass"></param>
-        /// <param name="count"></param>
-        /// <param name="type"></param>
-        protected void PresentDiamondOrScore(int gameId, string pass, int count, byte type)
-        {
-            if (count == 0)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " count 缺失");
-                return;
-            }
-            if (gameId > 0 && string.IsNullOrEmpty(pass))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " pass 转赠时安全密码必填");
-                return;
-            }
-            if (gameId > 0 && !IsPassChecked(pass))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " pass 安全密码不正确");
-                return;
-            }
-
-            //赠送钻石
-            Message msg = FacadeManage.aideAgentFacade.GiveAgentAward(_userid, gameId, type, count, pass);
-
-            if (msg.Success)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "转赠成功";
-            }
-            else
-            {
-                _ajv.code = msg.MessageID;
-                _ajv.msg = msg.Content;
-            }
-        }
-
-        /// <summary>
-        /// 首次设置安全密码接口
-        /// </summary>
-        /// <param name="pass"></param>
-        protected void SetSafePass(string pass)
-        {
-            AccountsInfo userInfo = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-            Entity.Agent.AgentInfo agentInfo =
-               FacadeManage.aideAgentFacade.GetAgentInfo(userInfo.AgentID, _userid);
-
-            if (agentInfo == null)
-            {
-                _ajv.msg = "该玩家不是代理";
-                return;
-
-            }
-
-            if (string.IsNullOrEmpty(pass) || pass.Length != 32)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " password 参数不正确或未加密");
-                return;
-            }
-            int spResult = FacadeManage.aideAgentFacade.SetAgentSafePassword(agentInfo.AgentID, pass);
-            if (spResult > 0)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "设置安全密码成功";
-            }
-            else
-            {
-                _ajv.msg = "设置安全密码失败";
-            }
-        }
-
-
-        /// <summary>
-        /// 修改安全密码接口
-        /// </summary>
-        /// <param name="oldPass"></param>
-        /// <param name="newPass"></param>
-        protected void UpdateSafePass(string oldPass, string newPass)
-        {
-
-            AccountsInfo userInfo = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-            Entity.Agent.AgentInfo agentInfo =
-               FacadeManage.aideAgentFacade.GetAgentInfo(userInfo.AgentID, _userid);
-
-            if (!IsPassChecked(oldPass))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " oldPassword 不正确");
-                return;
-            }
-            if (string.IsNullOrEmpty(newPass) || newPass.Length != 32)
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " newPassword 参数不正确或未加密");
-                return;
-            }
-            int upResult = FacadeManage.aideAgentFacade.SetAgentSafePassword(agentInfo.AgentID, newPass);
-            if (upResult > 0)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "修改安全密码成功";
-            }
-            else
-            {
-                _ajv.msg = "修改安全密码失败";
-            }
-        }
-
-
-        /// <summary>
-        /// 修改代理信息接口
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="phone"></param>
-        /// <param name="qq"></param>
-        protected void UpdateAgentInfo(string address, string phone, string qq)
-        {
-            if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(phone) ||
-                string.IsNullOrEmpty(qq))
-            {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode),
-                    " address、phone、qq 缺失");
-                return;
-            }
-            if (!Validate.IsMobileCode(phone))
-            {
-                _ajv.msg = "抱歉，联系电话格式不正确";
-                return;
-            }
-            Entity.Agent.AgentInfo uiAgent = new Entity.Agent.AgentInfo()
-            {
-                UserID = _userid,
-                ContactAddress = address,
-                ContactPhone = phone,
-                QQAccount = qq
-            };
-            int uiResult = FacadeManage.aideAgentFacade.UpdateAgentInfo(uiAgent);
-            if (uiResult > 0)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "修改代理信息成功";
-            }
-            else
-            {
-                _ajv.msg = "修改代理信息失败";
-            }
-        }
-
-
-        /// <summary>
-        /// 添加下级代理接口
-        /// </summary>
-        /// <param name="gameId"></param>
-        /// <param name="agentDomain"></param>
-        /// <param name="compllation"></param>
-        /// <param name="note"></param>
-        /// <param name="address"></param>
-        /// <param name="phone"></param>
-        /// <param name="qq"></param>
-        /// <param name="wcNickName"></param>
-        protected void AddBelowAgent(int gameId, string agentDomain, string compllation,
-           string address, string phone, string note)
-        {
-            if (gameId <= 0)
-            {
-                _ajv.msg = "抱歉，添加代理游戏ID不能为空";
-                return;
-            }
-            //if (string.IsNullOrEmpty(compllation))
-            //{
-            //    _ajv.msg = "抱歉，真实姓名不能为空";
-            //    return;
-            //}
-            //if (string.IsNullOrEmpty(phone))
-            //{
-            //    _ajv.msg = "抱歉，联系电话不能为空";
-            //    return;
-            //}
-            if (!string.IsNullOrEmpty(phone) && !Validate.IsMobileCode(phone))
-            {
-                _ajv.msg = "抱歉，联系电话格式不正确";
-                return;
-            }
-            //if (string.IsNullOrEmpty(agentDomain))
-            //{
-            //    _ajv.msg = "抱歉，代理域名不能为空";
-            //    return;
-            //}
-
-            AccountsInfo account = FacadeManage.aideAccountsFacade.GetAccountsInfoByGameID(gameId);
-            if (account == null)
-            {
-                _ajv.msg = "抱歉，添加代理异常，请稍后重试";
-                return;
-            }
-
-            Entity.Agent.AgentInfo info = new Entity.Agent.AgentInfo
-            {
-                AgentDomain = agentDomain,
-                AgentNote = note,
-                Compellation = compllation,
-                ContactAddress = address,
-                ContactPhone = phone,
-                WCNickName = account.NickName
-            };
-
-            Message msg = FacadeManage.aideAgentFacade.AddAgent(_userid, info, gameId);
-            if (msg.Success)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "添加下级代理成功";
-            }
-            else
-            {
-                _ajv.msg = msg.Content;
-            }
-        }
-
-        protected void BindAgent()
-        {
-            int gameId = GameRequest.GetInt("gameid", 0);
-            if (gameId == 0)
-            {
-                _ajv.SetValidDataValue(false);
-                _ajv.code = -1;
-                _ajv.msg = "请输入要绑定代理的游戏ID";
-                return;
-            }
-
-            AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountsInfoByGameID(gameId);
-            if (info == null)
-            {
-                _ajv.SetValidDataValue(false);
-                _ajv.code = -1;
-                _ajv.msg = "请输入要绑定代理不存在";
-                return;
-            }
-
-            Message msg = FacadeManage.aideAgentFacade.UserAgentBind(_userid, info.GameID, GameRequest.GetUserIP());
-            if (msg.Success)
-            {
-                _ajv.SetValidDataValue(true);
-                _ajv.msg = "上级代理绑定成功";
-            }
-            else
-            {
-                _ajv.msg = msg.Content;
-            }
-        }
-
-        /// <summary>
-        /// 获取返利配置信息列表
-        /// </summary>
-        /// <param name="context"></param>
-        protected void GetReturnAwardConfig(HttpContext context)
-        {
-            DataSet ds = FacadeManage.aideAgentFacade.GetReturnAwardConfig();
-            List<ReturnAwardConfig> list = new List<ReturnAwardConfig>();
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                DataTable dt = ds.Tables[0];
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    ReturnAwardConfig rac = new ReturnAwardConfig();
-                    rac.ConfigID = Convert.ToInt32(dt.Rows[i]["ConfigID"].ToString());
-                    rac.AwardLevel = Convert.ToInt32(dt.Rows[i]["AwardLevel"].ToString());
-                    rac.AwardType = Convert.ToByte(dt.Rows[i]["AwardType"].ToString());
-                    rac.AwardScale = Convert.ToDecimal(dt.Rows[i]["AwardScale"].ToString());
-                    rac.Nullity = Convert.ToBoolean(dt.Rows[i]["Nullity"].ToString());
-                    list.Add(rac);
-                }
-            }
-
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", list);
-
+            _ajv.SetDataItem("Count",ps.PageCount);
+            _ajv.SetDataItem("pageIndex", ps.PageIndex);
         }
 
-        /// <summary>
-        /// 获取我的提取赠送列表
-        /// </summary>
-        protected void GetMyTakeGrantRecord()
+        private void RewardDrawalBill()
         {
-            int number = GameRequest.GetInt("pagesize", 10);
-            int page = GameRequest.GetInt("pageindex", 1);
-            string query = GameRequest.GetString("query");
-            string startDate = GameRequest.GetString("startdate");
-            string endDate = GameRequest.GetString("enddate");
-            PagerSet ps;
-            string where;
-            string sqlUserId = "";
-            if (!string.IsNullOrEmpty(query))
-            {
-                sqlUserId = " AND SourceUserID IN (SELECT UserID FROM WHQJAccountsDB.DBO.AccountsInfo(NOLOCK) " +
-                            (Validate.IsPositiveInt(query)
-                                ? $"WHERE GameID={query} OR NickName='{query}') "
-                                : $"WHERE NickName = '{query}') ");
-            }
-            string sqlDate = "";
-            if (!string.IsNullOrEmpty(startDate))
-                sqlDate = $" AND CollectDate >= '{startDate} 00:00:00'";
-            if (!string.IsNullOrEmpty(endDate))
-                sqlDate += $"AND CollectDate <= '{endDate} 23:59:59' ";
-
-            where = $" WHERE TargetUserID = {_userid} OR SourceUserID = {_userid} AND TradeType  = 2 {sqlDate} {sqlUserId}";
-            ps = FacadeManage.aideAgentFacade.GetList(ReturnAwardGrant.Tablename, page, number, where,
-                $"ORDER BY {ReturnAwardGrant._CollectDate} DESC");
-            IList<ReturnAwardGrant> GrantList = new List<ReturnAwardGrant>();
-            if (ps?.RecordCount > 0)
-            {
-                foreach (DataRow dr in ps.PageSet.Tables[0].Rows)
-                {
-                    int userId = Convert.ToInt32(dr["SourceUserID"].ToString());
-                    AccountsInfo ai = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(userId);
-                    GrantList.Add(new ReturnAwardGrant
-                    {
-                        RecordID = Convert.ToInt32(dr["RecordID"]),
-                        SourceUserID = Convert.ToInt32(dr["SourceUserID"]),
-                        TargetUserID = Convert.ToInt32(dr["TargetUserID"]),
-                        TradeType = Convert.ToByte(dr["TradeType"]),
-                        SourceBefore = Convert.ToInt32(dr["SourceBefore"]),
-                        TargetBefore = Convert.ToInt32(dr["TargetBefore"]),
-                        Amount = Convert.ToInt32(dr["Amount"]),
-                        CollectDate = Convert.ToDateTime(dr["CollectDate"])
-                    });
-                }
-            }
-            _ajv.SetDataItem("record", GrantList);
-            _ajv.SetDataItem("pageCount", ps?.PageCount);
-            _ajv.SetDataItem("recordCount", ps?.RecordCount);
+            int index = GameRequest.GetQueryInt("pageIndex",1);
+            PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordAgentReward.Tablename,index,6, $" WHERE UserID={_userid} ", " ORDER BY drawalTime DESC ");
             _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("index",ps.PageIndex);
+            _ajv.SetDataItem("page", ps.PageCount);
+            _ajv.SetDataItem("content", ps.PageSet.Tables.Count>0? ps.PageSet.Tables[0]:null);
         }
+
         #endregion
 
 

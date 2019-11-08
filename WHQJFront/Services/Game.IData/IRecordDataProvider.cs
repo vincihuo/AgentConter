@@ -9,6 +9,8 @@ namespace Game.IData
     /// </summary>
     public interface IRecordDataProvider //: IProvider
     {
+        PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby);
+
         #region 代理信息
 
         /// <summary>

@@ -25,6 +25,12 @@ namespace Game.Data
 
         #endregion
 
+        public PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby)
+        {
+            PagerParameters pagerPrams = new PagerParameters(tableName, orderby, condition, pageIndex, pageSize);
+            return GetPagerSet2(pagerPrams);
+        }
+
         #region 代理信息
 
         /// <summary>

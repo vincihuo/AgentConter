@@ -1,13 +1,10 @@
-USE WHQJAgentDB
+USE [WHQJTreasureDB]
 GO
 
-----------------------------------------------------------------------------------------------------
--- ∞Ê»®£∫2018
---  ±º‰£∫2018-04-17
--- ”√Õæ£∫¥˙¿Ì¡Ï»°∑µ¿˚
-----------------------------------------------------------------------------------------------------
-IF EXISTS (SELECT * FROM DBO.SYSOBJECTS WHERE ID = OBJECT_ID(N'[dbo].[NET_AT_ReceiveAgentAward]') and OBJECTPROPERTY(ID, N'IsProcedure') = 1)
-DROP PROCEDURE [dbo].[NET_AT_ReceiveAgentAward]
+IF EXISTS (SELECT *
+FROM DBO.SYSOBJECTS
+WHERE ID = OBJECT_ID(N'[dbo].[NET_PJ_GetReward]') and OBJECTPROPERTY(ID, N'IsProcedure') = 1)
+DROP PROCEDURE [dbo].[NET_PJ_GetReward]
 GO
 
 
@@ -17,182 +14,77 @@ GO
 SET ANSI_NULLS ON 
 GO
 
---------------------------------------------------------------------	
---
-CREATE PROC [NET_AT_ReceiveAgentAward]
-(
-	@dwUserID			INT,					--”√ªß±Í ∂
-	@dwAward	    INT,			-- ∑µ¿˚ª˘◊º
-  @dwAwardType TINYINT,
-  @strClientIP NVARCHAR(15), -- ”√ªßIP
-
-	@strErrorDescribe NVARCHAR(127) OUTPUT		-- ‰≥ˆ–≈œ¢
+CREATE PROC [NET_PJ_GetReward]
+    (
+    @dwUserID			INT,
+    --È¢ÜÂèñid
+    @strErrorDescribe NVARCHAR(127) OUTPUT
 )
+WITH
+    ENCRYPTION
+AS
 
-WITH ENCRYPTION AS
-
---  Ù–‘…Ë÷√
-SET NOCOUNT ON
-
--- ”√ªß–≈œ¢
-DECLARE @UserID INT
 DECLARE @Nullity TINYINT
-DECLARE @AgentID INT
-DECLARE @DiamondAward INT
-DECLARE @GoldAward INT
+DECLARE @Reward BIGINT
 
+DECLARE @CurScore BIGINT
+DECLARE @CurInsureScore BIGINT
+DECLARE @RegisterIP NVARCHAR(15)
+DECLARE @RegisterDate DATETIME
+DECLARE @RegisterMachine NVARCHAR(32)
+
+SET NOCOUNT ON
 BEGIN
-	-- ≤È—Ø”√ªß	
-	SELECT @UserID=UserID,@Nullity=Nullity FROM WHQJAccountsDB.DBO.AccountsInfo WITH(NOLOCK) WHERE UserID=@dwUserID
-  -- ”√ªß¥Ê‘⁄
-	IF @UserID IS NULL
+    SELECT @Nullity=Nullity, @RegisterIP=RegisterIP, @RegisterDate=RegisterDate, @RegisterMachine=RegisterMachine
+	FROM WHQJAccountsDB.dbo.AccountsInfo(NOLOCK)
+	WHERE UserID = @dwUserID
+    IF @Nullity IS NULL
 	BEGIN
-		SET @strErrorDescribe=N'±ß«∏£¨ƒ˙µƒ’ ∫≈≤ª¥Ê‘⁄£°'
-		RETURN 1001
-	END	
-
-	-- ’ ∫≈Ω˚÷π
-	IF @Nullity=1
+        SET @strErrorDescribe=N'Ë¥¶Âè∑‰∏çÂ≠òÂú®'
+        RETURN 1001
+    END
+    IF @Nullity=1
 	BEGIN
-		SET @strErrorDescribe=N'±ß«∏£¨ƒ˙µƒ’ ∫≈“—∂≥Ω·£°'
-		RETURN 1002
-	END	
-
-	SELECT @AgentID=AgentID,@DiamondAward=DiamondAward,@GoldAward = GoldAward FROM AgentInfo WITH(NOLOCK) WHERE UserID=@UserID
-
-  IF @AgentID IS NULL 
-  BEGIN
-    SET @strErrorDescribe=N'±ß«∏£¨ƒ˙µƒ’ ∫≈∑«¥˙¿Ì£¨Œﬁ∑®¡Ï»°Ω±¿¯£°'
-    RETURN 1003
-  END
-
-  DECLARE @ReceiveBefore BIGINT
-  DECLARE @DateTime DATETIME 
-  SET @DateTime = GETDATE()
-
-  IF @dwAwardType = 1
-  BEGIN
-    SELECT @ReceiveBefore = Diamond FROM WHQJTreasureDB.DBO.UserCurrency(NOLOCK) WHERE UserID = @UserID
-    IF @ReceiveBefore IS NULL
-    BEGIN
-      INSERT WHQJTreasureDB.DBO.UserCurrency(UserID,Diamond) VALUES (@UserID,0)
-      SET @ReceiveBefore = 0
+        SET @strErrorDescribe=N'Ë¥¶Âè∑Ë¢´ÂÜªÁªì'
+        RETURN 1002
     END
 
-	DECLARE @ReceiveDiamondMin INT
-    SELECT @ReceiveDiamondMin = StatusValue FROM SystemStatusInfo(NOLOCK) WHERE StatusName = N'ReceiveDiamondMin'
-	IF @ReceiveDiamondMin IS NULL  SET @ReceiveDiamondMin = 0
-	IF @dwAward<@ReceiveDiamondMin
+    SELECT @Reward=Reward FROM AgentInfo WHERE UserID=@dwUserID
+    IF @Reward<1000
+    BEGIN
+        SET @strErrorDescribe=N'Â§ö‰Ωô‰∏ÄÂÖÉÂ•ñÂä±ÊâçËÉΩÈ¢ÜÂèñ'
+        RETURN 2001
+    END
+    SELECT @CurScore=Score,@CurInsureScore=InsureScore FROM GameScoreInfo WHERE UserID = @dwUserID
+
+    IF @CurScore IS NULL 
 	BEGIN
-		SET @strErrorDescribe = N'±ß«∏£¨ƒ˙¡Ï»°µƒΩ±¿¯≤ªƒ‹µÕ”⁄' + CAST(@ReceiveDiamondMin AS NVARCHAR(30)) + N'◊Í Ø'
-		RETURN 1004
+		INSERT GameScoreInfo
+			(UserID,Score,RegisterIP,RegisterDate,RegisterMachine)
+		VALUES
+			(@dwUserID, 0, @RegisterIP, @RegisterDate, @RegisterMachine)
+		SET @CurScore = 0
+		SET @CurInsureScore =0
 	END
 
-    DECLARE @ReceiveDiamondSave INT
-    SELECT @ReceiveDiamondSave = StatusValue FROM SystemStatusInfo(NOLOCK) WHERE StatusName = N'ReceiveDiamondSave'
-    IF @ReceiveDiamondSave IS NULL  SET @ReceiveDiamondSave = 0
-
-    IF @DiamondAward - @ReceiveDiamondSave < @dwAward
-    BEGIN
-      SET @strErrorDescribe = N'±ß«∏£¨ƒ˙ø…¡Ï»°µƒΩ±¿¯≤ª◊„“‘¡Ï»°°£'
-      RETURN 1004
-    END
-
-    -- ø™∆Ù ¬ŒÒ
     BEGIN TRAN
+    UPDATE AgentInfo SET Reward=0,AllReward=AllReward+@Reward WHERE UserID = @dwUserID
+    UPDATE GameScoreInfo SET InsureScore=InsureScore+@Reward WHERE UserID = @dwUserID
 
-      -- –¥»Î¡Ï»°º«¬º
-      INSERT ReturnAwardReceive (UserID,AwardType,ReceiveAward,ReceiveBefore, CollectDate) 
-      VALUES (@UserID,@dwAwardType,@dwAward,@ReceiveBefore, @DateTime)
+    INSERT WHQJRecordDB.dbo.RecordAgentReward (UserID,GetMoney,BeforeMoney,drawalTime)
+    VALUES(@dwUserID,@Reward,@CurInsureScore,GETDATE())
 
-      -- –¥»Î◊Í Ø¡˜ÀÆº«¬º
-      INSERT INTO WHQJRecordDB.DBO.RecordDiamondSerial
-        (SerialNumber,MasterID,UserID,TypeID,CurDiamond,ChangeDiamond,ClientIP,CollectDate)
-      VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 13, @ReceiveBefore, @dwAward, @strClientIP, @DateTime)
-
-      -- ∏¸–¬¥˙¿Ì–≈œ¢÷–µƒø…”√Ω±¿¯
-      UPDATE AgentInfo SET DiamondAward = DiamondAward - @dwAward WHERE UserID = @UserID
-      -- ∏¸–¬”√ªß◊Í Ø ˝æ›
-      UPDATE WHQJTreasureDB.DBO.UserCurrency  SET Diamond = Diamond + @dwAward WHERE UserID = @UserID
-
-      IF @@Error > 0 
-      BEGIN
+    INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
+		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
+	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 13, @CurScore, @CurInsureScore, @Reward, '0.0.0.0', GETDATE())
+    IF @@Error > 0 
+    BEGIN
         ROLLBACK TRAN
-        RETURN 2001
-      END
-
+        SET @strErrorDescribe=N'È¢ÜÂèñÂ§±Ë¥•Á®çÂêéÂÜçËØï'
+        RETURN 3001
+    END
     COMMIT TRAN
-    
-  END
-  ELSE IF @dwAwardType = 2
-  BEGIN
-    DECLARE @ReceiveBeforeInsure BIGINT 
-    SELECT @ReceiveBefore = Score,@ReceiveBeforeInsure = InsureScore FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK) WHERE UserID = @UserID
-    IF @ReceiveBefore IS NULL
-    BEGIN
-      INSERT WHQJTreasureDB.DBO.GameScoreInfo(UserID,Score,InsureScore,RegisterIP) VALUES (@UserID,0,0,@strClientIP)
-      SET @ReceiveBefore = 0
-      SET @ReceiveBeforeInsure = 0
-    END
-
-	DECLARE @ReceiveGoldMin INT
-    SELECT @ReceiveGoldMin = StatusValue FROM SystemStatusInfo(NOLOCK) WHERE StatusName = N'ReceiveGoldMin'
-	IF @ReceiveGoldMin IS NULL  SET @ReceiveGoldMin = 0
-	IF @dwAward<@ReceiveGoldMin
-	BEGIN
-		SET @strErrorDescribe = N'±ß«∏£¨ƒ˙¡Ï»°µƒΩ±¿¯≤ªƒ‹µÕ”⁄' + CAST(@ReceiveGoldMin AS NVARCHAR(30)) + N'Ω±“'
-		RETURN 1004
-	END
-
-    DECLARE @ReceiveGoldSave INT
-    SELECT @ReceiveGoldSave = StatusValue FROM SystemStatusInfo(NOLOCK) WHERE StatusName = N'ReceiveGoldSave'
-    IF @ReceiveGoldSave IS NULL  SET @ReceiveGoldSave = 0
-
-    IF @GoldAward - @ReceiveGoldSave < @dwAward
-    BEGIN
-      SET @strErrorDescribe = N'±ß«∏£¨ƒ˙ø…¡Ï»°µƒΩ±¿¯≤ª◊„“‘¡Ï»°°£'
-      RETURN 1004
-    END
-
-    IF EXISTS (SELECT 1 FROM WHQJTreasureDB.DBO.GameScoreLocker(NOLOCK) WHERE UserID = @UserID)
-    BEGIN
-      SET @strErrorDescribe = N'±ß«∏£¨ƒ˙¡Ï»°Ω±¿¯«∞±ÿ–ÎÕÀ≥ˆ”Œœ∑∑øº‰°£'
-      RETURN 1005
-    END
-
-    -- ø™∆Ù ¬ŒÒ
-    BEGIN TRAN
-
-      -- –¥»Î¡Ï»°º«¬º
-      INSERT ReturnAwardReceive (UserID,AwardType,ReceiveAward,ReceiveBefore, CollectDate) 
-      VALUES (@UserID,@dwAwardType,@dwAward,@ReceiveBefore, @DateTime)
-
-      -- –¥»ÎΩ±“¡˜ÀÆº«¬º
-      INSERT INTO WHQJRecordDB.DBO.RecordTreasureSerial
-      (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-      VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 9, @ReceiveBefore, @ReceiveBeforeInsure, @dwAward, @strClientIP, @DateTime)
-
-
-      -- ∏¸–¬¥˙¿Ì–≈œ¢÷–µƒø…”√Ω±¿¯
-      UPDATE AgentInfo SET GoldAward = GoldAward - @dwAward WHERE UserID = @UserID
-      -- ∏¸–¬”√ªßΩ±“ ˝æ›
-      UPDATE WHQJTreasureDB.DBO.GameScoreInfo  SET Score = Score + @dwAward WHERE UserID = @UserID
-
-      IF @@Error > 0 
-      BEGIN
-        ROLLBACK TRAN
-        RETURN 2001
-      END
-
-    COMMIT TRAN
-
-  END
-  ELSE 
-  BEGIN
-    SET @strErrorDescribe = N'±ß«∏£¨¡Ï»°≤Œ ˝≤ª’˝»∑°£'
-    RETURN 1000
-  END
-
-  RETURN 0
+	SET @strErrorDescribe=N'È¢ÜÂèñÊàêÂäü'
 END
+RETURN 0
 GO

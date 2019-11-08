@@ -164,6 +164,14 @@ namespace Game.Facade.DataStruct
         public string TypeName { get; set; }
     }
 
+    public class AgentReward
+    {
+        public string NicekName { get; set; }
+        public int GameId { get; set; }
+        public int person { get; set; }
+        public long personMoney { get; set; }
+        public long AllMoney { get; set; }
+    }
     public class DiamondStream
     {
         public string SerialNumber { get; set; }

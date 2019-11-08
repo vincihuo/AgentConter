@@ -24,6 +24,7 @@ namespace Game.IData
         /// <param name="orderby">排序</param>
         /// <returns></returns>
         PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby);
+        PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby, string[] fields, string[] fieldAlias);
         #endregion
 
         #region 一个字帅
@@ -95,6 +96,8 @@ namespace Game.IData
         /// <param name="ip">领取地址</param>
         /// <returns></returns>
         Message ReceiveSpreadAward(int userid, int configid, string ip);
+        Message GetReward(int uid);
+        DataSet GetAgentInfo(int uid);
         #endregion
 
         #region 钻石信息

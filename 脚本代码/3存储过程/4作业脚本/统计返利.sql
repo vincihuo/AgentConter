@@ -24,6 +24,9 @@ DECLARE @Curr BIGINT
 DECLARE @Tax BIGINT
 DECLARE @tCurr BIGINT
 DECLARE @TempUser INT
+DECLARE @Reward BIGINT
+DECLARE @Parent INT
+DECLARE @Beggar INT
 
 DECLARE @TempID TABLE
 (
@@ -31,7 +34,7 @@ DECLARE @TempID TABLE
 )
 
 BEGIN
-    SELECT @Curr=YesterDayReward ,@Tax=Tax FROM AgentInfo WHERE UserID=@dwUserID
+    SELECT @Curr=YesterDayReward ,@Tax=Tax,@Reward=Reward,@Parent=ParentID,@Beggar=BeggarNumber FROM AgentInfo WHERE UserID=@dwUserID
     IF @Curr IS NULL
     BEGIN
         SET @Curr=0
@@ -45,7 +48,10 @@ BEGIN
             DELETE FROM @TempID WHERE NId=@TempUser
             SET @Curr=@Curr+@tCurr
         END
-        UPDATE AgentInfo SET YesterDayReward=@Curr,Reward=Reward+@Curr,Tax=0 WHERE UserID=@dwUserID
+        UPDATE AgentInfo SET YesterDayReward=@Curr,Reward=Reward+@Curr,Tax=0,BackMoney=BackMoney+@Tax*0.3 WHERE UserID=@dwUserID
+        
+        INSERT [WHQJRecordDB].dbo.AgentCountRecord (UserID,ParentID,Tax,BeforeReward,BeggarNumber,CurrReward,CountTime)
+        VALUES (@dwUserID,@Parent,@Tax,@Reward,@Beggar,@Curr,GETDATE())
     END
     SET @Count = @Curr*0.3+@Tax*0.3
 END
