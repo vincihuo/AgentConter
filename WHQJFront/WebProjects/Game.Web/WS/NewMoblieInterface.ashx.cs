@@ -275,10 +275,18 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191108);
                         RewardRecord();
                         break;
+                    case "rewardrbill":
+                        _ajv.SetDataItem("apiVersion", 20191108);
+                        RewardDrawalBill();
+                        break;
                     #endregion
 
                     #region 最帅的写的接口
                     //获取线上充值列表
+                    case "payrecord":
+                        _ajv.SetDataItem("apiVersion",20191109);
+                        //PayRecord();
+                        break;
                     case "paylist":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
@@ -1472,8 +1480,6 @@ namespace Game.Web.WS
             {
                 _ajv.SetValidDataValue(true);
             }
-
-           
         }
         //领取奖励
         private void GetReward()
