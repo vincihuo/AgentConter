@@ -161,7 +161,7 @@ namespace Game.Facade.DataStruct
         public long BeforeGold { get; set; }
         public int ChangeGold { get; set; }
         public long AfterGold { get; set; }
-        public string TypeName { get; set; }
+        public int Type { get; set; }
     }
 
     public class AgentReward

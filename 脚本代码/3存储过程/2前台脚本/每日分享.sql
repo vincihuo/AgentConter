@@ -121,7 +121,7 @@ BEGIN
             -- 写入金币流水记录
             INSERT INTO  [WHQJRecordDB].dbo.RecordTreasureSerial
                 (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-            VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 13, @StartMoney, @StartInsureScore, @TimeShareGold, @strClientIP, getdate())
+            VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 15, @StartMoney, @StartInsureScore, @TimeShareGold, @strClientIP, getdate())
             --增加么打码量
             DECLARE @Multiple INT
             SELECT @Multiple=CONVERT(INT,Field3)
@@ -131,7 +131,7 @@ BEGIN
             SET @VileBet =@TimeShareGold*@Multiple/100;
             DECLARE @ErrorDescribe	NVARCHAR(127)
             DECLARE @Return INT
-            EXEC @Return=NET_PB_Deposit 4,@UserID,1,'每日分享',@VileBet,@ErrorDescribe OUTPUT
+            EXEC @Return=WHQJTreasureDB.dbo.NET_PB_Deposit 4,@UserID,1,'每日分享',@VileBet,@ErrorDescribe OUTPUT
         END
         --更新钻石
         if @TimeShareDiamond>0

@@ -31,6 +31,13 @@ BEGIN
     SELECT @Immediateperson=COUNT(*) FROM AgentInfo WHERE ParentID=@dwUserID
     SELECT @ImmediateMoney=SUM(Tax),@OtherMoney=SUM(CurrReward)  FROM [WHQJRecordDB].dbo.AgentCountRecord 
     WHERE ParentID=@dwUserID AND DATEDIFF(dd,CountTime,GETDATE())=1
+
+    IF @ImmediateMoney IS NULL
+    BEGIN
+        SET @ImmediateMoney=0
+        SET @OtherMoney=0
+    END
+
     SELECT Allperson=@Allperson,Immediateperson=@Immediateperson,ImmediateMoney=@ImmediateMoney,
             OtherMoney=@OtherMoney,CurrReward=@CurrReward,HisMoney=@HisMoney
 END

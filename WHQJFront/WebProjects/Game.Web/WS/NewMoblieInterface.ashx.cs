@@ -285,7 +285,7 @@ namespace Game.Web.WS
                     //获取线上充值列表
                     case "payrecord":
                         _ajv.SetDataItem("apiVersion",20191109);
-                        //PayRecord();
+                        PayRecord();
                         break;
                     case "paylist":
                         _ajv.SetDataItem("apiVersion", 20191018);
@@ -345,6 +345,33 @@ namespace Game.Web.WS
             }
             context.Response.End();
         }
+        private void PayRecord()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordTreasureSerial.Tablename,index,6,$" WHERE UserID={_userid} AND TypeID=12 ", "ORDER BY CollectDate DESC ");
+            _ajv.SetDataItem("index", ps.PageIndex);
+            _ajv.SetDataItem("pageCount", ps.PageCount);
+            _ajv.SetDataItem("list",ps.PageSet.Tables.Count>0? ps.PageSet.Tables[0]:null);
+        }
+        private void DrawalRecord()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            int type = GameRequest.GetQueryInt("index", 0);
+            string cType;
+            if (type == 0)
+            {
+                cType = " 1=1 ";
+            }
+            else
+            {
+                cType = $"OrderState = {type}";
+            }
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(DrawalOrder.Tablename, index, 6, $" WHERE UserID={_userid} AND "+ cType, " ORDER BY CurrentTime DESC ");
+            _ajv.SetDataItem("index", ps.PageIndex);
+            _ajv.SetDataItem("pageCount", ps.PageCount);
+            _ajv.SetDataItem("list", ps.PageSet.Tables.Count > 0 ? ps.PageSet.Tables[0] : null);
+        }
+
 
         private void BinDingPayee()
         {
@@ -906,7 +933,7 @@ namespace Game.Web.WS
                                      (RecordTreasureType)item["TypeID"] == RecordTreasureType.银行取出
                                         ? 0
                                         : Convert.ToInt32(item["ChangeScore"])),
-                        TypeName = EnumHelper.GetDesc((RecordTreasureType)item["TypeID"])
+                        Type = Convert.ToInt32(item["TypeID"])
                     };
                     list.Add(stream);
                 }
@@ -1484,7 +1511,7 @@ namespace Game.Web.WS
         //领取奖励
         private void GetReward()
         { 
-            Message mm= FacadeManage.aideTreasureFacade.GetReward(2);
+            Message mm= FacadeManage.aideTreasureFacade.GetReward(_userid);
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
