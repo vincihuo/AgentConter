@@ -18,14 +18,15 @@ GO
 
 
 CREATE PROCEDURE dbo.WEB_PageView_New
-	@TableName		NVARCHAR(50),			-- 表名
+	@TableName		NVARCHAR(500),			-- 表名
 	@ReturnFields	NVARCHAR(200) = '*',	-- 查询列数
 	@PageSize		INT = 10,				-- 每页数目
 	@PageIndex		INT = 1,				-- 当前页码
 	@Where			NVARCHAR(500) = '',		-- 查询条件
 	@Order			NVARCHAR(100),			-- 排序字段
 	@PageCount		INT OUTPUT,				-- 页码总数
-	@RecordCount	INT OUTPUT	        	-- 记录总数
+	@RecordCount	INT OUTPUT,	        	-- 记录总数
+	@Lock           NVARCHAR(200) = '(NOLOCK) '
 WITH ENCRYPTION AS
 
 --设置属性
@@ -39,20 +40,19 @@ DECLARE @TotalRecordForPageIndex INT
 
 BEGIN
 	IF @Where IS NULL SET @Where=N''
-	
 	-- 记录总数
 	DECLARE @countSql NVARCHAR(4000)  
-	
 	IF @RecordCount IS NULL
 	BEGIN
-		SET @countSql='SELECT @TotalRecord=Count(*) FROM '+@TableName+'(NOLOCK) '+@Where
+		SET @countSql='SELECT @TotalRecord=Count(*) FROM '+@TableName+@Lock+@Where
+
 		EXECUTE sp_executesql @countSql,N'@TotalRecord int out',@TotalRecord OUT
 	END
 	ELSE
 	BEGIN
 		SET @TotalRecord=@RecordCount
-	END		
-	
+	END
+
 	SET @RecordCount=@TotalRecord
 	SET @TotalPage=(@TotalRecord-1)/@PageSize+1	
 	SET @CurrentPageSize=(@PageIndex-1)*@PageSize
@@ -68,7 +68,7 @@ BEGIN
 	
 	EXEC	('SELECT *
 			FROM (SELECT TOP '+@TotalRecordForPageIndex+' '+@ReturnFields+', ROW_NUMBER() OVER ('+@Order+') AS PageView_RowNo
-			FROM '+@TableName+ '(NOLOCK) ' + @Where +' ) AS TempPageViewTable
+			FROM '+@TableName+ @Lock + @Where +' ) AS TempPageViewTable
 			WHERE TempPageViewTable.PageView_RowNo > 
 			'+@CurrentPageSize)
 	

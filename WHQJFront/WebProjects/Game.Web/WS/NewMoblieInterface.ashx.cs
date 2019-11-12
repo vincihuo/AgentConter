@@ -324,6 +324,10 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191019);
                         SetGameHotFix();
                         break;
+                    case "getidbylink":
+                        _ajv.SetDataItem("apiVersion", 20191109);
+                        GetIdByLink();
+                        break;
                     #endregion
                     default:
                         _ajv.code = (int)ApiCode.VertyParamErrorCode;
@@ -345,18 +349,35 @@ namespace Game.Web.WS
             }
             context.Response.End();
         }
+
+
         private void PayRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);
             PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordTreasureSerial.Tablename,index,6,$" WHERE UserID={_userid} AND TypeID=12 ", "ORDER BY CollectDate DESC ");
             _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("pageCount", ps.PageCount);
-            _ajv.SetDataItem("list",ps.PageSet.Tables.Count>0? ps.PageSet.Tables[0]:null);
+
+            IList<PayRecord> list = new List<PayRecord>();
+            DataTable table = ps.PageSet.Tables[0];
+            if (table != null && table.Rows.Count > 0)
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    PayRecord stream = new PayRecord
+                    {
+                        PayTime= item["CollectDate"].ToString(),
+                        PayMoney=Convert.ToInt64(item["ChangeScore"])
+                    };
+                    list.Add(stream);
+                }
+            }
+            _ajv.SetDataItem("list", list);
         }
         private void DrawalRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);
-            int type = GameRequest.GetQueryInt("index", 0);
+            int type = GameRequest.GetQueryInt("type", 0);
             string cType;
             if (type == 0)
             {
@@ -369,7 +390,23 @@ namespace Game.Web.WS
             PagerSet ps = FacadeManage.aideTreasureFacade.GetList(DrawalOrder.Tablename, index, 6, $" WHERE UserID={_userid} AND "+ cType, " ORDER BY CurrentTime DESC ");
             _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("pageCount", ps.PageCount);
-            _ajv.SetDataItem("list", ps.PageSet.Tables.Count > 0 ? ps.PageSet.Tables[0] : null);
+            IList<DrawalRecord> list = new List<DrawalRecord>();
+            DataTable table = ps.PageSet.Tables[0];
+            if (table != null && table.Rows.Count > 0)
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    DrawalRecord stream = new DrawalRecord
+                    {
+                        DrawalTime=item["CurrentTime"].ToString(),
+                        DrawalMoney=Convert.ToInt64(item["Amount"]),
+                        OrderCost= Convert.ToInt64(item["OrderCost"]),
+                        OrderStatus= Convert.ToInt32(item["OrderState"])
+                    };
+                    list.Add(stream);
+                }
+            }
+            _ajv.SetDataItem("list", list);
         }
 
 
@@ -1554,9 +1591,29 @@ namespace Game.Web.WS
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("index",ps.PageIndex);
             _ajv.SetDataItem("page", ps.PageCount);
-            _ajv.SetDataItem("content", ps.PageSet.Tables.Count>0? ps.PageSet.Tables[0]:null);
-        }
+            IList<AgentDrawalBill> list = new List<AgentDrawalBill>();
+            DataTable table = ps.PageSet.Tables[0];
+            if (table != null && table.Rows.Count > 0)
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    AgentDrawalBill stream = new AgentDrawalBill
+                    {
+                        DrawalTime=item["drawalTime"].ToString(),
+                        DrawalMoney=Convert.ToInt64(item["GetMoney"])
+                    };
+                    list.Add(stream);
+                }
+            }
+            _ajv.SetDataItem("list", list);
 
+        }
+        private void GetIdByLink()
+        {
+            string link = GameRequest.GetQueryString("link");
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("gameid", FacadeManage.aideTreasureFacade.GetIdByLink(link));
+        }
         #endregion
 
 

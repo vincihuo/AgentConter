@@ -1,5 +1,4 @@
 ﻿using Game.Entity.Accounts;
-using Game.Entity.Enum;
 using Game.Facade;
 using Game.Kernel;
 using Game.Utils;
@@ -7,7 +6,6 @@ using Game.Web.UI;
 using System;
 using System.Data;
 using System.Text;
-using Game.Entity.Agent;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -41,113 +39,41 @@ namespace Game.Web.Module.AgentManager
             AgentDataBind();
         }
         /// <summary>
-        /// 批量冻结玩家
-        /// </summary>
-        protected void btnDongjie_Click(object sender, EventArgs e)
-        {
-            //判断权限
-            AuthUserOperationPermission(Permission.Enable);
-            int result = FacadeManage.aideAgentFacade.NullityAgentUser(StrCIdList, 1);
-            if(result > 0)
-            {
-                ShowInfo("冻结成功");
-                AgentDataBind();
-            }
-            else
-            {
-                ShowError("冻结失败");
-            }
-        }
-        /// <summary>
-        /// 批量解冻玩家
-        /// </summary>
-        protected void btnJiedong_Click(object sender, EventArgs e)
-        {
-            //判断权限
-            AuthUserOperationPermission(Permission.Enable);
-            int result = FacadeManage.aideAgentFacade.NullityAgentUser(StrCIdList, 0);
-            if(result > 0)
-            {
-                ShowInfo("解冻成功");
-                AgentDataBind();
-            }
-            else
-            {
-                ShowError("解冻失败");
-            }
-        }
-        /// <summary>
-        /// 获取用户信息
-        /// </summary>
-        /// <returns></returns>
-        protected string GetAccountsInfo(int userid, int agentid)
-        {
-            if (usertable != null && usertable.Rows.Count > 0)
-            {
-                DataRow[] rows = usertable.Select("UserID=" + userid);
-                if (rows != null && rows.Length > 0)
-                {
-                    return string.Format("<td>{0}</td><td><a class=\"l\" href=\"javascript:void(0)\" onclick=\"openWindowOwn('AgentUserUpdate.aspx?param={1}', '{2}', 700,490);\">{2}</a></td>",
-                        rows[0]["GameID"], agentid, rows[0]["NickName"]);
-                }
-            }
-            return "<td></td><td></td>";
-        }
-        /// <summary>
         /// 数据绑定
         /// </summary>
         private void AgentDataBind()
         {
             string query = CtrlHelper.GetTextAndFilter(txtSearch);
             int typeid = Convert.ToInt32(ddlSearchType.SelectedValue);
-            StringBuilder condition = new StringBuilder(" WHERE 1=1");
+            StringBuilder condition = new StringBuilder(" WHERE 1=1 ");
             if (!string.IsNullOrEmpty(query))
             {
+                if (!Utils.Validate.IsPositiveInt(query))
+                {
+                    ShowError("输入查询格式不正确");
+                    return;
+                }
+                UserInfo info = FacadeManage.aideAccountsFacade.GetUserInfo(0, Convert.ToInt32(query));
                 if (typeid == 1)
                 {
-                    if (!Utils.Validate.IsPositiveInt(query))
-                    {
-                        ShowError("输入查询格式不正确");
-                        return;
-                    }
-                    UserInfo info = FacadeManage.aideAccountsFacade.GetUserInfo(0, Convert.ToInt32(query));
-                    condition.AppendFormat(" AND UserID={0}", info != null ? info.UserID : 0);
+                    condition.AppendFormat(" AND ParentID={0}", info != null ? info.UserID : 0);
                 }
                 else
                 {
-                    condition.AppendFormat(" AND {0}={1}", typeid == 2 ? "Compellation" : "ContactPhone", query);
+                    condition.AppendFormat(" AND UserID={0}", info != null ? info.UserID : 0);
                 }
             }
-            
-            PagerSet pagerSet = FacadeManage.aideAgentFacade.GetPageAgentList(condition.ToString(), "ORDER BY AgentID DESC", anpPage.CurrentPageIndex, anpPage.PageSize);
+            PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetListLock(" WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID ",
+                condition.ToString(), " ORDER BY BackMoney DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "R.UserID,A.GameID,A.NickName,R.BeggarNumber,R.AllReward,R.Reward,R.BackMoney,R.LinkUrl");
             anpPage.RecordCount = pagerSet.RecordCount;
             if (pagerSet.RecordCount > 0)
             {
-                usertable = pagerSet.PageSet.Tables[1];
-                parenttable = pagerSet.PageSet.Tables[2];
-                rptDataList.DataSource = pagerSet.PageSet.Tables[0];
+                rptDataList.DataSource = pagerSet.PageSet;
                 rptDataList.DataBind();
             }
             litNoData.Visible = pagerSet.RecordCount <= 0;
             rptDataList.Visible = pagerSet.RecordCount > 0;
         }
         
-        /// <summary>
-        /// 通过代理ID获取代理信息
-        /// </summary>
-        /// <param name="agentid"></param>
-        /// <returns></returns>
-        protected string GetAgentInfo(int agentid)
-        {
-            if (parenttable != null && parenttable.Rows.Count > 0 && agentid>0)
-            {
-                DataRow[] rows = parenttable.Select("AgentID=" + agentid);
-                if (rows != null && rows.Length > 0)
-                {
-                    return string.Format("{0}（{1}）", rows[0]["NickName"], rows[0]["GameID"]);
-                }
-            }
-            return "";
-        }
     }
 }

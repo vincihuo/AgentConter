@@ -98,6 +98,7 @@ namespace Game.IData
         Message ReceiveSpreadAward(int userid, int configid, string ip);
         Message GetReward(int uid);
         DataSet GetAgentInfo(int uid);
+        int GetIdByLink(string link);
         #endregion
 
         #region 钻石信息

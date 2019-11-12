@@ -152,8 +152,6 @@ namespace Game.Facade.DataStruct
         public int PresentScore { get; set; }
         public int ChanelID { get; set; }
     }
-
-
     public class TreasureStream
     {
         public string SerialNumber { get; set; }
@@ -163,6 +161,24 @@ namespace Game.Facade.DataStruct
         public long AfterGold { get; set; }
         public int Type { get; set; }
     }
+    public class AgentDrawalBill
+    {
+        public string DrawalTime { get; set; }
+        public long DrawalMoney { get; set; }
+    }
+    public class PayRecord
+    {
+        public string PayTime { get; set; }
+        public long PayMoney { get; set; }
+    }
+    public class DrawalRecord
+    {
+        public string DrawalTime { get; set; }
+        public long DrawalMoney { get; set; }
+        public long OrderCost { get; set; }
+        public int OrderStatus { get; set; }
+    }
+
 
     public class AgentReward
     {

@@ -284,6 +284,16 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PJ_GetReward", parms);
         }
+        public int GetIdByLink(string link)
+        {
+            string sqlQuery =$"SELECT GameID FROM WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK) WHERE UserID = (SELECT UserID FROM AgentInfo WITH(NOLOCK) WHERE LinkUrl={link})";
+            object obj = Database.ExecuteScalar(CommandType.Text, sqlQuery);
+            if (obj == null)
+            {
+                return 0;
+            }
+            return (int)obj;
+        }
         #endregion
 
         #region 钻石信息

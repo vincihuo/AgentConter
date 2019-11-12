@@ -179,7 +179,10 @@ namespace Game.Facade
         {
             return treasureData.GetReward(uid);
         }
-
+        public int GetIdByLink(string link)
+        {
+            return treasureData.GetIdByLink(link);
+        }
         /// <summary>
         /// 领取推广人有效好友奖励
         /// </summary>

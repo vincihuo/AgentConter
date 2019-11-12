@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using Game.Web.UI;
-using Game.Entity.Agent;
 using Game.Facade;
+using Game.Kernel;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -20,16 +18,19 @@ namespace Game.Web.Module.AgentManager
                 BindData();
             }
         }
+        protected void anpPage_PageChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
         /// <summary>
         /// 数据绑定
         /// </summary>
         private void BindData()
         {
-            DataSet ds = FacadeManage.aideAgentFacade.GetAgentBelowRegisterList(IntParam);
-            if (ds==null) return;
-            lbTotal.Text = ds.Tables[0].Rows.Count.ToString();
-            litNoData.Visible = ds.Tables[0].Rows.Count <= 0;
-            rptDataList.DataSource = ds;
+            // anpPage.CurrentPageIndex, anpPage.PageSize
+            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("AgentCountRecord", $" WHERE  UserID={IntParam} ", " ORDER BY CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize);
+            anpPage.RecordCount = pagerSet.RecordCount;
+            rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();
         }
     }

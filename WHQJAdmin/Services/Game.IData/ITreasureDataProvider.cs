@@ -23,6 +23,7 @@ namespace Game.IData
         /// <param name="fields">查询字段</param>
         /// <returns></returns>
         PagerSet GetList(string tableName, string where, string order, int pageIndex, int pageSize, string[] fields = null);
+        PagerSet GetListLock(string tableName, string where, string order, int pageIndex, int pageSize, string fields = null);
         #endregion 公用分页
 
         #region 提现
