@@ -156,5 +156,3 @@ END
 SELECT @result rst, @TimeShareDiamond as TimeShareDiamond, @TimeShareGold as TimeShareGold
 
 GO
-
-

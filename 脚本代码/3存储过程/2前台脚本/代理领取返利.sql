@@ -52,7 +52,7 @@ BEGIN
     SELECT @Reward=Reward FROM AgentInfo WHERE UserID=@dwUserID
     IF @Reward<1000
     BEGIN
-        SET @strErrorDescribe=N'多余一元奖励才能领取'
+        SET @strErrorDescribe=N'多于一元奖励才能领取'
         RETURN 2001
     END
     SELECT @CurScore=Score,@CurInsureScore=InsureScore FROM GameScoreInfo WHERE UserID = @dwUserID

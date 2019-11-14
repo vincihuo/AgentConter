@@ -1,7 +1,7 @@
 USE [msdb]
 GO
 
-/****** Object:  Job [Ã¿ÈÕ´úÀíË°ÊÕ·µÀû]    Script Date: 2018/6/5 12:04:21 ******/
+/****** Object:  Job [Ã¿ï¿½Õ´ï¿½ï¿½ï¿½Ë°ï¿½Õ·ï¿½ï¿½ï¿½]    Script Date: 2018/6/5 12:04:21 ******/
 BEGIN TRANSACTION
 DECLARE @ReturnCode INT
 SELECT @ReturnCode = 0
@@ -14,19 +14,19 @@ IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 END
 
 DECLARE @jobId BINARY(16)
-EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'Ã¿ÈÕ´úÀíË°ÊÕ·µÀû', 
+EXEC @ReturnCode =  msdb.dbo.sp_add_job @job_name=N'æ¯æ—¥ä»£ç†è¿”åˆ©', 
 		@enabled=1, 
 		@notify_level_eventlog=0, 
 		@notify_level_email=0, 
 		@notify_level_netsend=0, 
 		@notify_level_page=0, 
 		@delete_level=0, 
-		@description=N'ÎŞÃèÊö¡£', 
+		@description=N'äº”æè¿°', 
 		@category_name=N'[Uncategorized (Local)]', 
 		@owner_login_name=N'sa', @job_id = @jobId OUTPUT
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-/****** Object:  Step [Ã¿ÈÕ´úÀíË°ÊÕ·µÀû]    Script Date: 2018/6/5 12:04:21 ******/
-EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Ã¿ÈÕ´úÀíË°ÊÕ·µÀû', 
+/****** Object:  Step [Ã¿ï¿½Õ´ï¿½ï¿½ï¿½Ë°ï¿½Õ·ï¿½ï¿½ï¿½]    Script Date: 2018/6/5 12:04:21 ******/
+EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'æ¯æ—¥ä»£ç†è¿”åˆ©', 
 		@step_id=1, 
 		@cmdexec_success_code=0, 
 		@on_success_action=1, 
@@ -42,7 +42,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobstep @job_id=@jobId, @step_name=N'Ã¿ÈÕ´úÀí
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 EXEC @ReturnCode = msdb.dbo.sp_update_job @job_id = @jobId, @start_step_id = 1
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
-EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Ã¿ÈÕ´úÀíË°ÊÕ·µÀû', 
+EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'æ¯æ—¥ä»£ç†è¿”åˆ©', 
 		@enabled=1, 
 		@freq_type=4, 
 		@freq_interval=1, 
@@ -53,7 +53,7 @@ EXEC @ReturnCode = msdb.dbo.sp_add_jobschedule @job_id=@jobId, @name=N'Ã¿ÈÕ´úÀíË
 		@active_start_date=20180530, 
 		@active_end_date=99991231, 
 		@active_start_time=10000, 
-		@active_end_time=235959, 
+		@active_end_time=00001, 
 		@schedule_uid=N'9ab5ff10-f6f2-4e9a-bb2a-bd0bb3730978'
 IF (@@ERROR <> 0 OR @ReturnCode <> 0) GOTO QuitWithRollback
 EXEC @ReturnCode = msdb.dbo.sp_add_jobserver @job_id = @jobId, @server_name = N'(local)'
