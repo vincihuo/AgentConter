@@ -176,8 +176,7 @@ namespace Game.Web.WS
                         break;
                     //获取游戏列表
                     case "getgamelist":
-                        RewardDrawalBill();
-                        //GetGameList();
+                        GetGameList();
                         break;
                     //领取注册赠送奖励
                     case "receiveregistergrant":
@@ -1555,10 +1554,11 @@ namespace Game.Web.WS
         private void RewardRecord()
         {
             int index = GameRequest.GetQueryInt("index",1);
+            int uid = GameRequest.GetQueryInt("uid", _userid);
 
             string[] fields = { "A.GameID", "A.NickName", "R.BeggarNumber", "R.AllReward", "R.Reward" , "R.BackMoney" };
             string[] fieldAlias = { "GameID", "NickName", "BeggarNumber", "AllReward", "Reward", "BackMoney" };
-            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(" WHQJAccountsDB.dbo.AccountsInfo A INNER JOIN WHQJTreasureDB.dbo.AgentInfo R ON A.UserID = R.UserID ", index, 6, $" WHERE R.ParentID = {_userid} ",
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(" WHQJAccountsDB.dbo.AccountsInfo A INNER JOIN WHQJTreasureDB.dbo.AgentInfo R ON A.UserID = R.UserID ", index, 6, $" WHERE R.ParentID = {uid} ",
                 " ORDER BY BackMoney DESC ", fields, fieldAlias);
 
             IList<AgentReward> list = new List<AgentReward>();
