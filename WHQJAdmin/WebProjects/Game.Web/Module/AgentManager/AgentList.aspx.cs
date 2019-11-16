@@ -6,6 +6,7 @@ using Game.Web.UI;
 using System;
 using System.Data;
 using System.Text;
+using System.Web.UI.WebControls;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -38,9 +39,20 @@ namespace Game.Web.Module.AgentManager
         {
             AgentDataBind();
         }
+
+
+
+        protected void SelectBeggar(object sender, EventArgs e)
+        {
+            string id = ((Button)sender).CommandArgument;
+            txtSearch.Text = id;
+            ddlSearchType.SelectedValue=Convert.ToString(2);
+            AgentDataBind();
+        }
         /// <summary>
         /// 数据绑定
         /// </summary>
+        /// 
         private void AgentDataBind()
         {
             string query = CtrlHelper.GetTextAndFilter(txtSearch);
@@ -56,11 +68,11 @@ namespace Game.Web.Module.AgentManager
                 UserInfo info = FacadeManage.aideAccountsFacade.GetUserInfo(0, Convert.ToInt32(query));
                 if (typeid == 1)
                 {
-                    condition.AppendFormat(" AND ParentID={0}", info != null ? info.UserID : 0);
+                    condition.AppendFormat(" AND R.ParentID={0}", info != null ? info.UserID : 0);
                 }
                 else
                 {
-                    condition.AppendFormat(" AND UserID={0}", info != null ? info.UserID : 0);
+                    condition.AppendFormat(" AND R.UserID={0}", info != null ? info.UserID : 0);
                 }
             }
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetListLock(" WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID ",
@@ -74,6 +86,6 @@ namespace Game.Web.Module.AgentManager
             litNoData.Visible = pagerSet.RecordCount <= 0;
             rptDataList.Visible = pagerSet.RecordCount > 0;
         }
-        
+
     }
 }

@@ -113,8 +113,6 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PW_CreateBankPayOrder", prams);
         }
-
-
         public UserValidBet GetValidBetByUid(int uid)
         {
             string sql = $"SELECT * FROM UserValidBet where UserID={uid}";

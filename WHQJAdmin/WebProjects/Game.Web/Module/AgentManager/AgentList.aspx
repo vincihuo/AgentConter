@@ -12,6 +12,13 @@
     <script type="text/javascript" src="../../scripts/common.js"></script>
 
     <script type="text/javascript" src="../../scripts/comm.js"></script>
+
+     <script type="text/javascript">
+         function getnickname(id) {
+             $("#txtGameID")
+         }
+  </script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -106,6 +113,7 @@
                             </td>
 
                             <td>
+                                <asp:Button runat="server" Text="查看下级"  OnClick="SelectBeggar" CommandArgument='<%# Eval("GameID")%>' />
                                 <a class="l" href="javascript:void(0)" onclick="javascript:openWindowOwn('AgentUserUnder.aspx?param=<%#Eval("UserID").ToString() %>','UnderUser',700,600);">结算记录</a>
                             </td>
                         </tr>
