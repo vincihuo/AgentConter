@@ -689,46 +689,35 @@ namespace Game.Web.WS
         }
         private void GetPayList()
         {
-            int typeID = GameRequest.GetQueryInt("typeid", 0);
-            switch (typeID)
-            {
-                case 1:          //线上充值
-                    int payType= GameRequest.GetQueryInt("typeid", 0);
-                    IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(payType);
-
-                    List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
-                    for (int i = 0; i < list.Count; ++i)
-                    {
-                        AppOnlinePayConfig t = new AppOnlinePayConfig();
-                        t.ChanelID = list[i].ChanelID;
-                        t.ID = list[i].ID;
-                        t.PayType = list[i].PayType;
-                        t.PayName = list[i].PayName;
-                        t.ShoutCut = list[i].ShoutCut;
-                        t.PresentScore = list[i].PresentScore;
-                        pp.Add(t);
-                    }
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("list", pp);
-                    break;
-                case 2:
-                    IList<OfficalBankPay> list1 = FacadeManage.aideTreasureFacade.GetBankPayList();
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("list", list1);
-                    break;
-                case 3:
-                    IList<OfficalImgPay> list2 = FacadeManage.aideTreasureFacade.GetImgPayList();
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("list", list2);
-                    break;
-                case 4:
-                    IList<OnLineWeChat> list3 = FacadeManage.aideTreasureFacade.GetOnLineWeChatList();
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("List", list3);
-                    break;
+            //线上充值
+            for (int payType = 1; payType <= 3; ++payType) {
+                IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(payType);
+                List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
+                for (int i = 0; i < list.Count; ++i)
+                {
+                    AppOnlinePayConfig t = new AppOnlinePayConfig();
+                    t.ChanelID = list[i].ChanelID;
+                    t.ID = list[i].ID;
+                    t.PayType = list[i].PayType;
+                    t.PayName = list[i].PayName;
+                    t.ShoutCut = list[i].ShoutCut;
+                    t.PresentScore = list[i].PresentScore;
+                    pp.Add(t);
+                }
+                _ajv.SetValidDataValue(true);
+                _ajv.SetDataItem("list1_" + Convert.ToString(payType), pp);
             }
+            IList<OfficalBankPay> list1 = FacadeManage.aideTreasureFacade.GetBankPayList();
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("list2", list1);
 
+            IList<OfficalImgPay> list2 = FacadeManage.aideTreasureFacade.GetImgPayList();
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("list3", list2);
 
+            IList<OnLineWeChat> list3 = FacadeManage.aideTreasureFacade.GetOnLineWeChatList();
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("List4", list3);
         }
         /// <summary>
         /// 获取充值产品列表
