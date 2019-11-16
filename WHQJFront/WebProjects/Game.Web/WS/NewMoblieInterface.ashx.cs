@@ -692,6 +692,10 @@ namespace Game.Web.WS
             //线上充值
             for (int payType = 1; payType <= 3; ++payType) {
                 IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(payType);
+                if (list==null)
+                {
+                    continue;
+                }
                 List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
                 for (int i = 0; i < list.Count; ++i)
                 {
