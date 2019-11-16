@@ -48,9 +48,9 @@ namespace Game.Data
 
         #region 线上充值
 
-        public IList<OnlinePayConfig> GetOnLinePayList()
+        public IList<OnlinePayConfig> GetOnLinePayList(int payType)
         {
-            const string sqlQuery = "SELECT * FROM OnlinePayConfig WITH(NOLOCK)  ORDER BY PayIdentity DESC,SortID DESC";
+            string sqlQuery = $"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE PayType={payType}  ORDER BY PayIdentity DESC,SortID DESC";
             return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery);
         }
 

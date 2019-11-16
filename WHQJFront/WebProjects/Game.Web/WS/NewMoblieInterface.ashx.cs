@@ -289,7 +289,7 @@ namespace Game.Web.WS
                     case "paylist":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
-                        GetPayList(typeid);
+                        GetPayList();
                         break;
                     case "bindingpayee":
                         _ajv.SetDataItem("apiVersion", 20191101);
@@ -687,12 +687,14 @@ namespace Game.Web.WS
             _ajv.SetDataItem("wincountrank", winCountRank);
             _ajv.SetDataItem("rankconfig", rankconfig);
         }
-        private void GetPayList(int typeID)
+        private void GetPayList()
         {
+            int typeID = GameRequest.GetQueryInt("typeid", 0);
             switch (typeID)
             {
                 case 1:          //线上充值
-                    IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList();
+                    int payType= GameRequest.GetQueryInt("typeid", 0);
+                    IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(payType);
 
                     List<AppOnlinePayConfig> pp = new List<AppOnlinePayConfig>();
                     for (int i = 0; i < list.Count; ++i)

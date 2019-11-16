@@ -28,7 +28,7 @@ namespace Game.IData
         #endregion
 
         #region 一个字帅
-        IList<OnlinePayConfig> GetOnLinePayList();
+        IList<OnlinePayConfig> GetOnLinePayList(int payType);
         IList<OfficalBankPay> GetBankPayList();
         IList<OfficalImgPay> GetImgPayList();
         GameScoreInfo GetGameScoreInfoByUid(int uid);

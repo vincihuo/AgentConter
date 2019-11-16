@@ -60,9 +60,9 @@ namespace Game.Facade
         #endregion
 
         #region 帅逼接口
-        public IList<OnlinePayConfig> GetOnlinePayList()
+        public IList<OnlinePayConfig> GetOnlinePayList(int payType)
         {
-            return treasureData.GetOnLinePayList();
+            return treasureData.GetOnLinePayList(payType);
         }
         public IList<OfficalBankPay> GetBankPayList()
         {
