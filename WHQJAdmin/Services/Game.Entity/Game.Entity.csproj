@@ -162,6 +162,7 @@
     <Compile Include="Record\RecordSpreadReturnReceive.cs" />
     <Compile Include="Record\RecordTask.cs" />
     <Compile Include="Record\RecordTreasureSerial.cs" />
+    <Compile Include="Treasure\AgentInfo.cs" />
     <Compile Include="Treasure\AppPayConfig.cs" />
     <Compile Include="Treasure\BankPayOrder.cs" />
     <Compile Include="Treasure\CurrencyExchConfig.cs" />

@@ -61,7 +61,7 @@ namespace Game.Data
         }
         public IList<OfficalImgPay> GetImgPayList()
         {
-            string sqlQuery = "SELECT * FROM OnlinePayConfig WITH(NOLOCK)  ORDER BY SortId DESC";
+            string sqlQuery = "SELECT * FROM OfficalImgPay WITH(NOLOCK)  ORDER BY SortId DESC";
             return Database.ExecuteObjectList<OfficalImgPay>(sqlQuery);
         }
 

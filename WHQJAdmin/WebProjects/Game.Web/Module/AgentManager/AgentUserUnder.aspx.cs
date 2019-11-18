@@ -2,6 +2,10 @@
 using Game.Web.UI;
 using Game.Facade;
 using Game.Kernel;
+using Game.Utils;
+using System.Text;
+using System.Data;
+using System.Web.UI.WebControls;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -15,6 +19,10 @@ namespace Game.Web.Module.AgentManager
             base.moduleID = 1001;
             if(!IsPostBack)
             {
+                txtStartDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                SetDropDown();
+                SetCondition();
                 BindData();
             }
         }
@@ -28,10 +36,63 @@ namespace Game.Web.Module.AgentManager
         private void BindData()
         {
             // anpPage.CurrentPageIndex, anpPage.PageSize
-            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("AgentCountRecord", $" WHERE  UserID={IntParam} ", " ORDER BY CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize);
+            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetListLock("WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJRecordDB.dbo.AgentCountRecord (NOLOCK) R ON A.UserID = R.UserID ", SearchItems, " ORDER BY R.CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "A.UserID,A.GameID,A.NickName,R.CountTime,R.Tax,R.SubNumber,R.ParentID,R.BeggarNumber,R.CurrReward");
             anpPage.RecordCount = pagerSet.RecordCount;
             rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();
         }
+        protected void GameID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetCondition();
+            BindData();
+        }
+        protected void btnQuery_Click(object sender, EventArgs e)
+        {
+            SetCondition();
+            BindData();
+        }
+
+        private void SetDropDown()
+        {
+            DataSet ds = FacadeManage.aideTreasureFacade.GetSubList(IntParam);
+            DropDownList1.Items.Clear();
+            DataTable table = ds.Tables[0];
+            if (table == null || table.Rows.Count <= 0) return;
+            int i = 1;
+            DropDownList1.Items.Add(new ListItem("全部", "0"));
+            foreach (DataRow row in table.Rows)
+            {
+                DropDownList1.Items.Add(new ListItem(row["GameID"].ToString(), i.ToString()));
+                i++;
+            }
+        }
+
+        private void SetCondition()
+        {
+            string startDate = CtrlHelper.GetText(txtStartDate);
+            string endDate = CtrlHelper.GetText(txtEndDate);
+            StringBuilder condition = new StringBuilder($" WHERE  R.ParentID={IntParam}");
+       
+            if (DropDownList1.SelectedValue != "0")
+            {
+                condition.AppendFormat(" AND R.UserID ={0}", DropDownList1.SelectedItem.Text);
+            }
+            condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+
+            ViewState["SearchItems"] = condition.ToString();
+        }
+        public string SearchItems
+        {
+            get
+            {
+                if (ViewState["SearchItems"] == null)
+                {
+                    SetCondition();
+                }
+                return (string)ViewState["SearchItems"];
+            }
+            set { ViewState["SearchItems"] = value; }
+        }
+
     }
 }

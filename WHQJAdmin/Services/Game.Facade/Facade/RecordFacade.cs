@@ -48,6 +48,12 @@ namespace Game.Facade
         {
             return aideRecordData.GetList(tableName, where, order, pageIndex, pageSize, fields);
         }
+
+        public PagerSet GetListLock(string tableName, string where, string order, int pageIndex, int pageSize, string fields = null)
+        {
+            return aideRecordData.GetListLock(tableName, where, order, pageIndex, pageSize, fields);
+        }
+
         #endregion 公用分页
 
         #region 查询钻石

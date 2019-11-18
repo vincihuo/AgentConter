@@ -59,7 +59,6 @@ namespace Game.IData
         UserValidBet GetUserVailBet(int UserId);
         #endregion
 
-
         #region 充值配置
         /// <summary>
         /// 获取充值产品
@@ -160,6 +159,7 @@ namespace Game.IData
         /// <param name="config"></param>
         /// <returns></returns>
         int SaveSpreadReturnConfig(SpreadReturnConfig config);
+        DataSet GetSubList(int uid);
         #endregion
 
         #region 钻石信息

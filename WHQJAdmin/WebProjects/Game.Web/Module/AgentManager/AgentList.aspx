@@ -13,11 +13,11 @@
 
     <script type="text/javascript" src="../../scripts/comm.js"></script>
 
-     <script type="text/javascript">
-         function getnickname(id) {
-             $("#txtGameID")
-         }
-  </script>
+    <script type="text/javascript">
+        function getnickname(id) {
+            $("#txtGameID")
+        }
+    </script>
 
 </head>
 <body>
@@ -48,35 +48,24 @@
                 </td>
             </tr>
         </table>
-        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="Tmg7">
-            <tr>
-                <td height="39" class="titleOpBg">
-                    <input type="button" value="新增" class="btn wd1" onclick="openWindowOwn('AgentUserInfo.aspx', 'addagent', 700, 600)" />
-                </td>
-            </tr>
-        </table>
         <div id="content">
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="box" id="list">
                 <tr align="center" class="bold">
-                    <td class="listTitle">
-                        <input type="checkbox" name="chkAll" onclick="SelectAll(this.checked);" />
-                    </td>
-                    <td class="listTitle2">管理
-                    </td>
                     <td class="listTitle2">游戏ID
                     </td>
                     <td class="listTitle2">代理昵称
+                    </td>
+                    <td class="listTitle2">本人税收
                     </td>
                     <td class="listTitle2">下级人数
                     </td>
                     <td class="listTitle2">代理域名
                     </td>
-                    <td class="listTitle2">当前奖励
+                    <td class="listTitle2">可领取奖励
                     </td>
                     <td class="listTitle2">已领奖励
                     </td>
-                    <td class="listTitle2">上级返利
-                    </td>
+
                     <td class="listTitle2">代理操作
                     </td>
                 </tr>
@@ -84,12 +73,6 @@
                     <ItemTemplate>
                         <tr align="center" class="list" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
                             onmouseout="this.style.backgroundColor=currentcolor">
-                            <td style="width: 30px;">
-                                <input name='cid' type='checkbox' value='<%# Eval("UserID").ToString()%>' />
-                            </td>
-                            <td>
-                                <a href="javascript:;" class="l" onclick="openWindowOwn('AgentUserUpdate.aspx?param=<%# Eval( "UserID") %>', '', 700,490);">编辑</a>
-                            </td>
                             <td>
                                 <%# Eval( "GameID" ) %>
                             </td>
@@ -97,7 +80,10 @@
                                 <%# Eval( "NickName" ) %>
                             </td>
                             <td>
-                                <%# Eval( "BeggarNumber" ) %>
+                                <%#FacadeManage.ConversionMoneyToShow(Eval("BackMoney").ToString())%>
+                            </td>
+                            <td>
+                                <%# Eval( "SubNumber" ) %>
                             </td>
                             <td>
                                 <%# Eval( "LinkUrl" ) %>
@@ -108,13 +94,10 @@
                             <td>
                                 <%#FacadeManage.ConversionMoneyToShow(Eval("AllReward").ToString()) %>
                             </td>
-                            <td>
-                                <%#FacadeManage.ConversionMoneyToShow(Eval("BackMoney").ToString())%>
-                            </td>
 
                             <td>
-                                <asp:Button runat="server" Text="查看下级"  OnClick="SelectBeggar" CommandArgument='<%# Eval("GameID")%>' />
-                                <a class="l" href="javascript:void(0)" onclick="javascript:openWindowOwn('AgentUserUnder.aspx?param=<%#Eval("UserID").ToString() %>','UnderUser',700,600);">结算记录</a>
+                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentUserUnder.aspx?param='+<%# Eval("UserID")%>);">下级报表</a>
+                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>
                     </ItemTemplate>

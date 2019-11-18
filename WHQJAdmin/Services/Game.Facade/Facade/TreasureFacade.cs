@@ -331,6 +331,13 @@ namespace Game.Facade
         {
             return aideTreasureData.SaveSpreadReturnConfig(config);
         }
+
+
+        public DataSet GetSubList(int uid)
+        {
+            return aideTreasureData.GetSubList(uid);
+        }
+
         #endregion
 
         #region 钻石信息

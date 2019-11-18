@@ -61,7 +61,6 @@ namespace Game.Data
             ps.PageSet = ds;
             ps.PageCount = Convert.ToInt32(prams[6].Value);
             ps.RecordCount = Convert.ToInt32(prams[7].Value);
-
             return ps;
         }
 
@@ -708,7 +707,12 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sql, prams.ToArray());
         }
+        public DataSet GetSubList(int uid)
+        {
+            string sql = $"SELECT A.GameID FROM WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID WHERE R.ParentID={uid}";
+            return Database.ExecuteDataset(CommandType.Text, sql);
 
+        }
         #endregion
 
         #region 钻石信息与奖券

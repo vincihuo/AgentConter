@@ -12,8 +12,6 @@ namespace Game.Web.Module.AgentManager
 {
     public partial class AgentList : AdminPage
     {
-        private DataTable usertable;
-        private DataTable parenttable;
         /// <summary>
         /// 页面加载
         /// </summary>
@@ -22,6 +20,12 @@ namespace Game.Web.Module.AgentManager
             base.moduleID = 1001;
             if (!IsPostBack)
             {
+                if (IntParam > 0)
+                {
+                    UserInfo info = FacadeManage.aideAccountsFacade.GetUserInfo(IntParam);
+                    txtSearch.Text = info.GameID.ToString();
+                    ddlSearchType.SelectedValue = Convert.ToString(1);
+                }
                 AgentDataBind();
             }
         }
@@ -39,14 +43,11 @@ namespace Game.Web.Module.AgentManager
         {
             AgentDataBind();
         }
-
-
-
         protected void SelectBeggar(object sender, EventArgs e)
         {
-            string id = ((Button)sender).CommandArgument;
+            string id = ((LinkButton)sender).CommandArgument;
             txtSearch.Text = id;
-            ddlSearchType.SelectedValue=Convert.ToString(2);
+            ddlSearchType.SelectedValue=Convert.ToString(1);
             AgentDataBind();
         }
         /// <summary>
@@ -68,15 +69,15 @@ namespace Game.Web.Module.AgentManager
                 UserInfo info = FacadeManage.aideAccountsFacade.GetUserInfo(0, Convert.ToInt32(query));
                 if (typeid == 1)
                 {
-                    condition.AppendFormat(" AND R.ParentID={0}", info != null ? info.UserID : 0);
+                    condition.AppendFormat(" AND R.UserID={0}", info != null ? info.UserID : 0);
                 }
                 else
                 {
-                    condition.AppendFormat(" AND R.UserID={0}", info != null ? info.UserID : 0);
+                    condition.AppendFormat(" AND R.ParentID={0}", info != null ? info.UserID : 0);
                 }
             }
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetListLock(" WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID ",
-                condition.ToString(), " ORDER BY BackMoney DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "R.UserID,A.GameID,A.NickName,R.BeggarNumber,R.AllReward,R.Reward,R.BackMoney,R.LinkUrl");
+                condition.ToString(), " ORDER BY BackMoney DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "R.UserID,A.GameID,A.NickName,R.SubNumber,R.AllReward,R.ParentID,R.Reward,R.BackMoney,R.LinkUrl");
             anpPage.RecordCount = pagerSet.RecordCount;
             if (pagerSet.RecordCount > 0)
             {
@@ -86,6 +87,6 @@ namespace Game.Web.Module.AgentManager
             litNoData.Visible = pagerSet.RecordCount <= 0;
             rptDataList.Visible = pagerSet.RecordCount > 0;
         }
-
+         
     }
 }
