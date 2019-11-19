@@ -30,7 +30,24 @@ namespace Game.Web.Module.AccountManager
             base.moduleID = 100;
             if (!IsPostBack)
             {
+                SetTarget();
                 AccountsDataBind();
+            }
+        }
+        protected void SetTarget()
+        {
+            DropDownList2.Items.Clear();
+            string cfg = FacadeManage.aideNativeWebFacade.GetConfigInfo(3).Field5;
+            if (cfg == null)
+            {
+                return;
+            }
+            DropDownList2.Items.Add(new ListItem("全部", "-1"));
+            DropDownList2.Items.Add(new ListItem("无", "0"));
+            string[] strList = cfg.Split(',');
+            for (int i = 0; i < strList.Length; ++i)
+            {
+                DropDownList2.Items.Add(new ListItem(strList[i], (i + 1).ToString()));
             }
         }
 
@@ -190,6 +207,40 @@ namespace Game.Web.Module.AccountManager
                     condition.AppendFormat(" AND NickName='{0}'", query);
                 }
             }
+
+            string tag = DropDownList2.SelectedValue;
+            if (tag != "0")
+            {
+                condition.AppendFormat(" AND RankID={0} ", tag);
+            }
+            string regestIp = TextBox1.Text;
+            if (regestIp != "")
+            {
+                condition.AppendFormat(" AND RegisterIP='{0}' ", regestIp);
+            }
+            string logonIp = TextBox2.Text;
+            if (logonIp != "")
+            {
+                condition.AppendFormat(" AND LastLogonIP='{0}' ", logonIp);
+            }
+            string state = DropDownList1.SelectedValue;
+            if (state != "0")
+            {
+                condition.AppendFormat(" AND Nullity={0} ", Convert.ToInt32(state) - 1);
+            }
+            string RSTime = txtStartDate.Text;
+            string RETime = txtEndDate.Text;
+            if (RSTime != "" && RETime != "")
+            {
+                condition.AppendFormat(" AND RegisterDate BETWEEN '{0}' AND '{1}' ", RSTime, RETime);
+            }
+            string LSTime = TextBox3.Text;
+            string LETime = TextBox4.Text;
+            if (LSTime != "" && LETime != "")
+            {
+                condition.AppendFormat(" AND LastLogonDate BETWEEN '{0}' AND '{1}' ", LSTime, LETime);
+            }
+
 
             PagerSet pagerSet = FacadeManage.aideAccountsFacade.GetUserPageList(condition.ToString(), Orderby, anpPage.CurrentPageIndex, anpPage.PageSize);
             anpPage.RecordCount = pagerSet.RecordCount;

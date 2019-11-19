@@ -6,9 +6,7 @@
 <head id="Head1" runat="server">
     <link href="../../styles/layout.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../scripts/common.js"></script>
-
     <script type="text/javascript" src="../../scripts/comm.js"></script>
-
     <script type="text/javascript" src="../../scripts/My97DatePicker/WdatePicker.js"></script>
     <title>下级报表</title>
 </head>
@@ -46,11 +44,6 @@
 
                     <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                 </td>
-
-
-
-
-
                 <td class="titleOpBg Lpd10">
                     <span style="color: white; font-size: 14px; font-weight: bold;">下线总注册人数：<asp:Label ID="lbTotal" runat="server" Text="0"></asp:Label></span>
                 </td>
@@ -116,7 +109,7 @@
                                 <%# FacadeManage.ConversionMoneyToShow((Int64)((Convert.ToInt32(Eval( "CurrReward" ))+Convert.ToInt32(Eval( "Tax" )))*0.3)) %>
                             </td>
                             <td>
-                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentUserUnder.aspx?param='+<%# Eval("UserID")%>);">下级报表</a>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnSub" Text="下级报表" CommandArgument='<%# ParseArgument(Convert.ToInt32(Eval("UserID")),Eval("CountTime").ToString()) %> '></asp:LinkButton>
                                 <a class="l" href="javascript:void(0)" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>

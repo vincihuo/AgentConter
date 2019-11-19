@@ -87,6 +87,12 @@
                 <td style="width: 150px;">
                     <asp:TextBox ID="txtLognPass" CssClass="text" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
+                <td class="listTdLeft">用户标签：>
+                </td>
+                <td>
+                    <asp:DropDownList ID="DropDownList2" runat="server">
+                    </asp:DropDownList>
+                </td>
             </tr>
 
             <tr>
@@ -95,12 +101,12 @@
                 <td style="width: 150px;">
                     <asp:TextBox ID="txtInsurePass" CssClass="text" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
-                <td class="listTdLeft">用户状态：
+            <%--    <td class="listTdLeft">用户状态：
                 </td>
                 <td style="width: 150px;">
                     <asp:CheckBox ID="ckbNullity" runat="server" Text="冻结帐号" />
                     <asp:CheckBox ID="ckbLock" runat="server" Text="锁定客户端" />
-                </td>
+                </td>--%>
             </tr>
             <tr>
                 <td class="listTdLeft">真实姓名：

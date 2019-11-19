@@ -85,6 +85,15 @@ namespace Game.Web.Module.AccountManager {
         protected global::System.Web.UI.WebControls.TextBox txtLognPass;
         
         /// <summary>
+        /// DropDownList2 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        
+        /// <summary>
         /// txtInsurePass 控件。
         /// </summary>
         /// <remarks>
@@ -92,24 +101,6 @@ namespace Game.Web.Module.AccountManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInsurePass;
-        
-        /// <summary>
-        /// ckbNullity 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbNullity;
-        
-        /// <summary>
-        /// ckbLock 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbLock;
         
         /// <summary>
         /// txtRealName 控件。

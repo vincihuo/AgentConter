@@ -55,7 +55,7 @@ namespace Game.Web.Module.FilledManager
             mm.signArray = SignArray.Text;
             mm.splicetype = Convert.ToByte(TextBox3.Text);
             mm.joiner1 = TextBox1.Text;
-            mm.joiner1 = TextBox4.Text;
+            mm.joiner2 = TextBox4.Text;
             mm.type = Convert.ToByte(TextBox5.Text);
             mm.updown = Convert.ToByte(TextBox6.Text);
             mm.mapPos = TextBox7.Text;

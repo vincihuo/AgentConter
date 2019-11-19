@@ -151,6 +151,8 @@ namespace Game.Facade.DataStruct
         public string ShoutCut { get; set; }
         public int PresentScore { get; set; }
         public int ChanelID { get; set; }
+        public int Max { get; set; }
+        public int Min { get; set; }
     }
     public class TreasureStream
     {

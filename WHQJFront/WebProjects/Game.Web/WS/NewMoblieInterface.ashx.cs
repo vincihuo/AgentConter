@@ -706,6 +706,8 @@ namespace Game.Web.WS
                     t.PayName = list[i].PayName;
                     t.ShoutCut = list[i].ShoutCut;
                     t.PresentScore = list[i].PresentScore;
+                    t.Max = list[i].MaxAmount;
+                    t.Min = list[i].MinAmount;
                     pp.Add(t);
                 }
                 _ajv.SetValidDataValue(true);
