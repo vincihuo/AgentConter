@@ -1569,8 +1569,8 @@ namespace Game.Web.WS
                         NicekName = item["NickName"].ToString(),
                         GameId = Convert.ToInt32(item["GameID"]),
                         person= Convert.ToInt32(item["BeggarNumber"]),
-                        personMoney = Convert.ToInt32(item["AllReward"])+ Convert.ToInt32(item["Reward"]),
-                        AllMoney = Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])+ Convert.ToInt32(item["BackMoney"]),
+                        personMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"]) * 0.3),
+                        AllMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])*0.3) + Convert.ToInt32(item["BackMoney"]),
                     };
                     list.Add(stream);
                 }

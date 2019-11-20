@@ -209,7 +209,7 @@ namespace Game.Web.Module.AccountManager
             }
 
             string tag = DropDownList2.SelectedValue;
-            if (tag != "0")
+            if (tag != "-1")
             {
                 condition.AppendFormat(" AND RankID={0} ", tag);
             }
