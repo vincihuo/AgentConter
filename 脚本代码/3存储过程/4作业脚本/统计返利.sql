@@ -52,7 +52,7 @@ BEGIN
         UPDATE AgentInfo SET YesterDayReward=@Curr,Reward=Reward+@Curr,Tax=0,BackMoney=BackMoney+@Tax*0.3 WHERE UserID=@dwUserID
         
         INSERT [WHQJRecordDB].dbo.AgentCountRecord (UserID,ParentID,Tax,BeforeReward,BeggarNumber,SubNumber,CurrReward,CountTime)
-        VALUES (@dwUserID,@Parent,@Tax,@Reward,@Beggar,@Curr,@Sub,GETDATE())
+        VALUES (@dwUserID,@Parent,@Tax,@Reward,@Beggar,@Sub,@Curr,GETDATE())
     END
     SET @Count = @Curr*0.3+@Tax*0.3
 END

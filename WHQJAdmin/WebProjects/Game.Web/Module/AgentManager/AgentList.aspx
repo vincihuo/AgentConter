@@ -29,7 +29,7 @@
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：用户系统 - 代理账号
+                <td width="1232" height="25" valign="top" align="left">你当前位置：用户系统 - 代理管理
                 </td>
             </tr>
         </table>
@@ -97,7 +97,7 @@
 
                             <td>
                                 <a class="l" href="javascript:void(0)" onclick="Redirect('AgentUserUnder.aspx?param='+<%# Eval("UserID")%>);">返利报表</a>
-                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
+                                <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>
                     </ItemTemplate>

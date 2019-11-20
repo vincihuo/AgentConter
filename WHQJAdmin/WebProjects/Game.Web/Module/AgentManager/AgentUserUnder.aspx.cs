@@ -118,6 +118,14 @@ namespace Game.Web.Module.AgentManager
             }
             set { ViewState["SearchItems"] = value; }
         }
+        protected string GetStyle(int id)
+        {
+            if (id == 0)
+            {
+                return "visibility:hidden";
+            }
+            return "visibility:visible";
+        }
 
     }
 }

@@ -18,7 +18,7 @@
                 </div>
             </td>
             <td width="1232" height="25" valign="top" align="left">
-                目前操作功能：网站系统 - 发送消息
+                目前操作功能：网站系统 - 推送消息
             </td>
         </tr>
     </table>

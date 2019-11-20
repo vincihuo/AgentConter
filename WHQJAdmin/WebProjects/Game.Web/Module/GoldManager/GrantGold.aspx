@@ -94,7 +94,7 @@
       <td>
         <asp:TextBox ID="VileBet" runat="server" CssClass="text wd4" ></asp:TextBox>
         <span class="hong">*</span>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="输入打码量" Display="Dynamic" ControlToValidate="txtGold" ForeColor="Red"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="输入打码量" Display="Dynamic" ControlToValidate="VileBet" ForeColor="Red"></asp:RequiredFieldValidator>
       </td>
     </tr>
 

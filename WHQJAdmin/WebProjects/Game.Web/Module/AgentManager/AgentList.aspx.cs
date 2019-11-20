@@ -29,6 +29,14 @@ namespace Game.Web.Module.AgentManager
                 AgentDataBind();
             }
         }
+        protected string GetStyle(int id)
+        {
+            if (id == 0)
+            {
+                return "visibility:hidden";
+            }
+            return "visibility:visible";
+        }
         /// <summary>
         /// 数据分页
         /// </summary>

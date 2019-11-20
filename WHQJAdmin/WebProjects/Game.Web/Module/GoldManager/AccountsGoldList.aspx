@@ -145,54 +145,6 @@
                         </td>
                     </tr>
                 </ItemTemplate>
-                <AlternatingItemTemplate>
-                    <tr align="center" class="listBg" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
-                        onmouseout="this.style.backgroundColor=currentcolor">
-                        <%# GetAccountsInfo(Convert.ToInt32(Eval("UserID")))  %>
-                        <td>
-                            <%# Convert.ToInt64( Eval( "Score" ) ).ToString( "N0" )%>
-                        </td>
-                        <td>
-                            <%# Convert.ToInt64( Eval( "InsureScore" ) ).ToString( "N0" )%>
-                        </td>
-                        <td>
-                            <%# (long.Parse( Eval( "InsureScore" ).ToString() ) + long.Parse( Eval( "Score" ).ToString() ) ).ToString( "N0" )%>
-                        </td>
-                        <td>
-                            <%# Eval( "Revenue" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# int.Parse( Eval( "WinCount" ).ToString( ) ) + int.Parse( Eval( "LostCount" ).ToString( ) ) + int.Parse( Eval( "DrawCount" ).ToString( ) ) + int.Parse( Eval( "FleeCount" ).ToString( ) )%>
-                        </td>    
-                        <td>
-                            <%# Eval( "WinCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "LostCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "DrawCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "FleeCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "PlayTimeCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "OnLineTimeCount" ).ToString( )%>
-                        </td>
-                        <td>
-                            <%# Eval( "LastLogonDate" ).ToString()%>
-                        </td>
-                        <td>
-                            <%# Eval( "LastLogonIP" ).ToString( ) %>
-                        </td>
-                        <td>
-                            <a class="l" href="javascript:void(0)" onclick="javascript:openWindowOwn('GrantGold.aspx?param=<%#Eval("UserID").ToString() %>','GrantGold',600,240);">赠送金币</a>
-                        </td>
-                    </tr>
-                </AlternatingItemTemplate>
             </asp:Repeater>
             <asp:Literal runat="server" ID="litNoData" Visible="false" Text="<tr class='tdbg'><td colspan='100' align='center'><br>没有任何信息!<br><br></td></tr>"></asp:Literal>
         </table>

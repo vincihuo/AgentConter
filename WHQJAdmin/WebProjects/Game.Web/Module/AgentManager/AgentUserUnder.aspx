@@ -109,8 +109,8 @@
                                 <%# FacadeManage.ConversionMoneyToShow((Int64)((Convert.ToInt32(Eval( "CurrReward" ))+Convert.ToInt32(Eval( "Tax" )))*0.3)) %>
                             </td>
                             <td>
-                                <asp:LinkButton class="l" runat="server" OnClick="btnSub" Text="下级报表" CommandArgument='<%# ParseArgument(Convert.ToInt32(Eval("UserID")),Eval("CountTime").ToString()) %> '></asp:LinkButton>
-                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnSub" Enabled='<%# Convert.ToInt32(Eval( "SubNumber" ))==0?false:true %>' Text="下级报表" CommandArgument='<%# ParseArgument(Convert.ToInt32(Eval("UserID")),Eval("CountTime").ToString()) %> '></asp:LinkButton>
+                                <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>
                     </ItemTemplate>
