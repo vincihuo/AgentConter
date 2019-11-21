@@ -11,14 +11,14 @@ namespace Game.Web.Module.AgentManager
 {
     public partial class AgentUserUnder : AdminPage
     {
-        private int parentID=0;
+        private int parentID = 0;
         /// <summary>
         /// 页面加载
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             base.moduleID = 1001;
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 txtStartDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -40,7 +40,7 @@ namespace Game.Web.Module.AgentManager
             SetCondition();
             BindData();
         }
-        protected string ParseArgument(int id,string time)
+        protected string ParseArgument(int id, string time)
         {
             return id.ToString() + ',' + time;
         }
@@ -53,13 +53,13 @@ namespace Game.Web.Module.AgentManager
             // anpPage.CurrentPageIndex, anpPage.PageSize
             PagerSet pagerSet = FacadeManage.aideRecordFacade.GetListLock("WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJRecordDB.dbo.AgentCountRecord (NOLOCK) R ON A.UserID = R.UserID ", SearchItems, " ORDER BY R.CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "A.UserID,A.GameID,A.NickName,R.CountTime,R.Tax,R.SubNumber,R.ParentID,R.BeggarNumber,R.CurrReward");
 
-            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(parentID==0?IntParam:parentID);
-            if (ds.Tables.Count>0)
+            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(parentID == 0 ? IntParam : parentID);
+            if (ds.Tables.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
                 lbTotal.Text = row["person"].ToString();
-                Label1.Text = Convert.ToInt64((Int64)(row["ImmediateMoney"]) *0.3).ToString();
-                Label2.Text = Convert.ToInt64((Int64)(row["OtherMoney"]) * 0.3).ToString();
+                Label1.Text = FacadeManage.ConversionMoneyToShow((long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3)).ToString();
+                Label1.Text = FacadeManage.ConversionMoneyToShow((long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3)).ToString();
             }
 
             anpPage.RecordCount = pagerSet.RecordCount;
