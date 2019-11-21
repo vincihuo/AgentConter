@@ -160,6 +160,7 @@ namespace Game.IData
         /// <returns></returns>
         int SaveSpreadReturnConfig(SpreadReturnConfig config);
         DataSet GetSubList(int uid);
+        DataSet CountReward(int id);
         #endregion
 
         #region 钻石信息

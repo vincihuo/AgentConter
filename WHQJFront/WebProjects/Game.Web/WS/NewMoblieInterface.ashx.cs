@@ -492,7 +492,7 @@ namespace Game.Web.WS
             int cfgID = GameRequest.GetQueryInt("cfgID", 1);
             string bankAcc = GameRequest.GetQueryString("bankAcc");
             int trsfType = GameRequest.GetQueryInt("trsfType", 1);
-            string bankName = GameRequest.GetQueryString("bankAcc");
+            string bankName = GameRequest.GetQueryString("bankName");
             int amount = GameRequest.GetQueryInt("amount", 0);
             string payName = GameRequest.GetQueryString("payName");
             string orderID = Fetch.GetOrderIDByPrefix("BKPay");
@@ -670,7 +670,7 @@ namespace Game.Web.WS
                 DataHelper.ConvertDataTableToObjects<RankingConfig>(ds.Tables[6]);
             //获取提现
 
-            ConfigInfo drawalConfig=FacadeManage.aideNativeWebFacade.GetConfigInfo("");
+            ConfigInfo drawalConfig=FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
 
             //输出信息
             _ajv.SetValidDataValue(true);
@@ -701,7 +701,7 @@ namespace Game.Web.WS
                 {
                     AppOnlinePayConfig t = new AppOnlinePayConfig();
                     t.ChanelID = list[i].ChanelID;
-                    t.ID = list[i].ID;
+                    t.id = list[i].ID;
                     t.PayType = list[i].PayType;
                     t.PayName = list[i].PayName;
                     t.ShoutCut = list[i].ShoutCut;
@@ -1530,9 +1530,9 @@ namespace Game.Web.WS
             {
                 _ajv.SetValidDataValue(true);
                 _ajv.SetDataItem("Allperson", row["Allperson"]);
-                _ajv.SetDataItem("Immediateperson", row["Immediateperson"]);
-                _ajv.SetDataItem("ImmediateMoney", row["ImmediateMoney"]);
-                _ajv.SetDataItem("OtherMoney", row["OtherMoney"]);
+                _ajv.SetDataItem("Immediateperson", row["Immediateperson"]);                                                                                                                                                                                             
+                _ajv.SetDataItem("ImmediateMoney",Convert.ToInt32(row["ImmediateMoney"]) *0.3);
+                _ajv.SetDataItem("OtherMoney", Convert.ToInt32(row["OtherMoney"]) * 0.3);
                 _ajv.SetDataItem("CurrReward", row["CurrReward"]);
                 _ajv.SetDataItem("HisMoney", row["HisMoney"]);
             }

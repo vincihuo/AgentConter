@@ -53,6 +53,7 @@ namespace Game.Web.Module.GoldManager
                 ClientIP = ip,
                 Reason = strReason
             };
+            btnSave.Enabled = false;
             Message msg = FacadeManage.aideTreasureFacade.GrantTreasure(rgt);
             if(msg.Success)
             {
@@ -108,6 +109,7 @@ namespace Game.Web.Module.GoldManager
             {
                 MessageBox("赠送失败");
             }
+            btnSave.Enabled = true;
         }
     }
 }

@@ -52,6 +52,16 @@ namespace Game.Web.Module.AgentManager
         {
             // anpPage.CurrentPageIndex, anpPage.PageSize
             PagerSet pagerSet = FacadeManage.aideRecordFacade.GetListLock("WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJRecordDB.dbo.AgentCountRecord (NOLOCK) R ON A.UserID = R.UserID ", SearchItems, " ORDER BY R.CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "A.UserID,A.GameID,A.NickName,R.CountTime,R.Tax,R.SubNumber,R.ParentID,R.BeggarNumber,R.CurrReward");
+
+            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(parentID==0?IntParam:parentID);
+            if (ds.Tables.Count>0)
+            {
+                DataRow row = ds.Tables[0].Rows[0];
+                lbTotal.Text = row["person"].ToString();
+                Label1.Text = Convert.ToInt32((Int64)(row["ImmediateMoney"]) *0.3).ToString();
+                Label2.Text = Convert.ToInt32((Int64)(row["OtherMoney"]) * 0.3).ToString();
+            }
+
             anpPage.RecordCount = pagerSet.RecordCount;
             rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();

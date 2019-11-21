@@ -55,7 +55,7 @@
                     </td>
                     <td class="listTitle2">代理昵称
                     </td>
-                    <td class="listTitle2">本人税收
+                    <td class="listTitle2">产生返利
                     </td>
                     <td class="listTitle2">下级人数
                     </td>
@@ -94,7 +94,6 @@
                             <td>
                                 <%#FacadeManage.ConversionMoneyToShow(Eval("AllReward").ToString()) %>
                             </td>
-
                             <td>
                                 <a class="l" href="javascript:void(0)" onclick="Redirect('AgentUserUnder.aspx?param='+<%# Eval("UserID")%>);">返利报表</a>
                                 <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>

@@ -145,7 +145,7 @@ namespace Game.Facade.DataStruct
 
     public class AppOnlinePayConfig
     {
-        public int ID { get; set; }
+        public int id { get; set; }
         public int PayType { get; set; }
         public string PayName { get; set; }
         public string ShoutCut { get; set; }
