@@ -58,8 +58,8 @@ namespace Game.Web.Module.AgentManager
             {
                 DataRow row = ds.Tables[0].Rows[0];
                 lbTotal.Text = row["person"].ToString();
-                Label1.Text = Convert.ToInt32((Int64)(row["ImmediateMoney"]) *0.3).ToString();
-                Label2.Text = Convert.ToInt32((Int64)(row["OtherMoney"]) * 0.3).ToString();
+                Label1.Text = Convert.ToInt64((Int64)(row["ImmediateMoney"]) *0.3).ToString();
+                Label2.Text = Convert.ToInt64((Int64)(row["OtherMoney"]) * 0.3).ToString();
             }
 
             anpPage.RecordCount = pagerSet.RecordCount;
