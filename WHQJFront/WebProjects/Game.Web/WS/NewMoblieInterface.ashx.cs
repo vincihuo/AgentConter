@@ -372,6 +372,7 @@ namespace Game.Web.WS
                 }
             }
             _ajv.SetDataItem("list", list);
+            _ajv.SetValidDataValue(true);
         }
         private void DrawalRecord()
         {

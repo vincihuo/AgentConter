@@ -58,8 +58,18 @@ namespace Game.Web.Module.AgentManager
             {
                 DataRow row = ds.Tables[0].Rows[0];
                 lbTotal.Text = row["person"].ToString();
-                Label1.Text = FacadeManage.ConversionMoneyToShow((long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3)).ToString();
-                Label1.Text = FacadeManage.ConversionMoneyToShow((long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3)).ToString();
+                long ImmediateMoney = 0;
+                long otherMoney = 0;
+                if (row["ImmediateMoney"] != DBNull.Value)
+                {
+                    ImmediateMoney = (long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3);
+                }
+                if (row["OtherMoney"] != DBNull.Value)
+                {
+                    otherMoney = (long)(Convert.ToInt64(row["OtherMoney"]) * 0.3);
+                }
+                Label1.Text = FacadeManage.ConversionMoneyToShow(ImmediateMoney).ToString();
+                Label1.Text = FacadeManage.ConversionMoneyToShow(otherMoney).ToString();
             }
 
             anpPage.RecordCount = pagerSet.RecordCount;
