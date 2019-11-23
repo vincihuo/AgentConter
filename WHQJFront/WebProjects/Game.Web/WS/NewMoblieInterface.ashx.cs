@@ -13,7 +13,6 @@ using Game.Web.Helper;
 using System.Data;
 using Game.Entity.Accounts;
 using System.Text.RegularExpressions;
-using System.Media;
 using Game.Entity.Record;
 
 namespace Game.Web.WS
@@ -69,10 +68,6 @@ namespace Game.Web.WS
                 //    context.Response.Write(_ajv.SerializeToJson());
                 //    return;
                 //}
-                SoundPlayer sound = new SoundPlayer();
-                sound.SoundLocation = "D:/sound/elpx.wav";
-                sound.Load();
-                sound.Play();
 
                 //参数验证
                 if (context.Request.QueryString["userid"] != null && _userid <= 0)
@@ -1360,7 +1355,6 @@ namespace Game.Web.WS
                 AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountsInfoByAccounts(Mobile);
                 if (type == 1 && info != null)
                 {
-
                     rs = -2;//账号已注册
                     _ajv.SetValidDataValue(true);
                     _ajv.SetDataItem("rs", rs);
@@ -1373,8 +1367,6 @@ namespace Game.Web.WS
                     _ajv.SetDataItem("rs", rs);
                     return;
                 }
-
-
                 if (type == 2 && info == null)
                 {
                     rs = -3;//账号未注册

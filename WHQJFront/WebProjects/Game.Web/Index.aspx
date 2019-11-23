@@ -27,18 +27,11 @@
         </a>
         <img src="<%= MobileCase %>" class="ui-product" alt="" />
     </div>
-    <audio id="Music" src="Sound/elpx.wav" autoplay="autoplay" hidden="true" style="display: none"></audio>
 </body>
 <!-- 以下为openinstall集成代码，建议在html文档中尽量靠前放置，加快初始化过程 -->
 <!-- 强烈建议直接引用下面的cdn加速链接，以得到最及时的更新，我们将持续跟踪各种主流浏览器的变化，提供最好的服务；不推荐将此js文件下载到自己的服务器-->
 <link rel="preconnect" href="https://openinstall.io" crossorigin="use-credentials" />
 <script type="text/javascript" charset="utf-8" src="https://res.cdn.openinstall.io/openinstall.js">
-     function playsound() 
-     {
-        console.log("播放声音");
-        var myAuto = document.getElementById('Music');
-        myAuto.playsound();
-      }
 </script>
 <script type="text/javascript">
     //openinstall初始化时将与openinstall服务器交互，应尽可能早的调用

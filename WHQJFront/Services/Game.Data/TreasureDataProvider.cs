@@ -75,6 +75,7 @@ namespace Game.Data
             List<DbParameter> prams = new List<DbParameter>
             {
                 Database.MakeInParam("dwUserID", order.UserID),
+                Database.MakeInParam("DrawalType", order.IP),
                 Database.MakeInParam("strOrdersID", order.OrderID),
                 Database.MakeInParam("DrawalAmount", order.Amount),
                 Database.MakeInParam("OrderCost", order.OrderCost),
