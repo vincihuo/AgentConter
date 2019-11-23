@@ -197,7 +197,7 @@ namespace Game.Facade.DataStruct
         public long BeforeDiamond { get; set; }
         public int ChangeDiamond { get; set; }
         public long AfterDiamond { get; set; }
-        public string TypeName { get; set; }
+        public string Type { get; set; }
     }
 
     public class DiamondExchRecord

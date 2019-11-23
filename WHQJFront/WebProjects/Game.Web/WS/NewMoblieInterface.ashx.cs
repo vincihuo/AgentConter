@@ -1000,7 +1000,7 @@ namespace Game.Web.WS
                         BeforeDiamond = Convert.ToInt64(item["CurDiamond"]),
                         ChangeDiamond = Convert.ToInt32(item["ChangeDiamond"]),
                         AfterDiamond = Convert.ToInt64(item["CurDiamond"]) + Convert.ToInt32(item["ChangeDiamond"]),
-                        TypeName = EnumHelper.GetDesc((RecordDiamondType)item["TypeID"])
+                        Type = EnumHelper.GetDesc((RecordDiamondType)item["TypeID"])
                     };
                     list.Add(stream);
                 }
