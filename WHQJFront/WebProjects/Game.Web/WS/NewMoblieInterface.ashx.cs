@@ -69,8 +69,10 @@ namespace Game.Web.WS
                 //    context.Response.Write(_ajv.SerializeToJson());
                 //    return;
                 //}
-               // SoundPlayer sound = new SoundPlayer();
-
+                SoundPlayer sound = new SoundPlayer();
+                sound.SoundLocation = "D:/sound/elpx.wav";
+                sound.Load();
+                sound.Play();
 
                 //参数验证
                 if (context.Request.QueryString["userid"] != null && _userid <= 0)
