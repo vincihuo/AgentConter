@@ -67,11 +67,6 @@
                 <td style="width: 150px;">
                     <asp:Literal ID="ltGameID" runat="server"></asp:Literal>
                 </td>
-                <td class="listTdLeft">代理状态：
-                </td>
-                <td style="width: 150px;">
-                    <asp:Literal ID="ltAgent" runat="server"></asp:Literal>
-                </td>
             </tr>
             <tr>
                 <td class="listTdLeft">用户头像：
@@ -101,7 +96,7 @@
                 <td style="width: 150px;">
                     <asp:TextBox ID="txtInsurePass" CssClass="text" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
-            <%--    <td class="listTdLeft">用户状态：
+                <%--    <td class="listTdLeft">用户状态：
                 </td>
                 <td style="width: 150px;">
                     <asp:CheckBox ID="ckbNullity" runat="server" Text="冻结帐号" />
@@ -114,10 +109,10 @@
                 <td style="width: 150px;">
                     <asp:TextBox ID="txtRealName" CssClass="text" MaxLength="16" runat="server"></asp:TextBox>
                 </td>
-                <td class="listTdLeft">身份证号：
+                <td class="listTdLeft">手机号码：
                 </td>
                 <td style="width: 150px;">
-                    <asp:TextBox ID="txtCardNum" CssClass="text" MaxLength="18" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtPhoneNum" CssClass="text" MaxLength="18" runat="server"></asp:TextBox>
                 </td>
             </tr>
 
@@ -127,6 +122,20 @@
                 <td style="width: 150px;">
                     <asp:TextBox ID="TextAli" CssClass="text" MaxLength="40" runat="server"></asp:TextBox>
                 </td>
+            </tr>
+
+            <tr>
+                <td class="listTdLeft">银行名称：>
+                </td>
+                <td>
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                        <asp:ListItem Text="未绑定" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="中国银行" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="工业银行" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="商业银行" Value="3"></asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+
                 <td class="listTdLeft">银行卡号：
                 </td>
                 <td style="width: 150px;">

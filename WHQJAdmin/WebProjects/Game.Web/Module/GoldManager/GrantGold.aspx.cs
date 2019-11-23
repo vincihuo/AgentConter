@@ -30,10 +30,21 @@ namespace Game.Web.Module.GoldManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string strReason = CtrlHelper.GetText(txtReason);
+            int valiBet = 0;
             int a = 0;
             if(!int.TryParse(txtGold.Text,out a))
             {
                 MessageBox("赠送金币格式不正确");
+                return;
+            }
+            if (!int.TryParse(VileBet.Text,out valiBet))
+            {
+                MessageBox("打码量格式不正确");
+                return;
+            }
+            if (valiBet < 0)
+            {
+                MessageBox("打码量必须大于0");
                 return;
             }
             int gold = a;
@@ -57,7 +68,7 @@ namespace Game.Web.Module.GoldManager
             Message msg = FacadeManage.aideTreasureFacade.GrantTreasure(rgt);
             if(msg.Success)
             {
-                int valiBet = Convert.ToInt32(VileBet.Text);
+                
                 if (valiBet > 0)
                 {
                     Message msg1 = FacadeManage.aideTreasureFacade.AddValiBet(valiBet, IntParam, 3, 1, strReason);

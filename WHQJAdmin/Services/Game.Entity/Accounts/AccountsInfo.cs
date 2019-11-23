@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/19 11:42:37
+ * 日期：2019/11/22 16:45:39
  * 
  * 描述：实体类
  * 
@@ -78,6 +78,7 @@ namespace Game.Entity.Accounts
         private string p_placename;
         private string p_bankaccount;
         private string p_aliaccount;
+        private int p_banktype;
 
         #endregion
 
@@ -138,6 +139,7 @@ namespace Game.Entity.Accounts
             p_placename = string.Empty;
             p_bankaccount = string.Empty;
             p_aliaccount = string.Empty;
+            p_banktype = 0;
         }
 
         #endregion
@@ -891,6 +893,21 @@ namespace Game.Entity.Accounts
             get
             {
                 return p_aliaccount;
+            }
+        }
+
+        /// <summary>
+        /// BankType
+        /// </summary>
+        public int BankType
+        {
+            set
+            {
+                p_banktype = value;
+            }
+            get
+            {
+                return p_banktype;
             }
         }
 

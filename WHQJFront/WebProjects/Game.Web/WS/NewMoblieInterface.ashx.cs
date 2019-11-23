@@ -83,6 +83,7 @@ namespace Game.Web.WS
                 //获取其他参数
                 int configid = GameRequest.GetQueryInt("configid", 0);
                 int typeid = GameRequest.GetQueryInt("typeid", 0);
+
                 switch (action)
                 {
                     #region 老接口
@@ -408,8 +409,6 @@ namespace Game.Web.WS
             }
             _ajv.SetDataItem("list", list);
         }
-
-
         private void BinDingPayee()
         {
             int type = GameRequest.GetQueryInt("type", 0);
@@ -967,7 +966,7 @@ namespace Game.Web.WS
                                      (RecordTreasureType)item["TypeID"] == RecordTreasureType.银行取出
                                         ? 0
                                         : Convert.ToInt32(item["ChangeScore"])),
-                        Type = Convert.ToInt32(item["TypeID"])
+                        Type = FacadeManage.GetOrperteName(Convert.ToInt32(item["TypeID"]))
                     };
                     list.Add(stream);
                 }
@@ -1054,8 +1053,6 @@ namespace Game.Web.WS
         {
             OnLinePayOrder olOrder = FacadeManage.aideTreasureFacade.GetPayOnLinePayOrder(orderid);
             UserWealth userwealth = FacadeManage.aideTreasureFacade.GetUserWealth(olOrder.UserId);
-
-
             //if (olOrder == null || olOrder.OrderStatus != 1)
             //{
             //    _ajv.SetDataItem("OrderID", orderid);
@@ -1331,7 +1328,6 @@ namespace Game.Web.WS
             int userid = GameRequest.GetQueryInt("userid", 0);//用户标识
             int type = GameRequest.GetQueryInt("type", 0);//1注册2修改
 
-
             //电话号码非空验证
             if (string.IsNullOrEmpty(Mobile))
             {
@@ -1516,8 +1512,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("list", list);
 
         }
-
-
         #region 代理接口模块
         /// <summary>
         /// 获取代理信息汇总
@@ -1570,8 +1564,8 @@ namespace Game.Web.WS
                         NicekName = item["NickName"].ToString(),
                         GameId = Convert.ToInt32(item["GameID"]),
                         person= Convert.ToInt32(item["BeggarNumber"]),
-                        personMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"]) * 0.3),
-                        AllMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])*0.3) + Convert.ToInt32(item["BackMoney"]),
+                        personMoney = Convert.ToInt32(item["BackMoney"]),
+                        AllMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])*0.3),
                     };
                     list.Add(stream);
                 }
@@ -1613,9 +1607,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("gameid", FacadeManage.aideTreasureFacade.GetIdByLink(link));
         }
         #endregion
-
-
-
         #region 辅助方法
 
         /// <summary>

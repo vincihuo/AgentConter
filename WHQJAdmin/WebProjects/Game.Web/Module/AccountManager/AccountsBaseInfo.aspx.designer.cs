@@ -58,15 +58,6 @@ namespace Game.Web.Module.AccountManager {
         protected global::System.Web.UI.WebControls.Literal ltGameID;
         
         /// <summary>
-        /// ltAgent 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltAgent;
-        
-        /// <summary>
         /// imgFace 控件。
         /// </summary>
         /// <remarks>
@@ -112,13 +103,13 @@ namespace Game.Web.Module.AccountManager {
         protected global::System.Web.UI.WebControls.TextBox txtRealName;
         
         /// <summary>
-        /// txtCardNum 控件。
+        /// txtPhoneNum 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCardNum;
+        protected global::System.Web.UI.WebControls.TextBox txtPhoneNum;
         
         /// <summary>
         /// TextAli 控件。
@@ -128,6 +119,15 @@ namespace Game.Web.Module.AccountManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextAli;
+        
+        /// <summary>
+        /// DropDownList1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
         /// TextBank 控件。

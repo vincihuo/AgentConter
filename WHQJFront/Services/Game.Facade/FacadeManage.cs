@@ -167,5 +167,37 @@ namespace Game.Facade
                 return _aideGroupFacade;
             }
         }
+        public static string GetOrperteName(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return "后台赠送";
+                case 1:
+                    return "注册赠送";
+                case 2:
+                    return "后台赠送";
+                case 3:
+                    return "注册赠送";
+                case 4:
+                    return "后台赠送";
+                case 5:
+                    return "购买房卡";
+                case 6:
+                    return "银行入款";
+                case 7:
+                    return "银行出款";
+                case 12:
+                    return "充值入款";
+                case 13:
+                    return "代理奖励";
+                case 14:
+                    return "提现";
+                case 15:
+                    return "分享";
+                default:
+                    return "未知类型";
+            }
+        }
     }
 }

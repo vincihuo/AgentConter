@@ -46,8 +46,10 @@ namespace Game.Web.Module.AccountManager
                             DropDownList2.Items.Add(new ListItem(strList[i], (i + 1).ToString()));
                         }
                         DropDownList2.SelectedValue = model.RankID.ToString();
+
+                        DropDownList1.SelectedValue = model.BankType.ToString();
                         int logonTimes = model.WebLogonTimes + model.GameLogonTimes;
-                        CtrlHelper.SetText(ltAgent, model.AgentID > 0 ? "代理" : "非代理");
+                        //CtrlHelper.SetText(ltAgent, model.AgentID > 0 ? "代理" : "非代理");
                         CtrlHelper.SetText(ltGameID, model.GameID.ToString());
                         CtrlHelper.SetText(ltGameLogonTimes, model.GameLogonTimes.ToString());
                         CtrlHelper.SetText(ltLastLogonDate,
@@ -71,7 +73,7 @@ namespace Game.Web.Module.AccountManager
                         CtrlHelper.SetText(ltSex, model.Gender == 1 ? "男" : "女");
 
                         CtrlHelper.SetText(txtRealName, model.Compellation);
-                        CtrlHelper.SetText(txtCardNum, model.PassPortID);
+                        CtrlHelper.SetText(txtPhoneNum, model.RegisterMobile);
                         CtrlHelper.SetText(TextAli, model.AliAccount);
                         CtrlHelper.SetText(TextBank, model.BankAccount);
                         CtrlHelper.SetText(txtUnderWrite, model.UnderWrite);
@@ -97,7 +99,7 @@ namespace Game.Web.Module.AccountManager
             {
                 //获取保存数值
                 string realname = CtrlHelper.GetText(txtRealName);
-                string cardnum = CtrlHelper.GetText(txtCardNum);
+                string phone = CtrlHelper.GetText(txtPhoneNum);
                 string underwrite = CtrlHelper.GetText(txtUnderWrite);
 
                 //输入验证
@@ -107,16 +109,6 @@ namespace Game.Web.Module.AccountManager
                     MessageBox("已实名认证信息保存不能为空");
                     return;
                 }
-                if (model != null && model.PassPortID.Length > 0 && string.IsNullOrEmpty(cardnum))
-                {
-                    MessageBox("已实名认证信息保存不能为空");
-                    return;
-                }
-                if (!string.IsNullOrEmpty(cardnum) && !Utils.Validate.IsIDCard(cardnum))
-                {
-                    MessageBox("身份证格式错误");
-                    return;
-                }
 
                 //int isNullity = ckbNullity.Checked ? 1 : 0;
                 //int isLock = ckbLock.Checked ? 1 : 0;
@@ -124,11 +116,14 @@ namespace Game.Web.Module.AccountManager
                 AccountsInfo info = new AccountsInfo();
                 info.UserID = IntParam;
                 info.Compellation = realname;
-                info.PassPortID = cardnum;
+                info.RegisterMobile = phone;
                 info.UnderWrite = underwrite;
+                info.BankAccount = CtrlHelper.GetText(TextBank);
+                info.AliAccount = CtrlHelper.GetText(TextAli);
                 //info.Nullity = (byte) isNullity;
                 //info.MoorMachine = (byte) isLock;
                 info.RankID = Convert.ToInt32(DropDownList2.SelectedValue);
+                info.BankType= Convert.ToInt32(DropDownList1.SelectedValue);
                 info.InsurePass = !string.IsNullOrEmpty(CtrlHelper.GetText(txtInsurePass))
                     ? Utility.MD5(CtrlHelper.GetText(txtInsurePass))
                     : model?.InsurePass ?? "";
