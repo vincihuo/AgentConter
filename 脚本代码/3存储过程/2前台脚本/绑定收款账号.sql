@@ -49,8 +49,16 @@ BEGIN
         SET @strErrorDescribe=N'抱歉！先绑定真实姓名！'
         RETURN 1004
     END
+    DECLARE @tID INT
     IF @Type=0
     BEGIN
+        SELECT @tID=UserID FROM AccountsInfo WHERE AliAccount=@Acc
+        IF @tID IS NOT NULL
+        BEGIN
+            SET @strErrorDescribe=N'抱歉！该支付宝已经被使用！'
+            RETURN 2003
+        END
+
         IF @AliAcc!=N''
         BEGIN
             SET @strErrorDescribe=N'抱歉！已经绑定了支付宝账号！'
@@ -71,6 +79,15 @@ BEGIN
         SET @strErrorDescribe=N'抱歉！已经绑定了银行卡号！'
         RETURN 2001
     END
+
+    SELECT @tID=UserID FROM AccountsInfo WHERE BankAccount=@Acc
+    IF @tID IS NOT NULL
+    BEGIN
+        SET @strErrorDescribe=N'抱歉！该银行卡已经被使用！'
+        RETURN 2003
+    END
+
+    PRINT N'到这里的'
     UPDATE AccountsInfo SET BankAccount=@Acc,BankType=@Type WHERE UserID = @dwUserID
     IF @@ROWCOUNT<>1
 	BEGIN

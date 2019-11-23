@@ -44,7 +44,7 @@ namespace Game.Web.Module.GoldManager
             }
             if (valiBet < 0)
             {
-                MessageBox("打码量必须大于0");
+                MessageBox("打码量必须不小于0");
                 return;
             }
             int gold = a;

@@ -58,6 +58,11 @@ namespace Game.Data
             PagerParameters pagerPrams = new PagerParameters("AccountsInfo", where, order, pageIndex, pageSize, null, "WEB_PageView_UserList");
             return GetPagerSet(pagerPrams);
         }
+        public bool CheckRepeat(string where)
+        {
+            string sqlQuery = $"SELECT UserID FROM AccountsInfo WITH(NOLOCK) {where} ";
+            return Database.ExecuteScalar(CommandType.Text, sqlQuery) != null;
+        }
         /// <summary>
         /// 高效获取用户简洁信息
         /// </summary>

@@ -63,6 +63,12 @@ namespace Game.Facade
         {
             return aideAccountsData.GetUserPageList(where, order, pageIndex, pageSize);
         }
+
+        public bool CheckRepeat(string where)
+        {
+            return aideAccountsData.CheckRepeat(where);
+        }
+
         /// <summary>
         /// 高效获取用户简洁信息
         /// </summary>
@@ -104,6 +110,7 @@ namespace Game.Facade
         {
             return aideAccountsData.NullityAccountInfo(userlist, nullity);
         }
+
         /// <summary>
         /// 设置取消机器人
         /// </summary>

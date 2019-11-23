@@ -187,12 +187,14 @@ namespace Game.Facade
                     return "银行入款";
                 case 7:
                     return "银行出款";
+                case 11:
+                    return "提现";
                 case 12:
                     return "充值入款";
                 case 13:
                     return "代理奖励";
                 case 14:
-                    return "提现";
+                    return "签到";
                 case 15:
                     return "分享";
                 default:

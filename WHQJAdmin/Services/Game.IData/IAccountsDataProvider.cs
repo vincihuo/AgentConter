@@ -34,6 +34,7 @@ namespace Game.IData
         /// <param name="pageSize">页显示数</param>
         /// <returns></returns>
         PagerSet GetUserPageList(string where, string order, int pageIndex, int pageSize);
+        bool CheckRepeat(string where);
         /// <summary>
         /// 高效获取用户简洁信息
         /// </summary>

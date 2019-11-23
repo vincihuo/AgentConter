@@ -101,6 +101,8 @@ namespace Game.Web.Module.AccountManager
                 string realname = CtrlHelper.GetText(txtRealName);
                 string phone = CtrlHelper.GetText(txtPhoneNum);
                 string underwrite = CtrlHelper.GetText(txtUnderWrite);
+                string bankAcc = CtrlHelper.GetText(TextBank);
+                string aliAcc = CtrlHelper.GetText(TextAli);
 
                 //输入验证
                 AccountsInfo model = FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(IntParam);
@@ -113,13 +115,33 @@ namespace Game.Web.Module.AccountManager
                 //int isNullity = ckbNullity.Checked ? 1 : 0;
                 //int isLock = ckbLock.Checked ? 1 : 0;
 
+                StringBuilder sb = new StringBuilder();
+                if (phone != "")
+                {
+                    sb.AppendFormat(" OR RegisterMobile= {0}", phone);
+                }
+                if (bankAcc != "")
+                {
+                    sb.AppendFormat(" OR BankAccount = {0}", bankAcc);
+                }
+                if (aliAcc != "")
+                {
+                    sb.AppendFormat(" OR AliAccount = {0}", aliAcc);
+                }
+                if (sb.Length!=0 && FacadeManage.aideAccountsFacade.CheckRepeat(sb.ToString()))
+                {
+                    MessageBox("资料重复");
+                    return;
+                }
+
+
                 AccountsInfo info = new AccountsInfo();
                 info.UserID = IntParam;
                 info.Compellation = realname;
                 info.RegisterMobile = phone;
                 info.UnderWrite = underwrite;
-                info.BankAccount = CtrlHelper.GetText(TextBank);
-                info.AliAccount = CtrlHelper.GetText(TextAli);
+                info.BankAccount =bankAcc;
+                info.AliAccount = aliAcc;
                 //info.Nullity = (byte) isNullity;
                 //info.MoorMachine = (byte) isLock;
                 info.RankID = Convert.ToInt32(DropDownList2.SelectedValue);
