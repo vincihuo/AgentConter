@@ -161,7 +161,7 @@ namespace Game.Data
         public int UpdateAccountsBaseInfo(AccountsInfo accountsInfo)
         {
             string sqlQuery = @"UPDATE AccountsInfo SET UnderWrite=@UnderWrite,PassPortID=@PassPortID,
-                Compellation=@Compellation,Nullity=@Nullity,StunDown=@StunDown,MoorMachine=@MoorMachine,
+                Compellation=@Compellation,Nullity=@Nullity,StunDown=@StunDown,MoorMachine=@MoorMachine,RegisterMobile=@RegisterMobile,
                 IsAndroid=@IsAndroid,InsurePass=@InsurePass,AliAccount=@AliAccount,BankAccount=@BankAccount,BankType=@BankType,LogonPass=@LogonPass WHERE UserID=@UserID";
 
             List<DbParameter> prams = new List<DbParameter>
@@ -178,6 +178,7 @@ namespace Game.Data
                 Database.MakeInParam("AliAccount", accountsInfo.AliAccount),
                 Database.MakeInParam("BankAccount", accountsInfo.BankAccount),
                 Database.MakeInParam("BankType",accountsInfo.BankType),
+                Database.MakeInParam("RegisterMobile",accountsInfo.RegisterMobile),
                 Database.MakeInParam("LogonPass", accountsInfo.LogonPass)
             };
 

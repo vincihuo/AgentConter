@@ -53,11 +53,18 @@ namespace Game.Web.Module.AgentManager
             // anpPage.CurrentPageIndex, anpPage.PageSize
             PagerSet pagerSet = FacadeManage.aideRecordFacade.GetListLock("WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJRecordDB.dbo.AgentCountRecord (NOLOCK) R ON A.UserID = R.UserID ", SearchItems, " ORDER BY R.CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "A.UserID,A.GameID,A.NickName,R.CountTime,R.Tax,R.SubNumber,R.ParentID,R.BeggarNumber,R.CurrReward");
 
-            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(parentID == 0 ? IntParam : parentID);
+            string startDate = CtrlHelper.GetText(txtStartDate);
+            string endDate = CtrlHelper.GetText(txtEndDate);
+            int sid = parentID == 0 ? IntParam : parentID;
+            StringBuilder where = new StringBuilder($" WHERE  ParentID={sid} ");
+            where.AppendFormat(" AND CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+
+
+            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(where.ToString());
             if (ds.Tables.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
-                lbTotal.Text = row["person"].ToString();
+                lbTotal.Text = row["Person"].ToString();
                 long ImmediateMoney = 0;
                 long otherMoney = 0;
                 if (row["ImmediateMoney"] != DBNull.Value)

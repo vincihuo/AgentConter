@@ -712,9 +712,9 @@ namespace Game.Data
             string sql = $"SELECT A.GameID FROM WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID WHERE R.ParentID={uid}";
             return Database.ExecuteDataset(CommandType.Text, sql);
         }
-        public DataSet CountReward(int id)
+        public DataSet CountReward(string where)
         {
-            string sql = $"SELECT person=COUNT(*),ImmediateMoney= SUM(Tax),OtherMoney=SUM(Reward+AllReward) FROM AgentInfo WHERE ParentID={id}";
+            string sql = "SELECT Person=MAX(BeggarNumber)-MIN(BeggarNumber), ImmediateMoney= SUM(Tax),OtherMoney=SUM(CurrReward) FROM AgentCountRecord " + where;
             return Database.ExecuteDataset(CommandType.Text, sql);
         }
         #endregion

@@ -45,7 +45,7 @@
                     <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                 </td>
                 <td class="titleOpBg Lpd10">
-                    <span style="color: white; font-size: 14px; font-weight: bold;">下线总注册人数：<asp:Label ID="lbTotal" runat="server" Text="0"></asp:Label></span>
+                    <span style="color: white; font-size: 14px; font-weight: bold;">下线注册人数：<asp:Label ID="lbTotal" runat="server" Text="0"></asp:Label></span>
                 </td>
 
                 <td class="titleOpBg Lpd10">

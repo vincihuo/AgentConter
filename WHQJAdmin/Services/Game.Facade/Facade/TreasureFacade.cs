@@ -53,9 +53,9 @@ namespace Game.Facade
             return aideTreasureData.GetListLock(tableName, where, order, pageIndex, pageSize, fields);
         }
 
-        public DataSet CountReward(int id)
+        public DataSet CountReward(string where)
         {
-            return aideTreasureData.CountReward(id);
+            return aideTreasureData.CountReward(where);
         }
 
         #endregion 公用分页
