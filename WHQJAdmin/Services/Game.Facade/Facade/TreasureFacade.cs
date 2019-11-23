@@ -52,12 +52,6 @@ namespace Game.Facade
         {
             return aideTreasureData.GetListLock(tableName, where, order, pageIndex, pageSize, fields);
         }
-
-        public DataSet CountReward(string where)
-        {
-            return aideTreasureData.CountReward(where);
-        }
-
         #endregion 公用分页
 
         #region     打码量

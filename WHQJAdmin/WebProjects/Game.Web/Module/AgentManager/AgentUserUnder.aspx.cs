@@ -60,13 +60,18 @@ namespace Game.Web.Module.AgentManager
             where.AppendFormat(" AND CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
 
 
-            DataSet ds = FacadeManage.aideTreasureFacade.CountReward(where.ToString());
+            DataSet ds = FacadeManage.aideRecordFacade.CountReward(where.ToString());
             if (ds.Tables.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
-                lbTotal.Text = row["Person"].ToString();
                 long ImmediateMoney = 0;
                 long otherMoney = 0;
+                string person = "0";
+                if (row["Person"] != DBNull.Value)
+                {
+                    person= row["Person"].ToString();
+                }
+
                 if (row["ImmediateMoney"] != DBNull.Value)
                 {
                     ImmediateMoney = (long)(Convert.ToInt64(row["ImmediateMoney"]) * 0.3);
@@ -75,6 +80,7 @@ namespace Game.Web.Module.AgentManager
                 {
                     otherMoney = (long)(Convert.ToInt64(row["OtherMoney"]) * 0.3);
                 }
+                lbTotal.Text = person;
                 Label1.Text = FacadeManage.ConversionMoneyToShow(ImmediateMoney).ToString();
                 Label1.Text = FacadeManage.ConversionMoneyToShow(otherMoney).ToString();
             }

@@ -147,6 +147,7 @@ namespace Game.IData
         /// <param name="where"></param>
         /// <returns></returns>
         long[] GetTotalDiamondExch(string where);
+        DataSet CountReward(string where);
         #endregion
 
         #region 赠送靓号

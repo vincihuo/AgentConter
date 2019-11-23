@@ -232,6 +232,10 @@ namespace Game.Facade
         {
             return aideRecordData.GetTotalDiamondExch(where);
         }
+        public DataSet CountReward(string where)
+        {
+            return aideRecordData.CountReward(where);
+        }
         #endregion
 
         #region 赠送靓号

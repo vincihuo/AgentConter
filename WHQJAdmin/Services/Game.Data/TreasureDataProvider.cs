@@ -712,11 +712,6 @@ namespace Game.Data
             string sql = $"SELECT A.GameID FROM WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID WHERE R.ParentID={uid}";
             return Database.ExecuteDataset(CommandType.Text, sql);
         }
-        public DataSet CountReward(string where)
-        {
-            string sql = "SELECT Person=MAX(BeggarNumber)-MIN(BeggarNumber), ImmediateMoney= SUM(Tax),OtherMoney=SUM(CurrReward) FROM AgentCountRecord " + where;
-            return Database.ExecuteDataset(CommandType.Text, sql);
-        }
         #endregion
 
         #region 钻石信息与奖券

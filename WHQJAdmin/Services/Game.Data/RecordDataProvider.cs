@@ -327,6 +327,12 @@ namespace Game.Data
             return new[] {Convert.ToInt64(obj.Tables[0].Rows[0]["Gold"]), Convert.ToInt64(obj.Tables[0].Rows[0]["Diamond"])};
         }
 
+        public DataSet CountReward(string where)
+        {
+            string sql = "SELECT Person=MAX(BeggarNumber)-MIN(BeggarNumber), ImmediateMoney= SUM(Tax),OtherMoney=SUM(CurrReward) FROM AgentCountRecord " + where;
+            return Database.ExecuteDataset(CommandType.Text, sql);
+        }
+
         #endregion
 
         #region 赠送靓号
