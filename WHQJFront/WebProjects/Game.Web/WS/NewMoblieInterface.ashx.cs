@@ -1562,7 +1562,7 @@ namespace Game.Web.WS
                         GameId = Convert.ToInt32(item["GameID"]),
                         person= Convert.ToInt32(item["BeggarNumber"]),
                         AllMoney = Convert.ToInt32(item["BackMoney"]),
-                        personMoney = (int)(Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])*0.3),
+                        personMoney = (int)((Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])) * 0.3),
                     };
                     list.Add(stream);
                 }
