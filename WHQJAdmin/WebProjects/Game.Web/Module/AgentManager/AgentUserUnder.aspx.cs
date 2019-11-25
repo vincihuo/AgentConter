@@ -91,6 +91,7 @@ namespace Game.Web.Module.AgentManager
         }
         protected void GameID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            parentID = Convert.ToInt32(DropDownList1.Text);
             SetCondition();
             BindData();
         }
