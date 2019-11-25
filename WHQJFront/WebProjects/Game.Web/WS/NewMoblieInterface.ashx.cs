@@ -284,6 +284,10 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion",20191109);
                         PayRecord();
                         break;
+                    case "drawalrecord":
+                        _ajv.SetDataItem("apiVersion", 20191109);
+                        DrawalRecord();
+                        break;
                     case "paylist":
                         _ajv.SetDataItem("apiVersion", 20191018);
                         //获取参数
