@@ -125,7 +125,7 @@ BEGIN
     --写入流水
     INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
         (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-    VALUES(dbo.WF_GetSerialNumber(), @MatserID, @UserID, 11, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, N'0.0.0.0', @DateTime)
+    VALUES(dbo.WF_GetSerialNumber(), @MatserID, @UserID, 12, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, N'0.0.0.0', @DateTime)
 
     --  充值打码量倍数
     DECLARE @PayMultiple INT
