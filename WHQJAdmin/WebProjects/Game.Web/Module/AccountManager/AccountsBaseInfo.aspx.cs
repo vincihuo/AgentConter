@@ -115,20 +115,20 @@ namespace Game.Web.Module.AccountManager
                 //int isNullity = ckbNullity.Checked ? 1 : 0;
                 //int isLock = ckbLock.Checked ? 1 : 0;
 
-                StringBuilder sb = new StringBuilder(" WHERE 1=1 ");
+                StringBuilder sb = new StringBuilder(" WHERE 1=2 ");
                 if (phone != "")
                 {
-                    sb.AppendFormat(" OR RegisterMobile= {0} ", phone);
+                    sb.AppendFormat(" OR RegisterMobile= '{0}' ", phone);
                 }
                 if (bankAcc != "")
                 {
-                    sb.AppendFormat(" OR BankAccount = {0} ", bankAcc);
+                    sb.AppendFormat(" OR BankAccount = '{0}' ", bankAcc);
                 }
                 if (aliAcc != "")
                 {
-                    sb.AppendFormat(" OR AliAccount = {0} ", aliAcc);
+                    sb.AppendFormat(" OR AliAccount = '{0}' ", aliAcc);
                 }
-                if (sb.Length!=0 && FacadeManage.aideAccountsFacade.CheckRepeat(sb.ToString()))
+                if (FacadeManage.aideAccountsFacade.CheckRepeat(sb.ToString()))
                 {
                     MessageBox("资料重复");
                     return;
