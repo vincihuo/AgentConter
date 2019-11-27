@@ -68,9 +68,6 @@ namespace Game.Web.WS
                 //    context.Response.Write(_ajv.SerializeToJson());
                 //    return;
                 //}
-                _userid = 1386;
-                PayRecord();
-
                 //参数验证
                 if (context.Request.QueryString["userid"] != null && _userid <= 0)
                 {
