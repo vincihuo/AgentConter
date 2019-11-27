@@ -69,13 +69,13 @@ namespace Game.Web.WS
                 //    return;
                 //}
                 //参数验证
-                if (context.Request.QueryString["userid"] != null && _userid <= 0)
-                {
-                    _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                    _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " userid 错误");
-                    context.Response.Write(_ajv.SerializeToJson());
-                    return;
-                }
+                //if (context.Request.QueryString["userid"] != null && _userid <= 0)
+                //{
+                //    _ajv.code = (int)ApiCode.VertyParamErrorCode;
+                //    _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " userid 错误");
+                //    context.Response.Write(_ajv.SerializeToJson());
+                //    return;
+                //}
                 //获取其他参数
                 int configid = GameRequest.GetQueryInt("configid", 0);
                 int typeid = GameRequest.GetQueryInt("typeid", 0);

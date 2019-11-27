@@ -86,8 +86,7 @@ BEGIN
         SET @strErrorDescribe=N'抱歉！该银行卡已经被使用！'
         RETURN 2003
     END
-
-    PRINT N'到这里的'
+    
     UPDATE AccountsInfo SET BankAccount=@Acc,BankType=@Type WHERE UserID = @dwUserID
     IF @@ROWCOUNT<>1
 	BEGIN
