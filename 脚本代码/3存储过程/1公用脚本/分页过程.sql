@@ -18,7 +18,7 @@ GO
 
 
 CREATE PROCEDURE dbo.WEB_PageView_New
-	@TableName		NVARCHAR(500),			-- 表名
+	@TableName		NVARCHAR(2000),			-- 表名
 	@ReturnFields	NVARCHAR(200) = '*',	-- 查询列数
 	@PageSize		INT = 10,				-- 每页数目
 	@PageIndex		INT = 1,				-- 当前页码

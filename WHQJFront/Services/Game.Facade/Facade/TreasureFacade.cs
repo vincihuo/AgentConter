@@ -8,9 +8,6 @@ using Game.IData;
 using Game.Kernel;
 using Game.Utils;
 using System.Data;
-using Game.Data;
-using System.Data.Common;
-using System.Web;
 using Game.Entity.Treasure;
 
 namespace Game.Facade
@@ -55,6 +52,11 @@ namespace Game.Facade
         public PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby,string[] fields, string[] fieldAlias)
         {
             return treasureData.GetList(tableName, pageIndex, pageSize, condition, orderby, fields, fieldAlias);
+        }
+
+        public PagerSet GetListLock(string tableName, string where, string order, int pageIndex, int pageSize, string fields = null)
+        {
+            return treasureData.GetListLock(tableName,where,order,pageIndex,pageSize,fields);
         }
 
         #endregion

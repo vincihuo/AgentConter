@@ -113,6 +113,10 @@ namespace Game.Facade
         {
             return aideTreasureData.FinshOfficalOrder(orderid, type, masterId);
         }
+        public int RefuseOrder(string orderid, byte type)
+        {
+            return aideTreasureData.RefuseOrder(orderid,type);
+        }
 
         public pay_chanel GetPay_ChanelsByID(int id)
         {

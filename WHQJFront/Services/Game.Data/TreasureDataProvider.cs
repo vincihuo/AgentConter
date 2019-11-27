@@ -44,6 +44,32 @@ namespace Game.Data
             return GetPagerSet2(pagerPrams);
         }
 
+        public PagerSet GetListLock(string tableName, string where, string order, int pageIndex, int pageSize, string fields = null)
+        {
+            PagerSet ps = new PagerSet();
+            ps.PageIndex = pageIndex;
+            ps.PageSize = pageSize;
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("TableName", tableName),
+                Database.MakeInParam("ReturnFields", fields),
+                Database.MakeInParam("PageSize", pageSize),
+                Database.MakeInParam("PageIndex", pageIndex),
+                Database.MakeInParam("Where", where),
+                Database.MakeInParam("Order", order),
+                Database.MakeOutParam("PageCount", typeof(int)),
+                Database.MakeOutParam("RecordCount", typeof(int)),
+                Database.MakeInParam("Lock ", " "),
+            };
+            DataSet ds = Database.ExecuteDataset(CommandType.StoredProcedure, "WEB_PageView_New", prams.ToArray());
+            ps.PageSet = ds;
+            ps.PageCount = Convert.ToInt32(prams[6].Value);
+            ps.RecordCount = Convert.ToInt32(prams[7].Value);
+            return ps;
+        }
+
+
+
         #endregion
 
         #region 线上充值

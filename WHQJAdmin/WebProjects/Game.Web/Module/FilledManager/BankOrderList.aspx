@@ -59,8 +59,9 @@
                     </asp:DropDownList>
                     <asp:DropDownList ID="ddlPayStatus" runat="server">
                         <asp:ListItem Value="-1">全部</asp:ListItem>
-                        <asp:ListItem Value="0">未支付</asp:ListItem>
+                        <asp:ListItem Value="0">未处理</asp:ListItem>
                         <asp:ListItem Value="1">已支付</asp:ListItem>
+                        <asp:ListItem Value="1">已拒绝</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnQueryAcc" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQueryAcc_Click" />
                     <span class="total-span">
@@ -147,7 +148,8 @@
                                 <%# Eval("CallTime")%>
                             </td>
                             <td>
-                                <asp:Button runat="server" Text="确认到账" CssClass="btn wd1" OnClick="btnAgree_Click" CommandArgument='<%# Eval("OrderID")%>' Enabled='<%#Convert.ToInt32(Eval("OrderStates"))>0?false:true%>' />
+                                <asp:LinkButton class="l" runat="server" OnClick="btnAgree_Click" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="通过" CommandArgument='<%# Eval("OrderID")%>' ></asp:LinkButton>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnRefuse" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="拒绝" CommandArgument='<%# Eval("OrderID")%>' ></asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>

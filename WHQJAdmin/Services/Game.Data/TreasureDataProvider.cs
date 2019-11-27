@@ -224,6 +224,21 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PW_FinishOfficalOrder", prams);
         }
+
+        public int RefuseOrder(string orderid,byte type)
+        {
+            string sql;
+            if (type==1)  
+            {
+                sql = $"UPDATE BankPayOrder SET OrderStates=2 WHERE OrderID='{orderid}'";
+            }
+            else
+            {
+                sql = $"UPDATE ImgPayOrder SET OrderStates=2 WHERE OrderID='{orderid}'";
+            }
+            return Database.ExecuteNonQuery(sql);
+        }
+
         public int DeleteOnlinePayConfig(string idlist)
         {
             string sqlQuery = $"DELETE OnlinePayConfig WHERE ID IN({idlist})";

@@ -68,6 +68,8 @@ namespace Game.Web.WS
                 //    context.Response.Write(_ajv.SerializeToJson());
                 //    return;
                 //}
+                _userid = 1386;
+                PayRecord();
 
                 //参数验证
                 if (context.Request.QueryString["userid"] != null && _userid <= 0)
@@ -353,7 +355,8 @@ namespace Game.Web.WS
         private void PayRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);
-            PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordTreasureSerial.Tablename,index,6,$" WHERE UserID={_userid} AND TypeID=12 ", "ORDER BY CollectDate DESC ");
+
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList($"(SELECT Amount, OrderStates,PayTime, type = 1 FROM ImgPayOrder WHERE UserId = {_userid} UNION SELECT Amount, OrderStates, PayTime, type = 2 FROM BankPayOrder WHERE UserId = {_userid} UNION SELECT OrderAmount AS Amount, OrderStatus AS OrderStates,ApplyDate AS PayTime, type = 3 FROM OnLineOrder WHERE OrderStatus > 0 AND UserId = {_userid}) AS AA", 1, 6, " WHERE 1=1 ", " ORDER BY PayTime");
             _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("pageCount", ps.PageCount);
 
@@ -365,8 +368,9 @@ namespace Game.Web.WS
                 {
                     PayRecord stream = new PayRecord
                     {
-                        PayTime= item["CollectDate"].ToString(),
-                        PayMoney=Convert.ToInt64(item["ChangeScore"])
+                        PayTime= item["PayTime"].ToString(),
+                        PayMoney=Convert.ToInt64(item["Amount"]),
+                        OrderStatus=Convert.ToInt32(item["OrderStates"])
                     };
                     list.Add(stream);
                 }

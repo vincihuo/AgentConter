@@ -25,6 +25,7 @@ namespace Game.IData
         /// <returns></returns>
         PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby);
         PagerSet GetList(string tableName, int pageIndex, int pageSize, string condition, string orderby, string[] fields, string[] fieldAlias);
+        PagerSet GetListLock(string tableName, string where, string order, int pageIndex, int pageSize, string fields = null);
         #endregion
 
         #region 一个字帅
