@@ -78,7 +78,7 @@ namespace Game.Web.Module.FilledManager
         protected void btnAgree_Click(object sender, EventArgs e)
         {
             AuthUserOperationPermission(Permission.OrderOperating);
-            string oid = ((Button)sender).CommandArgument;
+            string oid = ((LinkButton)sender).CommandArgument;
             Message result = FacadeManage.aideTreasureFacade.FinshOfficalOrder(oid, 2, userExt.UserID);
             if (result.MessageID == 0)
             {
@@ -90,7 +90,12 @@ namespace Game.Web.Module.FilledManager
             }
             ShareInfoDataBind();
         }
-
+        protected void btnRefuse(object sender, EventArgs e)
+        {
+            string oid = ((LinkButton)sender).CommandArgument;
+            FacadeManage.aideTreasureFacade.RefuseOrder(oid, 2);
+            ShareInfoDataBind();
+        }
 
         /// <summary>
         /// 查询今天
@@ -156,7 +161,7 @@ namespace Game.Web.Module.FilledManager
             StringBuilder condition = new StringBuilder("WHERE 1=1");
             if (status >= 0)
             {
-                condition.AppendFormat(" AND OrderStatus='{0}'", status);
+                condition.AppendFormat(" AND OrderStates='{0}'", status);
             }
             if (!string.IsNullOrEmpty(queryContent))
             {
@@ -188,10 +193,14 @@ namespace Game.Web.Module.FilledManager
         {
             switch (status)
             {
+                case 0:
+                    return "未处理";
                 case 1:
-                    return "已支付";
-                default:
                     return "未支付";
+                case 2:
+                    return "已拒绝";
+                default:
+                    return "未知状态";
             }
         }
 

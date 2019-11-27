@@ -29,16 +29,41 @@ namespace Game.Web.Module.AccountManager
             {
                 txtStartDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                cbType.DataSource = GetSerialTypeList(typeof(GoldSerialType));
-                cbType.DataTextField = "Description";
-                cbType.DataValueField = "EnumValue";
-                cbType.DataBind();
+                //cbType.DataSource = GetSerialTypeList(typeof(GoldSerialType));
+                //cbType.DataTextField = "Description";
+                //cbType.DataValueField = "EnumValue";
+                //cbType.DataBind();
 
-                ddlSerialType.DataSource = GetSerialTypeList(typeof(GoldSerialType));
-                ddlSerialType.DataTextField = "Description";
-                ddlSerialType.DataValueField = "EnumValue";
-                ddlSerialType.DataBind();
-
+                cbType.Items.Add(new ListItem("后台赠送", "0"));
+                cbType.Items.Add(new ListItem("注册赠送", "1"));
+                cbType.Items.Add(new ListItem("主动转账", "2"));
+                cbType.Items.Add(new ListItem("接受转账", "3"));
+                cbType.Items.Add(new ListItem("购买道具", "4"));
+                cbType.Items.Add(new ListItem("钻石兑换", "5"));
+                cbType.Items.Add(new ListItem("银行入款", "6"));
+                cbType.Items.Add(new ListItem("银行出款", "7"));
+                cbType.Items.Add(new ListItem("提现", "11"));
+                cbType.Items.Add(new ListItem("充值入款", "12"));
+                cbType.Items.Add(new ListItem("代理奖励", "13"));
+                cbType.Items.Add(new ListItem("签到", "14"));
+                cbType.Items.Add(new ListItem("分享", "15"));
+                //ddlSerialType.DataSource = GetSerialTypeList(typeof(GoldSerialType));
+                //ddlSerialType.DataTextField = "Description";
+                //ddlSerialType.DataValueField = "EnumValue";
+                //ddlSerialType.DataBind();
+                ddlSerialType.Items.Add(new ListItem("后台赠送", "0"));
+                ddlSerialType.Items.Add(new ListItem("注册赠送", "1"));
+                ddlSerialType.Items.Add(new ListItem("主动转账", "2"));
+                ddlSerialType.Items.Add(new ListItem("接受转账", "3"));
+                ddlSerialType.Items.Add(new ListItem("购买道具", "4"));
+                ddlSerialType.Items.Add(new ListItem("钻石兑换", "5"));
+                ddlSerialType.Items.Add(new ListItem("银行入款", "6"));
+                ddlSerialType.Items.Add(new ListItem("银行出款", "7"));
+                ddlSerialType.Items.Add(new ListItem("提现", "11"));
+                ddlSerialType.Items.Add(new ListItem("充值入款", "12"));
+                ddlSerialType.Items.Add(new ListItem("代理奖励", "13"));
+                ddlSerialType.Items.Add(new ListItem("签到", "14"));
+                ddlSerialType.Items.Add(new ListItem("分享", "15"));
                 ddlSerialType.Items.Insert(0, new ListItem("全部", "-1"));
                 BindData();
             }

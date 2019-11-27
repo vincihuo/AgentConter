@@ -115,7 +115,7 @@ namespace Game.Web.Module.AccountManager
                 //int isNullity = ckbNullity.Checked ? 1 : 0;
                 //int isLock = ckbLock.Checked ? 1 : 0;
 
-                StringBuilder sb = new StringBuilder(" WHERE 1=2 ");
+                StringBuilder sb = new StringBuilder($" WHERE UserID <> {IntParam} AND (1=2 ");
                 if (phone != "")
                 {
                     sb.AppendFormat(" OR RegisterMobile= '{0}' ", phone);
@@ -128,6 +128,7 @@ namespace Game.Web.Module.AccountManager
                 {
                     sb.AppendFormat(" OR AliAccount = '{0}' ", aliAcc);
                 }
+                sb.Append(")");
                 if (FacadeManage.aideAccountsFacade.CheckRepeat(sb.ToString()))
                 {
                     MessageBox("资料重复");

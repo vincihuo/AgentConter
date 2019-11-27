@@ -68,7 +68,7 @@
                 <td class="listTdLeft" style="width: 80px">注册日期：
                 </td>
                 <td>
-                    <asp:TextBox ID="txtStartDate" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"></asp:TextBox><img
+                    <asp:TextBox ID="txtStartDate" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"></asp:TextBox> <img
                         src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'txtStartDate',dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"
                         style="cursor: pointer; vertical-align: middle" />
                     至
@@ -80,12 +80,12 @@
                 <td class="listTdLeft" style="width: 80px">登陆日期：
                 </td>
                 <td>
-                    <asp:TextBox ID="TextBox3" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"></asp:TextBox><img
-                        src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'txtStartDate',dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"
+                    <asp:TextBox ID="TextBox3" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'TextBox4\')}'})"></asp:TextBox><img
+                        src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'TextBox3',dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'TextBox4\')}'})"
                         style="cursor: pointer; vertical-align: middle" />
                     至
-                <asp:TextBox ID="TextBox4" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtStartDate\')}'})"></asp:TextBox><img
-                    src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'txtEndDate',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtStartDate\')}'})"
+                <asp:TextBox ID="TextBox4" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'TextBox3\')}'})"></asp:TextBox><img
+                    src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'TextBox4',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'TextBox3\')}'})"
                     style="cursor: pointer; vertical-align: middle" />
                 </td>
             </tr>

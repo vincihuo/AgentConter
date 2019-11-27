@@ -131,8 +131,11 @@
                     <asp:DropDownList ID="DropDownList1" runat="server">
                         <asp:ListItem Text="未绑定" Value="0"></asp:ListItem>
                         <asp:ListItem Text="中国银行" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="工业银行" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="商业银行" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="农业银行" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="建设银行" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="浦发银行" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="发展银行" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="宁波银行" Value="3"></asp:ListItem>
                     </asp:DropDownList>
                 </td>
 

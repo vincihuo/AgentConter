@@ -71,13 +71,23 @@ BEGIN
 
 	-- 游戏币信息
 	SELECT @Score=ISNULL(SUM(Score),0),@InsureScore=ISNULL(SUM(InsureScore),0) FROM GameScoreInfo(NOLOCK) 
-	SELECT @PayScore=ISNULL(SUM(Amount),0),@PayScoreAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates>0
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0),@PayScoreAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0)+@PayScore,@PayScoreAmount=ISNULL(SUM(Amount),0)+@PayScoreAmount FROM BankPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0)+@PayScore,@PayScoreAmount=ISNULL(SUM(Amount),0)+@PayScoreAmount FROM ImgPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+
+
 	-- 钻石信息
 	SELECT @Diamond=ISNULL(SUM(Diamond),0) FROM UserCurrency(NOLOCK)
 
 	-- 充值信息
-	SELECT @Amount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates>0
-	SELECT @TotalAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderStates>0
+	SELECT @Amount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @Amount=ISNULL(SUM(Amount),0)+@Amount FROM BankPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @Amount=ISNULL(SUM(Amount),0)+@Amount FROM ImgPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+
+	SELECT @TotalAmount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderStates=1
+	SELECT @TotalAmount=ISNULL(SUM(Amount),0)+@TotalAmount FROM BankPayOrder(NOLOCK) WHERE OrderStates=1
+	SELECT @TotalAmount=ISNULL(SUM(Amount),0)+@TotalAmount FROM ImgPayOrder(NOLOCK) WHERE OrderStates=1
+
 
 	-- 税收信息
 	SELECT @TotalRevenue=ISNULL(SUM(Revenue),0),@TotalWaste=ISNULL(SUM(Waste),0) FROM RecordDrawInfo(NOLOCK)

@@ -178,7 +178,7 @@ namespace Game.Web.Module.FilledManager
                 case 1:
                     return "已支付";
                 case 2:
-                    return "已经拒绝";
+                    return "已拒绝";
                 default:
                     return "未知状态";
             }
@@ -188,15 +188,13 @@ namespace Game.Web.Module.FilledManager
             switch (status)
             {
                 case 1:
-                    return "微信转账";
+                    return "银行转账";
                 case 2:
                     return "支付宝转账";
                 case 3:
-                    return "QQ转账";
-                case 4:
-                    return "银联转账";
+                    return "微信转账";
                 default:
-                    return "未知类型";
+                    return "其他";
             }
         }
         public string SearchItems

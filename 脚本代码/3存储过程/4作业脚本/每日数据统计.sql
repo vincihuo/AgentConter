@@ -65,14 +65,17 @@ BEGIN
 
 	-- 游戏币信息
 	SELECT @Gold=ISNULL(SUM(Score+InsureScore),0) FROM GameScoreInfo(NOLOCK) 
-	SELECT @PayScore=ISNULL(SUM(Score),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND ScoreType=0 AND OrderStatus>0
-
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0)+@PayScore FROM BankPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @PayScore=ISNULL(SUM(Amount+PresentScore),0)+@PayScore FROM ImgPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
 	-- 钻石信息
-	SELECT @Diamond=ISNULL(SUM(Diamond),0) FROM UserCurrency(NOLOCK) 
-	SELECT @PayDiamond=ISNULL(SUM(Score),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND ScoreType=1 AND OrderStatus>0
-
+	SELECT @Diamond=ISNULL(SUM(Diamond),0) FROM UserCurrency(NOLOCK)
+	SELECT @PayDiamond=ISNULL(SUM(ExchDiamond),0) FROM WHQJRecordDB.DBO.RecordCurrencyExch(NOLOCK) WHERE CollectDate>@StartTime AND CollectDate<=@EndTime
 	-- 充值信息
-	SELECT @Amount=ISNULL(SUM(Amount),0) FROM OnLinePayOrder(NOLOCK) WHERE OrderDate>=@StartTime AND OrderDate<=@EndTime AND OrderStatus>0
+	SELECT @Amount=ISNULL(SUM(PayAmount),0) FROM OnLinePayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @Amount=ISNULL(SUM(Amount),0)+@Amount FROM BankPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+	SELECT @Amount=ISNULL(SUM(Amount),0)+@Amount FROM ImgPayOrder(NOLOCK) WHERE PayTime>=@StartTime AND PayTime<=@EndTime AND OrderStates=1
+
 
 	-- 税收信息
 	SELECT @GameRevenue=ISNULL(SUM(Revenue),0),@GameWaste=ISNULL(SUM(Waste),0) FROM RecordDrawInfo(NOLOCK) WHERE StartTime>=@StartTime AND StartTime<=@EndTime

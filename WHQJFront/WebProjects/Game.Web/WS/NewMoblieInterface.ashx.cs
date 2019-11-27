@@ -353,7 +353,7 @@ namespace Game.Web.WS
         {
             int index = GameRequest.GetQueryInt("index", 1);
 
-            PagerSet ps = FacadeManage.aideTreasureFacade.GetList($"(SELECT Amount, OrderStates,PayTime, type = 1 FROM ImgPayOrder WHERE UserId = {_userid} UNION SELECT Amount, OrderStates, PayTime, type = 2 FROM BankPayOrder WHERE UserId = {_userid} UNION SELECT OrderAmount AS Amount, OrderStatus AS OrderStates,ApplyDate AS PayTime, type = 3 FROM OnLineOrder WHERE OrderStatus > 0 AND UserId = {_userid}) AS AA", 1, 6, " WHERE 1=1 ", " ORDER BY PayTime");
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList($"(SELECT Amount, OrderStates,PayTime, type = 1 FROM ImgPayOrder WHERE UserId = {_userid} UNION SELECT Amount, OrderStates, PayTime, type = 2 FROM BankPayOrder WHERE UserId = {_userid} UNION SELECT OrderAmount AS Amount, OrderStatus AS OrderStates,ApplyDate AS PayTime, type = 3 FROM OnLineOrder WHERE OrderStatus > 0 AND UserId = {_userid}) AS AA", index, 6, " WHERE 1=1 ", " ORDER BY PayTime DESC");
             _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("pageCount", ps.PageCount);
 

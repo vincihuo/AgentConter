@@ -265,7 +265,7 @@ namespace Game.Data
 
         public int DeleteImgPay(string idlist)
         {
-            string sqlQuery = $"DELETE OfficalImg  Pay WHERE id IN({idlist})";
+            string sqlQuery = $"DELETE OfficalImgPay WHERE id IN({idlist})";
             return Database.ExecuteNonQuery(sqlQuery);
         }
 

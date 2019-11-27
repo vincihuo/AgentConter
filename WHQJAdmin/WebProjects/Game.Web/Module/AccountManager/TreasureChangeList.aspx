@@ -18,7 +18,7 @@
                 <div class="arr">
                 </div>
             </td>
-            <td width="1232" height="25" valign="top" align="left" style="width: 1232px; height: 25px; vertical-align: top; text-align: left;">目前操作功能：钻石流水
+            <td width="1232" height="25" valign="top" align="left" style="width: 1232px; height: 25px; vertical-align: top; text-align: left;">目前操作功能：金币流水
             </td>
         </tr>
     </table>
@@ -81,7 +81,7 @@
                     <td class="listTitle">流水时间
                     </td>
                     <td class="listTitle2">
-                        <a style="color:red;" href="javascript:;" id="stype">流水类型<img src="/images/down.gif" style="margin-left:5px;" alt="选择类型" /></a>
+                        流水类型
                     </td>
                     <td class="listTitle2">操作前携带金币
                     </td>

@@ -14,7 +14,7 @@ CREATE PROCEDURE NET_PW_CreateDrawarOrder
 	@dwUserID			INT,
 	-- 操作用户
 
-	@DrawalType         DECIMAL(18,2),
+	@DrawalType         TINYINT,
 
 	@strOrdersID		NVARCHAR(32),
 	--	订单编号
