@@ -3,6 +3,7 @@ using Game.Web.UI;
 using Game.Kernel;
 using Game.Facade;
 using Game.Entity.Treasure;
+using Game.Entity.Accounts;
 
 namespace Game.Web.Module.DrawalManager
 {
@@ -27,6 +28,12 @@ namespace Game.Web.Module.DrawalManager
             TxtCurrTime.Text = order.CurrentTime.ToString();
             TxtDealTime.Text = order.DealTime.ToString();
             IP.Text = order.IP;
+
+            AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(order.UserID);
+            Literal1.Text = info.AliAccount;
+            Literal2.Text = info.BankAccount;
+            Literal3.Text = FacadeManage.GetBankName(info.BankType);
+
             if (order.OrderState == 0)
             {
                 TextState.Visible = false;
@@ -57,7 +64,7 @@ namespace Game.Web.Module.DrawalManager
             }
             else
             {
-                ShowError("操作失败，失败码"+result.MessageID.ToString());
+                ShowError(result.Content);
             }
         }
 

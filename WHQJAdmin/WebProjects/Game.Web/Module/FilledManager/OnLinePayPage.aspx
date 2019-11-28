@@ -1,5 +1,5 @@
 ﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OnLinePayConfig.aspx.cs" Inherits="Game.Web.Module.FilledManager.OnLinePayPage" %>
-
+ <%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -107,7 +107,7 @@
                             </td>
 
                             <td>
-                                <%# Eval("MinAmount")%> - <%# Eval("MaxAmount")%>
+                                <%#FacadeManage.ConversionMoneyToShow(Eval("MinAmount").ToString()) %> - <%#FacadeManage.ConversionMoneyToShow( Eval("MaxAmount").ToString())%>
                             </td>
 
                             <td>

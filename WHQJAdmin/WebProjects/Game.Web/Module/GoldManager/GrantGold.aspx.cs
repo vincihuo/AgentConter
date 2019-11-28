@@ -60,7 +60,7 @@ namespace Game.Web.Module.GoldManager
             {
                 MasterID = userExt.UserID,
                 UserID = userid,
-                AddGold = gold,
+                AddGold = gold*1000,
                 ClientIP = ip,
                 Reason = strReason
             };
@@ -71,7 +71,7 @@ namespace Game.Web.Module.GoldManager
                 
                 if (valiBet > 0)
                 {
-                    Message msg1 = FacadeManage.aideTreasureFacade.AddValiBet(valiBet, IntParam, 3, 1, strReason);
+                    Message msg1 = FacadeManage.aideTreasureFacade.AddValiBet(valiBet*1000, IntParam, 3, 1, strReason);
                     if (!msg1.Success)
                     {
                         MessageBox("怎加打码量失败");

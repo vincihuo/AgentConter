@@ -20,11 +20,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aideNativeWebFacade == null )
+                if (_aideNativeWebFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aideNativeWebFacade == null )
+                        if (_aideNativeWebFacade == null)
                             _aideNativeWebFacade = new NativeWebFacade();
                     }
                 }
@@ -40,11 +40,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aidePlatformManagerFacade == null )
+                if (_aidePlatformManagerFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aidePlatformManagerFacade == null )
+                        if (_aidePlatformManagerFacade == null)
                             _aidePlatformManagerFacade = new PlatformManagerFacade();
                     }
                 }
@@ -60,11 +60,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aidePlatformFacade == null )
+                if (_aidePlatformFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aidePlatformFacade == null )
+                        if (_aidePlatformFacade == null)
                             _aidePlatformFacade = new PlatformFacade();
                     }
                 }
@@ -80,11 +80,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aideTreasureFacade == null )
+                if (_aideTreasureFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aideTreasureFacade == null )
+                        if (_aideTreasureFacade == null)
                             _aideTreasureFacade = new TreasureFacade();
                     }
                 }
@@ -100,11 +100,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aideAccountsFacade == null )
+                if (_aideAccountsFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aideAccountsFacade == null )
+                        if (_aideAccountsFacade == null)
                             _aideAccountsFacade = new AccountsFacade();
                     }
                 }
@@ -120,11 +120,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aideRecordFacade == null )
+                if (_aideRecordFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aideRecordFacade == null )
+                        if (_aideRecordFacade == null)
                             _aideRecordFacade = new RecordFacade();
                     }
                 }
@@ -140,11 +140,11 @@ namespace Game.Facade
         {
             get
             {
-                if( _aideGameMatchFacade == null )
+                if (_aideGameMatchFacade == null)
                 {
-                    lock( lockObj )
+                    lock (lockObj)
                     {
-                        if( _aideGameMatchFacade == null )
+                        if (_aideGameMatchFacade == null)
                             _aideGameMatchFacade = new GameMatchFacade();
                     }
                 }
@@ -214,6 +214,27 @@ namespace Game.Facade
         public static Int64 ConversionMoneyToReal(int a)
         {
             return a * 1000;
+        }
+
+        public static string GetBankName(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return "中国银行";
+                case 2:
+                    return "农业银行";
+                case 3:
+                    return "建设银行";
+                case 4:
+                    return "浦发银行";
+                case 5:
+                    return "发展银行";
+                case 6:
+                    return "宁波银行";
+                default:
+                    return "未绑定";
+            }
         }
 
     }

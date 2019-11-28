@@ -66,7 +66,27 @@
                     <asp:Literal ID="TxtOrderCost" runat="server"></asp:Literal>
                 </td>
             </tr>
+            <tr>
+                <td class="listTdLeft">支付宝：
+                </td>
+                <td>
+                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                </td>
+            </tr>
 
+            <tr>
+                <td class="listTdLeft">银行类型：
+                </td>
+                <td>
+                    <asp:Literal ID="Literal3" runat="server"></asp:Literal>
+                </td>
+
+                <td class="listTdLeft">银行卡号：
+                </td>
+                <td>
+                    <asp:Literal ID="Literal2" runat="server"></asp:Literal>
+                </td>
+            </tr>
             <tr>
                 <td class="listTdLeft">提款类型：
                 </td>

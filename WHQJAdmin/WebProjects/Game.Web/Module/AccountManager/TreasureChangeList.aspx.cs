@@ -42,6 +42,7 @@ namespace Game.Web.Module.AccountManager
                 cbType.Items.Add(new ListItem("钻石兑换", "5"));
                 cbType.Items.Add(new ListItem("银行入款", "6"));
                 cbType.Items.Add(new ListItem("银行出款", "7"));
+                cbType.Items.Add(new ListItem("提现退款", "10"));
                 cbType.Items.Add(new ListItem("提现", "11"));
                 cbType.Items.Add(new ListItem("充值入款", "12"));
                 cbType.Items.Add(new ListItem("代理奖励", "13"));
@@ -59,6 +60,7 @@ namespace Game.Web.Module.AccountManager
                 ddlSerialType.Items.Add(new ListItem("钻石兑换", "5"));
                 ddlSerialType.Items.Add(new ListItem("银行入款", "6"));
                 ddlSerialType.Items.Add(new ListItem("银行出款", "7"));
+                ddlSerialType.Items.Add(new ListItem("提现退款", "10"));
                 ddlSerialType.Items.Add(new ListItem("提现", "11"));
                 ddlSerialType.Items.Add(new ListItem("充值入款", "12"));
                 ddlSerialType.Items.Add(new ListItem("代理奖励", "13"));

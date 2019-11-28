@@ -87,7 +87,7 @@ BEGIN
 	--金币流水
 	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
 		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 6, @CurScore, @CurInsureScore, @DrawalAmount, @ClientIP, GETDATE())
+	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 11, @CurScore, @CurInsureScore, 0-@DrawalAmount, @ClientIP, GETDATE())
 	IF @@ROWCOUNT<>1
 	BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'

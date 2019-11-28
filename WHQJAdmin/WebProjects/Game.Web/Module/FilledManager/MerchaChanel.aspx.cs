@@ -39,8 +39,8 @@ namespace Game.Web.Module.FilledManager
             config.Md5key = CtrlHelper.GetText(TexMd5);
             config.PublicKey = CtrlHelper.GetText(TxtPublicKey);
             config.PrivateKey= CtrlHelper.GetText(TxtPrivateKey);
-            config.MaxAmount = Convert.ToInt32(TextMax.Text);
-            config.MinAmount = Convert.ToInt32(TextMin.Text);
+            config.MaxAmount = Convert.ToInt32(TextMax.Text)*1000;
+            config.MinAmount = Convert.ToInt32(TextMin.Text)*1000;
             config.ShoutCut = CtrlHelper.GetText(txtPrice);
             config.PayIdentity = Convert.ToByte(DropDownList1.SelectedValue);
             config.SortID = Convert.ToInt32(SortID.Text);
@@ -106,8 +106,8 @@ namespace Game.Web.Module.FilledManager
                     TexMd5.Text = config.Md5key;
                     TxtPrivateKey.Text = config.PrivateKey;
                     TxtPublicKey.Text = config.PublicKey;
-                    TextMin.Text = config.MinAmount.ToString();
-                    TextMax.Text = config.MaxAmount.ToString();
+                    TextMin.Text = (config.MinAmount / 1000).ToString();
+                    TextMax.Text = (config.MaxAmount / 1000).ToString();
 
                     txtPrice.Text = config.ShoutCut;
                     DropDownList1.SelectedValue = config.PayIdentity.ToString();

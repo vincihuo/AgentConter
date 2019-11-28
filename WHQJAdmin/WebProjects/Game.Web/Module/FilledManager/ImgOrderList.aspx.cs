@@ -196,7 +196,7 @@ namespace Game.Web.Module.FilledManager
                 case 0:
                     return "未处理";
                 case 1:
-                    return "未支付";
+                    return "已支付";
                 case 2:
                     return "已拒绝";
                 default:

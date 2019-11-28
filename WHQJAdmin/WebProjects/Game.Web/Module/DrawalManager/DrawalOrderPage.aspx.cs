@@ -6,6 +6,7 @@ using Game.Utils;
 using Game.Facade;
 using Game.Entity.Treasure;
 using System.Web.UI.WebControls;
+using Game.Entity.Enum;
 
 namespace Game.Web.Module.DrawalManager
 {
@@ -39,9 +40,9 @@ namespace Game.Web.Module.DrawalManager
         {
             if (type == 1)
             {
-                return "微信";
+                return "支付宝";
             }
-            return "支付宝";
+            return "银行卡";
         }
 
         private void OrderDataBind()
@@ -50,8 +51,7 @@ namespace Game.Web.Module.DrawalManager
             SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            ltTotal.Text = $"已出款金额：{FacadeManage.aideTreasureFacade.GetTotleDrawalMoney(SearchItems)}元 ";
-
+            ltTotal.Text = $"已出款金额：{FacadeManage.aideTreasureFacade.GetTotleDrawalMoney(SearchItems)/1000}元 ";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
         }

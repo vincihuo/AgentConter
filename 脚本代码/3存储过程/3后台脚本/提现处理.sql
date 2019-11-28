@@ -53,12 +53,6 @@ BEGIN
     --拒绝订单
     IF @State=2
     BEGIN
-        IF EXISTS(SELECT 1 FROM GameScoreLocker WHERE UserID=@UserID) 
-	    BEGIN
-		SET @strErrorDescribe=N'提现时请玩家离开游戏房间'
-		RETURN 2001
-	    END
-
         DECLARE @CurScore BIGINT
         DECLARE @CurInsureScore BIGINT
         SELECT @CurScore=Score,@CurInsureScore=InsureScore FROM GameScoreInfo WHERE UserID = @UserID
@@ -72,7 +66,7 @@ BEGIN
 		RETURN 2002
 	    END
         --加钱
-	    UPDATE GameScoreInfo SET Score = Score + @Amount WHERE UserID = @UserID
+	    UPDATE GameScoreInfo SET InsureScore = InsureScore + @Amount WHERE UserID = @UserID
 	    IF @@ROWCOUNT<>1
 	    BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'
@@ -81,7 +75,7 @@ BEGIN
 	    END
         --金币流水
 	    INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-	    VALUES(dbo.WF_GetSerialNumber(),@masterID,@UserID,11,@CurScore,@CurInsureScore,0-@Amount,@strClientIP,GETDATE())
+	    VALUES(dbo.WF_GetSerialNumber(),@masterID,@UserID,10,@CurScore,@CurInsureScore,@Amount,@strClientIP,GETDATE())
 	    IF @@ROWCOUNT<>1
 	    BEGIN
 		SET @strErrorDescribe=N'抱歉，提款异常，请稍后重试'

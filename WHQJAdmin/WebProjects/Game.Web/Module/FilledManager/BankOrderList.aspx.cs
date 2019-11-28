@@ -60,14 +60,7 @@ namespace Game.Web.Module.FilledManager
             AuthUserOperationPermission(Permission.OrderOperating);
             string oid = ((LinkButton)sender).CommandArgument;
             Message result = FacadeManage.aideTreasureFacade.FinshOfficalOrder(oid, 1, userExt.UserID);
-            if (result.MessageID == 0)
-            {
-                ShowInfo("充值成功");
-            }
-            else
-            {
-                ShowError("充值失败");
-            }
+            ShowInfo(result.Content);
             ShareInfoDataBind();
         }
         protected void btnRefuse(object sender, EventArgs e)

@@ -34,28 +34,28 @@ namespace Game.Web.Module.DataStatistics
             if (ds.Tables[0]!=null && ds.Tables[0].Rows.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
-                ltAllRevenue.Text = (Convert.ToInt64(row["TotalRevenue"]) + Convert.ToInt64(row["TotalInsureRevenue"])).ToString("N");
-                ltAllScore.Text = (Convert.ToInt64(row["Score"])+ Convert.ToInt64(row["InsureScore"])).ToString("N");
-                ltAmount.Text = row["Amount"].ToString();
+                ltAllRevenue.Text = FacadeManage.ConversionMoneyToShow((Convert.ToInt64(row["TotalRevenue"]) + Convert.ToInt64(row["TotalInsureRevenue"]))).ToString("N");
+                ltAllScore.Text = FacadeManage.ConversionMoneyToShow((Convert.ToInt64(row["Score"]) + Convert.ToInt64(row["InsureScore"]))).ToString("N");
+                ltAmount.Text = FacadeManage.ConversionMoneyToShow(row["Amount"].ToString()).ToString();
                 ltDiamond.Text = Convert.ToInt64(row["Diamond"]).ToString("N");
                 ltGameRegisterUser.Text = row["GameRegisterUser"].ToString();
                 ltGoldRoomCount.Text = row["GoldRoomCount"].ToString();
                 ltH5RegisterUser.Text = row["H5RegisterUser"].ToString();
-                ltInsureRevenue.Text = Convert.ToInt64(row["InsureRevenue"]).ToString("N");
-                ltInsureScore.Text = Convert.ToInt64(row["InsureScore"]).ToString("N");
+                ltInsureRevenue.Text =FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["InsureRevenue"])).ToString("N");
+                ltInsureScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["InsureScore"])).ToString("N");
                 ltPayDiamond.Text = row["PayDiamond"].ToString();
                 ltPayDiamondAmount.Text = row["PayDiamondAmount"].ToString();
-                ltPayScore.Text = row["PayScore"].ToString();
-                ltPayScoreAmount.Text = row["PayScoreAmount"].ToString();
-                ltRevenue.Text = row["Revenue"].ToString();
-                ltScore.Text = Convert.ToInt64(row["Score"]).ToString("N");
+                ltPayScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["PayScore"])).ToString();
+                ltPayScoreAmount.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["PayScoreAmount"])).ToString();
+                ltRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Revenue"])).ToString();
+                ltScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Score"])).ToString();
                 ltScoreRoomCount.Text = row["ScoreRoomCount"].ToString();
                 ltTotalAmount.Text = row["TotalAmount"].ToString();
-                ltTotalInsureRevenue.Text = Convert.ToInt64(row["TotalInsureRevenue"]).ToString("N");
-                ltTotalRevenue.Text = Convert.ToInt64(row["TotalRevenue"]).ToString("N");
+                ltTotalInsureRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["TotalInsureRevenue"])).ToString();
+                ltTotalRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["TotalRevenue"])).ToString();
                 ltTotalUser.Text = row["TotalUser"].ToString();
-                ltTotalWaste.Text = Convert.ToInt64(row["TotalWaste"]).ToString("N");
-                ltWaste.Text = Convert.ToInt64(row["Waste"]).ToString("N");
+                ltTotalWaste.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["TotalWaste"])).ToString();
+                ltWaste.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Waste"])).ToString();
                 ltWebRegisterUser.Text = row["WebRegisterUser"].ToString();
             }
         }

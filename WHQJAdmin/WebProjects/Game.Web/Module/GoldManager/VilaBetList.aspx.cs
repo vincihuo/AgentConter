@@ -84,7 +84,7 @@ namespace Game.Web.Module.GoldManager
         private void SetUerBet()
         {
             UserValidBet bet = FacadeManage.aideTreasureFacade.GetUserVailBet(UserId);
-            ltTotal.Text = $"目标打码量：{bet.TargetBet} 当前打码量：{bet.CurrentValidBet}";
+            ltTotal.Text = $"目标打码量：{bet.TargetBet/1000} 当前打码量：{bet.CurrentValidBet/1000}";
 
         }
 

@@ -187,6 +187,8 @@ namespace Game.Facade
                     return "银行入款";
                 case 7:
                     return "银行出款";
+                case 10:
+                    return "提现退款";
                 case 11:
                     return "提现";
                 case 12:
