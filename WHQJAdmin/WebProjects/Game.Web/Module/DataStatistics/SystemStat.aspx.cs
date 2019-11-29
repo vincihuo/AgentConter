@@ -50,7 +50,7 @@ namespace Game.Web.Module.DataStatistics
                 ltRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Revenue"])).ToString();
                 ltScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Score"])).ToString();
                 ltScoreRoomCount.Text = row["ScoreRoomCount"].ToString();
-                ltTotalAmount.Text = row["TotalAmount"].ToString();
+                ltTotalAmount.Text = FacadeManage.ConversionMoneyToShow(row["TotalAmount"].ToString()).ToString();
                 ltTotalInsureRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["TotalInsureRevenue"])).ToString();
                 ltTotalRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["TotalRevenue"])).ToString();
                 ltTotalUser.Text = row["TotalUser"].ToString();
