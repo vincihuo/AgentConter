@@ -104,9 +104,9 @@ namespace Game.Facade
             return aideTreasureData.DeleteOnlinePayConfig(idlist);
         }
 
-        public Message FinshOnlineOrder(string orderid,byte type,int payAmount,string address)
+        public Message FinshOnlineOrder(string orderid,byte type,int payAmount,int masterId, string address)
         {
-            return aideTreasureData.FinshOnlineOrder(orderid, type, payAmount, address);
+            return aideTreasureData.FinshOnlineOrder(orderid, type, payAmount, masterId, address);
         }
 
         public Message FinshOfficalOrder(string orderid, byte type,int masterId)

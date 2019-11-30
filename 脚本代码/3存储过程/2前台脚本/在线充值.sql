@@ -27,6 +27,7 @@ CREATE PROCEDURE NET_PW_FinishOnLineOrder
 	--	订单编号
 	@PayAmount			DECIMAL(18,2),
 	--	用户帐号
+	@MasterId           INT,
 	@OrderAddress       NVARCHAR(15),
 	@strErrorDescribe	NVARCHAR(127) OUTPUT
 --	输出信息
@@ -85,7 +86,7 @@ BEGIN
 		RETURN 1005
 	END
 	--刷新状态
-	UPDATE OnLinePayOrder SET OrderStates = @callType,PayAmount = @PayAmount,CallTime=@DateTime WHERE OrderID = @strOrdersID AND UserID = @UserID
+	UPDATE OnLinePayOrder SET OrderStates = @callType,PayAmount = @PayAmount,MasterId=@MasterId,CallTime=@DateTime WHERE OrderID = @strOrdersID AND UserID = @UserID
 	--获取用户金额
 	SELECT @BeforeScore = Score, @BeforeInsure=InsureScore
 	FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK)
@@ -121,7 +122,7 @@ BEGIN
 	--写入流水
 	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
 		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-	VALUES(dbo.WF_GetSerialNumber(), 0, @UserID, 12, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, @OrderAddress, @DateTime)
+	VALUES(dbo.WF_GetSerialNumber(), @MasterId, @UserID, 12, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, @OrderAddress, @DateTime)
 	--增加打码量
 
 	--  充值打码量倍数

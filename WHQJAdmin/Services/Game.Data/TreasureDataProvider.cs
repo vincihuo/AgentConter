@@ -565,13 +565,14 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery.ToString(), prams.ToArray());
         }
 
-        public Message FinshOnlineOrder(string orderid, byte type, int payAmount, string address)
+        public Message FinshOnlineOrder(string orderid, byte type, int payAmount, int masterId, string address)
         {
             List<DbParameter> prams = new List<DbParameter>
             {
                 Database.MakeInParam("strOrdersID", orderid),
                 Database.MakeInParam("callType", type),
                 Database.MakeInParam("PayAmount", payAmount),
+                Database.MakeInParam("MasterId", masterId),
                 Database.MakeInParam("OrderAddress",address),
                 Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
             };
@@ -724,7 +725,7 @@ namespace Game.Data
         }
         public DataSet GetSubList(int uid)
         {
-            string sql = $"SELECT A.GameID FROM WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID WHERE R.ParentID={uid}";
+            string sql = $"SELECT A.GameID, R.UserID FROM WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID WHERE R.ParentID={uid}";
             return Database.ExecuteDataset(CommandType.Text, sql);
         }
         #endregion

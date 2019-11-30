@@ -70,6 +70,7 @@
                         <asp:ListItem Value="-1">全部</asp:ListItem>
                         <asp:ListItem Value="0">未支付</asp:ListItem>
                         <asp:ListItem Value="1">已支付</asp:ListItem>
+                        <asp:ListItem Value="2">补单</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Button ID="btnQueryAcc" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQueryAcc_Click" />
                     <span class="total-span">

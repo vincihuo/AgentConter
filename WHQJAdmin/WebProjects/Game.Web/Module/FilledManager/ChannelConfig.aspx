@@ -73,7 +73,7 @@
                         <td class="listTdLeft">充值比列：
                         </td>
                         <td>
-                            <asp:TextBox ID="TextBox2" runat="server" CssClass="text" MaxLength="1"></asp:TextBox>
+                            <asp:TextBox ID="TextBox2" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
                             <span class="hong">*</span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入充值比列" Display="Dynamic" ControlToValidate="TextBox2" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>

@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/26 14:34:44
+ * 日期：2019/11/30 11:33:39
  * 
  * 描述：实体类
  * 
@@ -30,7 +30,7 @@ namespace Game.Entity.Treasure
 
         private int p_id;
         private string p_sendpamar;
-        private byte p_moneypre;
+        private int p_moneypre;
         private string p_singpos;
         private byte p_method;
         private string p_respsign;
@@ -58,7 +58,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// 初始化pay_chanel
         /// </summary>
-        public pay_chanel()
+        public pay_chanel() 
         {
             p_id = 0;
             p_sendpamar = string.Empty;
@@ -95,7 +95,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_id = value;
+                p_id=value;
             }
             get
             {
@@ -110,7 +110,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_sendpamar = value;
+                p_sendpamar=value;
             }
             get
             {
@@ -121,11 +121,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// moneyPre
         /// </summary>
-        public byte moneyPre
+        public int moneyPre
         {
             set
             {
-                p_moneypre = value;
+                p_moneypre=value;
             }
             get
             {
@@ -140,7 +140,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_singpos = value;
+                p_singpos=value;
             }
             get
             {
@@ -155,7 +155,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_method = value;
+                p_method=value;
             }
             get
             {
@@ -170,7 +170,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_respsign = value;
+                p_respsign=value;
             }
             get
             {
@@ -185,7 +185,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_respcode = value;
+                p_respcode=value;
             }
             get
             {
@@ -200,7 +200,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_successcode = value;
+                p_successcode=value;
             }
             get
             {
@@ -215,7 +215,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_infoname = value;
+                p_infoname=value;
             }
             get
             {
@@ -230,7 +230,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_infotype = value;
+                p_infotype=value;
             }
             get
             {
@@ -245,7 +245,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_orderkey = value;
+                p_orderkey=value;
             }
             get
             {
@@ -260,7 +260,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_signkey = value;
+                p_signkey=value;
             }
             get
             {
@@ -275,7 +275,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_moneykey = value;
+                p_moneykey=value;
             }
             get
             {
@@ -290,7 +290,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_codekey = value;
+                p_codekey=value;
             }
             get
             {
@@ -305,7 +305,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_codesuccess = value;
+                p_codesuccess=value;
             }
             get
             {
@@ -320,7 +320,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_backstring = value;
+                p_backstring=value;
             }
             get
             {
@@ -335,7 +335,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_sendsign = value;
+                p_sendsign=value;
             }
             get
             {
@@ -350,7 +350,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_backsign = value;
+                p_backsign=value;
             }
             get
             {
@@ -365,7 +365,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_callsign = value;
+                p_callsign=value;
             }
             get
             {
@@ -380,7 +380,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_name = value;
+                p_name=value;
             }
             get
             {
@@ -395,7 +395,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_banktype = value;
+                p_banktype=value;
             }
             get
             {
@@ -410,7 +410,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_bankmappn = value;
+                p_bankmappn=value;
             }
             get
             {

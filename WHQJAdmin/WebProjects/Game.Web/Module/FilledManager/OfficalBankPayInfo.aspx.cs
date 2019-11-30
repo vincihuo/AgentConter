@@ -27,13 +27,12 @@ namespace Game.Web.Module.FilledManager
                 BankName.Text = chanel.BankName;
                 BankNumber.Text = chanel.BankNumber;
                 BankAddr.Text = chanel.BankAddr;
-                TexMax.Text = chanel.MaxAmount.ToString();
-                TexMin.Text = chanel.MinAmount.ToString();
+                TexMax.Text = FacadeManage.ConversionMoneyToShow(chanel.MaxAmount.ToString()).ToString();
+                TexMin.Text = FacadeManage.ConversionMoneyToShow(chanel.MinAmount.ToString()).ToString();
                 TexDescription.Text = chanel.Description;
                 TexSort.Text = chanel.SortId.ToString();
             }
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             OfficalBankPay chanel = new OfficalBankPay();
@@ -51,8 +50,8 @@ namespace Game.Web.Module.FilledManager
             chanel.BankNumber = BankNumber.Text;
             chanel.BankAddr = BankAddr.Text;
             chanel.BankName = BankName.Text;
-            chanel.MinAmount = Convert.ToInt32(TexMin.Text);
-            chanel.MaxAmount = Convert.ToInt32(TexMax.Text);
+            chanel.MinAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMin.Text));
+            chanel.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMax.Text));
             chanel.Description = TexDescription.Text;
             chanel.SortId = Convert.ToInt32(TexSort.Text);
             int result = FacadeManage.aideTreasureFacade.SaveBankPay(chanel);

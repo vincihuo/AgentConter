@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/28 16:19:14
+ * 日期：2019/11/29 19:27:24
  * 
  * 描述：实体类
  * 
@@ -31,8 +31,8 @@ namespace Game.Entity.Treasure
         private int p_id;
         private byte p_paytype;
         private string p_payurl;
-        private int p_maxamount;
-        private int p_minamount;
+        private Int64 p_maxamount;
+        private Int64 p_minamount;
         private string p_configname;
         private int p_sortid;
         private string p_description;
@@ -44,7 +44,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// 初始化OfficalImgPay
         /// </summary>
-        public OfficalImgPay()
+        public OfficalImgPay() 
         {
             p_id = 0;
             p_paytype = 0;
@@ -67,7 +67,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_id = value;
+                p_id=value;
             }
             get
             {
@@ -82,7 +82,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_paytype = value;
+                p_paytype=value;
             }
             get
             {
@@ -97,7 +97,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_payurl = value;
+                p_payurl=value;
             }
             get
             {
@@ -108,11 +108,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MaxAmount
         /// </summary>
-        public int MaxAmount
+        public Int64 MaxAmount
         {
             set
             {
-                p_maxamount = value;
+                p_maxamount=value;
             }
             get
             {
@@ -123,11 +123,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MinAmount
         /// </summary>
-        public int MinAmount
+        public Int64 MinAmount
         {
             set
             {
-                p_minamount = value;
+                p_minamount=value;
             }
             get
             {
@@ -142,7 +142,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_configname = value;
+                p_configname=value;
             }
             get
             {
@@ -157,7 +157,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_sortid = value;
+                p_sortid=value;
             }
             get
             {
@@ -172,7 +172,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_description = value;
+                p_description=value;
             }
             get
             {

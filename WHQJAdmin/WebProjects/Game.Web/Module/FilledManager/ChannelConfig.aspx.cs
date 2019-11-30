@@ -81,7 +81,7 @@ namespace Game.Web.Module.FilledManager
                 AuthUserOperationPermission(Permission.Add);
             }
             chanel.sendpamar = Sendpamar.Text;
-            chanel.moneyPre = Convert.ToByte(TextBox2.Text);
+            chanel.moneyPre = Convert.ToInt32(TextBox2.Text);
             chanel.singpos = Singpos.Text;
             chanel.method = Convert.ToByte(TextBox3.Text);
             chanel.respCode = RespCode.Text;

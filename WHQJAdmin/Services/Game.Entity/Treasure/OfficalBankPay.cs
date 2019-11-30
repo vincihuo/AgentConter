@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/28 11:51:42
+ * 日期：2019/11/29 19:27:24
  * 
  * 描述：实体类
  * 
@@ -33,8 +33,8 @@ namespace Game.Entity.Treasure
         private string p_bankname;
         private string p_banknumber;
         private string p_bankaddr;
-        private int p_minamount;
-        private int p_maxamount;
+        private Int64 p_minamount;
+        private Int64 p_maxamount;
         private string p_configname;
         private int p_sortid;
         private string p_description;
@@ -142,7 +142,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MinAmount
         /// </summary>
-        public int MinAmount
+        public Int64 MinAmount
         {
             set
             {
@@ -157,7 +157,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MaxAmount
         /// </summary>
-        public int MaxAmount
+        public Int64 MaxAmount
         {
             set
             {

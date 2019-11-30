@@ -437,16 +437,16 @@ namespace Game.Web.WS
             int max = Convert.ToInt32(cfg.Field3);
             if (amount < min || amount > max)
             {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"提现金额必须在{min}-{max}之间");
+                _ajv.code = (int)ApiCode.LogicErrorCode;
+                _ajv.msg = $"提现金额必须在{min}-{max}之间";
                 return;
             }
             //判断打码量
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
             if (validBet.CurrentValidBet < validBet.TargetBet)
             {
-                _ajv.code = (int)ApiCode.VertyParamErrorCode;
-                _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), $"打码量不足，目标打码量{validBet.TargetBet}，当前打码量{validBet.CurrentValidBet}");
+                _ajv.code = (int)ApiCode.LogicErrorCode;
+                _ajv.msg = $"打码量不足，目标打码量{validBet.TargetBet}，当前打码量{validBet.CurrentValidBet}";
                 return;
             }
 

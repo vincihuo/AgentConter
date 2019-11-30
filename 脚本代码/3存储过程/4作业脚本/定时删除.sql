@@ -22,7 +22,6 @@ WITH ENCRYPTION AS
 SET NOCOUNT ON
 
 BEGIN
-
     DELETE OnLinePayOrder WHERE OrderStates=1 AND DateDiff(dd,PayTime,GetDate())>1
     INSERT INTO WHQJRecordDB.dbo.DrawalOrderCopy SELECT * FROM DrawalOrder WHERE DateDiff(dd,CurrentTime,GetDate())>30
     DELETE DrawalOrder WHERE DateDiff(dd,CurrentTime,GetDate())>30

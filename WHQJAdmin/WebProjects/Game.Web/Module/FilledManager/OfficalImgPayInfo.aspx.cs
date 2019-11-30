@@ -25,8 +25,8 @@ namespace Game.Web.Module.FilledManager
                 TxtName.Text = chanel.ConfigName;
                 ddlProductType.SelectedValue = chanel.PayType.ToString();
                 PayUrl.Text = chanel.PayUrl;
-                TexMax.Text = chanel.MaxAmount.ToString();
-                TexMin.Text = chanel.MinAmount.ToString();
+                TexMax.Text = FacadeManage.ConversionMoneyToShow(chanel.MaxAmount).ToString();
+                TexMin.Text = FacadeManage.ConversionMoneyToShow(chanel.MinAmount).ToString();
                 TexDescription.Text = chanel.Description;
                 TexSort.Text = chanel.SortId.ToString();
             }
@@ -46,8 +46,8 @@ namespace Game.Web.Module.FilledManager
             chanel.ConfigName = TxtName.Text;
             chanel.PayType = Convert.ToByte(ddlProductType.SelectedValue);
             chanel.PayUrl = PayUrl.Text;
-            chanel.MinAmount = Convert.ToInt32(TexMin.Text);
-            chanel.MaxAmount = Convert.ToInt32(TexMax.Text);
+            chanel.MinAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMin.Text));
+            chanel.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMax.Text));
             chanel.Description = TexDescription.Text;
             chanel.SortId = Convert.ToInt32(TexSort.Text);
             int result = FacadeManage.aideTreasureFacade.SaveImgPay(chanel);

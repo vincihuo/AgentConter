@@ -39,7 +39,7 @@ namespace Game.IData
         int DeleteOnlinePayConfig(string idlist);
         int DeletePayChanel(string idlist);
         bool IsExistOnlinePayConfig(string where);
-        Message FinshOnlineOrder(string orderid, byte type, int payAmount, string address);
+        Message FinshOnlineOrder(string orderid, byte type, int payAmount, int masterId, string address);
         pay_chanel GetPay_ChanelsByID(int id);
         IList<signtype> GetSignList();
         signtype GetSignById(int id);

@@ -51,7 +51,7 @@ namespace Game.Web.Module.DrawalManager
             SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            ltTotal.Text = $"已出款金额：{FacadeManage.aideTreasureFacade.GetTotleDrawalMoney(SearchItems)/1000}元 ";
+            ltTotal.Text = $"已出款金额：{FacadeManage.ConversionMoneyToShow(FacadeManage.aideTreasureFacade.GetTotleDrawalMoney(SearchItems).ToString())}元 ";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
         }

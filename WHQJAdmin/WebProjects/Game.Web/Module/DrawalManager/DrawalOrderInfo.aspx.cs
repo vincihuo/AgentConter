@@ -33,7 +33,6 @@ namespace Game.Web.Module.DrawalManager
             Literal1.Text = info.AliAccount;
             Literal2.Text = info.BankAccount;
             Literal3.Text = FacadeManage.GetBankName(info.BankType);
-
             if (order.OrderState == 0)
             {
                 TextState.Visible = false;
@@ -43,7 +42,17 @@ namespace Game.Web.Module.DrawalManager
                 TextState.Text = order.OrderState == 1 ? "同意" : "拒绝";
                 BtnN.Visible = BtnY.Visible = false;
             }
-            TxtDrawalType.Text = order.drawalType == 1 ? "支付宝" : "银行卡";
+            if (order.drawalType == 1)
+            {
+                TxtDrawalType.Text = "支付宝";
+                bank.Visible = false;
+            }
+            else
+            {
+                TxtDrawalType.Text = "银行卡";
+                aliy.Visible = false;
+            }
+
         }
 
         protected void OnBtnY(object sender, EventArgs e)

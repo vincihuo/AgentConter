@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VilaBetList.aspx.cs" Inherits="Game.Web.Module.GoldManager.VilaBetList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,13 +89,13 @@
                                 <%#  DepositName(Convert.ToInt32(Eval("DepositType")))%>
                             </td>
                             <td>
-                                <%# Eval("LastValiBet")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("LastValiBet").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("CurrentValidBet")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("CurrentValidBet").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("TotalValiBet")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("TotalValiBet").ToString())%>
                             </td>
                             <td>
                                 <%# Eval("DepositName")%>

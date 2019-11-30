@@ -39,13 +39,21 @@ namespace Game.Web.Module.FilledManager
             config.Md5key = CtrlHelper.GetText(TexMd5);
             config.PublicKey = CtrlHelper.GetText(TxtPublicKey);
             config.PrivateKey= CtrlHelper.GetText(TxtPrivateKey);
-            config.MaxAmount = Convert.ToInt32(TextMax.Text)*1000;
-            config.MinAmount = Convert.ToInt32(TextMin.Text)*1000;
-            config.ShoutCut = CtrlHelper.GetText(txtPrice);
+            config.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TextMax.Text));
+            config.MinAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TextMin.Text));
+
+            string[] mm = CtrlHelper.GetText(txtPrice).Split(',');
+            string shout="";
+            for (int i = 0; i < mm.Length; ++i)
+            {
+                shout += Convert.ToInt32(mm[i]) * 1000 + ",";
+            }
+            shout=shout.Substring(0,shout.Length-1);
+            config.ShoutCut = shout;
             config.PayIdentity = Convert.ToByte(DropDownList1.SelectedValue);
             config.SortID = Convert.ToInt32(SortID.Text);
-            config.FristPresent = Convert.ToInt32(txtFristPresent.Text);
-            config.PresentScore = Convert.ToInt32(txtPresentScore.Text);
+            config.FristPresent = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(txtFristPresent.Text));
+            config.PresentScore = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(txtPresentScore.Text));
             config.ChanelID = Convert.ToInt32(DropDownList2.SelectedValue);
             config.ChanelName = DropDownList2.SelectedItem.Text;
             config.AttachStr1 = CtrlHelper.GetText(AttaBox1);
@@ -109,10 +117,16 @@ namespace Game.Web.Module.FilledManager
                     TextMin.Text = (config.MinAmount / 1000).ToString();
                     TextMax.Text = (config.MaxAmount / 1000).ToString();
 
-                    txtPrice.Text = config.ShoutCut;
+                    string[] mm = config.ShoutCut.Split(',');
+                    string shout = "";
+                    for (int i = 0; i < mm.Length; ++i)
+                    {
+                        shout += Convert.ToInt32(mm[i]) / 1000 + ",";
+                    }
+                    txtPrice.Text = shout;
                     DropDownList1.SelectedValue = config.PayIdentity.ToString();
-                    txtFristPresent.Text = config.FristPresent.ToString();
-                    txtPresentScore.Text = config.PresentScore.ToString();
+                    txtFristPresent.Text = (config.FristPresent/1000).ToString();
+                    txtPresentScore.Text = (config.PresentScore/1000).ToString();
                     SortID.Text = config.SortID.ToString();
                     TexPayUrl.Text = config.PayUrl;
                     AttaBox1.Text = config.AttachStr1;

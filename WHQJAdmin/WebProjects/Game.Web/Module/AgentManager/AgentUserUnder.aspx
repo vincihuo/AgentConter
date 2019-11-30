@@ -27,7 +27,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width="155" Height="24" CssClass="text" OnSelectedIndexChanged="GameID_SelectedIndexChanged">
+                    <asp:DropDownList ID="DropDownList1" runat="server" Width="155" Height="24" CssClass="text" >
                     </asp:DropDownList>
                 </td>
 
@@ -109,7 +109,7 @@
                                 <%# FacadeManage.ConversionMoneyToShow((Int64)((Convert.ToInt32(Eval( "CurrReward" ))+Convert.ToInt32(Eval( "Tax" )))*0.3)) %>
                             </td>
                             <td>
-                                <asp:LinkButton class="l" runat="server" OnClick="btnSub" Enabled='<%# Convert.ToInt32(Eval( "SubNumber" ))==0?false:true %>' Text="下级报表" CommandArgument='<%# ParseArgument(Convert.ToInt32(Eval("UserID")),Eval("CountTime").ToString()) %> '></asp:LinkButton>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnSub" Visable='<%# Convert.ToInt32(Eval( "SubNumber" ))==0?false:true %>' Text="下级报表" CommandArgument='<%# ParseArgument(Convert.ToInt32(Eval("UserID")),Eval("CountTime").ToString()) %> '></asp:LinkButton>
                                 <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>

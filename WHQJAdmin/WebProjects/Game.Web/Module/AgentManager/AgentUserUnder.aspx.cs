@@ -11,7 +11,6 @@ namespace Game.Web.Module.AgentManager
 {
     public partial class AgentUserUnder : AdminPage
     {
-        private int parentID = 0;
         /// <summary>
         /// 页面加载
         /// </summary>
@@ -30,16 +29,6 @@ namespace Game.Web.Module.AgentManager
         {
             BindData();
         }
-        protected void btnSub(object sender, EventArgs e)
-        {
-            string[] arguments = ((LinkButton)sender).CommandArgument.ToString().Split(',');
-            txtStartDate.Text = arguments[1];
-            txtEndDate.Text = arguments[1];
-            parentID = Convert.ToInt32(arguments[0]);
-            SetDropDown();
-            SetCondition();
-            BindData();
-        }
         protected string ParseArgument(int id, string time)
         {
             return id.ToString() + ',' + time;
@@ -55,11 +44,16 @@ namespace Game.Web.Module.AgentManager
 
             string startDate = CtrlHelper.GetText(txtStartDate);
             string endDate = CtrlHelper.GetText(txtEndDate);
-            int sid = parentID == 0 ? IntParam : parentID;
-            StringBuilder where = new StringBuilder($" WHERE  ParentID={sid} ");
+            StringBuilder where = new StringBuilder();
+            if (DropDownList1.SelectedValue != "0"&& DropDownList1.SelectedValue!="")
+            {
+                where.AppendFormat("WHERE  ParentID={0}", DropDownList1.SelectedValue);
+            }
+            else
+            {
+                where.AppendFormat("WHERE  ParentID={0}", IntParam);
+            }
             where.AppendFormat(" AND CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
-
-
             DataSet ds = FacadeManage.aideRecordFacade.CountReward(where.ToString());
             if (ds.Tables.Count > 0)
             {
@@ -89,22 +83,25 @@ namespace Game.Web.Module.AgentManager
             rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();
         }
-        protected void GameID_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnSub(object sender, EventArgs e)
         {
-            parentID = Convert.ToInt32(DropDownList1.Text);
-            SetCondition();
+            string[] arguments = ((LinkButton)sender).CommandArgument.ToString().Split(',');
+            txtStartDate.Text = arguments[1];
+            txtEndDate.Text = arguments[1];
+            int parentID = Convert.ToInt32(arguments[0]);
+            SetDropDown(parentID);
+            SetCondition(parentID);
             BindData();
         }
         protected void btnQuery_Click(object sender, EventArgs e)
         {
             SetCondition();
             BindData();
-
         }
 
-        private void SetDropDown()
+        private void SetDropDown(int pid)
         {
-            DataSet ds = FacadeManage.aideTreasureFacade.GetSubList(parentID);
+            DataSet ds = FacadeManage.aideTreasureFacade.GetSubList(pid);
             DropDownList1.Items.Clear();
             DataTable table = ds.Tables[0];
             if (table == null || table.Rows.Count <= 0) return;
@@ -112,16 +109,22 @@ namespace Game.Web.Module.AgentManager
             DropDownList1.Items.Add(new ListItem("全部", "0"));
             foreach (DataRow row in table.Rows)
             {
-                DropDownList1.Items.Add(new ListItem(row["GameID"].ToString(), i.ToString()));
+                DropDownList1.Items.Add(new ListItem(row["GameID"].ToString(), row["UserID"].ToString()));
                 i++;
             }
         }
 
-        private void SetCondition()
+        private void SetCondition(int pid=0)
         {
             string startDate = CtrlHelper.GetText(txtStartDate);
             string endDate = CtrlHelper.GetText(txtEndDate);
-            if (parentID == 0)
+            if (DropDownList1.SelectedValue != "0"&& DropDownList1.SelectedValue != "")
+            {
+                StringBuilder condition = new StringBuilder($" WHERE  R.UserID={DropDownList1.SelectedValue}");
+                condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+                ViewState["SearchItems"] = condition.ToString();
+            }
+            else if (pid == 0)
             {
                 StringBuilder condition = new StringBuilder($" WHERE  R.UserID={IntParam}");
                 condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
@@ -129,14 +132,8 @@ namespace Game.Web.Module.AgentManager
             }
             else
             {
-                StringBuilder condition = new StringBuilder($" WHERE  R.ParentID={parentID}");
-
-                if (DropDownList1.SelectedValue != "0")
-                {
-                    condition.AppendFormat(" AND R.UserID ={0}", DropDownList1.SelectedItem.Text);
-                }
+                StringBuilder condition = new StringBuilder($" WHERE  R.ParentID={pid}");
                 condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
-
                 ViewState["SearchItems"] = condition.ToString();
             }
         }

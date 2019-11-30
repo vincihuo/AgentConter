@@ -1,6 +1,6 @@
-﻿/*
+/*
  * 版本： 4.0
- * 日期：2019/10/28 16:25:16
+ * 日期：2019/11/29 19:27:23
  * 
  * 描述：实体类
  * 
@@ -37,12 +37,12 @@ namespace Game.Entity.Treasure
         private string p_privatekey;
         private string p_publickey;
         private string p_shoutcut;
-        private int p_maxamount;
-        private int p_minamount;
+        private Int64 p_maxamount;
+        private Int64 p_minamount;
         private byte p_payidentity;
         private int p_sortid;
-        private int p_fristpresent;
-        private int p_presentscore;
+        private Int64 p_fristpresent;
+        private Int64 p_presentscore;
         private int p_chanelid;
         private string p_chanelname;
         private string p_attachstr1;
@@ -57,7 +57,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// 初始化OnlinePayConfig
         /// </summary>
-        public OnlinePayConfig()
+        public OnlinePayConfig() 
         {
             p_id = 0;
             p_paytype = 0;
@@ -93,7 +93,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_id = value;
+                p_id=value;
             }
             get
             {
@@ -108,7 +108,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_paytype = value;
+                p_paytype=value;
             }
             get
             {
@@ -123,7 +123,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_payname = value;
+                p_payname=value;
             }
             get
             {
@@ -138,7 +138,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_uid = value;
+                p_uid=value;
             }
             get
             {
@@ -153,7 +153,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_payurl = value;
+                p_payurl=value;
             }
             get
             {
@@ -168,7 +168,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_md5key = value;
+                p_md5key=value;
             }
             get
             {
@@ -183,7 +183,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_privatekey = value;
+                p_privatekey=value;
             }
             get
             {
@@ -198,7 +198,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_publickey = value;
+                p_publickey=value;
             }
             get
             {
@@ -213,7 +213,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_shoutcut = value;
+                p_shoutcut=value;
             }
             get
             {
@@ -224,11 +224,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MaxAmount
         /// </summary>
-        public int MaxAmount
+        public Int64 MaxAmount
         {
             set
             {
-                p_maxamount = value;
+                p_maxamount=value;
             }
             get
             {
@@ -239,11 +239,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MinAmount
         /// </summary>
-        public int MinAmount
+        public Int64 MinAmount
         {
             set
             {
-                p_minamount = value;
+                p_minamount=value;
             }
             get
             {
@@ -258,7 +258,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_payidentity = value;
+                p_payidentity=value;
             }
             get
             {
@@ -273,7 +273,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_sortid = value;
+                p_sortid=value;
             }
             get
             {
@@ -284,11 +284,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// FristPresent
         /// </summary>
-        public int FristPresent
+        public Int64 FristPresent
         {
             set
             {
-                p_fristpresent = value;
+                p_fristpresent=value;
             }
             get
             {
@@ -299,11 +299,11 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// PresentScore
         /// </summary>
-        public int PresentScore
+        public Int64 PresentScore
         {
             set
             {
-                p_presentscore = value;
+                p_presentscore=value;
             }
             get
             {
@@ -318,7 +318,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_chanelid = value;
+                p_chanelid=value;
             }
             get
             {
@@ -333,7 +333,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_chanelname = value;
+                p_chanelname=value;
             }
             get
             {
@@ -348,7 +348,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_attachstr1 = value;
+                p_attachstr1=value;
             }
             get
             {
@@ -363,7 +363,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_attachstr2 = value;
+                p_attachstr2=value;
             }
             get
             {
@@ -378,7 +378,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_attachstr3 = value;
+                p_attachstr3=value;
             }
             get
             {
@@ -393,7 +393,7 @@ namespace Game.Entity.Treasure
         {
             set
             {
-                p_attachstr4 = value;
+                p_attachstr4=value;
             }
             get
             {

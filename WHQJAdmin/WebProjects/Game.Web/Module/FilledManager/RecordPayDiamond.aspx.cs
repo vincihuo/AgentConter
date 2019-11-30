@@ -83,14 +83,14 @@ namespace Game.Web.Module.FilledManager
         {
             AuthUserOperationPermission(Permission.OrderOperating);
             string oid = ((Button)sender).CommandArgument;
-            Message result= FacadeManage.aideTreasureFacade.FinshOnlineOrder(oid,2,0,"0.0.0.0");
+            Message result= FacadeManage.aideTreasureFacade.FinshOnlineOrder(oid,2,0,userExt.UserID,userExt.PreLoginIP);
             if (result.MessageID == 0)
             {
-                ShowInfo("补单成功");
+                ShowInfo(result.Content);
             }
             else
             {
-                ShowError("补单失败");
+                ShowError(result.Content);
             }
             ShareInfoDataBind();
         }
@@ -160,7 +160,7 @@ namespace Game.Web.Module.FilledManager
             StringBuilder condition = new StringBuilder("WHERE 1=1");
             if (status >= 0)
             {
-                condition.AppendFormat(" AND OrderStatus='{0}'", status);
+                condition.AppendFormat(" AND OrderStates='{0}'", status);
             }
             if (!string.IsNullOrEmpty(queryContent))
             {
