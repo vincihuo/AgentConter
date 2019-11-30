@@ -123,7 +123,7 @@ namespace Game.Web.Module.FilledManager
                     {
                         shout += Convert.ToInt32(mm[i]) / 1000 + ",";
                     }
-                    txtPrice.Text = shout;
+                    txtPrice.Text = shout.Substring(0, shout.Length - 1); ;
                     DropDownList1.SelectedValue = config.PayIdentity.ToString();
                     txtFristPresent.Text = (config.FristPresent/1000).ToString();
                     txtPresentScore.Text = (config.PresentScore/1000).ToString();
