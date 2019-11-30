@@ -66,6 +66,15 @@
                     <asp:Literal ID="TxtOrderCost" runat="server"></asp:Literal>
                 </td>
             </tr>
+            <tr>
+                <td class="listTdLeft">实际到账：
+                </td>
+                <td>
+                    <asp:Literal ID="Literal4" runat="server"></asp:Literal>
+                </td>
+            </tr>
+
+
             <tr id="aliy" runat="server">
                 <td class="listTdLeft">支付宝：
                 </td>
@@ -74,7 +83,7 @@
                 </td>
             </tr>
 
-            <tr id="bank" runat="server" >
+            <tr id="bank" runat="server">
                 <td class="listTdLeft">银行类型：
                 </td>
                 <td width="10%">

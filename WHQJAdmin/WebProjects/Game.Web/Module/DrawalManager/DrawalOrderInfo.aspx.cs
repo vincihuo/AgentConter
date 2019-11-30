@@ -25,6 +25,7 @@ namespace Game.Web.Module.DrawalManager
             TxtGameID.Text = order.GameID.ToString();
             TxtMasterID.Text = order.MasterID.ToString();
             TxtOrderCost.Text = FacadeManage.ConversionMoneyToShow((long)order.OrderCost).ToString();
+            Literal4.Text= FacadeManage.ConversionMoneyToShow((long)(order.Amount- order.OrderCost)).ToString();
             TxtCurrTime.Text = order.CurrentTime.ToString();
             TxtDealTime.Text = order.DealTime.ToString();
             IP.Text = order.IP;
