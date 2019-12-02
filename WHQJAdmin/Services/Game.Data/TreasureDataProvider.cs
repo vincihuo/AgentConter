@@ -230,11 +230,11 @@ namespace Game.Data
             string sql;
             if (type==1)  
             {
-                sql = $"UPDATE BankPayOrder SET OrderStates=2,SET MasterId={masterId} WHERE OrderID='{orderid}'";
+                sql = $"UPDATE BankPayOrder SET OrderStates=2,MasterId={masterId},CallTime=GETDATE() WHERE OrderID='{orderid}'";
             }
             else
             {
-                sql = $"UPDATE ImgPayOrder SET OrderStates=2 ,SET MasterId={masterId} WHERE OrderID='{orderid}'";
+                sql = $"UPDATE ImgPayOrder SET OrderStates=2 ,MasterId={masterId},CallTime=GETDATE() WHERE OrderID='{orderid}'";
             }
             return Database.ExecuteNonQuery(sql);
         }
