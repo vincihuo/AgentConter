@@ -225,16 +225,16 @@ namespace Game.Data
             return MessageHelper.GetMessage(Database, "NET_PW_FinishOfficalOrder", prams);
         }
 
-        public int RefuseOrder(string orderid,byte type)
+        public int RefuseOrder(string orderid,byte type, int masterId)
         {
             string sql;
             if (type==1)  
             {
-                sql = $"UPDATE BankPayOrder SET OrderStates=2 WHERE OrderID='{orderid}'";
+                sql = $"UPDATE BankPayOrder SET OrderStates=2,SET MasterId={masterId} WHERE OrderID='{orderid}'";
             }
             else
             {
-                sql = $"UPDATE ImgPayOrder SET OrderStates=2 WHERE OrderID='{orderid}'";
+                sql = $"UPDATE ImgPayOrder SET OrderStates=2 ,SET MasterId={masterId} WHERE OrderID='{orderid}'";
             }
             return Database.ExecuteNonQuery(sql);
         }
@@ -832,7 +832,7 @@ namespace Game.Data
         //获取充值总数
         public decimal GetTotalAmount(string table, string where)
         {
-            string sql = $"SELECT ISNULL(SUM(Amount),0) AS Amount FROM {table} {where} AND OrderStates>0";
+            string sql = $"SELECT ISNULL(SUM(Amount),0) AS Amount FROM {table} {where}";
             return Convert.ToDecimal(Database.ExecuteScalar(CommandType.Text, sql));
         }
 

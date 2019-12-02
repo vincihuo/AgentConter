@@ -446,7 +446,7 @@ namespace Game.Web.WS
             if (validBet.CurrentValidBet < validBet.TargetBet)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
-                _ajv.msg = $"打码量不足，目标打码量{validBet.TargetBet}，当前打码量{validBet.CurrentValidBet}";
+                _ajv.msg = $"打码量不足，目标打码量{validBet.TargetBet/1000.0f}，当前打码量{validBet.CurrentValidBet/1000.0f}";
                 return;
             }
 

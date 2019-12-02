@@ -54,7 +54,7 @@ namespace Game.IData
         OfficalImgPay GetImgPayById(int id);
 
         Message FinshOfficalOrder(string orderid, byte type, int masterId);
-        int RefuseOrder(string orderid, byte type);
+        int RefuseOrder(string orderid, byte type, int masterId);
 
         Message AddValiBet(int valiBet, int userID, byte type, int DepositID, string DepositName);
         UserValidBet GetUserVailBet(int UserId);

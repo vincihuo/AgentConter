@@ -40,7 +40,7 @@ namespace Game.Web.Module.FilledManager
                  SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            long mm =(long)FacadeManage.aideTreasureFacade.GetTotalAmount(ImgPayOrder.Tablename, SearchItems);
+            long mm =(long)FacadeManage.aideTreasureFacade.GetTotalAmount(ImgPayOrder.Tablename, SearchItems+ " AND OrderStates=1");
             ltTotal.Text = $"已充值金额：{FacadeManage.ConversionMoneyToShow(mm)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(OnLinePayOrder.Tablename, SearchItems)} (当前条件统计)";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
@@ -93,7 +93,7 @@ namespace Game.Web.Module.FilledManager
         protected void btnRefuse(object sender, EventArgs e)
         {
             string oid = ((LinkButton)sender).CommandArgument;
-            FacadeManage.aideTreasureFacade.RefuseOrder(oid, 2);
+            FacadeManage.aideTreasureFacade.RefuseOrder(oid, 2, userExt.UserID);
             ShareInfoDataBind();
         }
 

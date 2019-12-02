@@ -36,7 +36,7 @@ BEGIN
 	END
     IF @OrderState <>0
     BEGIN
-	SET @strErrorDescribe=N'订单已经GGtry了!'
+	SET @strErrorDescribe=N'订单已经完成!'
 	RETURN 1002
 	END
     IF @State=1

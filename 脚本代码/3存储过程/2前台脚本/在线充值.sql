@@ -86,6 +86,11 @@ BEGIN
 		RETURN 1005
 	END
 	--刷新状态
+	IF @callType=2
+	BEGIN
+	SET @PayAmount=@Amount
+	END
+
 	UPDATE OnLinePayOrder SET OrderStates = @callType,PayAmount = @PayAmount,MasterId=@MasterId,CallTime=@DateTime WHERE OrderID = @strOrdersID AND UserID = @UserID
 	--获取用户金额
 	SELECT @BeforeScore = Score, @BeforeInsure=InsureScore

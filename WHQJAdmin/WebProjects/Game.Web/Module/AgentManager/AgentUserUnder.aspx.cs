@@ -118,11 +118,20 @@ namespace Game.Web.Module.AgentManager
         {
             string startDate = CtrlHelper.GetText(txtStartDate);
             string endDate = CtrlHelper.GetText(txtEndDate);
-            if (DropDownList1.SelectedValue != "0"&& DropDownList1.SelectedValue != "")
+            if (DropDownList1.SelectedValue != "")
             {
-                StringBuilder condition = new StringBuilder($" WHERE  R.UserID={DropDownList1.SelectedValue}");
-                condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
-                ViewState["SearchItems"] = condition.ToString();
+                if (DropDownList1.SelectedValue != "0")
+                {
+                    StringBuilder condition = new StringBuilder($" WHERE  R.UserID={DropDownList1.SelectedValue}");
+                    condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+                    ViewState["SearchItems"] = condition.ToString();
+                }
+                else
+                {
+                    StringBuilder condition = new StringBuilder($" WHERE  R.ParentID={IntParam}");
+                    condition.AppendFormat(" AND R.CountTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+                    ViewState["SearchItems"] = condition.ToString();
+                }
             }
             else if (pid == 0)
             {

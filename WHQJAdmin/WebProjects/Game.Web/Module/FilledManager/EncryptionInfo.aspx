@@ -53,7 +53,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">签名字段名：
+                        <td class="listTdLeft">key名：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox2" runat="server" CssClass="text"></asp:TextBox>
@@ -61,7 +61,7 @@
                     </tr>
 
                     <tr>
-                        <td class="listTdLeft">签名位置：
+                        <td class="listTdLeft">key位置：
                         </td>
                         <td>
                             <asp:TextBox ID="SignArray" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
@@ -92,7 +92,7 @@
                     </tr>
 
                     <tr>
-                        <td class="listTdLeft">加密类型：
+                        <td class="listTdLeft">签名类型：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox5" runat="server" CssClass="text" MaxLength="4"></asp:TextBox>
@@ -132,6 +132,8 @@
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox9" runat="server" CssClass="text" MaxLength="1"></asp:TextBox>
+                            <span class="hong">没有填0</span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="必须填写发送方法" Display="Dynamic" ControlToValidate="TextBox9" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
 

@@ -53,7 +53,6 @@ namespace Game.Web.Module.DrawalManager
                 TxtDrawalType.Text = "银行卡";
                 aliy.Visible = false;
             }
-
         }
 
         protected void OnBtnY(object sender, EventArgs e)

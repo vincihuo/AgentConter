@@ -32,8 +32,12 @@ BEGIN
     INSERT INTO WHQJRecordDB.dbo.ImgPayOrderCopy SELECT * FROM ImgPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
     DELETE ImgPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
 
+    INSERT INTO WHQJRecordDB.dbo.AgentCountRecordCopy SELECT * FROM WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
+    DELETE WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
+
+
     DELETE ValiBetRecord WHERE DateDiff(dd,DepositTime,GetDate())>30
-    DELETE AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>10
+    
     DELETE RecordAgentReward WHERE DateDiff(dd,drawalTime,GetDate())>30
 END
 RETURN 0
