@@ -843,7 +843,7 @@ namespace Game.Data
         /// <returns></returns>
         public long GetTotalPayOrderCount(string table ,string where)
         {
-            string sql = $"SELECT COUNT(1) AS [COUNT] FROM {table} {where} AND OrderStates>0";
+            string sql = $"SELECT COUNT(1) AS [COUNT] FROM {table} {where}";
             return Convert.ToInt64(Database.ExecuteScalar(CommandType.Text, sql));
         }
 

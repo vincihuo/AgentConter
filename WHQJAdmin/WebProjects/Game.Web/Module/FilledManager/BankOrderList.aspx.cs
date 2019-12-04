@@ -34,7 +34,7 @@ namespace Game.Web.Module.FilledManager
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
             long mm = (long)FacadeManage.aideTreasureFacade.GetTotalAmount(BankPayOrder.Tablename, SearchItems+ " AND OrderStates=1");
-            ltTotal.Text = $"已充值金额：{FacadeManage.ConversionMoneyToShow(mm)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(BankPayOrder.Tablename, SearchItems)} (当前条件统计)";
+            ltTotal.Text = $"已充值金额：{FacadeManage.ConversionMoneyToShow(mm)}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(BankPayOrder.Tablename, SearchItems+ " AND OrderStates=1 ")} (当前条件统计)";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
         }
