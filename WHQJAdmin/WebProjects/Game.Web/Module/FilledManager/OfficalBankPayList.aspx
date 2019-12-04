@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OfficalBankPayList.aspx.cs" Inherits="Game.Web.Module.FilledManager.OfficalPayList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -78,10 +78,10 @@
                             </td>
 
                             <td>
-                                <%# Eval("MinAmount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("MinAmount").ToString())%>
                             </td>
                             <td>
-                                <%# Eval("MaxAmount")%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval("MaxAmount").ToString())%>
                             </td>
                         </tr>
                     </ItemTemplate>

@@ -41,15 +41,7 @@ namespace Game.Web.Module.FilledManager
             config.PrivateKey= CtrlHelper.GetText(TxtPrivateKey);
             config.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TextMax.Text));
             config.MinAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TextMin.Text));
-
-            string[] mm = CtrlHelper.GetText(txtPrice).Split(',');
-            string shout="";
-            for (int i = 0; i < mm.Length; ++i)
-            {
-                shout += Convert.ToInt32(mm[i]) * 1000 + ",";
-            }
-            shout=shout.Substring(0,shout.Length-1);
-            config.ShoutCut = shout;
+            config.ShoutCut = FacadeManage.ConverToShow(CtrlHelper.GetText(txtPrice));
             config.PayIdentity = Convert.ToByte(DropDownList1.SelectedValue);
             config.SortID = Convert.ToInt32(SortID.Text);
             config.FristPresent = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(txtFristPresent.Text));

@@ -193,6 +193,17 @@ namespace Game.Facade
         }
 
 
+        public static string ConverToShow(string t)
+        {
+            string[] mm = t.Split(',');
+            string shout = "";
+            for (int i = 0; i < mm.Length; ++i)
+            {
+                shout += Convert.ToInt32(mm[i]) * 1000 + ",";
+            }
+            return shout.Substring(0, shout.Length - 1);
+        }
+
         public static float ConversionMoneyToShow(string t)
         {
             Int64 a = (Int64)double.Parse(t);

@@ -1,18 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AgentUserUnder.aspx.cs" Inherits="Game.Web.Module.AgentManager.AgentUserUnder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AgetRewardCount.aspx.cs" Inherits="Game.Web.Module.AgentManager.AgetRewardCount" %>
 
 <%@ Import Namespace="Game.Facade" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
+<head runat="server">
     <link href="../../styles/layout.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../scripts/common.js"></script>
     <script type="text/javascript" src="../../scripts/comm.js"></script>
     <script type="text/javascript" src="../../scripts/My97DatePicker/WdatePicker.js"></script>
-    <title>下级报表</title>
+    <title>返利报表</title>
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- 头部菜单 Start -->
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
             <tr>
                 <td width="19" height="25" valign="top" class="Lpd10">
@@ -23,14 +23,14 @@
                 </td>
             </tr>
         </table>
-        <!-- 头部菜单 End -->
+
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
-                <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Width="155" Height="24" CssClass="text" >
-                    </asp:DropDownList>
+                <td class="listTdLeft">游戏ID
                 </td>
-
+                <td>
+                    <asp:TextBox ID="GameId" runat="server" CssClass="text"></asp:TextBox>
+                </td>
                 <td class="listTdLeft" style="width: 80px">日期查询：
                 </td>
                 <td>
@@ -58,6 +58,7 @@
 
             </tr>
         </table>
+
         <div id="content">
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="box" id="list">
                 <tr align="center" class="bold">
@@ -131,5 +132,10 @@
         </table>
 
     </form>
+
+
+
+
+
 </body>
 </html>

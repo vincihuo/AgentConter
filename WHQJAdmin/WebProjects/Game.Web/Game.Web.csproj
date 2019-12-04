@@ -148,6 +148,7 @@
     <Content Include="Module\AgentManager\AgentUserUpdate.aspx" />
     <Content Include="Module\AgentManager\AgentReturnConfigInfo.aspx" />
     <Content Include="Module\AgentManager\AgentReturnConfigList.aspx" />
+    <Content Include="Module\AgentManager\AgetRewardCount.aspx" />
     <Content Include="Module\AgentManager\SystemSet.aspx" />
     <Content Include="Module\AppManager\DataBaseInfoInfo.aspx" />
     <Content Include="Module\AppManager\DataBaseInfoList.aspx" />
@@ -2930,6 +2931,13 @@
     </Compile>
     <Compile Include="Module\AgentManager\AgentReturnConfigList.aspx.designer.cs">
       <DependentUpon>AgentReturnConfigList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\AgentManager\AgetRewardCount.aspx.cs">
+      <DependentUpon>AgetRewardCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\AgentManager\AgetRewardCount.aspx.designer.cs">
+      <DependentUpon>AgetRewardCount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\AgentManager\SystemSet.aspx.cs">
       <DependentUpon>SystemSet.aspx</DependentUpon>

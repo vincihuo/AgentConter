@@ -95,7 +95,7 @@
                                 <%#FacadeManage.ConversionMoneyToShow(Eval("AllReward").ToString()) %>
                             </td>
                             <td>
-                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgentUserUnder.aspx?param='+<%# Eval("UserID")%>);">返利报表</a>
+                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgetRewardCount.aspx?param='+<%# Eval("UserID")%>);">返利报表</a>
                                 <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
                             </td>
                         </tr>

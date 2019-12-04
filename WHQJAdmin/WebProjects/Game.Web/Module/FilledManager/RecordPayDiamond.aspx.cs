@@ -45,7 +45,7 @@ namespace Game.Web.Module.FilledManager
                  SearchItems, Orderby, anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
-            ltTotal.Text = $"已支付金额：{FacadeManage.aideTreasureFacade.GetTotalPayAmount(SearchItems+ " AND OrderStates>0")}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(OnLinePayOrder.Tablename,SearchItems)} (当前条件统计)";
+            ltTotal.Text = $"已支付金额：{FacadeManage.ConversionMoneyToShow(FacadeManage.aideTreasureFacade.GetTotalPayAmount(SearchItems + " AND OrderStates>0").ToString())}元 已支付订单数：{FacadeManage.aideTreasureFacade.GetTotalPayOrderCount(OnLinePayOrder.Tablename,SearchItems)} (当前条件统计)";
             rptShareInfo.DataSource = pagerSet.PageSet;
             rptShareInfo.DataBind();
         }
@@ -66,6 +66,30 @@ namespace Game.Web.Module.FilledManager
             if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate))
             {
                 condition.AppendFormat(" AND PayTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
+            }
+            int type = Convert.ToInt32(ddlSearchType.SelectedValue);
+            int status = Convert.ToInt32(ddlPayStatus.SelectedValue);
+            string queryContent = CtrlHelper.GetTextAndFilter(txtSearch);
+            if (status >= 0)
+            {
+                condition.AppendFormat(" AND OrderStates='{0}'", status);
+            }
+            if (!string.IsNullOrEmpty(queryContent))
+            {
+                switch (type)
+                {
+                    case 0:
+                        condition.AppendFormat(" AND OrderID='{0}'", queryContent);
+                        break;
+                    default:
+                        if (!Utils.Validate.IsPositiveInt(queryContent))
+                        {
+                            ShowError("输入的查询格式不正确");
+                            return;
+                        }
+                        condition.AppendFormat(" AND GameID={0}", queryContent);
+                        break;
+                }
             }
             ViewState["SearchItems"] = condition.ToString();
         }
@@ -147,43 +171,6 @@ namespace Game.Web.Module.FilledManager
 
             btnQuery_Click(sender, e);
         }
-
-        /// <summary>
-        /// 用户查询
-        /// </summary>
-        protected void btnQueryAcc_Click(object sender, EventArgs e)
-        {
-            int type = Convert.ToInt32(ddlSearchType.SelectedValue);
-            int status = Convert.ToInt32(ddlPayStatus.SelectedValue);
-            string queryContent = CtrlHelper.GetTextAndFilter(txtSearch);
-
-            StringBuilder condition = new StringBuilder("WHERE 1=1");
-            if (status >= 0)
-            {
-                condition.AppendFormat(" AND OrderStates='{0}'", status);
-            }
-            if (!string.IsNullOrEmpty(queryContent))
-            {
-                switch (type)
-                {
-                    case 0:
-                        condition.AppendFormat(" AND OrderID='{0}'", queryContent);
-                        break;
-                    default:
-                        if (!Utils.Validate.IsPositiveInt(queryContent))
-                        {
-                            ShowError("输入的查询格式不正确");
-                            return;
-                        }
-                        condition.AppendFormat(" AND GameID={0}", queryContent);
-                        break;
-                }
-            }
-
-            ViewState["SearchItems"] = condition.ToString();
-            ShareInfoDataBind();
-        }
-
         /// <summary>
         /// 充值类型
         /// </summary>

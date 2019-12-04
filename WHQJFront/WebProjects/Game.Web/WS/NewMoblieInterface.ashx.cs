@@ -433,8 +433,8 @@ namespace Game.Web.WS
             //判断玩家金币
             ConfigInfo cfg = FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
             int p = Convert.ToInt32(cfg.Field1);
-            int min = Convert.ToInt32(cfg.Field2);
-            int max = Convert.ToInt32(cfg.Field3);
+            int min = Convert.ToInt32(cfg.Field2)*1000;
+            int max = Convert.ToInt32(cfg.Field3)*1000;
             if (amount < min || amount > max)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
@@ -674,6 +674,8 @@ namespace Game.Web.WS
             ConfigInfo drawalConfig=FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
 
             //输出信息
+            drawalConfig.Field2 += "000";
+            drawalConfig.Field3 += "000";
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("drawalConfig", drawalConfig);
             _ajv.SetDataItem("sharelink", shareLink);

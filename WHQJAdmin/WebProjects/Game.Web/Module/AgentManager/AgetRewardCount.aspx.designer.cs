@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Game.Web.Module.FilledManager {
+namespace Game.Web.Module.AgentManager {
     
     
-    public partial class ImgOrderList {
+    public partial class AgetRewardCount {
         
         /// <summary>
         /// form1 控件。
@@ -20,6 +20,15 @@ namespace Game.Web.Module.FilledManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// GameId 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox GameId;
         
         /// <summary>
         /// txtStartDate 控件。
@@ -40,103 +49,49 @@ namespace Game.Web.Module.FilledManager {
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
         
         /// <summary>
-        /// ddlGlobalShareInfo 控件。
+        /// btnQuery 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGlobalShareInfo;
+        protected global::System.Web.UI.WebControls.Button btnQuery;
         
         /// <summary>
-        /// btnQueryTD 控件。
+        /// lbTotal 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryTD;
+        protected global::System.Web.UI.WebControls.Label lbTotal;
         
         /// <summary>
-        /// btnQueryYD 控件。
+        /// Label1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryYD;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// btnQueryTW 控件。
+        /// Label2 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryTW;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// btnQueryYW 控件。
+        /// rptDataList 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryYW;
-        
-        /// <summary>
-        /// txtSearch 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
-        
-        /// <summary>
-        /// ddlSearchType 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSearchType;
-        
-        /// <summary>
-        /// ddlPayStatus 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPayStatus;
-        
-        /// <summary>
-        /// btnQueryAcc 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnQueryAcc;
-        
-        /// <summary>
-        /// ltTotal 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltTotal;
-        
-        /// <summary>
-        /// rptShareInfo 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptShareInfo;
+        protected global::System.Web.UI.WebControls.Repeater rptDataList;
         
         /// <summary>
         /// litNoData 控件。
@@ -148,12 +103,12 @@ namespace Game.Web.Module.FilledManager {
         protected global::System.Web.UI.WebControls.Literal litNoData;
         
         /// <summary>
-        /// anpNews 控件。
+        /// anpPage 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::Wuqi.Webdiyer.AspNetPager anpNews;
+        protected global::Wuqi.Webdiyer.AspNetPager anpPage;
     }
 }

@@ -40,8 +40,6 @@ namespace Game.Web.Module.FilledManager
                 ShowInfo("删除失败");
             }
         }
-
-
         protected string GetPayTypeName(int type)
         {
             switch (type)

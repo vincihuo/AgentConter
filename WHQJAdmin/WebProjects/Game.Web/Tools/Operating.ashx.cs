@@ -156,13 +156,13 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["Gold"]);
+                    sc.count = Convert.ToInt64(item["Gold"])/1000;
                     sc.type = "平台金币";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["PayGold"]);
+                    sc.count = Convert.ToInt64(item["PayGold"])/1000;
                     sc.type = "充值金币";
                     data.Add(sc);
                 }
@@ -195,7 +195,7 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsPayChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.amount = Convert.ToDecimal(item["PayAmount"]);
+                    sc.amount = Convert.ToDecimal(item["PayAmount"])/1000;
                     sc.type = "充值金额";
                     data.Add(sc);
                 }
@@ -318,19 +318,19 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameRevenue"]);
+                    sc.count = Convert.ToInt64(item["GameRevenue"])/1000;
                     sc.type = "游戏服务费";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["InsureRevenue"]);
+                    sc.count = Convert.ToInt64(item["InsureRevenue"])/1000;
                     sc.type = "银行服务费";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameRevenue"]) + Convert.ToInt64(item["InsureRevenue"]);
+                    sc.count = Convert.ToInt64(item["GameRevenue"])/1000 + Convert.ToInt64(item["InsureRevenue"])/1000;
                     sc.type = "合计服务费";
                     data.Add(sc);
                 }
@@ -363,7 +363,7 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameWaste"]);
+                    sc.count = Convert.ToInt64(item["GameWaste"])/1000;
                     sc.type = "游戏损耗";
                     data.Add(sc);
                 }

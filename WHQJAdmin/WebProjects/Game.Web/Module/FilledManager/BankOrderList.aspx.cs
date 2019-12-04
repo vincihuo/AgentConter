@@ -48,6 +48,32 @@ namespace Game.Web.Module.FilledManager
             {
                 condition.AppendFormat(" AND PayTime BETWEEN '{0}' AND '{1}'", startDate, endDate);
             }
+
+            int type = Convert.ToInt32(ddlSearchType.SelectedValue);
+            int status = Convert.ToInt32(ddlPayStatus.SelectedValue);
+            string queryContent = CtrlHelper.GetTextAndFilter(txtSearch);
+
+            if (status >= 0)
+            {
+                condition.AppendFormat(" AND OrderStates='{0}'", status);
+            }
+            if (!string.IsNullOrEmpty(queryContent))
+            {
+                switch (type)
+                {
+                    case 0:
+                        condition.AppendFormat(" AND OrderID='{0}'", queryContent);
+                        break;
+                    default:
+                        if (!Utils.Validate.IsPositiveInt(queryContent))
+                        {
+                            ShowError("输入的查询格式不正确");
+                            return;
+                        }
+                        condition.AppendFormat(" AND GameID={0}", queryContent);
+                        break;
+                }
+            }
             ViewState["SearchItems"] = condition.ToString();
         }
         protected void btnQuery_Click(object sender, EventArgs e)
@@ -122,41 +148,6 @@ namespace Game.Web.Module.FilledManager
             btnQuery_Click(sender, e);
         }
 
-        /// <summary>
-        /// 用户查询
-        /// </summary>
-        protected void btnQueryAcc_Click(object sender, EventArgs e)
-        {
-            int type = Convert.ToInt32(ddlSearchType.SelectedValue);
-            int status = Convert.ToInt32(ddlPayStatus.SelectedValue);
-            string queryContent = CtrlHelper.GetTextAndFilter(txtSearch);
-
-            StringBuilder condition = new StringBuilder("WHERE 1=1");
-            if (status >= 0)
-            {
-                condition.AppendFormat(" AND OrderStates='{0}'", status);
-            }
-            if (!string.IsNullOrEmpty(queryContent))
-            {
-                switch (type)
-                {
-                    case 0:
-                        condition.AppendFormat(" AND OrderID='{0}'", queryContent);
-                        break;
-                    default:
-                        if (!Utils.Validate.IsPositiveInt(queryContent))
-                        {
-                            ShowError("输入的查询格式不正确");
-                            return;
-                        }
-                        condition.AppendFormat(" AND GameID={0}", queryContent);
-                        break;
-                }
-            }
-
-            ViewState["SearchItems"] = condition.ToString();
-            ShareInfoDataBind();
-        }
         /// <summary>
         /// 充值状态
         /// </summary>

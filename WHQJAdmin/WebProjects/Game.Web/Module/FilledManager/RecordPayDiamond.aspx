@@ -48,7 +48,6 @@
                         <asp:ListItem Text="支付宝" Value="2"></asp:ListItem>
                         <asp:ListItem Text="云闪" Value="3"></asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                     <asp:Button ID="btnQueryTD" runat="server" Text="今天" CssClass="btn wd1" OnClick="btnQueryTD_Click" />
                     <asp:Button ID="btnQueryYD" runat="server" Text="昨天" CssClass="btn wd1" OnClick="btnQueryYD_Click" />
                     <asp:Button ID="btnQueryTW" runat="server" Text="本周" CssClass="btn wd1" OnClick="btnQueryTW_Click" />
@@ -72,7 +71,7 @@
                         <asp:ListItem Value="1">已支付</asp:ListItem>
                         <asp:ListItem Value="2">补单</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:Button ID="btnQueryAcc" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQueryAcc_Click" />
+                    <asp:Button ID="btnQueryAcc" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                     <span class="total-span">
                         <asp:Literal ID="ltTotal" runat="server"></asp:Literal></span>
                 </td>
