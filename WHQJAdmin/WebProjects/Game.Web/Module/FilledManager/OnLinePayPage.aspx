@@ -120,7 +120,7 @@
                                 <%#Convert.ToInt32( Eval("PayIdentity").ToString())==0?"普通充值":Convert.ToInt32( Eval("PayIdentity").ToString())==1?"首冲":Convert.ToInt32( Eval("PayIdentity").ToString())==2?"每日":Convert.ToInt32( Eval("PayIdentity").ToString())==3?"热卖":"人气"%>
                             </td>
                             <td>
-                                <%# FacadeManage.ConverToShow(Eval("PresentScore").ToString()) %>
+                                <%# Eval("PresentScore") %>
                             </td>
                             <td>
                                 <%# Eval("chanelName").ToString()%>

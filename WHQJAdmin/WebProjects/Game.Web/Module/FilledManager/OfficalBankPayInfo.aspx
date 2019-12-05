@@ -130,6 +130,14 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="listTdLeft">禁用：
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="ckbLock" runat="server" />
+                        </td>
+                    </tr>
+
 
                 </table>
             </ContentTemplate>

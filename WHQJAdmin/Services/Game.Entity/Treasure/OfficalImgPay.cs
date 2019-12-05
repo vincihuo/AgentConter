@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/11/29 19:27:24
+ * 日期：2019/12/4 20:05:18
  * 
  * 描述：实体类
  * 
@@ -36,6 +36,7 @@ namespace Game.Entity.Treasure
         private string p_configname;
         private int p_sortid;
         private string p_description;
+        private byte p_nullity;
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace Game.Entity.Treasure
             p_configname = string.Empty;
             p_sortid = 0;
             p_description = string.Empty;
+            p_nullity = 0;
         }
 
         #endregion
@@ -177,6 +179,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_description;
+            }
+        }
+
+        /// <summary>
+        /// Nullity
+        /// </summary>
+        public byte Nullity
+        {
+            set
+            {
+                p_nullity=value;
+            }
+            get
+            {
+                return p_nullity;
             }
         }
 

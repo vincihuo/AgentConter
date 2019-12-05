@@ -29,6 +29,7 @@ namespace Game.Web.Module.FilledManager
                 TexMin.Text = FacadeManage.ConversionMoneyToShow(chanel.MinAmount).ToString();
                 TexDescription.Text = chanel.Description;
                 TexSort.Text = chanel.SortId.ToString();
+                ckbLock.Checked = chanel.Nullity == 1;
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace Game.Web.Module.FilledManager
             chanel.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMax.Text));
             chanel.Description = TexDescription.Text;
             chanel.SortId = Convert.ToInt32(TexSort.Text);
+            chanel.Nullity = (byte)(ckbLock.Checked ? 1 : 0);
             int result = FacadeManage.aideTreasureFacade.SaveImgPay(chanel);
             if (result > 0)
             {

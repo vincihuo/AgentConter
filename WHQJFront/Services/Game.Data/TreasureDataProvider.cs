@@ -76,18 +76,18 @@ namespace Game.Data
 
         public IList<OnlinePayConfig> GetOnLinePayList(int payType)
         {
-            string sqlQuery = $"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE PayType={payType}  ORDER BY PayIdentity DESC,SortID DESC";
+            string sqlQuery = $"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE PayType={payType} AND Nullity=0  ORDER BY PayIdentity DESC,SortID DESC";
             return Database.ExecuteObjectList<OnlinePayConfig>(sqlQuery);
         }
 
         public IList<OfficalBankPay> GetBankPayList()
         {
-            string sqlQuery = "SELECT * FROM OfficalBankPay WITH(NOLOCK)  ORDER BY SortId DESC";
+            string sqlQuery = "SELECT * FROM OfficalBankPay WITH(NOLOCK) WHERE Nullity=0 ORDER BY SortId DESC";
             return Database.ExecuteObjectList<OfficalBankPay>(sqlQuery);
         }
         public IList<OfficalImgPay> GetImgPayList()
         {
-            string sqlQuery = "SELECT * FROM OfficalImgPay WITH(NOLOCK)  ORDER BY SortId DESC";
+            string sqlQuery = "SELECT * FROM OfficalImgPay WITH(NOLOCK)WHERE Nullity=0  ORDER BY SortId DESC";
             return Database.ExecuteObjectList<OfficalImgPay>(sqlQuery);
         }
 

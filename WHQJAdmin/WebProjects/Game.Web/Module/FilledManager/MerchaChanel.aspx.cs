@@ -44,13 +44,14 @@ namespace Game.Web.Module.FilledManager
             config.ShoutCut = FacadeManage.ConverToShow(CtrlHelper.GetText(txtPrice));
             config.PayIdentity = Convert.ToByte(DropDownList1.SelectedValue);
             config.SortID = Convert.ToInt32(SortID.Text);
-            config.FristPresent = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(txtFristPresent.Text));
-            config.PresentScore = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(txtPresentScore.Text));
+            config.FristPresent = Convert.ToInt32(txtFristPresent.Text);
+            config.PresentScore = Convert.ToInt32(txtPresentScore.Text);
             config.ChanelID = Convert.ToInt32(DropDownList2.SelectedValue);
             config.ChanelName = DropDownList2.SelectedItem.Text;
             config.AttachStr1 = CtrlHelper.GetText(AttaBox1);
             config.AttachStr2 = CtrlHelper.GetText(AttaBox2);
             config.PayUrl= CtrlHelper.GetText(TexPayUrl);
+            config.Nullity = (byte)(ckbLock.Checked ? 1 : 0);
             if (IntParam > 0)
             {
                 config.ID = IntParam;
@@ -108,7 +109,7 @@ namespace Game.Web.Module.FilledManager
                     TxtPublicKey.Text = config.PublicKey;
                     TextMin.Text = (config.MinAmount / 1000).ToString();
                     TextMax.Text = (config.MaxAmount / 1000).ToString();
-
+                    ckbLock.Checked = config.Nullity == 1;
                     string[] mm = config.ShoutCut.Split(',');
                     string shout = "";
                     for (int i = 0; i < mm.Length; ++i)
@@ -117,8 +118,8 @@ namespace Game.Web.Module.FilledManager
                     }
                     txtPrice.Text = shout.Substring(0, shout.Length - 1); ;
                     DropDownList1.SelectedValue = config.PayIdentity.ToString();
-                    txtFristPresent.Text = (config.FristPresent/1000).ToString();
-                    txtPresentScore.Text = (config.PresentScore/1000).ToString();
+                    txtFristPresent.Text = config.FristPresent.ToString();
+                    txtPresentScore.Text = config.PresentScore.ToString();
                     SortID.Text = config.SortID.ToString();
                     TexPayUrl.Text = config.PayUrl;
                     AttaBox1.Text = config.AttachStr1;

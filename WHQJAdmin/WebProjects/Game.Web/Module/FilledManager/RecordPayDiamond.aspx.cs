@@ -155,7 +155,6 @@ namespace Game.Web.Module.FilledManager
                 Convert.ToDateTime(Fetch.GetWeekTime().Split('$')[0]).ToString("yyyy-MM-dd"));
             CtrlHelper.SetText(txtEndDate,
                 Convert.ToDateTime(Fetch.GetWeekTime().Split('$')[1]).ToString("yyyy-MM-dd"));
-
             btnQuery_Click(sender, e);
         }
 
@@ -168,7 +167,6 @@ namespace Game.Web.Module.FilledManager
                 Convert.ToDateTime(Fetch.GetLastWeekTime().Split('$')[0]).ToString("yyyy-MM-dd"));
             CtrlHelper.SetText(txtEndDate,
                 Convert.ToDateTime(Fetch.GetLastWeekTime().Split('$')[1]).ToString("yyyy-MM-dd"));
-
             btnQuery_Click(sender, e);
         }
         /// <summary>

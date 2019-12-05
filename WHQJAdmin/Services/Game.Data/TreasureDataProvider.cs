@@ -122,6 +122,7 @@ namespace Game.Data
                 Database.MakeInParam("PresentScore", config.PresentScore),
                 Database.MakeInParam("FristPresent", config.FristPresent),
                 Database.MakeInParam("ChanelID", config.ChanelID),
+                Database.MakeInParam("Nullity", config.Nullity),
                 Database.MakeInParam("ChanelName", config.ChanelName),
                 Database.MakeInParam("AttachStr1", config.AttachStr1),
                 Database.MakeInParam("AttachStr2", config.AttachStr1)
@@ -129,8 +130,8 @@ namespace Game.Data
             string sqlQuery;
             if (config.ID == 0)
             {
-                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,PayUrl,Md5key,PrivateKey,PublicKey,MinAmount,MaxAmount,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,ChanelID,ChanelName,AttachStr1) 
-                                        VALUES(@PayType,@PayName,@UID,@PayUrl,@Md5key,@PrivateKey,@PublicKey,@MinAmount,@MaxAmount,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@ChanelID,@ChanelName,@AttachStr1)";
+                sqlQuery = @"INSERT INTO OnlinePayConfig(PayType,PayName,UID,PayUrl,Md5key,PrivateKey,PublicKey,MinAmount,MaxAmount,ShoutCut,PayIdentity,SortID,PresentScore,FristPresent,Nullity,ChanelID,ChanelName,AttachStr1) 
+                                        VALUES(@PayType,@PayName,@UID,@PayUrl,@Md5key,@PrivateKey,@PublicKey,@MinAmount,@MaxAmount,@ShoutCut,@PayIdentity,@SortID,@PresentScore,@FristPresent,@Nullity,@ChanelID,@ChanelName,@AttachStr1)";
             }
             else
             {
@@ -155,6 +156,7 @@ namespace Game.Data
                     .Append("ChanelName=@ChanelName, ")
                     .Append("AttaChStr1=@AttachStr1, ")
                     .Append("AttaChStr2=@AttachStr2 ")
+                    .Append("Nullity=@Nullity ")
                     .Append("WHERE ID=@ID");
                 sqlQuery = sql.ToString();
             }
@@ -171,18 +173,19 @@ namespace Game.Data
                 Database.MakeInParam("MaxAmount", officalImgPay.MaxAmount),
                 Database.MakeInParam("MinAmount", officalImgPay.MinAmount),
                 Database.MakeInParam("SortId", officalImgPay.SortId),
+                Database.MakeInParam("Nullity", officalImgPay.Nullity),
                 Database.MakeInParam("Description", officalImgPay.Description)
             };
             string sqlQuery;
             if (officalImgPay.id == 0)
             {
-                sqlQuery = @"INSERT INTO [dbo].[OfficalImgPay]( [ConfigName], [payType], [PayUrl], [MaxAmount], [MinAmount], [SortId], [Description]) 
-                                                           VALUES (@ConfigName,@payType,@PayUrl,@MaxAmount,@MinAmount,@SortId,@Description)";
+                sqlQuery = @"INSERT INTO [dbo].[OfficalImgPay]( [ConfigName], [payType], [PayUrl], [MaxAmount], [MinAmount], [SortId], [Nullity],[Description]) 
+                                                           VALUES (@ConfigName,@payType,@PayUrl,@MaxAmount,@MinAmount,@SortId,@Nullity,@Description)";
             }
             else
             {
                 prams.Add(Database.MakeInParam("id", officalImgPay.id));
-                sqlQuery = @"UPDATE [dbo].[OfficalImgPay] SET ConfigName=@ConfigName,payType=@payType,PayUrl=@PayUrl,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
+                sqlQuery = @"UPDATE [dbo].[OfficalImgPay] SET ConfigName=@ConfigName,payType=@payType,PayUrl=@PayUrl,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Nullity=@Nullity,Description=@Description WHERE id=@id";
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
@@ -198,18 +201,19 @@ namespace Game.Data
                 Database.MakeInParam("MaxAmount", officalBankPay.MaxAmount),
                 Database.MakeInParam("MinAmount", officalBankPay.MinAmount),
                 Database.MakeInParam("SortId", officalBankPay.SortId),
+                Database.MakeInParam("Nullity", officalBankPay.Nullity),
                 Database.MakeInParam("Description", officalBankPay.Description)
             };
             string sqlQuery;
             if (officalBankPay.id == 0)
             {
-                sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [MerchantName],[BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId], [Description]) 
-                                                           VALUES (@ConfigName,@MerchantName,@BankName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Description)";
+                sqlQuery = @"INSERT INTO [dbo].[OfficalBankPay]( [ConfigName], [MerchantName],[BankName], [BankNumber], [BankAddr],[MaxAmount], [MinAmount], [SortId],[Nullity], [Description]) 
+                                                           VALUES (@ConfigName,@MerchantName,@BankName,@BankNumber,@BankAddr,@MaxAmount,@MinAmount,@SortId,@Nullity,@Description)";
             }
             else
             {
                 prams.Add(Database.MakeInParam("id", officalBankPay.id));
-                sqlQuery = @"UPDATE [dbo].[officalBankPay] SET ConfigName=@ConfigName,MerchantName=@MerchantName,BankName=@BankName,BankNumber=@BankNumber,BankAddr=@BankAddr,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Description=@Description WHERE id=@id";
+                sqlQuery = @"UPDATE [dbo].[officalBankPay] SET ConfigName=@ConfigName,MerchantName=@MerchantName,BankName=@BankName,BankNumber=@BankNumber,BankAddr=@BankAddr,MaxAmount=@MaxAmount,MinAmount=@MinAmount,SortId=@SortId,Nullity=@Nullity,Description=@Description WHERE id=@id";
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }

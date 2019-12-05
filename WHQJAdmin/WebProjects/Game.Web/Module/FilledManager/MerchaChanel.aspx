@@ -196,6 +196,14 @@
                             <asp:TextBox ID="AttaBox2" runat="server" CssClass="text" MaxLength="100"></asp:TextBox>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="listTdLeft">禁用：
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="ckbLock" runat="server" />
+                        </td>
+                    </tr>
+
                 </table>
             </ContentTemplate>
         </asp:UpdatePanel>

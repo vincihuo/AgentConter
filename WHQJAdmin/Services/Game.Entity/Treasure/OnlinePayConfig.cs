@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/11/29 19:27:23
+ * 日期：2019/12/4 20:05:19
  * 
  * 描述：实体类
  * 
@@ -41,14 +41,15 @@ namespace Game.Entity.Treasure
         private Int64 p_minamount;
         private byte p_payidentity;
         private int p_sortid;
-        private Int64 p_fristpresent;
-        private Int64 p_presentscore;
+        private int p_fristpresent;
+        private int p_presentscore;
         private int p_chanelid;
         private string p_chanelname;
         private string p_attachstr1;
         private string p_attachstr2;
         private string p_attachstr3;
         private string p_attachstr4;
+        private byte p_nullity;
 
         #endregion
 
@@ -80,6 +81,7 @@ namespace Game.Entity.Treasure
             p_attachstr2 = string.Empty;
             p_attachstr3 = string.Empty;
             p_attachstr4 = string.Empty;
+            p_nullity = 0;
         }
 
         #endregion
@@ -284,7 +286,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// FristPresent
         /// </summary>
-        public Int64 FristPresent
+        public int FristPresent
         {
             set
             {
@@ -299,7 +301,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// PresentScore
         /// </summary>
-        public Int64 PresentScore
+        public int PresentScore
         {
             set
             {
@@ -398,6 +400,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_attachstr4;
+            }
+        }
+
+        /// <summary>
+        /// Nullity
+        /// </summary>
+        public byte Nullity
+        {
+            set
+            {
+                p_nullity=value;
+            }
+            get
+            {
+                return p_nullity;
             }
         }
 

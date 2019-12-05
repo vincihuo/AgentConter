@@ -109,6 +109,13 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="请输入开户地址" Display="Dynamic" ControlToValidate="TexSort" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="listTdLeft">禁用：
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="ckbLock" runat="server" />
+                        </td>
+                    </tr>
 
                 </table>
             </ContentTemplate>
