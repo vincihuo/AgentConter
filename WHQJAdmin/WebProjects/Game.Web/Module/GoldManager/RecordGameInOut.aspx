@@ -54,7 +54,6 @@
                 <asp:Button ID="btnQueryYD" runat="server" Text="昨天" CssClass="btn wd1" OnClick="btnQueryYD_Click" />
                 <asp:Button ID="btnQueryTW" runat="server" Text="本周" CssClass="btn wd1" OnClick="btnQueryTW_Click" />
                 <asp:Button ID="btnQueryYW" runat="server" Text="上周" CssClass="btn wd1" OnClick="btnQueryYW_Click" />
-                <asp:CheckBox ID="IncludeAndroid" runat="server" Text="冻结帐号" />
             </td>
         </tr>
     </table>

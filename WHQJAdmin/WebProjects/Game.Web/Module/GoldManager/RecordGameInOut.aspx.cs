@@ -128,12 +128,6 @@ namespace Game.Web.Module.GoldManager
                 condition.AppendFormat(" AND EnterTime BETWEEN '{0}' AND '{1}'", 
                     Convert.ToDateTime(startDate), Convert.ToDateTime(endDate).AddDays(1).ToString("yyyy-MM-dd"));
             }
-
-            if (IncludeAndroid.Checked)
-            {
-                condition.AppendFormat("");
-            }
-
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetPageInoutList(condition.ToString(), Orderby,
                 anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;

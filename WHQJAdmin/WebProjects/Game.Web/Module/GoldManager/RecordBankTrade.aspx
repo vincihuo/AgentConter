@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecordBankTrade.aspx.cs" Inherits="Game.Web.Module.GoldManager.RecordBankTrade" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -113,22 +113,22 @@
                             <%# Eval("TradeType").ToString()=="1"?"存款":Eval("TradeType").ToString()=="2"?"取款":"转账" %>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "SourceGold" ) ).ToString( "N0" )%>
+                            <%# FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "SourceGold" ) ))%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "SourceBank" ) ).ToString( "N0" )%>
+                            <%# FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "SourceBank" ) ))%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "TargetGold" ) ).ToString( "N0" ) %>
+                            <%# FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "TargetGold" ) ))%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "TargetBank" ) ).ToString( "N0" ) %>
+                            <%#FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "TargetBank" ) ))%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "SwapScore" ) ).ToString( "N0" )%>
+                            <%#FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "SwapScore" ) ))%>
                         </td>
                         <td>
-                            <%# Convert.ToInt64( Eval( "Revenue" ) ).ToString( "N0" )%>
+                            <%#FacadeManage.ConversionMoneyToShow(Convert.ToInt64( Eval( "Revenue" ) ))%>
                         </td>
                         <td>
                             <%# Eval( "ClientIP" ) %>

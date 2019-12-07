@@ -144,7 +144,6 @@ namespace Game.Web.Module.WebManager
             litNoData.Visible = pagerSet.PageSet.Tables[0].Rows.Count <= 0;
             rptIssue.DataSource = pagerSet.PageSet;
             rptIssue.DataBind();
-
         }
         /// <summary>
         /// 查询条件
