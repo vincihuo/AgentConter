@@ -54,7 +54,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="listTdLeft">新闻标题：</td>
+                <td class="listTdLeft">公告标题：</td>
                 <td>
                     <asp:TextBox ID="txtTitle" runat="server" CssClass="text" Width="450px" MaxLength="21"></asp:TextBox>
                     <span class="hong">*</span>
@@ -64,9 +64,10 @@
             <tr>
                 <td class="listTdLeft">新闻来源：</td>
                 <td>
-                    <asp:TextBox ID="txtPublisher" runat="server" CssClass="text" Width="450px" MaxLength="50"></asp:TextBox>
-                    <span class="hong">*</span>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ForeColor="Red" ControlToValidate="txtPublisher" Display="Dynamic" ErrorMessage="请输入新闻来源"></asp:RequiredFieldValidator>
+                    <asp:DropDownList ID="ddtype" runat="server" Width="205px">
+                        <asp:ListItem Text="活动" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="公告" Value="2"></asp:ListItem>
+                    </asp:DropDownList>
                 </td>
             </tr>
             <tr>
@@ -84,7 +85,7 @@
             <tr>
                 <td class="listTdLeft">图片：</td>
                 <td style="line-height: 35px;">
-                    <GameImg:ImageUploader id="upImage" maxsize="2097152" runat="server" deletebuttonclass="l2" deletebuttontext="删除" folder="/Upload/Active" viewbuttonclass="l2" viewbuttontext="查看" textboxclass="text" />
+                    <GameImg:ImageUploader ID="upImage" MaxSize="2097152" runat="server" DeleteButtonClass="l2" DeleteButtonText="删除" Folder="/Upload/Active" ViewButtonClass="l2" ViewButtonText="查看" TextBoxClass="text" />
                     <span>[体积：不大于2M]</span>
                 </td>
             </tr>

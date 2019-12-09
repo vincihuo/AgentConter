@@ -55,7 +55,7 @@ namespace Game.Web.Module.WebManager
             notice.IsHot = cbHot.Checked;
             notice.IsTop = cbTop.Checked;
             notice.Nullity = cbNullity.Checked;
-            notice.Publisher = CtrlHelper.GetText(txtPublisher);
+            notice.Publisher = ddtype.SelectedValue;
             notice.SortID = CtrlHelper.GetInt(txtSort,1);
             notice.NoticeTitle = CtrlHelper.GetText(txtTitle);
             notice.PlatformType = 1;
@@ -79,7 +79,7 @@ namespace Game.Web.Module.WebManager
                 SystemNotice notice = FacadeManage.aideNativeWebFacade.GetSystemNoticeInfo(IntParam);
                 if(notice != null)
                 {
-                    CtrlHelper.SetText(txtPublisher, notice.Publisher);
+                    ddtype.SelectedValue = notice.Publisher;
                     CtrlHelper.SetText(txtTitle, notice.NoticeTitle);
                     CtrlHelper.SetText(txtSort, notice.SortID.ToString());
                     //txtMobile.Text = notice.MoblieContent;
