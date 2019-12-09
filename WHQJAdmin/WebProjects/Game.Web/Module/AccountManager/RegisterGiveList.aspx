@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegisterGiveList.aspx.cs" Inherits="Game.Web.Module.AccountManager.RegisterGiveList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,7 +45,7 @@
                         <td>                             
                             <a class="l" href="RegisterGiveInfo.aspx?param=<%#Eval("ConfigID") %>">编辑</a>              
                         </td>                
-                        <td><%# Eval("ScoreCount") %></td>
+                        <td><%#FacadeManage.ConversionMoneyToShow( Eval("ScoreCount").ToString()) %></td>
                         <td><%# Eval("DiamondCount") %></td>
                         <td><%# Eval("PlatformType").ToString()=="1"?"H5":Eval("PlatformType").ToString()=="2"?"U3D":"LUA" %></td>
                        
@@ -58,7 +58,7 @@
                       <td>                             
                         <a class="l" href="RegisterGiveInfo.aspx?param=<%#Eval("ConfigID") %>">编辑</a>              
                       </td>                
-                        <td><%# Eval("ScoreCount") %></td>
+                        <td><%# FacadeManage.ConversionMoneyToShow( Eval("ScoreCount").ToString()) %></td>
                         <td><%# Eval("DiamondCount") %></td>
                          <td><%# Eval("PlatformType").ToString()=="1"?"H5":Eval("PlatformType").ToString()=="2"?"U3D":"LUA" %></td>     
                     </tr>

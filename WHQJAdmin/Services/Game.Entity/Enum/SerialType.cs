@@ -22,7 +22,7 @@ namespace Game.Entity.Enum
         /// <summary>
         /// 注册赠送
         /// </summary>
-        [EnumDescription("注册赠送")]
+        [EnumDescription("钻石兑换")]
         注册赠送 = 1,
 
         ///// <summary>

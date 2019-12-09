@@ -37,7 +37,7 @@ namespace Game.Web.Module.AppManager
             ShareConfig Config = new ShareConfig();
             Config.ID = IntParam;
             Config.DayShareLmt = CtrlHelper.GetInt(txtDayShareLmt, 0);
-            Config.TimeShareGold = CtrlHelper.GetInt(txtTimeShareGold, 0)*1000;
+            Config.TimeShareGold = (int)FacadeManage.ConversionMoneyToReal(CtrlHelper.GetInt(txtTimeShareGold, 0));
             Config.TimeShareDiamond = CtrlHelper.GetInt(txtTimeShareDiamond, 0);
             Config.Nullity = Convert.ToByte(ddlSate.SelectedValue);
             int result = FacadeManage.aideNativeWebFacade.UpdateShareConfig(Config);

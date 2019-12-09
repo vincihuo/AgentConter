@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShareConfigList.aspx.cs" Inherits="Game.Web.Module.AppManager.ShareConfigList" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -73,7 +73,7 @@
                         <%# Eval( "DayShareLmt" ).ToString( )%>
                       </td>
                         <td>
-                        <%# Eval( "TimeShareGold" ).ToString( )%>
+                        <%# FacadeManage.ConversionMoneyToShow(Eval( "TimeShareGold" ).ToString( ))%>
                       </td>
                       <td>
                         <%# Eval( "TimeShareDiamond" ).ToString( )%>

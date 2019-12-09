@@ -54,7 +54,7 @@ namespace Game.Web.Module.AccountManager
                     return;
                 }
             }
-            quest.ScoreCount = Convert.ToInt32(txtScoreCount.Text.Trim());
+            quest.ScoreCount = Convert.ToInt32(txtScoreCount.Text.Trim())*1000;
             quest.DiamondCount = Convert.ToInt32(txtDiamondCount.Text.Trim());
             quest.PlatformType = Convert.ToInt32(Dropplatform.SelectedValue.ToString());
 
@@ -78,7 +78,7 @@ namespace Game.Web.Module.AccountManager
                 RegisterGive quest = FacadeManage.aideAccountsFacade.GetRegisterGiveInfo(IntParam);
                 if (quest != null)
                 {
-                    CtrlHelper.SetText(txtScoreCount, quest.ScoreCount.ToString());
+                    CtrlHelper.SetText(txtScoreCount, FacadeManage.ConversionMoneyToShow(quest.ScoreCount.ToString()).ToString());
                     CtrlHelper.SetText(txtDiamondCount, quest.DiamondCount.ToString());
                     Dropplatform.SelectedValue = quest.PlatformType.ToString();
                 }
