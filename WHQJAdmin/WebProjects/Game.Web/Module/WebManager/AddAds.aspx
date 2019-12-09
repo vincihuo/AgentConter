@@ -70,19 +70,6 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="排序格式不正确" Display="Dynamic" ControlToValidate="txtSortID" ValidationExpression="^\d*$" ForeColor="Red"></asp:RegularExpressionValidator>
             </td>
         </tr>
-         <tr>
-            <td class="listTdLeft">
-               平台类型：
-            </td>
-            <td>
-                <asp:DropDownList ID="Dropplatform" runat="server" Width="205px">
-                    <asp:ListItem Text="三端" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="LUA" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="U3D" Value="3"></asp:ListItem>
-                    <asp:ListItem Text="H5" Value="4"></asp:ListItem>
-                </asp:DropDownList>
-            </td>
-        </tr>
         <tr>
             <td class="listTdLeft">
                广告位类型：

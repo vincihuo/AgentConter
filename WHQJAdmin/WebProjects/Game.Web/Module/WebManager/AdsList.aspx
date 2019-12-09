@@ -33,7 +33,6 @@
                 <td style="width:30px;" class="listTitle"><input type="checkbox" name="chkAll" onclick="SelectAll(this.checked);" /></td>
                 <td style="width:100px;" class="listTitle2">管理</td>
                 <td class="listTitle2">广告类型</td>
-                 <td class="listTitle2">平台类型</td>
                 <td class="listTitle2">广告资源</td>
                 <td class="listTitle2">备注</td>
             </tr>
@@ -44,7 +43,6 @@
                         <td><input name='cid' type='checkbox' value='<%# Eval("ID")%>'/></td>      
                         <td><a class="l" href="AddAds.aspx?param=<%# Eval("ID") %>">编辑</a></td>  
                         <td><%# GetAdsType(Convert.ToInt32(Eval("Type"))) %></td>
-                          <td><%# Convert.ToInt32(Eval("PlatformType"))==1?"三端":Convert.ToInt32(Eval("PlatformType"))==2?"LUA":Convert.ToInt32(Eval("PlatformType"))==3?"U3D":"H5" %></td>
                         <td style="padding:2px;"><img src="/Upload<%# Eval( "ResourceURL" )%>" title="<%# Eval( "Title" )%>" height="64"/></td>         
                         <td><%# Eval("Remark")%></td>
                     </tr>
@@ -55,7 +53,6 @@
                         <td><input name='cid' type='checkbox' value='<%# Eval("ID")%>'/></td>      
                         <td><a class="l" href="AddAds.aspx?param=<%# Eval("ID") %>">编辑</a></td>  
                         <td><%# GetAdsType(Convert.ToInt32(Eval("Type"))) %></td>
-                         <td><%# Convert.ToInt32(Eval("PlatformType"))==1?"三端":Convert.ToInt32(Eval("PlatformType"))==2?"LUA":Convert.ToInt32(Eval("PlatformType"))==3?"U3D":"H5" %></td>
                         <td style="padding:2px;"><img src="/Upload<%# Eval( "ResourceURL" )%>" title="<%# Eval( "Title" )%>" height="58"/></td>             
                         <td><%# Eval("Remark")%></td>
                     </tr>

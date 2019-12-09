@@ -3959,6 +3959,7 @@
   <ItemGroup>
     <Folder Include="Module\MatchManager\" />
     <Folder Include="scripts\kindEditor\attached\" />
+    <Folder Include="Upload\Active\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

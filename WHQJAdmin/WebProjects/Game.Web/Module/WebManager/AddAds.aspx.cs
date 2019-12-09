@@ -56,7 +56,7 @@ namespace Game.Web.Module.WebManager
             ads.Remark = CtrlHelper.GetText(txtDescript);
             //ads.Title = CtrlHelper.GetText(txttitle);
             ads.SortID = CtrlHelper.GetInt(txtSortID, 0);
-            ads.PlatformType = Convert.ToByte(Dropplatform.SelectedValue);
+            ads.PlatformType = 1;
             string filepath = upImage.FilePath;
 
             if (string.IsNullOrEmpty(filepath))
@@ -91,7 +91,6 @@ namespace Game.Web.Module.WebManager
                     //CtrlHelper.SetText(txttitle, ads.Title);
                     CtrlHelper.SetText(txtSortID, ads.SortID.ToString());
                     ddlType.SelectedValue = ads.Type.ToString();
-                    Dropplatform.SelectedValue= ads.PlatformType.ToString();
                     ddlType.Enabled = false;
                     activity.Visible = false;
                     if (ads.Type == 6)

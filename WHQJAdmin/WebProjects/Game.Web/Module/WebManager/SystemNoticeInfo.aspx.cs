@@ -42,7 +42,15 @@ namespace Game.Web.Module.WebManager
                 notice.PublisherTime = DateTime.Now;
             }
 
-            notice.MoblieContent = txtMobile.Text;
+            string filepath = upImage.FilePath;
+
+            if (string.IsNullOrEmpty(filepath))
+            {
+                ShowError("广告图片未上传");
+                return;
+            }
+
+            notice.MoblieContent = filepath.Substring(7, filepath.Length - 7);
             //notice.WebContent = txtWeb.Text;
             notice.IsHot = cbHot.Checked;
             notice.IsTop = cbTop.Checked;
@@ -50,7 +58,7 @@ namespace Game.Web.Module.WebManager
             notice.Publisher = CtrlHelper.GetText(txtPublisher);
             notice.SortID = CtrlHelper.GetInt(txtSort,1);
             notice.NoticeTitle = CtrlHelper.GetText(txtTitle);
-            notice.PlatformType = Convert.ToInt32(Dropplatform.SelectedValue);
+            notice.PlatformType = 1;
             int result = IntParam > 0 ? FacadeManage.aideNativeWebFacade.UpdateSystemNotice(notice) : FacadeManage.aideNativeWebFacade.InsertSystemNotice(notice);
             if(result > 0)
             {
@@ -74,9 +82,9 @@ namespace Game.Web.Module.WebManager
                     CtrlHelper.SetText(txtPublisher, notice.Publisher);
                     CtrlHelper.SetText(txtTitle, notice.NoticeTitle);
                     CtrlHelper.SetText(txtSort, notice.SortID.ToString());
-                    txtMobile.Text = notice.MoblieContent;
-                    Dropplatform.SelectedValue = notice.PlatformType.ToString();
+                    //txtMobile.Text = notice.MoblieContent;
                     //txtWeb.Text = notice.WebContent;
+                    upImage.FilePath = "/Upload" + notice.MoblieContent;
                     cbHot.Checked = notice.IsHot;
                     cbNullity.Checked = notice.Nullity;
                     cbTop.Checked = notice.IsTop;
