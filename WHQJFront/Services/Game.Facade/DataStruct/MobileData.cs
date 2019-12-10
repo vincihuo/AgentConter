@@ -41,10 +41,13 @@ namespace Game.Facade.DataStruct
 
     public class MobileCustomerService
     {
-        public string Phone { get; set; }
-        public string WeiXin { get; set; }
-        public string QQ { get; set; }
         public string Link { get; set; }
+        public string Number1 { get; set; }
+        public string Type1 { get; set; }
+        public string Number2 { get; set; }
+        public string Type2 { get; set; }
+        public string Number3 { get; set; }
+        public string Type3 { get; set; }
     }
 
     public class AdsMobile
