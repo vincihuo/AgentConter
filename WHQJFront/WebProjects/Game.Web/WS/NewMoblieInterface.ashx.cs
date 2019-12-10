@@ -275,6 +275,10 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191108);
                         RewardDrawalBill();
                         break;
+                    case "agentrank":
+                        _ajv.SetDataItem("apiVersion", 20191210);
+                        AgentRank();
+                        break;
                     #endregion
 
                     #region 最帅的写的接口
@@ -349,6 +353,28 @@ namespace Game.Web.WS
             }
             context.Response.End();
         }
+
+        private void AgentRank()
+        {
+            int type = GameRequest.GetQueryInt("type", 1);
+            DataSet ds = FacadeManage.aideTreasureFacade.GetAgentRank(_userid, type);
+            IList<RankInfo> list = new List<RankInfo>();
+            DataTable table = ds.Tables[0];
+            foreach (DataRow item in table.Rows)
+            {
+                RankInfo stream = new RankInfo
+                {
+                    Name = item["NickName"].ToString(),
+                    GameId=Convert.ToInt32(item["GameID"]),
+                    Reward = Convert.ToInt64(item["Reward"])
+                };
+                list.Add(stream);
+            }
+            long rec = ds.Tables[1] == null ? 0 : Convert.ToInt64(ds.Tables[1].Rows[0]["OwnReward"]);
+            _ajv.SetDataItem("own", rec);
+            _ajv.SetDataItem("list", list);
+        }
+
         private void PayRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);

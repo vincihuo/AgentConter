@@ -174,6 +174,14 @@ namespace Game.Facade.DataStruct
         public long PayMoney { get; set; }
         public int OrderStatus { get; set; }
     }
+
+    public class RankInfo
+    {
+        public string Name { get; set; }
+        public long Reward { get; set; }
+        public int GameId { get; set; }
+    }
+
     public class DrawalRecord
     {
         public string DrawalTime { get; set; }

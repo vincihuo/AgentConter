@@ -105,6 +105,11 @@ namespace Game.Facade
             return treasureData.BuyDiam(uid, number);
         }
 
+        public DataSet GetAgentRank(int uid, int type)
+        {
+            return treasureData.GetAgentRank(uid,type);
+        }
+
         #endregion
 
         #region 充值产品

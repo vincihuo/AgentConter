@@ -43,7 +43,7 @@
                 <td style="width:30px; height: 30px;" class="listTitle"><input type="checkbox" name="chkAll" onclick="SelectAll(this.checked);" /></td>
                 <td class="auto-style1">管理</td>
                 <td class="listTitleBg">活动标题</td>
-                <td class="listTitleBg">活动来源</td>
+                <td class="listTitleBg">活动类型</td>
                 <td class="listTitleBg">活动资源</td>
                 <td class="listTitleBg">发布时间</td>  
                 <td class="listTitleBg">新闻排序</td>
@@ -58,7 +58,7 @@
                             <a class="l" href="SystemNoticeInfo.aspx?cmd=edit&param=<%#Eval("NoticeID") %>">编辑</a>              
                         </td>                
                         <td><%# Eval("NoticeTitle").ToString().Length>20?Eval("NoticeTitle").ToString().Substring(0,20):Eval("NoticeTitle").ToString() %></td>
-                        <td><%# Eval("Publisher") %></td>
+                        <td><%# Eval("Publisher").ToString()=="1"?"公告":"活动" %></td>
                         <td style="padding:2px;"><img src="/Upload<%# Eval( "MoblieContent" )%>" title="111" height="58"/></td> 
                         <%--<td><%# Eval("IsHot").ToString()=="True"?"是":"否" %></td>--%>
                         <td><%# Eval("PublisherTime")%></td>
