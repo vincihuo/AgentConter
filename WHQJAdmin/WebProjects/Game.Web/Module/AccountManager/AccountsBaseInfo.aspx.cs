@@ -93,7 +93,10 @@ namespace Game.Web.Module.AccountManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //权限验证
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
 
             if (IntParam > 0)
             {

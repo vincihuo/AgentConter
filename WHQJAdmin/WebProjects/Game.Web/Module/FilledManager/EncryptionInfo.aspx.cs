@@ -43,12 +43,18 @@ namespace Game.Web.Module.FilledManager
             signtype mm = new signtype();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 mm = FacadeManage.aideTreasureFacade.GetSignById(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             mm.keyName = TextBox2.Text;
             mm.name = TxtName.Text;

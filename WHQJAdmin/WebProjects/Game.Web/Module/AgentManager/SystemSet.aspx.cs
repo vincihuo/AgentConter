@@ -27,8 +27,10 @@ namespace Game.Web.Module.AgentManager
         /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            AuthUserOperationPermission(Permission.Edit);
-
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
             SystemStatusInfo config = new SystemStatusInfo
             {
                 StatusName = CtrlHelper.GetText(txtStatusName),

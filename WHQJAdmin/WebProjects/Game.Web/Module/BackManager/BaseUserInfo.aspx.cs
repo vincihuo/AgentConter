@@ -39,12 +39,18 @@ namespace Game.Web.Module.BackManager
             Base_Users user = new Base_Users();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 user = FacadeManage.aidePlatformManagerFacade.GetUserByUserId(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             user.Username = CtrlHelper.GetText(txtAccounts);
             if(hidfLogonPass.Value.Trim() == "********")

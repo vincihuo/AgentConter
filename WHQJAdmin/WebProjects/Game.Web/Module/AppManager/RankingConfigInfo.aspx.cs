@@ -42,12 +42,18 @@ namespace Game.Web.Module.AppManager
 
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideNativeWebFacade.GetRankingConfigById(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 if (FacadeManage.aideNativeWebFacade.ExistRankingConfig(config.TypeID, config.RankType))
                 {
                     ShowError("相同配置信息已存在");

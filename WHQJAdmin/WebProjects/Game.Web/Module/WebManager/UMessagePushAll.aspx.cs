@@ -43,7 +43,10 @@ namespace Game.Web.Module.WebManager
         /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
             try
             {
                 int typeID = Convert.ToInt32(ddlType.SelectedValue);

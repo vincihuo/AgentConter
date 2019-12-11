@@ -39,14 +39,20 @@ namespace Game.Web.Module.AppManager
             SystemMessage systemMessage = new SystemMessage();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 systemMessage = FacadeManage.aidePlatformFacade.GetSystemMessageInfo(IntParam);
                 systemMessage.UpdateMasterID = userExt.UserID;
                 systemMessage.UpdateDate = DateTime.Now;
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 systemMessage.CreateMasterID = userExt.UserID;
                 systemMessage.CreateDate = DateTime.Now;
             }

@@ -41,12 +41,18 @@ namespace Game.Web.Module.AccountManager
 
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 quest.ConfigID = IntParam;
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 RegisterGive info= FacadeManage.aideAccountsFacade.GetRegisterGiveInfoByPlatformType(Convert.ToInt32(Dropplatform.SelectedValue.ToString()));
                 if (info != null)
                 {

@@ -39,13 +39,19 @@ namespace Game.Web.Module.WebManager
             int Type= Convert.ToInt32(ddlType.SelectedValue);
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 rule = FacadeManage.aideNativeWebFacade.GetGameRuleInfo(IntParam);
                 rule.LogID = rule.LogID + 1;
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 rule = FacadeManage.aideNativeWebFacade.GetGameRuleInfoByKindid(kindid, Type);
                 if (rule != null)
                 {

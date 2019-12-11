@@ -40,7 +40,10 @@ namespace Game.Web.Module.WebManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //判断权限
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
 
             Message msg = new Message();
             msg = SaveImage(fuAdminLogo, "/Upload/Site", "u3dadminlogo.png");

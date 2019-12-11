@@ -57,12 +57,18 @@ namespace Game.Web.Module.AppManager
             DataBaseInfo dataBaseInfo = new DataBaseInfo();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 dataBaseInfo = FacadeManage.aidePlatformFacade.GetDataBaseInfo(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 DataBaseInfo info = FacadeManage.aidePlatformFacade.GetDataBaseInfo(address);
                 if(info != null)
                 {

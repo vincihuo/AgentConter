@@ -46,12 +46,18 @@ namespace Game.Web.Module.MallManager
             AwardInfo info = new AwardInfo();
             if( IntParam > 0 )
             {
-                AuthUserOperationPermission( Permission.Edit );
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 info = FacadeManage.aideNativeWebFacade.GetAwardInfoByID( IntParam );
             }
             else
             {
-                AuthUserOperationPermission( Permission.Add );
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 info.CollectDate = DateTime.Now;
             }
 

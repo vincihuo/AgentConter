@@ -39,12 +39,18 @@ namespace Game.Web.Module.FilledManager
             OfficalBankPay chanel = new OfficalBankPay();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
-                chanel= FacadeManage.aideTreasureFacade.GetBankPayById(IntParam);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
+                chanel = FacadeManage.aideTreasureFacade.GetBankPayById(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             chanel.ConfigName = TxtName.Text;
             chanel.MerchantName = MerchantName.Text;

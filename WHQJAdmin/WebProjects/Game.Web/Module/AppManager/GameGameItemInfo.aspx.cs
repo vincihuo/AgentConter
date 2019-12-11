@@ -45,12 +45,18 @@ namespace Game.Web.Module.AppManager
             int gid = Convert.ToInt32(gameID);
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 gameGameItem = FacadeManage.aidePlatformFacade.GetGameGameItemInfo(gid);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 GameGameItem item = FacadeManage.aidePlatformFacade.GetGameGameItemInfo(gid);
                 if(item != null)
                 {

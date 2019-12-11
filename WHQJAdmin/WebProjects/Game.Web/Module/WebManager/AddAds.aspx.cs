@@ -34,12 +34,18 @@ namespace Game.Web.Module.WebManager
             Ads ads = new Ads();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 ads = FacadeManage.aideNativeWebFacade.GetAds(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
 
             ads.Type = Convert.ToByte(ddlType.SelectedValue);

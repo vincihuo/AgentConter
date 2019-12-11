@@ -33,12 +33,18 @@ namespace Game.Web.Module.AppManager
             SpreadReturnConfig config = new SpreadReturnConfig();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config.ConfigID = IntParam;
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
 
             config.SpreadLevel = CtrlHelper.GetInt(txtSpreadLevel, 0);

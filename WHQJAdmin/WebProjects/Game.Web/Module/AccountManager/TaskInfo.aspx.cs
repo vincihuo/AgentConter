@@ -40,12 +40,18 @@ namespace Game.Web.Module.AccountManager
             Game.Entity.Platform.TaskInfo info = new Game.Entity.Platform.TaskInfo();
             if (IntParam>0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 info = FacadeManage.aidePlatformFacade.GetTaskInfo(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
 
             info.CollectDate = DateTime.Now;

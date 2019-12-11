@@ -26,12 +26,18 @@ namespace Game.Web.Module.FilledManager
             OnlinePayConfig config = new OnlinePayConfig();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideTreasureFacade.GetOnlinePayConfig(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             config.PayType = Convert.ToByte(ddlProductType.SelectedValue);
             config.PayName = CtrlHelper.GetText(txtProductName);

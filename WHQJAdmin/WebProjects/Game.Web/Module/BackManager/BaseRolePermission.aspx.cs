@@ -35,7 +35,10 @@ namespace Game.Web.Module.BackManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //判断权限
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
 
             Base_RolePermission rolePermission = new Base_RolePermission();
             rolePermission.RoleID = IntParam;

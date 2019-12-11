@@ -36,12 +36,18 @@ namespace Game.Web.Module.BackManager
             Base_Roles role = new Base_Roles();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 role = FacadeManage.aidePlatformManagerFacade.GetRoleInfo(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             role.RoleName = CtrlHelper.GetText(txtRoleName);
             role.Description = CtrlHelper.GetText(txtDescription);

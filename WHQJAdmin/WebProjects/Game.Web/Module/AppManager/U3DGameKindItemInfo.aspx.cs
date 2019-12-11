@@ -37,12 +37,18 @@ namespace Game.Web.Module.AppManager
             int kindid = Convert.ToInt32(ddlKind.SelectedValue);
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 model = FacadeManage.aidePlatformFacade.GetU3DGameKindItemInfo(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 model = FacadeManage.aidePlatformFacade.GetU3DGameKindItemInfo(kindid);
                 if (model != null)
                 {

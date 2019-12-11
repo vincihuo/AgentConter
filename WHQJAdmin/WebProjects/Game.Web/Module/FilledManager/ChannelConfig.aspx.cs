@@ -73,12 +73,18 @@ namespace Game.Web.Module.FilledManager
             pay_chanel chanel = new pay_chanel();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 chanel = FacadeManage.aideTreasureFacade.GetPay_ChanelsByID(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             chanel.sendpamar = Sendpamar.Text;
             chanel.moneyPre = Convert.ToInt32(TextBox2.Text);

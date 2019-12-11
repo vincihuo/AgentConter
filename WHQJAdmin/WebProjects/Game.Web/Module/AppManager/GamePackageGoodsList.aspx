@@ -90,7 +90,7 @@
                             <%#GetGamePackageGoodsProperty(Convert.ToInt32( Eval("PropertyID")))%>
                         </td>  
                         <td>
-                            <%#Convert.ToInt32( Eval( "TypeID" ))==0?Convert.ToInt32( Eval( "GoodsNum" ))/1000: Convert.ToInt32( Eval( "GoodsNum" ))%>
+                            <%#Convert.ToInt32( Eval( "TypeID" ))==0?Convert.ToInt32( Eval( "GoodsNum" )): Convert.ToInt32( Eval( "GoodsNum" ))%>
                         </td>      
                          <td style="padding:2px;">
                              <img src="/Upload<%# Eval( "ResourceURL" )%>"  height="64"/>

@@ -37,7 +37,10 @@ namespace Game.Web.Module.FilledManager
             OnLineWeChat config = new OnLineWeChat();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideTreasureFacade.GetOnLineWeChat(IntParam);
             }
 

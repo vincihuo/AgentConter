@@ -48,7 +48,10 @@ namespace Game.Web.Module.AgentManager
         /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
             if(IntParam > 0)
             {
                 AgentInfo info = FacadeManage.aideAgentFacade.GetAgentInfo(IntParam);

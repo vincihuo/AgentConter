@@ -36,13 +36,19 @@ namespace Game.Web.Module.AppManager
             SpreadConfig config = new SpreadConfig();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideTreasureFacade.GetSpreadConfig(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
-                if(FacadeManage.aideTreasureFacade.SpreadConfigCount() >= 5)
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
+                if (FacadeManage.aideTreasureFacade.SpreadConfigCount() >= 5)
                 {
                     ShowError("推广配置最多配置5个");
                     return;

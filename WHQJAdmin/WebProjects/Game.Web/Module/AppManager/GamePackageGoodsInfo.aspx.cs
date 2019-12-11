@@ -41,7 +41,10 @@ namespace Game.Web.Module.AppManager
             GamePackageGoods config = new GamePackageGoods();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aidePlatformFacade.GetGamePackageGoods(IntParam);
             }
 

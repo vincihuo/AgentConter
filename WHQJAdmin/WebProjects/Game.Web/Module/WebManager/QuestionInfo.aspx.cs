@@ -34,12 +34,18 @@ namespace Game.Web.Module.WebManager
            
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 quest.ID = IntParam;
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             quest.QuestionTitle = CtrlHelper.GetText(txtQuestion);
             quest.Answer = CtrlHelper.GetText(txtAnswer);

@@ -30,12 +30,18 @@ namespace Game.Web.Module.FilledManager
             AppPayConfig config = new AppPayConfig();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideTreasureFacade.GetAppPayConfig(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
 
             config.AppleID = CtrlHelper.GetText(txtAppleID);

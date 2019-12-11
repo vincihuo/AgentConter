@@ -15,12 +15,13 @@ GO
 CREATE PROCEDURE PW_MbileAccountBind
     @dwUserid  int,
     ---用户id
+	@Password nvarchar(32),
+    -- 密码
     @Accounts nvarchar(20),
     ---手机号
     @Code    nvarchar(10),
     ---验证码
-    @Password nvarchar(32),
-    -- 密码
+	@NickName nvarchar(32),
     @strErrorDescribe NVARCHAR(127) OUTPUT
 -- 输出信息
 as
@@ -50,7 +51,7 @@ BEGIN
     END
     IF @config=0
     BEGIN
-        UPDATE AccountsInfo SET LogonPass=@Password,Accounts=@Accounts WHERE UserID=@dwUserid
+        UPDATE AccountsInfo SET LogonPass=@Password,Accounts=@Accounts,NickName=@NickName WHERE UserID=@dwUserid
     END
     ELSE IF @config=1
     BEGIN
@@ -62,7 +63,7 @@ BEGIN
             SET @strErrorDescribe=N'验证码过期'
             RETURN 1001
         END
-        UPDATE AccountsInfo SET LogonPass=@Password,Accounts=@Accounts,RegisterMobile=@Accounts WHERE UserID=@dwUserid
+        UPDATE AccountsInfo SET LogonPass=@Password,Accounts=@Accounts,RegisterMobile=@Accounts,NickName=@NickName WHERE UserID=@dwUserid
     END
 
     DECLARE @DateID INT

@@ -33,12 +33,18 @@ namespace Game.Web.Module.WebManager
             SystemNotice notice = new SystemNotice();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 notice = FacadeManage.aideNativeWebFacade.GetSystemNoticeInfo(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 notice.PublisherTime = DateTime.Now;
             }
 

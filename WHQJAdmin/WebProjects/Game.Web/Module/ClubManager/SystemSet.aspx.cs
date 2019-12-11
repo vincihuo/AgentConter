@@ -26,7 +26,10 @@ namespace Game.Web.Module.ClubManager
         /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            AuthUserOperationPermission(Permission.Edit);
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
 
             IMGroupOption config = new IMGroupOption();
             config.OptionName = CtrlHelper.GetText(txtStatusName);

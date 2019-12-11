@@ -33,12 +33,18 @@ namespace Game.Web.Module.AccountManager
             ConfineMachine machine = new ConfineMachine();
             if(!string.IsNullOrEmpty(StrParam))
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 machine = FacadeManage.aideAccountsFacade.GetConfineMachineBySerial(StrParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 machine.MachineSerial = CtrlHelper.GetText(txtString);
             }
 

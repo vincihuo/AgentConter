@@ -35,12 +35,18 @@ namespace Game.Web.Module.AccountManager
             ConfineAddress address = new ConfineAddress();
             if(!string.IsNullOrEmpty(StrParam))
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 address = FacadeManage.aideAccountsFacade.GetConfineAddressByAddress(StrParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
                 address.AddrString = CtrlHelper.GetText(txtString);
             }
             address.EnjoinLogon = ckbEnjoinLogon.Checked;

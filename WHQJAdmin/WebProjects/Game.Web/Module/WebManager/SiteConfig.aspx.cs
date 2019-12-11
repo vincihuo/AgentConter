@@ -35,8 +35,11 @@ namespace Game.Web.Module.AppManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             //判断权限
-            AuthUserOperationPermission(Permission.Edit);
-            if(IntParam > 0)
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
+            if (IntParam > 0)
             {
                 ConfigInfo config = FacadeManage.aideNativeWebFacade.GetConfigInfo(IntParam);
                 if(config != null)

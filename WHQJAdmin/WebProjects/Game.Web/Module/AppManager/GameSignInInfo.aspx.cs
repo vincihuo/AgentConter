@@ -23,6 +23,7 @@ namespace Game.Web.Module.AppManager
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            base.moduleID = 307;
             if (!Page.IsPostBack)
             {
                 DataSet ds = FacadeManage.aidePlatformFacade.GetGamePackageList();
@@ -38,10 +39,13 @@ namespace Game.Web.Module.AppManager
         /// </summary>
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
             GameSignIn config = new GameSignIn();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
                 config = FacadeManage.aidePlatformFacade.GetGameSignIn(IntParam);
             }
 
@@ -88,7 +92,7 @@ namespace Game.Web.Module.AppManager
                     rblNullity.SelectedValue = config.Nullity.ToString();
                     ddlTypeID.SelectedValue = config.TypeID.ToString();
                     ddlPackageID.SelectedValue = config.PackageID.ToString();
-                   
+
 
                     //if (!string.IsNullOrEmpty(config.ResourceURL))
                     //{

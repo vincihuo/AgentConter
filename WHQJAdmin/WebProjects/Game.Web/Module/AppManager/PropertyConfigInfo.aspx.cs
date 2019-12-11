@@ -32,8 +32,10 @@ namespace Game.Web.Module.AppManager
         protected void btnSave_Click( object sender, EventArgs e )
         {
             //判断权限
-            AuthUserOperationPermission(Permission.Edit);
-
+            if (!AuthUserOperationPermission(Permission.Edit))
+            {
+                return;
+            }
             GameProperty property = new GameProperty();
             property.ID = IntParam;
             property.ExchangeType = (byte)GameRequest.GetQueryInt("type",0);

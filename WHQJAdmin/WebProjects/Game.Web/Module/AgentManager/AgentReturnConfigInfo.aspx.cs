@@ -41,12 +41,18 @@ namespace Game.Web.Module.AgentManager
             ReturnAwardConfig cfg = new ReturnAwardConfig();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 cfg = FacadeManage.aideAgentFacade.GetAgentReturnConfig(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             cfg.AwardLevel = Convert.ToInt32(ddlLevel.SelectedValue);
             cfg.AwardScale = Convert.ToDecimal(txtPresentScale.Text) / 1000;

@@ -37,12 +37,18 @@ namespace Game.Web.Module.FilledManager
             OfficalImgPay chanel = new OfficalImgPay();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 chanel = FacadeManage.aideTreasureFacade.GetImgPayById(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
             chanel.ConfigName = TxtName.Text;
             chanel.PayType = Convert.ToByte(ddlProductType.SelectedValue);

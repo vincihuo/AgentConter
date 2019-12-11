@@ -31,6 +31,15 @@ BEGIN
         SELECT TOP 1 @TempUser = UserID FROM AgentInfo WHERE YesterDayReward IS NULL
         EXEC NET_PJ_CountReward @TempUser,@tCurr OUTPUT
     END
+    EXEC NET_PJ_RankAgent 1
+    IF DATEPART(weekday,GETDATE())='2'
+    BEGIN
+    EXEC NET_PJ_RankAgent 2
+    END
+    IF DATEPART(DD,GETDATE())='1'
+    BEGIN
+    EXEC NET_PJ_RankAgent 3
+    END
 END
 RETURN 0
 GO

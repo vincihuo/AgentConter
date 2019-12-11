@@ -185,12 +185,12 @@ namespace Game.Web.UI
         /// 验证当前页面的操作权限
         /// </summary>
         /// <param name="permission">权限值</param>
-        protected void AuthUserOperationPermission(Permission permission)
+        protected bool AuthUserOperationPermission(Permission permission)
         {
             if (userExt == null || userExt.UserID <= 0 || moduleID <= 0 || userPower == null || userPower.Count <= 0)
             {
                 RedirectToLogin("/Login.aspx");
-                return;
+                return false;
             }
             if (userExt.RoleID != 1)
             {
@@ -198,9 +198,10 @@ namespace Game.Web.UI
                     (userPower[moduleID.ToString()] & Convert.ToInt64(permission)) <= 0)
                 {
                     Redirect("/NotPower.html");
-                    return;
+                    return false;
                 }
             }
+            return true;
         }
 
         #endregion

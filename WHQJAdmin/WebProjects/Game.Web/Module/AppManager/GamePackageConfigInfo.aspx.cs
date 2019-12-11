@@ -37,7 +37,10 @@ namespace Game.Web.Module.AppManager
             GamePackage config = new GamePackage();
             if (IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aidePlatformFacade.GetGamePackage(IntParam);
             }
            

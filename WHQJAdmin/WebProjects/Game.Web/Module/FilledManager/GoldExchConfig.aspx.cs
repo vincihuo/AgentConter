@@ -36,12 +36,18 @@ namespace Game.Web.Module.GoldManager
             CurrencyExchConfig config = new CurrencyExchConfig();
             if(IntParam > 0)
             {
-                AuthUserOperationPermission(Permission.Edit);
+                if (!AuthUserOperationPermission(Permission.Edit))
+                {
+                    return;
+                }
                 config = FacadeManage.aideTreasureFacade.GetCurrencyExch(IntParam);
             }
             else
             {
-                AuthUserOperationPermission(Permission.Add);
+                if (!AuthUserOperationPermission(Permission.Add))
+                {
+                    return;
+                }
             }
 
             config.ConfigName = CtrlHelper.GetText(txtProductName);
