@@ -50,14 +50,14 @@
         </tr>
        
       
-        <tr>
+ <%--       <tr>
             <td class="listTdLeft">
                分享获得金币：
             </td>
             <td>
                 <asp:TextBox ID="txtTimeShareGold" runat="server" CssClass="text" validate="{digits:true}"></asp:TextBox>
             </td>
-        </tr>
+        </tr>--%>
         <tr>
             <td class="listTdLeft">
               分享获得钻石：

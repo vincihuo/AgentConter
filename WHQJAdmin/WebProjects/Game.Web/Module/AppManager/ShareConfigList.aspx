@@ -52,9 +52,9 @@
               <td class="listTitle2">
                 每日分享次数
               </td>
-              <td class="listTitle2">
+          <%--    <td class="listTitle2">
                 每日分享获得金币
-              </td>
+              </td>--%>
               <td class="listTitle2">
                 每日分享获得钻石
               </td>
@@ -72,9 +72,9 @@
                       <td>
                         <%# Eval( "DayShareLmt" ).ToString( )%>
                       </td>
-                        <td>
+<%--                        <td>
                         <%# FacadeManage.ConversionMoneyToShow(Eval( "TimeShareGold" ).ToString( ))%>
-                      </td>
+                      </td>--%>
                       <td>
                         <%# Eval( "TimeShareDiamond" ).ToString( )%>
                       </td>

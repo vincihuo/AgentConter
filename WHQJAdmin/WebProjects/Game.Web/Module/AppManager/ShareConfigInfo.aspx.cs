@@ -40,7 +40,7 @@ namespace Game.Web.Module.AppManager
             ShareConfig Config = new ShareConfig();
             Config.ID = IntParam;
             Config.DayShareLmt = CtrlHelper.GetInt(txtDayShareLmt, 0);
-            Config.TimeShareGold = (int)FacadeManage.ConversionMoneyToReal(CtrlHelper.GetInt(txtTimeShareGold, 0));
+            Config.TimeShareGold = 0; //(int)FacadeManage.ConversionMoneyToReal(CtrlHelper.GetInt(txtTimeShareGold, 0));
             Config.TimeShareDiamond = CtrlHelper.GetInt(txtTimeShareDiamond, 0);
             Config.Nullity = Convert.ToByte(ddlSate.SelectedValue);
             int result = FacadeManage.aideNativeWebFacade.UpdateShareConfig(Config);
@@ -65,7 +65,7 @@ namespace Game.Web.Module.AppManager
             if (Config == null)
                 return;
             CtrlHelper.SetText(txtDayShareLmt, Config.DayShareLmt.ToString());
-            CtrlHelper.SetText(txtTimeShareGold, FacadeManage.ConversionMoneyToShow(Config.TimeShareGold).ToString());
+            //CtrlHelper.SetText(txtTimeShareGold, FacadeManage.ConversionMoneyToShow(Config.TimeShareGold).ToString());
             CtrlHelper.SetText(txtTimeShareDiamond, Config.TimeShareDiamond.ToString());
             ddlSate.SelectedValue = Config.Nullity.ToString();
         }
