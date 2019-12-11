@@ -49,8 +49,14 @@ namespace Game.Web.Module.AppManager
             config.PackageID = Convert.ToInt32(ddlPackageID.SelectedValue);
             config.TypeID = Convert.ToByte(ddlTypeID.SelectedValue);
             config.PropertyID = Convert.ToInt32(ddlPropertyID.SelectedValue);
-            config.GoodsNum = CtrlHelper.GetInt(txtGoodsNum, 0);
-
+            if (config.TypeID==0)
+            {
+                config.GoodsNum = CtrlHelper.GetInt(txtGoodsNum, 0)*1000;
+            }
+            else
+            {
+                config.GoodsNum = CtrlHelper.GetInt(txtGoodsNum, 0);
+            }
             string filepath = upImage.FilePath;
 
             if (string.IsNullOrEmpty(filepath))
@@ -80,7 +86,14 @@ namespace Game.Web.Module.AppManager
                 GamePackageGoods config = FacadeManage.aidePlatformFacade.GetGamePackageGoods(IntParam);
                 if (config != null)
                 {
-                    CtrlHelper.SetText(txtGoodsNum, config.GoodsNum.ToString());
+                    if (config.TypeID == 0)
+                    {
+                        CtrlHelper.SetText(txtGoodsNum, (config.GoodsNum/1000).ToString());
+                    }
+                    else
+                    {
+                        CtrlHelper.SetText(txtGoodsNum, config.GoodsNum.ToString());
+                    }
                     ddlPropertyID.SelectedValue= config.PropertyID.ToString();
                     ddlTypeID.SelectedValue = config.TypeID.ToString();
                     ddlPackageID.SelectedValue = config.PackageID.ToString();
