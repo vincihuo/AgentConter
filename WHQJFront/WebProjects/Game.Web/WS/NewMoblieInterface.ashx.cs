@@ -284,7 +284,7 @@ namespace Game.Web.WS
                     #region 最帅的写的接口
                     //获取线上充值列表
                     case "payrecord":
-                        _ajv.SetDataItem("apiVersion",20191109);
+                        _ajv.SetDataItem("apiVersion", 20191109);
                         PayRecord();
                         break;
                     case "drawalrecord":
@@ -365,7 +365,7 @@ namespace Game.Web.WS
                 RankInfo stream = new RankInfo
                 {
                     Name = item["NickName"].ToString(),
-                    GameId=Convert.ToInt32(item["GameID"]),
+                    GameId = Convert.ToInt32(item["GameID"]),
                     Reward = Convert.ToInt64(item["Reward"])
                 };
                 list.Add(stream);
@@ -391,9 +391,9 @@ namespace Game.Web.WS
                 {
                     PayRecord stream = new PayRecord
                     {
-                        PayTime= item["PayTime"].ToString(),
-                        PayMoney=Convert.ToInt64(item["Amount"]),
-                        OrderStatus=Convert.ToInt32(item["OrderStates"])
+                        PayTime = item["PayTime"].ToString(),
+                        PayMoney = Convert.ToInt64(item["Amount"]),
+                        OrderStatus = Convert.ToInt32(item["OrderStates"])
                     };
                     list.Add(stream);
                 }
@@ -414,7 +414,7 @@ namespace Game.Web.WS
             {
                 cType = $"OrderState = {type}";
             }
-            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(DrawalOrder.Tablename, index, 6, $" WHERE UserID={_userid} AND "+ cType, " ORDER BY CurrentTime DESC ");
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetList(DrawalOrder.Tablename, index, 6, $" WHERE UserID={_userid} AND " + cType, " ORDER BY CurrentTime DESC ");
             _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("pageCount", ps.PageCount);
             IList<DrawalRecord> list = new List<DrawalRecord>();
@@ -425,10 +425,10 @@ namespace Game.Web.WS
                 {
                     DrawalRecord stream = new DrawalRecord
                     {
-                        DrawalTime=item["CurrentTime"].ToString(),
-                        DrawalMoney=Convert.ToInt64(item["Amount"]),
-                        OrderCost= Convert.ToInt64(item["OrderCost"]),
-                        OrderStatus= Convert.ToInt32(item["OrderState"])
+                        DrawalTime = item["CurrentTime"].ToString(),
+                        DrawalMoney = Convert.ToInt64(item["Amount"]),
+                        OrderCost = Convert.ToInt64(item["OrderCost"]),
+                        OrderStatus = Convert.ToInt32(item["OrderState"])
                     };
                     list.Add(stream);
                 }
@@ -459,8 +459,8 @@ namespace Game.Web.WS
             //判断玩家金币
             ConfigInfo cfg = FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
             int p = Convert.ToInt32(cfg.Field1);
-            int min = Convert.ToInt32(cfg.Field2)*1000;
-            int max = Convert.ToInt32(cfg.Field3)*1000;
+            int min = Convert.ToInt32(cfg.Field2) * 1000;
+            int max = Convert.ToInt32(cfg.Field3) * 1000;
             if (amount < min || amount > max)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
@@ -472,7 +472,7 @@ namespace Game.Web.WS
             if (validBet.CurrentValidBet < validBet.TargetBet)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
-                _ajv.msg = $"打码量不足，目标打码量{validBet.TargetBet/1000.0f}，当前打码量{validBet.CurrentValidBet/1000.0f}";
+                _ajv.msg = $"打码量不足，目标打码量{validBet.TargetBet / 1000.0f}，当前打码量{validBet.CurrentValidBet / 1000.0f}";
                 return;
             }
 
@@ -605,7 +605,7 @@ namespace Game.Web.WS
 
             //获取客服界面配置
             MobileCustomerService mcs = DataHelper.ConvertRowToObject<MobileCustomerService>(ds.Tables[1].Rows[0]);
-            mcs.Link = imageServerHost + "/site/qrcustomer.png";
+            // mcs.Link = imageServerHost + "/site/qrcustomer.png";
             //获取系统公告配置
             IList<NoticeMobile> noticelist = DataHelper.ConvertDataTableToObjects<NoticeMobile>(ds.Tables[2]);
             foreach (NoticeMobile notice in noticelist)
@@ -703,7 +703,7 @@ namespace Game.Web.WS
                 DataHelper.ConvertDataTableToObjects<RankingConfig>(ds.Tables[6]);
             //获取提现
 
-            ConfigInfo drawalConfig=FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
+            ConfigInfo drawalConfig = FacadeManage.aideNativeWebFacade.GetConfigInfo("DrawalConfig");
 
             //输出信息
             drawalConfig.Field2 += "000";
@@ -725,9 +725,10 @@ namespace Game.Web.WS
         private void GetPayList()
         {
             //线上充值
-            for (int payType = 1; payType <= 3; ++payType) {
+            for (int payType = 1; payType <= 3; ++payType)
+            {
                 IList<OnlinePayConfig> list = FacadeManage.aideTreasureFacade.GetOnlinePayList(payType);
-                if (list==null)
+                if (list == null)
                 {
                     continue;
                 }
@@ -1557,8 +1558,8 @@ namespace Game.Web.WS
             {
                 _ajv.SetValidDataValue(true);
                 _ajv.SetDataItem("Allperson", row["Allperson"]);
-                _ajv.SetDataItem("Immediateperson", row["Immediateperson"]);                                                                                                                                                                                             
-                _ajv.SetDataItem("ImmediateMoney",Convert.ToInt32(row["ImmediateMoney"]) *0.3);
+                _ajv.SetDataItem("Immediateperson", row["Immediateperson"]);
+                _ajv.SetDataItem("ImmediateMoney", Convert.ToInt32(row["ImmediateMoney"]) * 0.3);
                 _ajv.SetDataItem("OtherMoney", Convert.ToInt32(row["OtherMoney"]) * 0.3);
                 _ajv.SetDataItem("CurrReward", row["CurrReward"]);
                 _ajv.SetDataItem("HisMoney", row["HisMoney"]);
@@ -1570,17 +1571,17 @@ namespace Game.Web.WS
         }
         //领取奖励
         private void GetReward()
-        { 
-            Message mm= FacadeManage.aideTreasureFacade.GetReward(_userid);
+        {
+            Message mm = FacadeManage.aideTreasureFacade.GetReward(_userid);
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
         private void RewardRecord()
         {
-            int index = GameRequest.GetQueryInt("index",1);
+            int index = GameRequest.GetQueryInt("index", 1);
             int uid = GameRequest.GetQueryInt("uid", _userid);
 
-            string[] fields = { "A.GameID", "A.NickName", "R.BeggarNumber", "R.AllReward", "R.Reward" , "R.BackMoney" };
+            string[] fields = { "A.GameID", "A.NickName", "R.BeggarNumber", "R.AllReward", "R.Reward", "R.BackMoney" };
             string[] fieldAlias = { "GameID", "NickName", "BeggarNumber", "AllReward", "Reward", "BackMoney" };
             PagerSet ps = FacadeManage.aideTreasureFacade.GetList(" WHQJAccountsDB.dbo.AccountsInfo A INNER JOIN WHQJTreasureDB.dbo.AgentInfo R ON A.UserID = R.UserID ", index, 6, $" WHERE R.ParentID = {uid} ",
                 " ORDER BY BackMoney DESC ", fields, fieldAlias);
@@ -1595,7 +1596,7 @@ namespace Game.Web.WS
                     {
                         NicekName = item["NickName"].ToString(),
                         GameId = Convert.ToInt32(item["GameID"]),
-                        person= Convert.ToInt32(item["BeggarNumber"]),
+                        person = Convert.ToInt32(item["BeggarNumber"]),
                         AllMoney = Convert.ToInt32(item["BackMoney"]),
                         personMoney = (int)((Convert.ToInt32(item["AllReward"]) + Convert.ToInt32(item["Reward"])) * 0.3),
                     };
@@ -1604,16 +1605,16 @@ namespace Game.Web.WS
             }
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", list);
-            _ajv.SetDataItem("Count",ps.PageCount);
+            _ajv.SetDataItem("Count", ps.PageCount);
             _ajv.SetDataItem("pageIndex", ps.PageIndex);
         }
 
         private void RewardDrawalBill()
         {
-            int index = GameRequest.GetQueryInt("pageIndex",1);
-            PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordAgentReward.Tablename,index,6, $" WHERE UserID={_userid} ", " ORDER BY drawalTime DESC ");
+            int index = GameRequest.GetQueryInt("pageIndex", 1);
+            PagerSet ps = FacadeManage.aideRecordFacade.GetList(RecordAgentReward.Tablename, index, 6, $" WHERE UserID={_userid} ", " ORDER BY drawalTime DESC ");
             _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("index",ps.PageIndex);
+            _ajv.SetDataItem("index", ps.PageIndex);
             _ajv.SetDataItem("page", ps.PageCount);
             IList<AgentDrawalBill> list = new List<AgentDrawalBill>();
             DataTable table = ps.PageSet.Tables[0];
@@ -1623,8 +1624,8 @@ namespace Game.Web.WS
                 {
                     AgentDrawalBill stream = new AgentDrawalBill
                     {
-                        DrawalTime=item["drawalTime"].ToString(),
-                        DrawalMoney=Convert.ToInt64(item["GetMoney"])
+                        DrawalTime = item["drawalTime"].ToString(),
+                        DrawalMoney = Convert.ToInt64(item["GetMoney"])
                     };
                     list.Add(stream);
                 }

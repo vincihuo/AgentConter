@@ -33,7 +33,7 @@ BEGIN
 	SELECT StatusName,StatusValue FROM WHQJAccountsDB.dbo.SystemStatusInfo WITH(NOLOCK)
 
 	-- 获取客服配置
-	SELECT Field1 AS Phone,Field2 AS WeiXin,Field3 AS QQ,Field4 AS Link FROM ConfigInfo WITH(NOLOCK) WHERE ConfigKey =N'SysCustomerService'
+	SELECT Field1 AS Link,Field2 AS Number1,Field3 AS Type1,Field4 AS Number2,Field5 AS Type2,Field6 AS Number3,Field7 AS Type3 FROM ConfigInfo WITH(NOLOCK) WHERE ConfigKey =N'SysCustomerService'
 
 	-- 获取系统公告
 	SELECT NoticeID,NoticeTitle,MoblieContent,PublisherTime,Publisher FROM SystemNotice WITH(NOLOCK) WHERE Nullity=0 ORDER BY IsTop DESC,SortID ASC,NoticeID DESC
