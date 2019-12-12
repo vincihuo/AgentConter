@@ -18,7 +18,7 @@ CREATE PROC [NET_PB_AgentRevenueRebate]
 
 WITH ENCRYPTION AS
 
--- å±æ€§è®¾ç½®
+-- ÊôĞÔÉèÖÃ
 SET NOCOUNT ON
 
 DECLARE @TempUser INT

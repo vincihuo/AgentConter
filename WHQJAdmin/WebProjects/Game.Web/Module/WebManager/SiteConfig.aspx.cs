@@ -45,7 +45,7 @@ namespace Game.Web.Module.AppManager
                 if(config != null)
                 {
                     config.ConfigString = CtrlHelper.GetText(txtConfigString);
-                    config.Field1 = CtrlHelper.GetText(txtField1);
+                    config.Field1 = txtField1.Text;
                     config.Field2 = CtrlHelper.GetText(txtField2);
                     config.Field3 = CtrlHelper.GetText(txtField3);
                     config.Field4 = CtrlHelper.GetText(txtField4);
@@ -84,7 +84,7 @@ namespace Game.Web.Module.AppManager
                     CtrlHelper.SetText(txtConfigKey, config.ConfigKey);
                     CtrlHelper.SetText(txtConfigName, config.ConfigName);
                     CtrlHelper.SetText(txtConfigString, config.ConfigString);
-                    CtrlHelper.SetText(txtField1, config.Field1);
+                    txtField1.Text = config.Field1;
                     CtrlHelper.SetText(txtField2, config.Field2);
                     CtrlHelper.SetText(txtField3, config.Field3);
                     CtrlHelper.SetText(txtField4, config.Field4);
