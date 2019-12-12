@@ -36,7 +36,7 @@ BEGIN
 	SELECT Field1 AS Phone,Field2 AS WeiXin,Field3 AS QQ,Field4 AS Link FROM ConfigInfo WITH(NOLOCK) WHERE ConfigKey =N'SysCustomerService'
 
 	-- 获取系统公告
-	SELECT TOP 10 NoticeID,NoticeTitle,MoblieContent,PublisherTime,PlatformType FROM SystemNotice WITH(NOLOCK) WHERE Nullity=0 ORDER BY IsTop DESC,SortID ASC,NoticeID DESC
+	SELECT NoticeID,NoticeTitle,MoblieContent,PublisherTime,Publisher FROM SystemNotice WITH(NOLOCK) WHERE Nullity=0 ORDER BY IsTop DESC,SortID ASC,NoticeID DESC
 
 	-- 获取广告资源
 	SELECT Title,ResourceURL,LinkURL,SortID,PlatformType FROM Ads WITH(NOLOCK) WHERE [Type] = 3 ORDER BY SortID ASC

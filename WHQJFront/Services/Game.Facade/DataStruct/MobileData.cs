@@ -77,7 +77,7 @@ namespace Game.Facade.DataStruct
         public string NoticeTitle { get; set; }
         public string MoblieContent { get; set; }
         public DateTime PublisherTime { get; set; }
-        public int PlatformType { get; set; }
+        public int Publisher { get; set; }
     }
 
     public class SpreadConfigMobile
