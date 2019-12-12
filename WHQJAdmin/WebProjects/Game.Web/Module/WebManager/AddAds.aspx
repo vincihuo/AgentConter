@@ -70,25 +70,6 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="排序格式不正确" Display="Dynamic" ControlToValidate="txtSortID" ValidationExpression="^\d*$" ForeColor="Red"></asp:RegularExpressionValidator>
             </td>
         </tr>
-        <tr>
-            <td class="listTdLeft">
-               广告位类型：
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlType" runat="server" Width="205px">
-                    <asp:ListItem Text="首页轮播广告" Value="0"></asp:ListItem>
-                    <asp:ListItem Text="新闻公告广告" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="联系我们广告" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="游戏下载广告" Value="5"></asp:ListItem>
-                    <asp:ListItem Text="H5竖版弹出广告" Value="3"></asp:ListItem>
-                    <asp:ListItem Text="手机横版弹出广告" Value="4"></asp:ListItem>
-                    <asp:ListItem Text="活动公告" Value="6"></asp:ListItem>
-                </asp:DropDownList>
-            </td>
-        </tr>
-
-         
-
         <tr id="activity" runat="server">
             <td class="listTdLeft">
                活动类型：
@@ -102,7 +83,7 @@
                 </asp:DropDownList>
             </td>
         </tr>
-        <tr id="linkurl" runat="server">
+        <tr id="linkurl" runat="server" >
             <td class="listTdLeft">
                广告位链接：
             </td>
@@ -139,31 +120,7 @@
         $(function () {
             if (window.location.href.indexOf('?param=') < 0) {
                 $('#ddlLink').css('display', 'none');
-                $('#activity').css('display', 'none');
-            } 
-            $('#ddlType').on('change', function () {
-                if ($(this).val() == '4') {
-                    $('#linkurl').css('display', 'none');
-                    $('#activity').css('display', 'none');
-                } else if ($(this).val() == '3') {
-                    $('#linkurl').css('display', 'table-row');
-                    $('#ddlLink').css('display', 'block');
-                    $('#txtLink').css('display', 'none');
-                    $('#ddlActivity').css('display', 'none');
-                }
-                else if ($(this).val() == '6') {
-                    $('#linkurl').css('display', 'table-row');
-                    $('#ddlLink').css('display', 'none');
-                    $('#txtLink').css('display', 'block');
-                    $('#activity').css('display', 'table-row');
-                }
-                else {
-                    $('#linkurl').css('display', 'table-row');
-                    $('#ddlLink').css('display', 'none');
-                    $('#txtLink').css('display', 'block');
-                    $('#activity').css('display', 'none');
-                }
-            });
+            }
             $('#ddlActivity').on('change', function () {
                 if ($(this).val() == '0') {
                     $('#txtLink').css('display', 'block');

@@ -47,16 +47,14 @@ namespace Game.Web.Module.WebManager
                     return;
                 }
             }
-
-            ads.Type = Convert.ToByte(ddlType.SelectedValue);
-            ads.LinkURL = ddlLink.SelectedValue;
-            if (ads.Type == 6 && Convert.ToInt32(ddlActivity.SelectedValue) == 0)
+            ads.Type = Convert.ToByte(ddlActivity.SelectedValue);
+            if (ads.Type == 0)
             {
                 ads.LinkURL = CtrlHelper.GetText(txtLink);
             }
-            else if (ads.Type == 6 && Convert.ToInt32(ddlActivity.SelectedValue) > 0)
+            else
             {
-                ads.LinkURL = ddlActivity.SelectedValue;
+                ads.LinkURL = ddlLink.SelectedValue;
             }
 
             ads.Remark = CtrlHelper.GetText(txtDescript);
@@ -96,33 +94,37 @@ namespace Game.Web.Module.WebManager
                     CtrlHelper.SetText(txtDescript, ads.Remark);
                     //CtrlHelper.SetText(txttitle, ads.Title);
                     CtrlHelper.SetText(txtSortID, ads.SortID.ToString());
-                    ddlType.SelectedValue = ads.Type.ToString();
-                    ddlType.Enabled = false;
-                    activity.Visible = false;
-                    if (ads.Type == 6)
+                    ddlActivity.SelectedValue = ads.Type.ToString();
+                    if (ads.Type == 0)
                     {
-                        activity.Visible = true;
+                        txtLink.Visible = true;
                         ddlLink.Visible = false;
-
-                        if (ads.LinkURL.Length > 1)
+                        if (ads.LinkURL.Length > 0)
                         {
                             CtrlHelper.SetText(txtLink, ads.LinkURL);
                         }
 
                     }
+                    else
+                    {
+                        txtLink.CssClass = "hide";
+                        //txtLink.Visible = false;
+                        ddlLink.Visible = false;
+                    }
+
                     if (!string.IsNullOrEmpty(ads.ResourceURL))
                     {
                         upImage.FilePath = "/Upload" + ads.ResourceURL;
                     }
-                    else if(ads.Type==3 && ads.Type == 4)
-                    {
-                        linkurl.Visible = false;
-                    }
-                    else
-                    {
-                        ddlLink.Visible = false;
-                        CtrlHelper.SetText(txtLink, ads.LinkURL);
-                    }
+                    //else if(ads.Type==3 && ads.Type == 4)
+                    //{
+                    //    linkurl.Visible = false;
+                    //}
+                    //else
+                    //{
+                    //    ddlLink.Visible = false;
+                    //    CtrlHelper.SetText(txtLink, ads.LinkURL);
+                    //}
                 }
             }
         }

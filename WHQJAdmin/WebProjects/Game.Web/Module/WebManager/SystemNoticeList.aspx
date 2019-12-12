@@ -58,9 +58,8 @@
                             <a class="l" href="SystemNoticeInfo.aspx?cmd=edit&param=<%#Eval("NoticeID") %>">编辑</a>              
                         </td>                
                         <td><%# Eval("NoticeTitle").ToString().Length>20?Eval("NoticeTitle").ToString().Substring(0,20):Eval("NoticeTitle").ToString() %></td>
-                        <td><%# Eval("Publisher").ToString()=="1"?"公告":"活动" %></td>
+                        <td><%# Eval("Publisher").ToString()=="1"?"活动":"公告" %></td>
                         <td style="padding:2px;"><img src="/Upload<%# Eval( "MoblieContent" )%>" title="111" height="58"/></td> 
-                        <%--<td><%# Eval("IsHot").ToString()=="True"?"是":"否" %></td>--%>
                         <td><%# Eval("PublisherTime")%></td>
                         <td><%# Eval("SortID")%></td>
                         <td><%# GetNullityStatus((byte)(Eval("Nullity").ToString()=="True"?1:0))%></td>                        
@@ -74,7 +73,7 @@
                             <a class="l" href="SystemNoticeInfo.aspx?cmd=edit&param=<%#Eval("NoticeID") %>">编辑</a>              
                         </td>                
                         <td><%# Eval("NoticeTitle").ToString().Length>20?Eval("NoticeTitle").ToString().Substring(0,20):Eval("NoticeTitle").ToString() %></td>
-                        <td><%# Eval("Publisher") %></td>
+                        <td><%# Eval("Publisher").ToString()=="1"?"活动":"公告" %></td>
                         <td style="padding:2px;"><img src="/Upload<%# Eval( "MoblieContent" )%>" title="111" height="58"/></td> 
                        <%-- <td><%# Eval("IsHot").ToString()=="True"?"是":"否" %></td>--%>
                         <td><%# Eval("PublisherTime")%></td>
