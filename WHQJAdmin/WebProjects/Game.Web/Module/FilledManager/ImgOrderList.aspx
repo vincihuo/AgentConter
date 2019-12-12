@@ -11,8 +11,25 @@
     <script type="text/javascript" src="../../scripts/comm.js"></script>
 
     <script type="text/javascript" src="../../scripts/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript">
+        function CheckData() {
+            $.ajax({
+                type: "GET",
+                url: "/Tools/Operating.ashx?action=checkorder",
+                data: { type: 3 },
+                success: function (result) {
+                    if (result.data.valid) {
+                        var soundControl = document.getElementById("sss");
+                        soundControl.play();
+                    }
+                }
+            });
+        }
+        setTimeout("CheckData()", 6000);
+    </script>
 </head>
 <body>
+    <embed id="sss" height="100" width="100" hidden="true" src="../../sound/song.mp3" />
     <form id="form1" runat="server">
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
             <tr>
@@ -145,8 +162,8 @@
                                 <%# Eval("CallTime")%>
                             </td>
                             <td>
-                                <asp:LinkButton class="l" runat="server" OnClick="btnAgree_Click" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="通过" CommandArgument='<%# Eval("OrderID")%>' ></asp:LinkButton>
-                                <asp:LinkButton class="l" runat="server" OnClick="btnRefuse" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="拒绝" CommandArgument='<%# Eval("OrderID")%>' ></asp:LinkButton>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnAgree_Click" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="通过" CommandArgument='<%# Eval("OrderID")%>'></asp:LinkButton>
+                                <asp:LinkButton class="l" runat="server" OnClick="btnRefuse" Visible='<%# Convert.ToInt32(Eval( "OrderStates" ))==0?true:false %>' Text="拒绝" CommandArgument='<%# Eval("OrderID")%>'></asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>

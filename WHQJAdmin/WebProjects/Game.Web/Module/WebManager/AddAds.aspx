@@ -97,9 +97,8 @@
                 <asp:DropDownList ID="ddlActivity" runat="server" Width="205px">
                     <asp:ListItem Text="网址" Value="0"></asp:ListItem>
                     <asp:ListItem Text="签到" Value="1"></asp:ListItem>
-                    <asp:ListItem Text="分享" Value="2"></asp:ListItem>
-                    <asp:ListItem Text="比赛" Value="3"></asp:ListItem>
-                    <asp:ListItem Text="商城" Value="4"></asp:ListItem>
+                    <asp:ListItem Text="推广" Value="2"></asp:ListItem>
+                    <asp:ListItem Text="充值" Value="3"></asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>

@@ -84,6 +84,11 @@ namespace Game.Facade
 
         #region 线上充值配置
 
+        public bool CheckOrder(int type)
+        {
+            return aideTreasureData.CheckOrder(type);
+        }
+
         public IList<pay_chanel> GetPay_ChanelsByType(int type)
         {
             return aideTreasureData.GetPay_ChanelsByType(type);

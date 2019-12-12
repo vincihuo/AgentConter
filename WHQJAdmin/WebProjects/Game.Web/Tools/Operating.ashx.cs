@@ -21,7 +21,7 @@ namespace Game.Web.Tools
     /// <summary>
     /// 后台涉及的一些异步操作
     /// </summary>
-    public class Operating : IHttpHandler,IRequiresSessionState
+    public class Operating : IHttpHandler, IRequiresSessionState
     {
         public AjaxJsonValid ajv = new AjaxJsonValid();
         public void ProcessRequest(HttpContext context)
@@ -30,7 +30,7 @@ namespace Game.Web.Tools
 
             //执行操作
             string action = GameRequest.GetQueryString("action").ToLower();
-            switch(action)
+            switch (action)
             {
                 case "getuserinfo":
                     GetUserInfo(context);
@@ -59,9 +59,17 @@ namespace Game.Web.Tools
                 case "getuseronlinestatictics":
                     GetUserOnlineStatictics(context);
                     break;
+                case "checkorder":
+                    CheckOrder(context);
+                    break;
                 default:
                     break;
             }
+        }
+        private void CheckOrder(HttpContext context)
+        {
+            int type= GameRequest.GetFormInt("type", 0);
+            FacadeManage.aideTreasureFacade.CheckOrder(type);
         }
         /// <summary>
         /// 通过游戏ID获取游戏信息
@@ -70,7 +78,7 @@ namespace Game.Web.Tools
         private void GetUserInfo(HttpContext context)
         {
             int gameID = GameRequest.GetFormInt("GameID", 0);
-            if(gameID == 0)
+            if (gameID == 0)
             {
                 ajv.msg = "游戏ID输入非法";
                 context.Response.Write(ajv.SerializeToJson());
@@ -78,7 +86,7 @@ namespace Game.Web.Tools
             }
 
             AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(gameID);
-            if( info?.UserID > 0)
+            if (info?.UserID > 0)
             {
                 ajv.SetValidDataValue(true);
                 ajv.AddDataItem("UserID", info.UserID);
@@ -156,13 +164,13 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["Gold"])/1000;
+                    sc.count = Convert.ToInt64(item["Gold"]) / 1000;
                     sc.type = "平台金币";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["PayGold"])/1000;
+                    sc.count = Convert.ToInt64(item["PayGold"]) / 1000;
                     sc.type = "充值金币";
                     data.Add(sc);
                 }
@@ -195,7 +203,7 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsPayChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.amount = Convert.ToDecimal(item["PayAmount"])/1000;
+                    sc.amount = Convert.ToDecimal(item["PayAmount"]) / 1000;
                     sc.type = "充值金额";
                     data.Add(sc);
                 }
@@ -254,13 +262,13 @@ namespace Game.Web.Tools
 
             DateTime sDate = string.IsNullOrEmpty(stime) ? DateTime.Now.AddDays(-1) : Convert.ToDateTime(stime);
             DateTime eDate = string.IsNullOrEmpty(etime) ? DateTime.Now.AddDays(-7) : Convert.ToDateTime(etime);
-            if(sDate >= eDate)
+            if (sDate >= eDate)
             {
                 sDate = eDate.AddDays(-7);
             }
             DataSet ds = FacadeManage.aideNativeWebFacade.GetDataStatistics(Fetch.GetDateID(sDate), Fetch.GetDateID(eDate));
             List<StatisticsChart> data = new List<StatisticsChart>();
-            if(ds != null && ds.Tables[0].Rows.Count > 0)
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 StatisticsChart sc = null;
                 foreach (DataRow item in ds.Tables[0].Rows)
@@ -318,19 +326,19 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameRevenue"])/1000;
+                    sc.count = Convert.ToInt64(item["GameRevenue"]) / 1000;
                     sc.type = "游戏服务费";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["InsureRevenue"])/1000;
+                    sc.count = Convert.ToInt64(item["InsureRevenue"]) / 1000;
                     sc.type = "银行服务费";
                     data.Add(sc);
 
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameRevenue"])/1000 + Convert.ToInt64(item["InsureRevenue"])/1000;
+                    sc.count = Convert.ToInt64(item["GameRevenue"]) / 1000 + Convert.ToInt64(item["InsureRevenue"]) / 1000;
                     sc.type = "合计服务费";
                     data.Add(sc);
                 }
@@ -363,7 +371,7 @@ namespace Game.Web.Tools
                 {
                     sc = new StatisticsChart();
                     sc.time = Convert.ToDateTime(item["CollectDate"]).ToString("yyyy-MM-dd");
-                    sc.count = Convert.ToInt64(item["GameWaste"])/1000;
+                    sc.count = Convert.ToInt64(item["GameWaste"]) / 1000;
                     sc.type = "游戏损耗";
                     data.Add(sc);
                 }
@@ -381,7 +389,7 @@ namespace Game.Web.Tools
             string stime = GameRequest.GetQueryString("stime");
             string etime = GameRequest.GetQueryString("etime");
 
-            if(string.IsNullOrEmpty(stime) || string.IsNullOrEmpty(etime))
+            if (string.IsNullOrEmpty(stime) || string.IsNullOrEmpty(etime))
             {
                 return;
             }
@@ -420,10 +428,10 @@ namespace Game.Web.Tools
             etime = etime + " 23:59:59";
             IList<StatisticsOnline> list = FacadeManage.aidePlatformFacade.GetUserOnlineStatistics(stime, etime);
             List<StatisticsChart> data = new List<StatisticsChart>();
-            if(list != null && list.Count > 0)
+            if (list != null && list.Count > 0)
             {
                 StatisticsChart sc = null;
-                foreach(StatisticsOnline item in list)
+                foreach (StatisticsOnline item in list)
                 {
                     sc = new StatisticsChart();
                     sc.time = item.DTime.ToString("yyyy-MM-dd HH:mm:ss");

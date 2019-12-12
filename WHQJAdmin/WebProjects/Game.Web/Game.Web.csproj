@@ -486,6 +486,7 @@
     <Content Include="scripts\My97DatePicker\WdatePicker.js" />
     <Content Include="scripts\QuickUpload.js" />
     <Content Include="scripts\web-storage-cache.min.js" />
+    <Content Include="sound\song.mp3" />
     <Content Include="styles\layout.css" />
     <Content Include="Themes\TabSiteConfig.ascx" />
     <Content Include="Tools\ImagePreview.ashx" />

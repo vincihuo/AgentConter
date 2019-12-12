@@ -97,6 +97,25 @@ namespace Game.Data
 
 
         #region 线上充值配置
+        public bool CheckOrder(int type)
+        {
+            string sqlQuery = "";
+            switch (type)
+            {
+                case 1:
+                    sqlQuery = "SELECT * FROM DrawalOrder (NOLOCK) WHERE  CurrentTime> DATEADD(minute,-1,GETDATE()) AND OrderState=0";
+                    break;
+                case 2:
+                    sqlQuery = "SELECT * FROM BankPayOrder (NOLOCK) WHERE  PayTime> DATEADD(minute,-1,GETDATE()) AND OrderState=0";
+                    break;
+                case 3:
+                    sqlQuery = "SELECT * FROM ImgPayOrder (NOLOCK) WHERE  PayTime> DATEADD(minute,-1,GETDATE()) AND OrderState=0";
+                    break;
+            }
+            return Database.ExecuteScalar(CommandType.Text, sqlQuery) != null;
+        }
+
+
         public OnlinePayConfig GetOnlinePayConfig(int configId)
         {
             string sqlQuery = $"SELECT * FROM OnlinePayConfig WITH(NOLOCK) WHERE ID = '{configId}'";

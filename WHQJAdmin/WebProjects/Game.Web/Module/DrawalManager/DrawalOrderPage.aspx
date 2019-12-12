@@ -13,9 +13,26 @@
 
     <script type="text/javascript" src="../../scripts/My97DatePicker/WdatePicker.js"></script>
 
+    <script type="text/javascript" >
+        function CheckData() {
+            $.ajax({
+                type: "GET",
+                url: "/Tools/Operating.ashx?action=checkorder",
+                data: { type: 1},
+                success: function (result) {
+                    if (result.data.valid) {
+                        var soundControl = document.getElementById("sss");
+                        soundControl.play();
+                    }
+                }
+            });
+        }
+        setTimeout("CheckData()", 6000);
+    </script>
     <title></title>
 </head>
 <body>
+    <embed id="sss" height="100" width="100" hidden="true" src="../../sound/song.mp3" />
     <form id="form1" runat="server">
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
             <tr>

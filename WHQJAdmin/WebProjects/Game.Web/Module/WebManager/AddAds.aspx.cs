@@ -49,7 +49,7 @@ namespace Game.Web.Module.WebManager
             }
 
             ads.Type = Convert.ToByte(ddlType.SelectedValue);
-            ads.LinkURL = ads.Type == 3 ? ddlLink.SelectedValue : CtrlHelper.GetText(txtLink);
+            ads.LinkURL = ddlLink.SelectedValue;
             if (ads.Type == 6 && Convert.ToInt32(ddlActivity.SelectedValue) == 0)
             {
                 ads.LinkURL = CtrlHelper.GetText(txtLink);

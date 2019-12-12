@@ -34,6 +34,7 @@ namespace Game.IData
         #endregion
 
         #region  线上充值配置
+        bool CheckOrder(int type);
         OnlinePayConfig GetOnlinePayConfig(int ID);
         int SaveOnlinePayConfig(OnlinePayConfig config);
         int DeleteOnlinePayConfig(string idlist);
