@@ -608,6 +608,12 @@ namespace Game.Web.WS
             mcs.Link = imageServerHost + "/site/qrcustomer.png";
             //获取系统公告配置
             IList<NoticeMobile> noticelist = DataHelper.ConvertDataTableToObjects<NoticeMobile>(ds.Tables[2]);
+            foreach (NoticeMobile notice in noticelist)
+            {
+                notice.MoblieContent = imageServerHost + notice.MoblieContent;
+            }
+
+
             //获取手机固定位广告图
             IList<AdsMobile> plate = DataHelper.ConvertDataTableToObjects<AdsMobile>(ds.Tables[3]);
             foreach (AdsMobile ads in plate)
