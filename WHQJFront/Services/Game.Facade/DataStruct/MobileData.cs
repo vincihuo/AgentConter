@@ -43,10 +43,13 @@ namespace Game.Facade.DataStruct
     {
         public string Link { get; set; }
         public string Number1 { get; set; }
+        public string Name1 { get; set; }
         public string Type1 { get; set; }
         public string Number2 { get; set; }
+        public string Name2 { get; set; }
         public string Type2 { get; set; }
         public string Number3 { get; set; }
+        public string Name3 { get; set; }
         public string Type3 { get; set; }
     }
 
@@ -57,6 +60,7 @@ namespace Game.Facade.DataStruct
         public string LinkURL { get; set; }
         public int SortID { get; set; }
         public int PlatformType { get; set; }
+        public int Type { get; set; }
     }
 
     public class GameSignInMobile
