@@ -23,6 +23,7 @@ namespace Game.Facade.DataStruct
         public int MobileBattleRecordMask { get; set; }
         public int IsOpenGameSignIn { get; set; }
         public int IsOpenRedemptionCenter { get; set; }
+        public int RegistGrant { get; set; }
 
     }
     public class GroupSystemConfig

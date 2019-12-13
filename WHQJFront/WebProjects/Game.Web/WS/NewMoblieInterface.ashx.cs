@@ -1654,6 +1654,9 @@ namespace Game.Web.WS
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (item["StatusName"].ToString())
                 {
+                    case "GrantScoreCount":
+                        config.RegistGrant = Convert.ToInt32(item["StatusValue"]);
+                        break;
                     case "JJOpenMobileMall":
                         config.IsOpenMall = Convert.ToInt32(item["StatusValue"]);
                         break;
