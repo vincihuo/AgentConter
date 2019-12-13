@@ -4,81 +4,191 @@ SET NOCOUNT ON
 
 -- 模块表
 TRUNCATE TABLE [dbo].[Base_Module]
+INSERT INTO [dbo].[Base_Module] VALUES (N'1', N'0', N'用户系统', N'', N'1', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (1, 0, N'用户系统', N'', 1, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (2, 0, N'充值系统', N'', 2, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (3, 0, N'维护系统', N'', 3, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (4, 0, N'网站系统', N'', 4, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (5, 0, N'金币系统', N'', 5, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (6, 0, N'钻石系统', N'', 6, 0, 1, N'',0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (7, 0, N'统计系统', N'', 7, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (8, 0, N'后台系统', N'', 20, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (9, 0, N'亲友圈系统', N'', 8, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (10, 0, N'代理系统', N'', 9, 0, 1, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'2', N'0', N'充值系统', N'', N'2', N'0', N'1', N'', N'0')
+GO
 
+INSERT INTO [dbo].[Base_Module] VALUES (N'3', N'0', N'维护系统', N'', N'3', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (100, 1, N'用户管理', N'/Module/AccountManager/AccountsList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (101, 1, N'在线玩家', N'/Module/AccountManager/UserPlaying.aspx', 0, 0, 3, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (102, 1, N'赠送记录', N'/Module/AccountManager/RecordGrantGoldList.aspx', 0, 0, 4, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (103, 1, N'用户游戏', N'/Module/AccountManager/GeneralGame.aspx', 0, 0, 2, N'', 0)
---INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (104, 1, N'任务管理', '/Module/AccountManager/TaskList.aspx',0,0,4,N'',0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (105, 1, N'注册赠送', '/Module/AccountManager/RegisterGiveList.aspx',0,0,4,N'',0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'4', N'0', N'网站系统', N'', N'4', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (200, 2, N'充值配置', N'/Module/FilledManager/AppPayConfigList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (201, 2, N'充值记录', N'/Module/FilledManager/RecordPayDiamond.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (202, 2, N'在线充值配置', N'/Module/FilledManager/OnLineWeChatList.aspx', 3, 0, 0, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'5', N'0', N'金币系统', N'', N'5', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (301, 3, N'游戏管理', N'/Module/AppManager/GameGameItemList.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (302, 3, N'系统消息', N'/Module/AppManager/SystemMessageList.aspx', 0, 0, 3, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (303, 3, N'系统设置', N'/Module/AppManager/SystemSet.aspx', 0, 0, 4, N'', 0)
---INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (304, 3, N'推广管理', N'/Module/AppManager/SpreadConfigList.aspx', 0, 0, 5, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (305, 3, N'排行管理', N'/Module/AppManager/RankingConfigList.aspx', 0, 0, 6, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (306, 3, N'道具管理', N'/Module/AppManager/PropertyConfigList.aspx', 0, 0, 7, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'6', N'0', N'钻石系统', N'', N'6', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (307, 3, N'签到管理', N'/Module/AppManager/GamePackageConfigList.aspx', 0, 0, 8, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (308, 3, N'每日分享管理', N'/Module/AppManager/ShareConfigList.aspx', 0, 0, 9, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'7', N'0', N'统计系统', N'', N'7', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (400, 4, N'站点配置', N'/Module/WebManager/LogoSet.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (401, 4, N'游戏规则', N'/Module/WebManager/KindRuleList.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (402, 4, N'广告管理', N'/Module/WebManager/AdsList.aspx', 0, 0, 3, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (403, 4, N'新闻公告', N'/Module/WebManager/SystemNoticeList.aspx', 0, 0, 4, N'', 0)
---INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (404, 4, N'消息推送', N'/Module/WebManager/UMessagePushList.aspx', 0, 0, 5, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (405, 4, N'常见问题', N'/Module/WebManager/QuestionList.aspx', 0, 0, 6, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'8', N'0', N'后台系统', N'', N'20', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (500, 5, N'金币管理', N'/Module/GoldManager/AccountsGoldList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (503, 5, N'银行记录', N'/Module/GoldManager/RecordBankTrade.aspx', 0, 0, 4, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (504, 5, N'进出记录', N'/Module/GoldManager/RecordGameInOut.aspx', 0, 0, 5, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (505, 5, N'游戏记录', N'/Module/GoldManager/RecordUserGame.aspx', 0, 0, 6, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (506, 5, N'金币约战', N'/Module/GoldManager/RecordGoldBattleList.aspx', 0, 0, 7, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'9', N'0', N'亲友圈系统', N'', N'8', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (600, 6, N'钻石管理', N'/Module/Diamond/DiamondList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (604, 6, N'积分约战', N'/Module/Diamond/RecordScoreBattleList.aspx', 0, 0, 5, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'10', N'0', N'代理系统', N'', N'9', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (700, 7, N'每日统计', N'/Module/DataStatistics/UserRegister.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (701, 7, N'在线统计', N'/Module/DataStatistics/UserOnline.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (705, 7, N'分布统计', N'/Module/DataStatistics/WealthDistribute.aspx', 0, 0, 6, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (706, 7, N'全局统计', N'/Module/DataStatistics/SystemStat.aspx', 0, 0, 0, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'11', N'0', N'兑换系统', N'', N'11', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (800, 8, N'账号管理', N'/Module/BackManager/BaseRoleList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (801, 8, N'安全日志', N'/Module/OperationLog/SystemSecurityList.aspx', 0, 0, 2, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'12', N'0', N'奖券系统', N'', N'6', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (901, 9, N'亲友圈配置', N'/Module/ClubManager/SystemSet.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (902, 9, N'亲友圈管理', N'/Module/ClubManager/GroupList.aspx', 0, 0, 2, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'13', N'0', N'提现系统', N'', N'2', N'0', N'1', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1000, 10, N'代理配置', N'/Module/AgentManager/SystemSet.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1001, 10, N'代理管理', N'/Module/AgentManager/AgentList.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1002, 10, N'代理返利', N'/Module/AgentManager/AgentReturnConfigList.aspx', 0, 0, 3, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'100', N'1', N'用户管理', N'/Module/AccountManager/AccountsList.aspx', N'1', N'0', N'0', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (11, 0, N'兑换系统', N'', 11, 0, 1, N'', 0)
---INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (1100, 11, N'类型管理', N'/Module/MallManager/MallTypeList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (1101, 11, N'商品管理', N'/Module/MallManager/MallInfoList.aspx', 5, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (1102, 11, N'订单管理', N'/Module/MallManager/MallOrderList.aspx', 10, 0, 1, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'101', N'1', N'在线玩家', N'/Module/AccountManager/UserPlaying.aspx', N'3', N'0', N'0', N'', N'0')
+GO
 
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [OrderNo], [Nullity], [IsMenu], [Description], [ManagerPopedom]) VALUES (12, 0, N'奖券系统', N'', 6, 0, 1, N'',0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1200, 12, N'奖券管理', N'/Module/AwardTicket/AwardTicketList.aspx', 0, 0, 1, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1201, 12, N'奖券记录', N'/Module/AwardTicket/RecordAwardTicketSerialList.aspx', 0, 0, 2, N'', 0)
-INSERT [dbo].[Base_Module] ([ModuleID], [ParentID], [Title], [Link], [IsMenu], [Nullity], [OrderNo], [Description], [ManagerPopedom]) VALUES (1202, 12, N'兑换记录', N'/Module/AwardTicket/ExchangeAwardTicketList.aspx', 0, 0, 3, N'', 0)
+INSERT INTO [dbo].[Base_Module] VALUES (N'102', N'1', N'赠送记录', N'/Module/AccountManager/RecordGrantGoldList.aspx', N'4', N'0', N'0', N'', N'0')
+GO
 
+INSERT INTO [dbo].[Base_Module] VALUES (N'103', N'1', N'用户游戏', N'/Module/AccountManager/GeneralGame.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'201', N'2', N'线上订单', N'/Module/FilledManager/RecordPayDiamond.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'202', N'2', N'代理入款', N'/Module/FilledManager/OnLineWeChatList.aspx', N'3', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'203', N'2', N'自动入款配置', N'/Module/FilledManager/OnLinePayPage.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'204', N'2', N'充值渠道', N'/Module/FilledManager/ChanelPage.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'205', N'2', N'加密配置', N'/Module/FilledManager/EncryptionList.aspx', N'5', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'206', N'2', N'转账渠道', N'/Module/FilledManager/OfficalBankPayList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'207', N'2', N'固码渠道', N'/Module/FilledManager/OfficalImgPayList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'208', N'2', N'银行订单', N'/Module/FilledManager/BankOrderList.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'209', N'2', N'固码订单', N'/Module/FilledManager/ImgOrderList.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'301', N'3', N'游戏管理', N'/Module/AppManager/GameGameItemList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'302', N'3', N'系统消息', N'/Module/AppManager/SystemMessageList.aspx', N'3', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'303', N'3', N'系统设置', N'/Module/AppManager/SystemSet.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'305', N'3', N'排行管理', N'/Module/AppManager/RankingConfigList.aspx', N'6', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'306', N'3', N'道具管理', N'/Module/AppManager/PropertyConfigList.aspx', N'7', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'307', N'3', N'签到管理', N'/Module/AppManager/GamePackageConfigList.aspx', N'8', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'308', N'3', N'每日分享管理', N'/Module/AppManager/ShareConfigList.aspx', N'9', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'400', N'4', N'站点配置', N'/Module/WebManager/LogoSet.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'401', N'4', N'游戏规则', N'/Module/WebManager/KindRuleList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'402', N'4', N'广告管理', N'/Module/WebManager/AdsList.aspx', N'3', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'403', N'4', N'新闻公告', N'/Module/WebManager/SystemNoticeList.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'405', N'4', N'常见问题', N'/Module/WebManager/QuestionList.aspx', N'6', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'407', N'4', N'推送消息', N'/Module/WebManager/UMessagePushAll.aspx', N'7', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'500', N'5', N'金币管理', N'/Module/GoldManager/AccountsGoldList.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'503', N'5', N'银行记录', N'/Module/GoldManager/RecordBankTrade.aspx', N'4', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'504', N'5', N'进出记录', N'/Module/GoldManager/RecordGameInOut.aspx', N'5', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'505', N'5', N'游戏记录', N'/Module/GoldManager/RecordUserGame.aspx', N'6', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'506', N'5', N'金币约战', N'/Module/GoldManager/RecordGoldBattleList.aspx', N'7', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'507', N'5', N'稽核查询', N'/Module/GoldManager/VilaBetList.aspx', N'5', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'600', N'6', N'钻石管理', N'/Module/Diamond/DiamondList.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'604', N'6', N'积分约战', N'/Module/Diamond/RecordScoreBattleList.aspx', N'5', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'700', N'7', N'每日统计', N'/Module/DataStatistics/UserRegister.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'701', N'7', N'在线统计', N'/Module/DataStatistics/UserOnline.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'705', N'7', N'分布统计', N'/Module/DataStatistics/WealthDistribute.aspx', N'6', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'706', N'7', N'全局统计', N'/Module/DataStatistics/SystemStat.aspx', N'0', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'800', N'8', N'账号管理', N'/Module/BackManager/BaseRoleList.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'801', N'8', N'安全日志', N'/Module/OperationLog/SystemSecurityList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'901', N'9', N'亲友圈配置', N'/Module/ClubManager/SystemSet.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'902', N'9', N'亲友圈管理', N'/Module/ClubManager/GroupList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1001', N'10', N'代理管理', N'/Module/AgentManager/AgentList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1101', N'11', N'商品管理', N'/Module/MallManager/MallInfoList.aspx', N'5', N'0', N'1', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1102', N'11', N'订单管理', N'/Module/MallManager/MallOrderList.aspx', N'10', N'0', N'1', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1200', N'12', N'奖券管理', N'/Module/AwardTicket/AwardTicketList.aspx', N'1', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1201', N'12', N'奖券记录', N'/Module/AwardTicket/RecordAwardTicketSerialList.aspx', N'2', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1202', N'12', N'兑换记录', N'/Module/AwardTicket/ExchangeAwardTicketList.aspx', N'3', N'0', N'0', N'', N'0')
+GO
+
+INSERT INTO [dbo].[Base_Module] VALUES (N'1301', N'13', N'提现订单', N'/Module/DrawalManager/DrawalOrderPage.aspx', N'1', N'0', N'0', N'', N'0')
+GO
 -- 模板权限表
 TRUNCATE TABLE Base_ModulePermission
 
