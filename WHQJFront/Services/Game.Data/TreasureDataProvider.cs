@@ -337,7 +337,7 @@ namespace Game.Data
                     mm = "Day";
                     break;
             }
-            string sql = $"SELECT TOP 10 B.GameID, B.NickName,A.{mm}Reward AS Reward FROM AgentRank A  INNER JOIN WHQJAccountsDB.dbo.AccountsInfo B ON A.UserID=B.UserID ORDER BY A.DayReward DESC SELECT {mm}Reward FROM AgentRank WHERE UserID={uid}";
+            string sql = $"SELECT TOP 10 B.GameID, B.NickName,A.{mm}Reward AS Reward FROM AgentRank A  INNER JOIN WHQJAccountsDB.dbo.AccountsInfo B ON A.UserID=B.UserID ORDER BY A.DayReward DESC SELECT {mm}Reward AS OwnReward FROM AgentRank WHERE UserID={uid}";
             return Database.ExecuteDataset(sql);
         }
 
