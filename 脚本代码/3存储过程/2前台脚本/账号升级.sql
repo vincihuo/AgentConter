@@ -17,7 +17,7 @@ CREATE PROCEDURE PW_MbileAccountBind
     ---用户id
 	@Password nvarchar(32),
     -- 密码
-    @Accounts nvarchar(20),
+    @Accounts nvarchar(32),
     ---手机号
     @Code    nvarchar(10),
     ---验证码
