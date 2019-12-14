@@ -47,9 +47,13 @@ namespace Game.Web.Module.WebManager
                 }
                 notice.PublisherTime = DateTime.Now;
             }
+            //if(upImage.ImgThumbnailsWidth>10)
+            //{
+                
+            //}
+
 
             string filepath = upImage.FilePath;
-
             if (string.IsNullOrEmpty(filepath))
             {
                 ShowError("广告图片未上传");

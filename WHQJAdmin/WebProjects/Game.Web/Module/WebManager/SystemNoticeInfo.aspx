@@ -56,7 +56,7 @@
             <tr>
                 <td class="listTdLeft">公告标题：</td>
                 <td>
-                    <asp:TextBox ID="txtTitle" runat="server" CssClass="text" Width="450px" MaxLength="21"></asp:TextBox>
+                    <asp:TextBox ID="txtTitle" runat="server" CssClass="text" Width="450px" MaxLength="6"></asp:TextBox>
                     <span class="hong">*</span>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ForeColor="Red" ControlToValidate="txtTitle" Display="Dynamic" ErrorMessage="请输入新闻标题"></asp:RequiredFieldValidator>
                 </td>
@@ -86,7 +86,7 @@
                 <td class="listTdLeft">图片：</td>
                 <td style="line-height: 35px;">
                     <GameImg:ImageUploader ID="upImage" MaxSize="2097152" runat="server" DeleteButtonClass="l2" DeleteButtonText="删除" Folder="/Upload/Active" ViewButtonClass="l2" ViewButtonText="查看" TextBoxClass="text" />
-                    <span>[体积：不大于2M]</span>
+                    <span>[体积：不大于2M 尺寸：750*540]</span>
                 </td>
             </tr>
             <tr>
