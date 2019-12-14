@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OfficalBankPayList.aspx.cs" Inherits="Game.Web.Module.FilledManager.OfficalPayList" %>
+
 <%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
@@ -53,6 +54,8 @@
                     </td>
                     <td class="listTitle2">最高入款
                     </td>
+                    <td class="listTitle2">赠送比列
+                    </td>
                 </tr>
                 <asp:Repeater ID="rptDataList" runat="server">
                     <ItemTemplate>
@@ -82,6 +85,9 @@
                             </td>
                             <td>
                                 <%# FacadeManage.ConversionMoneyToShow(Eval("MaxAmount").ToString())%>
+                            </td>
+                            <td>
+                                <%# Eval("PresentScore")%>
                             </td>
                         </tr>
                     </ItemTemplate>

@@ -64,10 +64,11 @@ BEGIN
         RETURN 2005
     END
     --查询入款配置
-    DECLARE @MinAmount INT
-    DECLARE @MaxAmount INT
+    DECLARE @MinAmount BIGINT
+    DECLARE @MaxAmount BIGINT
+    DECLARE @PresentScore BIGINT
 	DECLARE @PayType TINYINT
-    SELECT @MinAmount=MinAmount,@MaxAmount=MaxAmount,@PayType=PayType FROM OfficalImgPay WHERE id=@cfgID AND PayUrl=@PayLink
+    SELECT @MinAmount=MinAmount,@MaxAmount=MaxAmount,@PresentScore=PresentScore,@PayType=PayType FROM OfficalImgPay WHERE id=@cfgID AND PayUrl=@PayLink
     IF @MinAmount IS NULL
     BEGIN
         SET @strErrorDescribe=N'抱歉，存款配置不存在或者已经修改'
@@ -87,7 +88,7 @@ BEGIN
     END
     --写入订单
     INSERT INTO ImgPayOrder (OrderID,GameId,UserId,NickName,Amount,PresentScore,PayLink,PayType,OrderStates,PayName,PayTime)
-    VALUES(@strOrderID,@GameID,@UserID,@NickName,@amount,0,@PayLink,@PayType,0,@payName,GETDATE())
+    VALUES(@strOrderID,@GameID,@UserID,@NickName,@amount,@PresentScore*@amount/100,@PayLink,@PayType,0,@payName,GETDATE())
     IF @@ROWCOUNT<>1
 	BEGIN
         SET @strErrorDescribe=N'抱歉，写入订单失败'

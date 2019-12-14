@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/12/4 20:05:18
+ * 日期：2019/12/14 14:35:53
  * 
  * 描述：实体类
  * 
@@ -33,6 +33,7 @@ namespace Game.Entity.Treasure
         private string p_payurl;
         private Int64 p_maxamount;
         private Int64 p_minamount;
+        private int p_presentscore;
         private string p_configname;
         private int p_sortid;
         private string p_description;
@@ -52,6 +53,7 @@ namespace Game.Entity.Treasure
             p_payurl = string.Empty;
             p_maxamount = 0;
             p_minamount = 0;
+            p_presentscore = 0;
             p_configname = string.Empty;
             p_sortid = 0;
             p_description = string.Empty;
@@ -134,6 +136,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_minamount;
+            }
+        }
+
+        /// <summary>
+        /// PresentScore
+        /// </summary>
+        public int PresentScore
+        {
+            set
+            {
+                p_presentscore=value;
+            }
+            get
+            {
+                return p_presentscore;
             }
         }
 

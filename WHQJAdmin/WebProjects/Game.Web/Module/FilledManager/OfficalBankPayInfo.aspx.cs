@@ -29,6 +29,7 @@ namespace Game.Web.Module.FilledManager
                 BankAddr.Text = chanel.BankAddr;
                 TexMax.Text = FacadeManage.ConversionMoneyToShow(chanel.MaxAmount.ToString()).ToString();
                 TexMin.Text = FacadeManage.ConversionMoneyToShow(chanel.MinAmount.ToString()).ToString();
+                TextBoxPre.Text = chanel.PresentScore.ToString();
                 TexDescription.Text = chanel.Description;
                 TexSort.Text = chanel.SortId.ToString();
                 ckbLock.Checked = chanel.Nullity == 1;
@@ -59,6 +60,7 @@ namespace Game.Web.Module.FilledManager
             chanel.BankName = BankName.Text;
             chanel.MinAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMin.Text));
             chanel.MaxAmount = FacadeManage.ConversionMoneyToReal(Convert.ToInt32(TexMax.Text));
+            chanel.PresentScore = Convert.ToInt32(TextBoxPre.Text);
             chanel.Description = TexDescription.Text;
             chanel.SortId = Convert.ToInt32(TexSort.Text);
             chanel.Nullity = (byte)(ckbLock.Checked ? 1 : 0);

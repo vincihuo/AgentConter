@@ -113,6 +113,16 @@
                     </tr>
 
                     <tr>
+                        <td class="listTdLeft">赠送比列：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextBoxPre" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
+                            <span>%</span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
                         <td class="listTdLeft">附加说明：
                         </td>
                         <td>

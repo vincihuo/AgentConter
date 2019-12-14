@@ -69,9 +69,11 @@ BEGIN
         RETURN 2005
     END
     --查询入款配置
-    DECLARE @MinAmount INT
-    DECLARE @MaxAmount INT
-    SELECT @MinAmount=MinAmount,@MaxAmount=MaxAmount FROM OfficalBankPay WHERE id=@cfgID AND BankNumber=@Number
+
+    DECLARE @MinAmount BIGINT
+    DECLARE @MaxAmount BIGINT
+    DECLARE @PresentScore BIGINT
+    SELECT @MinAmount=MinAmount,@MaxAmount=MaxAmount,@PresentScore=PresentScore FROM OfficalBankPay WHERE id=@cfgID AND BankNumber=@Number
     IF @MinAmount IS NULL
     BEGIN
         SET @strErrorDescribe=N'抱歉，存款配置不存在或者已经修改'
@@ -91,7 +93,7 @@ BEGIN
     END
     --写入订单
     INSERT INTO BankPayOrder (OrderID,GameId,UserId,NickName,Amount,PresentScore,Payee,OrderStates,PayName,PayBank,TransferType,PayTime)
-    VALUES(@strOrderID,@GameID,@UserID,@NickName,@amount,0,@Number,0,@payName,@payBank,@TransferType,GETDATE())
+    VALUES(@strOrderID,@GameID,@UserID,@NickName,@amount,@PresentScore*@amount/100,@Number,0,@payName,@payBank,@TransferType,GETDATE())
     IF @@ROWCOUNT<>1
 	BEGIN
         SET @strErrorDescribe=N'抱歉，写入订单失败'

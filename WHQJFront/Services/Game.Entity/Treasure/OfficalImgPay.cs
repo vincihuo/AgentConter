@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/29 14:13:19
+ * 日期：2019/12/14 14:35:53
  * 
  * 描述：实体类
  * 
@@ -31,11 +31,13 @@ namespace Game.Entity.Treasure
         private int p_id;
         private byte p_paytype;
         private string p_payurl;
-        private int p_maxamount;
-        private int p_minamount;
+        private Int64 p_maxamount;
+        private Int64 p_minamount;
+        private int p_presentscore;
         private string p_configname;
         private int p_sortid;
         private string p_description;
+        private byte p_nullity;
 
         #endregion
 
@@ -51,9 +53,11 @@ namespace Game.Entity.Treasure
             p_payurl = string.Empty;
             p_maxamount = 0;
             p_minamount = 0;
+            p_presentscore = 0;
             p_configname = string.Empty;
             p_sortid = 0;
             p_description = string.Empty;
+            p_nullity = 0;
         }
 
         #endregion
@@ -108,7 +112,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MaxAmount
         /// </summary>
-        public int MaxAmount
+        public Int64 MaxAmount
         {
             set
             {
@@ -123,7 +127,7 @@ namespace Game.Entity.Treasure
         /// <summary>
         /// MinAmount
         /// </summary>
-        public int MinAmount
+        public Int64 MinAmount
         {
             set
             {
@@ -132,6 +136,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_minamount;
+            }
+        }
+
+        /// <summary>
+        /// PresentScore
+        /// </summary>
+        public int PresentScore
+        {
+            set
+            {
+                p_presentscore=value;
+            }
+            get
+            {
+                return p_presentscore;
             }
         }
 
@@ -177,6 +196,21 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_description;
+            }
+        }
+
+        /// <summary>
+        /// Nullity
+        /// </summary>
+        public byte Nullity
+        {
+            set
+            {
+                p_nullity=value;
+            }
+            get
+            {
+                return p_nullity;
             }
         }
 
