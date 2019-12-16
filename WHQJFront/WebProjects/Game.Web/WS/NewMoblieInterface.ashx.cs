@@ -370,7 +370,7 @@ namespace Game.Web.WS
                 };
                 list.Add(stream);
             }
-            long rec = ds.Tables[1] == null ? 0 : Convert.ToInt64(ds.Tables[1].Rows[0]["OwnReward"]);
+            long rec = ds.Tables[1].Rows.Count >0 ? Convert.ToInt64(ds.Tables[1].Rows[0]["OwnReward"]):0;
             _ajv.SetDataItem("own", rec);
             _ajv.SetDataItem("list", list);
         }

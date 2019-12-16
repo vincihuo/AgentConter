@@ -7,35 +7,59 @@ SET NOCOUNT ON
 TRUNCATE TABLE ConfigInfo
 GO
 
-INSERT INTO ConfigInfo(ConfigKey,ConfigName,ConfigString,Field1,Field2,Field3,Field4,Field5,Field6,SortID) VALUES(N'MobilePlatformVersion',N'移动版大厅配置',
-N'参数说明
+INSERT INTO [dbo].[ConfigInfo] ([ConfigKey], [ConfigName], [ConfigString], [Field1], [Field2], [Field3], [Field4], [Field5], [Field6], [Field7], [Field8], [SortID], [Field9], [Field10], [Field11], [Field12], [Field13]) VALUES ( N'MobilePlatformVersion', N'移动版大厅配置', N'参数说明
 字段1：热更新下载路径   
 字段2：大厅版本号 
 字段3：资源版本号
 字段4：ios企业版本的下载地址
 字段5：苹果大厅下载地址
 字段6：安卓大厅下载地址
-字段7：U3D苹果大厅版本号
+字段7：账号注册规则
+(0) 字母 + 数字
+(1) 手机号
 字段8：U3D安卓大厅版本号
 字段9：U3D苹果大厅下载地址
 字段10：U3D安卓大厅下载地址
 字段11：U3D苹果老大厅下载地址
 字段12：U3D安卓老大厅下载地址
-字段13：U3D资源版本号',N'http://qj.foxuc.net/Download/Phone',N'0',N'0',N'',N'itms-services://?action=download-manifest&url=https://qj.foxuc.net/Download/LuaMBClient_LY.plist',N'http://172.16.3.211:6511/Download/LuaMBClient_LY.apk',4)
-INSERT INTO ConfigInfo(ConfigKey,ConfigName,ConfigString,Field1,Field2,Field3,Field4,Field5,Field6,SortID) VALUES(N'SysCustomerService',N'系统客服配置',
-N'参数说明
-字段1：客服电话   
-字段2：客服微信 
-字段3：客服QQ',
-N'400-000-7043',N'4000007043',N'4000007043',N'',N'',
-N'',5)
+字段13：U3D资源版本号', N'http://hot.test.wgame200.com', N'0', N'4338649', N'', N'itms-services://?action=download-manifest&amp;url=https://qj.foxuc.net/Download/LuaMBClient_LY.plist', N'http://hot-update.csdncw.com/soft/android/hn8/hn8_release.apk', N'0', N'', N'4', N'', N'', N'', N'', N'')
+GO
 
-INSERT INTO ConfigInfo(ConfigKey,ConfigName,ConfigString,Field1,Field2,Field3,Field4,SortID) VALUES(N'WebSiteConfig',N'网站站点配置',
-N'参数说明
+INSERT INTO [dbo].[ConfigInfo] ([ConfigKey], [ConfigName], [ConfigString], [Field1], [Field2], [Field3], [Field4], [Field5], [Field6], [Field7], [Field8], [SortID], [Field9], [Field10], [Field11], [Field12], [Field13]) VALUES ( N'SysCustomerService', N'系统客服配置', N'参数说明
+字段1：客服连接
+字段2：号码1
+字段3：名称
+字段4：类型
+字段5：号码1
+字段6：名称
+字段7：类型
+字段5：号码3
+字段6：名称
+字段7：类型', N'https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1260815&configID=101712&jid=3499059624&s=1', N'4000007043', N'微信1', N'2', N'4000007043', N'企鹅1', N'1', N'https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1260815&configID=101712&jid=3499059624&s=1', N'5', N'aaa', N'2', N'', N'', N'')
+GO
+
+INSERT INTO [dbo].[ConfigInfo] ( [ConfigKey], [ConfigName], [ConfigString], [Field1], [Field2], [Field3], [Field4], [Field5], [Field6], [Field7], [Field8], [SortID], [Field9], [Field10], [Field11], [Field12], [Field13]) VALUES ( N'WebSiteConfig', N'网站站点配置', N'参数说明
 字段1：网站二维码地址 
 字段2：网站图片服务器地址
 字段3：网站前台服务器地址
-字段4：网站分享链接地址',N'http://qj.foxuc.net',N'http://imageqj.foxuc.net',N'http://qj.foxuc.net',N'http://qj.foxuc.net',6)
+字段4：网站分享链接地址', N'http://qj.foxuc.net', N'http://www.test.wgame200.com:8082', N'http://www.test.wgame200.com', N'http://qj.foxuc.net', N'', N'', N'', N'', N'6', N'', N'', N'', N'', N'')
+GO
+
+INSERT INTO [dbo].[ConfigInfo] ( [ConfigKey], [ConfigName], [ConfigString], [Field1], [Field2], [Field3], [Field4], [Field5], [Field6], [Field7], [Field8], [SortID], [Field9], [Field10], [Field11], [Field12], [Field13]) VALUES ( N'DrawalConfig', N'提现配置', N'字段1：手续费收取比列
+字段2：最低提现
+字段3：最高提现
+字段4：银行列表（0支付宝1天地银行）', N'10', N'10', N'500000', N'1,2,3,4,5', N'', N'', N'ws://payment.test.wgame200.com/ws', N'', N'0', N'', N'', N'', N'', N'')
+GO
+
+INSERT INTO [dbo].[ConfigInfo] ( [ConfigKey], [ConfigName], [ConfigString], [Field1], [Field2], [Field3], [Field4], [Field5], [Field6], [Field7], [Field8], [SortID], [Field9], [Field10], [Field11], [Field12], [Field13]) VALUES ( N'ValiBetConfig', N'打码量配置', N'全部配置百分比
+字段1：入款稽核比列
+字段2：充值送稽核比列
+3：分享
+4：签到
+5：排行榜
+6：注册送
+7：实名认证
+8：手机绑定', N'100', N'100', N'200', N'100', N'100', N'100', N'100', N'100', N'0', N'', N'', N'', N'', N'')
 GO
 
 -- 手机广告配置

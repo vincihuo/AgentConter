@@ -23,19 +23,18 @@ SET NOCOUNT ON
 
 BEGIN
     DELETE OnLinePayOrder WHERE OrderStates=1 AND DateDiff(dd,PayTime,GetDate())>1
-    INSERT INTO WHQJRecordDB.dbo.DrawalOrderCopy SELECT * FROM DrawalOrder WHERE DateDiff(dd,CurrentTime,GetDate())>30
+    INSERT INTO WHQJRecordDB.dbo.DrawalOrder_copy1 SELECT * FROM DrawalOrder WHERE DateDiff(dd,CurrentTime,GetDate())>30
     DELETE DrawalOrder WHERE DateDiff(dd,CurrentTime,GetDate())>30
-    INSERT INTO WHQJRecordDB.dbo.OnLinePayOrderCopy SELECT * FROM OnLinePayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
+    INSERT INTO WHQJRecordDB.dbo.OnLinePayOrder_copy1 SELECT * FROM OnLinePayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
     DELETE OnLinePayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
-    INSERT INTO WHQJRecordDB.dbo.BankPayOrderCopy SELECT * FROM BankPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
+    INSERT INTO WHQJRecordDB.dbo.BankPayOrder_copy1 SELECT * FROM BankPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
     DELETE BankPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
-    INSERT INTO WHQJRecordDB.dbo.ImgPayOrderCopy SELECT * FROM ImgPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
+    INSERT INTO WHQJRecordDB.dbo.ImgPayOrder_copy1 SELECT * FROM ImgPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
     DELETE ImgPayOrder WHERE DateDiff(dd,PayTime,GetDate())>30
 
-    INSERT INTO WHQJRecordDB.dbo.AgentCountRecordCopy SELECT * FROM WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
+    INSERT INTO WHQJRecordDB.dbo.AgentCountRecord_copy1 SELECT * FROM WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
     DELETE WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
-
-
+    
     DELETE ValiBetRecord WHERE DateDiff(dd,DepositTime,GetDate())>30
     
     DELETE RecordAgentReward WHERE DateDiff(dd,drawalTime,GetDate())>30
