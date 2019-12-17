@@ -746,20 +746,24 @@ namespace Game.Web.WS
                     t.MinAmount = list[i].MinAmount;
                     pp.Add(t);
                 }
-                _ajv.SetValidDataValue(true);
                 _ajv.SetDataItem("list1_" + Convert.ToString(payType), pp);
             }
+            
             IList<OfficalBankPay> list1 = FacadeManage.aideTreasureFacade.GetBankPayList();
-            _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("list2", list1);
+            if (list1!=null)
+                _ajv.SetDataItem("list2", list1);
 
             IList<OfficalImgPay> list2 = FacadeManage.aideTreasureFacade.GetImgPayList();
-            _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("list3", list2);
+            if (list2 != null)
+                _ajv.SetDataItem("list3", list2);
 
             IList<OnLineWeChat> list3 = FacadeManage.aideTreasureFacade.GetOnLineWeChatList();
+            if (list3 != null)
+            {
+                _ajv.SetDataItem("List4", list3);
+            }
             _ajv.SetValidDataValue(true);
-            _ajv.SetDataItem("List4", list3);
+
         }
         /// <summary>
         /// 获取充值产品列表
