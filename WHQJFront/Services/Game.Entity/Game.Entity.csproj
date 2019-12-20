@@ -95,6 +95,7 @@
     <Compile Include="Platform\PersonalRoomScoreInfo.cs" />
     <Compile Include="Platform\RecordBackInfo.cs" />
     <Compile Include="Platform\StreamCreateTableFeeInfo.cs" />
+    <Compile Include="Platform\TurntableConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record\RecordAgentReward.cs" />
     <Compile Include="Record\RecordDiamondSerial.cs" />

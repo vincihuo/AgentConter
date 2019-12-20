@@ -348,6 +348,12 @@ namespace Game.Data
             DataSet ds = Database.ExecuteDataset(CommandType.Text, sql, prams);
             return ds.Tables[0].Rows.Count <= 0;
         }
+        public AccountsInfo RandomAndroid()
+        {
+            int mm = new Random().Next(200);
+            string sql = $"SELECT * FROM (SELECT row_number() over (ORDER BY UserID) AS rowNum,* FROM AccountsInfo WHERE IsAndroid=1) as t WHERE rowNum={mm}";
+            return Database.ExecuteObject<AccountsInfo>(sql);
+        }
 
         #endregion
     }

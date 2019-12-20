@@ -307,4 +307,13 @@ namespace Game.Facade.DataStruct
         public int LoopCount { get; set; }
         public DateTime PlayTime { get; set; }
     }
+
+    public class TurntableReward
+    {
+        public DateTime time;
+        public string turnName;
+        public long money;
+        public string nickName;
+    }
+
 }

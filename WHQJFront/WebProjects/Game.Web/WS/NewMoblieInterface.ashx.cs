@@ -332,6 +332,24 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191109);
                         GetIdByLink();
                         break;
+                    case "getturntables":
+                        _ajv.SetDataItem("apiVersion", 20191220);
+                        GetTurntables();
+                        break;
+                    case "startturntable":
+                        _ajv.SetDataItem("apiVersion", 20191220);
+                        StartTurntable();
+                        break;
+                    case "getturntablemsg":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20191220);
+                        _ajv.SetDataItem("openList",FacadeManage.nList);
+                        _ajv.SetDataItem("bigList", FacadeManage.bList);
+                        break;
+                    case "getturntablerecord":
+                        _ajv.SetValidDataValue(true);
+                        GetTurntableRecord();
+                        break;
                     #endregion
                     default:
                         _ajv.code = (int)ApiCode.VertyParamErrorCode;
@@ -353,6 +371,63 @@ namespace Game.Web.WS
             }
             context.Response.End();
         }
+        private void GetTurntableRecord()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            int size = GameRequest.GetQueryInt("size", 1);
+            PagerSet ps= FacadeManage.aideRecordFacade.GetList(RecordTurntable.Tablename,index,size, $" WHERE UserId={_userid} ", " Opentime DESC ");
+            IList<RecordTurntable> list = DataHelper.ConvertDataTableToObjects<RecordTurntable>(ps.PageSet.Tables[0]);
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("records", list);
+        }
+        private void StartTurntable()
+        {
+            int index= GameRequest.GetQueryInt("index", 1);
+            IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
+            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
+            if (validBet.GrandScore > Convert.ToInt64(list[index * 4]) * 1000)
+            {
+                AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
+                long reward = FacadeManage.StartTurntable(list[index * 4 + 1], list[index * 4], list[index * 4 + 2]);
+                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, list[index * 4 + 2].TurnName, reward, Convert.ToInt64(list[index * 4].TurnName));
+                if (mm.Success)
+                {
+                    _ajv.SetValidDataValue(true);
+                    _ajv.SetDataItem("reward", reward);
+                }
+                else
+                {
+                    _ajv.SetValidDataValue(false);
+                    _ajv.msg = mm.Content;
+                }
+            }
+            else
+            {
+                _ajv.code = (int)ApiCode.LogicErrorCode;
+                _ajv.msg = $"积分不足";
+                return;
+            }
+
+        }
+        private void GetTurntables()
+        {
+            IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
+            List<TurntableConfig> slist= new List<TurntableConfig>();
+            slist.Add(list[0]);
+            slist.Add(list[4]);
+            slist.Add(list[8]);
+            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
+            _ajv.SetValidDataValue(true);
+            _ajv.SetDataItem("list", slist);
+            List<string> names = new List<string>();
+            names.Add(list[2].TurnName);
+            names.Add(list[6].TurnName);
+            names.Add(list[10].TurnName);
+            _ajv.SetDataItem("list", slist);
+            _ajv.SetDataItem("names",names);
+            _ajv.SetDataItem("todayValibet",validBet.TodayValiBet);
+            _ajv.SetDataItem("GrandScore", validBet.GrandScore);
+        }
 
         private void AgentRank()
         {
@@ -371,6 +446,7 @@ namespace Game.Web.WS
                 list.Add(stream);
             }
             long rec = ds.Tables[1].Rows.Count >0 ? Convert.ToInt64(ds.Tables[1].Rows[0]["OwnReward"]):0;
+            _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("own", rec);
             _ajv.SetDataItem("list", list);
         }
@@ -1253,7 +1329,7 @@ namespace Game.Web.WS
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("bList", bList);
             _ajv.SetDataItem("sList", sList);
-        }
+        } 
 
         /// <summary>
         /// 获取俱乐部战绩

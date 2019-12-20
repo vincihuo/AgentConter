@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/10/24 10:37:22
+ * 日期：2019/12/20 12:33:55
  * 
  * 描述：实体类
  * 
@@ -32,6 +32,8 @@ namespace Game.Entity.Treasure
         private Int64 p_currentvalidbet;
         private Int64 p_targetbet;
         private Int64 p_spillbet;
+        private Int64 p_todayvalibet;
+        private Int64 p_grandscore;
 
         #endregion
 
@@ -46,6 +48,8 @@ namespace Game.Entity.Treasure
             p_currentvalidbet = 0;
             p_targetbet = 0;
             p_spillbet = 0;
+            p_todayvalibet = 0;
+            p_grandscore = 0;
         }
 
         #endregion
@@ -109,6 +113,36 @@ namespace Game.Entity.Treasure
             get
             {
                 return p_spillbet;
+            }
+        }
+
+        /// <summary>
+        /// TodayValiBet
+        /// </summary>
+        public Int64 TodayValiBet
+        {
+            set
+            {
+                p_todayvalibet=value;
+            }
+            get
+            {
+                return p_todayvalibet;
+            }
+        }
+
+        /// <summary>
+        /// GrandScore
+        /// </summary>
+        public Int64 GrandScore
+        {
+            set
+            {
+                p_grandscore=value;
+            }
+            get
+            {
+                return p_grandscore;
             }
         }
 

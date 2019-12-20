@@ -187,5 +187,11 @@ namespace Game.Data
             string sql = $"UPDATE MobileKindItem SET ResVersion={version} WHERE KindID={gameID}";
             return Database.ExecuteNonQuery(CommandType.Text, sql);
         }
+
+        public IList<TurntableConfig> GetTurntableConfigs(int uid)
+        {
+            string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) ORDER BY id";
+            return Database.ExecuteObjectList<TurntableConfig>(sql);
+        }
     }
 }

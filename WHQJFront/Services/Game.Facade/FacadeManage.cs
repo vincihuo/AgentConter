@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Game.Facade.DataStruct;
+using Game.Entity.Platform;
+using Game.Entity.Accounts;
 
 namespace Game.Facade
 {
@@ -10,6 +13,9 @@ namespace Game.Facade
     /// </summary>
     public class FacadeManage
     {
+        public static List<TurntableReward> bList;
+        public static List<TurntableReward> nList;
+
         private static object lockObj = new object();
 
         ///// <summary>
@@ -201,6 +207,64 @@ namespace Game.Facade
                     return "分享";
                 default:
                     return "未知类型";
+            }
+        }
+
+        public static void CreatTurnTableDate()
+        {
+            IList<TurntableConfig> list = aidePlatformFacade.GetTurntableConfigs();
+            int pp = new Random().Next(10);
+            int turnIndex = 0;
+            if (pp > 3 && pp < 8)
+            {
+                turnIndex = 1;
+            }
+            else if (pp>8)
+            {
+                turnIndex = 2;
+            }
+            TurntableConfig broad = list[4 * turnIndex + 2];
+            AccountsInfo android = aideAccountsFacade.RandomAndroid();
+            long reward = StartTurntable(list[4 * turnIndex + 3], list[4 * turnIndex], broad);
+            TurntableReward record = new TurntableReward();
+            record.money = reward;
+            record.time = DateTime.Now;
+            record.turnName = broad.TurnName;
+            record.nickName = android.NickName;
+            PustTurnTableRecord(record, (int)broad.GetType().GetProperty("Money" + turnIndex).GetValue(broad, null));
+        }
+
+        public static long StartTurntable(TurntableConfig pre, TurntableConfig money, TurntableConfig broad)
+        {
+            int r = new Random().Next(Convert.ToInt32(pre.TurnName));
+
+            int i = 1;
+            int p = 0;
+            for (; i < 14; ++i)
+            {
+                p+= (int)pre.GetType().GetProperty("Money"+i).GetValue(pre, null);
+                if (p > r)
+                {
+                    break;
+                }
+            }
+            long reward = (long)money.GetType().GetProperty("Money" + i).GetValue(money,null);
+            return reward;
+        }
+        public static void PustTurnTableRecord(TurntableReward record,int big)
+        {
+            nList.Add(record);
+            if (nList.Count > 20)
+            {
+                nList.RemoveAt(0);
+            }
+            if (big == 1)
+            {
+                bList.Add(record);
+                if (bList.Count > 20)
+                {
+                    bList.RemoveAt(0);
+                }
             }
         }
     }

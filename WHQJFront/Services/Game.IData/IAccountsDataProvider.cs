@@ -92,6 +92,8 @@ namespace Game.IData
         /// <param name="gameId"></param>
         /// <returns></returns>
         int UserIPBind(string userIp, int gameId);
+
+        AccountsInfo RandomAndroid();
         #endregion
 
         #region 推广中心

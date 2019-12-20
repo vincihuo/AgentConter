@@ -106,5 +106,6 @@ namespace Game.IData
 
         int SetGameVerSion(int gameID, int version);
 
+        IList<TurntableConfig> GetTurntableConfigs();
     }
 }

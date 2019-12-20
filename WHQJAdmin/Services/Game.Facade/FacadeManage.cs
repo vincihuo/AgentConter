@@ -10,6 +10,7 @@ namespace Game.Facade
     /// </summary>
     public class FacadeManage
     {
+       
         private static readonly object lockObj = new object();
 
         ///// <summary>

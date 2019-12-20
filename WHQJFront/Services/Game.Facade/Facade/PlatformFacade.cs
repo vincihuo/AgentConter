@@ -157,5 +157,9 @@ namespace Game.Facade
         {
             return platformData.SetGameVerSion(gameID, version);
         }
+        public IList<TurntableConfig> GetTurntableConfigs()
+        {
+            return platformData.GetTurntableConfigs();
+        }
     }
 }

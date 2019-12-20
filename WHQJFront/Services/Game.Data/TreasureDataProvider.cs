@@ -311,7 +311,7 @@ namespace Game.Data
         }
         public int GetIdByLink(string link)
         {
-            string sqlQuery =$"SELECT GameID FROM WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK) WHERE UserID = (SELECT UserID FROM AgentInfo WITH(NOLOCK) WHERE LinkUrl={link})";
+            string sqlQuery = $"SELECT GameID FROM WHQJAccountsDB.dbo.AccountsInfo WITH(NOLOCK) WHERE UserID = (SELECT UserID FROM AgentInfo WITH(NOLOCK) WHERE LinkUrl={link})";
             object obj = Database.ExecuteScalar(CommandType.Text, sqlQuery);
             if (obj == null)
             {
@@ -340,7 +340,18 @@ namespace Game.Data
             string sql = $"SELECT TOP 10 B.GameID, B.NickName,A.{mm}Reward AS Reward FROM AgentRank A  INNER JOIN WHQJAccountsDB.dbo.AccountsInfo B ON A.UserID=B.UserID ORDER BY A.{mm}Reward DESC SELECT {mm}Reward AS OwnReward FROM AgentRank WHERE UserID={uid}";
             return Database.ExecuteDataset(sql);
         }
-
+        public Message DealTurnTable(int uid, string tableName, long reward,long score)
+        {
+            List<DbParameter> parms = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("Reward", reward),
+                Database.MakeInParam("Score", score),
+                Database.MakeInParam("TableName", tableName),
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_TurnTable", parms);
+        }
         #endregion
 
         #region 钻石信息

@@ -155,7 +155,7 @@ namespace Game.Web.Module.AccountManager
                     : model?.InsurePass ?? "";
 
                 info.LogonPass = !string.IsNullOrEmpty(CtrlHelper.GetText(txtLognPass))
-                    ? Utility.MD5(CtrlHelper.GetText(txtLognPass  ))
+                    ? Utility.MD5(CtrlHelper.GetText(txtLognPass))
                     : model?.LogonPass ?? "";
 
                 int result = FacadeManage.aideAccountsFacade.UpdateAccountsBaseInfo(info);

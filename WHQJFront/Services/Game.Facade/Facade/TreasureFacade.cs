@@ -110,6 +110,11 @@ namespace Game.Facade
             return treasureData.GetAgentRank(uid,type);
         }
 
+        public Message DealTurnTable(int uid, string tableName, long reward, long score)
+        {
+            return treasureData.DealTurnTable(uid, tableName, reward, score);
+        }
+
         #endregion
 
         #region 充值产品

@@ -253,6 +253,11 @@ namespace Game.Facade
         {
             return accountsData.VaildSendOnTime(mobile, minute);
         }
+
+        public AccountsInfo RandomAndroid()
+        {
+            return accountsData.RandomAndroid();
+        }
         #endregion
     }
 }
