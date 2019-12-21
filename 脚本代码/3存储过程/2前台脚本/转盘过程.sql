@@ -15,6 +15,8 @@ CREATE PROCEDURE NET_PW_TurnTable
     -- 操作用户
     @Reward             BIGINT,
     @Score              BIGINT,
+    @TableIndex         INT,
+    @Open               INT,
     @TableName          NVARCHAR(20),
     --兑换数量
     @strErrorDescribe	NVARCHAR(127) OUTPUT
@@ -43,8 +45,8 @@ BEGIN
     SELECT @BeforMoney = Score, @BeforeInsure=InsureScore FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK) WHERE UserID = @dwUserID 
     UPDATE GameScoreInfo SET Score = Score + @Reward WHERE UserID = @dwUserID
     --写入转盘记录
-    INSERT INTO WHQJRecordDB.dbo.RecordTurntable(UserId,TurntableName,Reward,Score)
-    VALUES(@dwUserID,@TableName,@Reward,@Score)
+    INSERT INTO WHQJRecordDB.dbo.RecordTurntable(UserId,TurntableName,Reward,Score,OpenPos,TableIndex,Opentime)
+    VALUES(@dwUserID,@TableName,@Reward,@Score,@Open,@TableIndex,GETDATE())
     --写入流水
 	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
 		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)

@@ -17,8 +17,8 @@ namespace Game.Data
     public class PlatformDataProvider : BaseDataProvider, IPlatformDataProvider
     {
         #region 构造方法
-        public PlatformDataProvider( string connString )
-            : base( connString )
+        public PlatformDataProvider(string connString)
+            : base(connString)
         {
         }
         #endregion
@@ -32,10 +32,10 @@ namespace Game.Data
         public string GetConn(int kindId)
         {
             GameGameItem game = GetGameGameItemInfo(kindId);
-            if(game != null)
+            if (game != null)
             {
                 DataBaseInfo database = GetDataBaseInfo(game.DataBaseAddr);
-                if(database != null)
+                if (database != null)
                 {
                     string userId = Utils.CWHEncryptNet.XorCrevasse(database.DBUser);
                     string password = Utils.CWHEncryptNet.XorCrevasse(database.DBPassword);
@@ -72,7 +72,7 @@ namespace Game.Data
         /// </summary>
         /// <param name="gameId">游戏模块标识</param>
         /// <returns></returns>
-        public GameGameItem GetGameGameItemInfo( int gameId )
+        public GameGameItem GetGameGameItemInfo(int gameId)
         {
             string sqlQuery = $"SELECT * FROM GameGameItem WITH(NOLOCK) WHERE GameID={gameId}";
             return Database.ExecuteObject<GameGameItem>(sqlQuery);
@@ -81,7 +81,7 @@ namespace Game.Data
         /// 新增游戏模块
         /// </summary>
         /// <param name="gameGameItem">游戏模块</param>
-        public int InsertGameGameItem( GameGameItem gameGameItem )
+        public int InsertGameGameItem(GameGameItem gameGameItem)
         {
             string sqlQuery = @"INSERT INTO GameGameItem VALUES(@GameID,@GameName,@SuportType,@DataBaseAddr,
                             @DataBaseName,@ServerVersion,@ClientVersion,@ServerDLLName,@ClientExeName)";
@@ -105,7 +105,7 @@ namespace Game.Data
         /// 修改游戏模块
         /// </summary>
         /// <param name="gameGameItem">游戏模块</param>
-        public int UpdateGameGameItem( GameGameItem gameGameItem )
+        public int UpdateGameGameItem(GameGameItem gameGameItem)
         {
             string sqlQuery = @"UPDATE GameGameItem SET GameName=@GameName,SuportType=@SuporType,DataBaseAddr=@DataBaseAddr,
                         DataBaseName=@DataBaseName,ServerVersion=@ServerVersion,ClientVersion=@ClientVersion,
@@ -124,13 +124,13 @@ namespace Game.Data
                 Database.MakeInParam("GameID", gameGameItem.GameID)
             };
 
-            return Database.ExecuteNonQuery( CommandType.Text, sqlQuery, prams.ToArray() );
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
         /// <summary>
         /// 删除游戏模块
         /// </summary>
         /// <param name="gamelist">游戏标识列表</param>
-        public int DeleteGameGameItem( string gamelist)
+        public int DeleteGameGameItem(string gamelist)
         {
             string sqlQuery = $"DELETE GameGameItem WHERE GameID IN({gamelist})";
             return Database.ExecuteNonQuery(sqlQuery);
@@ -430,7 +430,7 @@ namespace Game.Data
         {
             string sqlQuery = "SELECT * FROM DataBaseInfo WITH(NOLOCK) WHERE DBAddr= @DBAddr";
 
-            var prams = new List<DbParameter> {Database.MakeInParam("DBAddr", dBAddr)};
+            var prams = new List<DbParameter> { Database.MakeInParam("DBAddr", dBAddr) };
 
             return Database.ExecuteObject<DataBaseInfo>(sqlQuery, prams);
         }
@@ -769,7 +769,7 @@ namespace Game.Data
                 Database.MakeInParam("ID", property.ID)
             };
 
-            return Database.ExecuteNonQuery(CommandType.Text,sqlQuery,prams.ToArray());
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
         #endregion
 
@@ -779,7 +779,7 @@ namespace Game.Data
         /// <summary>
         /// 获取签到礼包配置列表
         /// </summary>
-     
+
         /// <returns></returns>
         public DataSet GetGamePackageList()
         {
@@ -978,7 +978,7 @@ namespace Game.Data
                 Database.MakeInParam("NeedDay", config.NeedDay),
                 Database.MakeInParam("SortID", config.SortID),
                 Database.MakeInParam("Nullity", config.Nullity),
-               
+
 
             };
 
@@ -1094,6 +1094,49 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sql, prams.ToArray());
         }
         #endregion
-
+        public IList<TurntableConfig> GetTurntableConfigs()
+        {
+            string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) ORDER BY id";
+            return Database.ExecuteObjectList<TurntableConfig>(sql);
+        }
+        public TurntableConfig GetTurntableConfigByid(int uid)
+        {
+            string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) WHERE id={uid}";
+            return Database.ExecuteObject<TurntableConfig>(sql);
+        }
+        public int SaveTurnTable(TurntableConfig cfg)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("Value1", cfg.Value1),
+                Database.MakeInParam("Value2", cfg.Value2),
+                Database.MakeInParam("Value3", cfg.Value3),
+                Database.MakeInParam("Value4", cfg.Value4),
+                Database.MakeInParam("Value5", cfg.Value5),
+                Database.MakeInParam("Value6", cfg.Value6),
+                Database.MakeInParam("Value7", cfg.Value7),
+                Database.MakeInParam("Value8", cfg.Value8),
+                Database.MakeInParam("Value9", cfg.Value9),
+                Database.MakeInParam("Value10", cfg.Value10),
+                Database.MakeInParam("Value11", cfg.Value11),
+                Database.MakeInParam("Value12", cfg.Value12),
+                Database.MakeInParam("Value13", cfg.Value13),
+            };
+            prams.Add(Database.MakeInParam("id", cfg.id));
+            string sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13 WHERE id=@id";
+            int mm = (cfg.id - 1) % 4;
+            if (mm == 1 || mm == 3)
+            {
+                long count = cfg.Value1 + cfg.Value2 + cfg.Value3 + cfg.Value4 + cfg.Value5 + cfg.Value6 + cfg.Value7 + cfg.Value8 + cfg.Value9 + cfg.Value10 + cfg.Value11 + cfg.Value12 + cfg.Value13;
+                prams.Add(Database.MakeInParam("MenuVaule", count));
+                sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13,MenuVaule=@MenuVaule WHERE id=@id";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+        public int SaveMenuValue(int id, int value)
+        {
+            string sql = $"UPDATE [dbo].[TurntableConfig] SET MenuVaule={value} WHERE id={id}";
+            return Database.ExecuteNonQuery(CommandType.Text, sql);
+        }
     }
 }

@@ -340,13 +340,15 @@ namespace Game.Data
             string sql = $"SELECT TOP 10 B.GameID, B.NickName,A.{mm}Reward AS Reward FROM AgentRank A  INNER JOIN WHQJAccountsDB.dbo.AccountsInfo B ON A.UserID=B.UserID ORDER BY A.{mm}Reward DESC SELECT {mm}Reward AS OwnReward FROM AgentRank WHERE UserID={uid}";
             return Database.ExecuteDataset(sql);
         }
-        public Message DealTurnTable(int uid, string tableName, long reward,long score)
+        public Message DealTurnTable(int uid, string tableName, int index, int open, long reward, long score)
         {
             List<DbParameter> parms = new List<DbParameter>
             {
                 Database.MakeInParam("dwUserID", uid),
                 Database.MakeInParam("Reward", reward),
                 Database.MakeInParam("Score", score),
+                Database.MakeInParam("TableIndex", index),
+                Database.MakeInParam("Open", open),
                 Database.MakeInParam("TableName", tableName),
                 Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
             };

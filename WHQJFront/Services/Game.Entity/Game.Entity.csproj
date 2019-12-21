@@ -102,6 +102,7 @@
     <Compile Include="Record\RecordPresentCurrency.cs" />
     <Compile Include="Record\RecordRegisterGrant.cs" />
     <Compile Include="Record\RecordTreasureSerial.cs" />
+    <Compile Include="Record\RecordTurntable.cs" />
     <Compile Include="Treasure\AppPayConfig.cs" />
     <Compile Include="Treasure\AppReceipt.cs" />
     <Compile Include="Treasure\AppReceiptInfo.cs" />

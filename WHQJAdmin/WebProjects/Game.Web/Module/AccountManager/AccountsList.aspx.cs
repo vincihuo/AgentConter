@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Game.Web.UI;
 using Game.Kernel;
 using System.Text;
 using Game.Utils;
-using Game.Entity.Accounts;
-using Game.Entity;
 using Game.Entity.Enum;
 using Game.Facade;
 using System.Data;

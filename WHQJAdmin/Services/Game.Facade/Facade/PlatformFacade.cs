@@ -491,7 +491,7 @@ namespace Game.Facade
         /// <returns></returns>
         public GameProperty GetPropertyInfo(int id, int typeid)
         {
-           return _aidePlatformData.GetPropertyInfo(id, typeid);
+            return _aidePlatformData.GetPropertyInfo(id, typeid);
         }
 
         /// <summary>
@@ -510,7 +510,7 @@ namespace Game.Facade
         /// <summary>
         /// 获取签到礼包配置列表
         /// </summary>
-       
+
         /// <returns></returns>
         public DataSet GetGamePackageList()
         {
@@ -660,5 +660,23 @@ namespace Game.Facade
             return _aidePlatformData.UpdateTaskInfo(info);
         }
         #endregion
+
+        public IList<TurntableConfig> GetTurntableConfigs()
+        {
+            return _aidePlatformData.GetTurntableConfigs();
+        }
+
+        public TurntableConfig GetTurntableConfigByid(int uid)
+        {
+            return _aidePlatformData.GetTurntableConfigByid(uid);
+        }
+        public int SaveTurnTable(TurntableConfig cfg)
+        {
+            return _aidePlatformData.SaveTurnTable(cfg);
+        }
+        public int SaveMenuValue(int id,int value)
+        {
+            return _aidePlatformData.SaveMenuValue(id, value);
+        }
     }
 }

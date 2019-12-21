@@ -188,7 +188,7 @@ namespace Game.Data
             return Database.ExecuteNonQuery(CommandType.Text, sql);
         }
 
-        public IList<TurntableConfig> GetTurntableConfigs(int uid)
+        public IList<TurntableConfig> GetTurntableConfigs()
         {
             string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) ORDER BY id";
             return Database.ExecuteObjectList<TurntableConfig>(sql);

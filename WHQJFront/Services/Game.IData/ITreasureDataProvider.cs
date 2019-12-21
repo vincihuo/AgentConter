@@ -101,7 +101,7 @@ namespace Game.IData
         DataSet GetAgentInfo(int uid);
         DataSet GetAgentRank(int uid, int type);
         int GetIdByLink(string link);
-        Message DealTurnTable(int uid, string tableName, long reward, long score)
+        Message DealTurnTable(int uid, string tableName,int index,int open, long reward, long score);
         #endregion
 
         #region 钻石信息

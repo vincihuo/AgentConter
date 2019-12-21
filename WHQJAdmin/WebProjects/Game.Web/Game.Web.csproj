@@ -271,6 +271,10 @@
     <Content Include="Module\MallManager\MallOrder.aspx" />
     <Content Include="Module\MallManager\MallOrderList.aspx" />
     <Content Include="Module\OperationLog\SystemSecurityList.aspx" />
+    <Content Include="Module\TurntableManager\TurntableConfig.aspx" />
+    <Content Include="Module\TurntableManager\TurntableConfigInfo.aspx" />
+    <Content Include="Module\TurntableManager\TurntableCount.aspx" />
+    <Content Include="Module\TurntableManager\TurntableRecord.aspx" />
     <Content Include="Module\WebManager\AddAds.aspx" />
     <Content Include="Module\WebManager\AdsList.aspx" />
     <Content Include="Module\WebManager\KindRuleInfo.aspx" />
@@ -3793,6 +3797,34 @@
     </Compile>
     <Compile Include="Module\OperationLog\SystemSecurityList.aspx.designer.cs">
       <DependentUpon>SystemSecurityList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableConfig.aspx.cs">
+      <DependentUpon>TurntableConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableConfig.aspx.designer.cs">
+      <DependentUpon>TurntableConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableConfigInfo.aspx.cs">
+      <DependentUpon>TurntableConfigInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableConfigInfo.aspx.designer.cs">
+      <DependentUpon>TurntableConfigInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableCount.aspx.cs">
+      <DependentUpon>TurntableCount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableCount.aspx.designer.cs">
+      <DependentUpon>TurntableCount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableRecord.aspx.cs">
+      <DependentUpon>TurntableRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\TurntableManager\TurntableRecord.aspx.designer.cs">
+      <DependentUpon>TurntableRecord.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\WebManager\AddAds.aspx.cs">
       <DependentUpon>AddAds.aspx</DependentUpon>

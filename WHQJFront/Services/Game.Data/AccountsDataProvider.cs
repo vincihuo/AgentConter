@@ -350,7 +350,7 @@ namespace Game.Data
         }
         public AccountsInfo RandomAndroid()
         {
-            int mm = new Random().Next(200);
+            int mm = new Random().Next(1,200);
             string sql = $"SELECT * FROM (SELECT row_number() over (ORDER BY UserID) AS rowNum,* FROM AccountsInfo WHERE IsAndroid=1) as t WHERE rowNum={mm}";
             return Database.ExecuteObject<AccountsInfo>(sql);
         }

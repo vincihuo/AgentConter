@@ -382,16 +382,42 @@ namespace Game.Web.WS
         }
         private void StartTurntable()
         {
-            int index= GameRequest.GetQueryInt("index", 1);
+            int index= GameRequest.GetQueryInt("index", 0);
             IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
             if (validBet.GrandScore > Convert.ToInt64(list[index * 4]) * 1000)
             {
                 AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-                long reward = FacadeManage.StartTurntable(list[index * 4 + 1], list[index * 4], list[index * 4 + 2]);
-                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, list[index * 4 + 2].TurnName, reward, Convert.ToInt64(list[index * 4].TurnName));
+                TurntableConfig money = list[index * 4];
+                TurntableConfig broad = list[4 * index + 2];
+
+                int i = FacadeManage.StartTurntable(list[index * 4 + 1], money, list[index * 4 + 2]);
+                string tName = "";
+                switch (index)
+                {
+                    case 0:
+                        tName = "白银转盘";
+                        break;
+                    case 1:
+                        tName = "黄金转盘";
+                        break;
+                    default:
+                        tName = "钻石转盘";
+                        break;
+                }
+
+                long reward = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
+                
+                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index,i, reward*1000, Convert.ToInt64(list[index * 4].MenuVaule)*1000);
                 if (mm.Success)
                 {
+                    TurntableReward record = new TurntableReward();
+                    record.money = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
+                    record.time = DateTime.Now;
+                    record.turnName = tName;
+                    record.nickName = user.NickName;
+                    long bBord = (long)broad.GetType().GetProperty("Value" + index).GetValue(broad, null);
+                    FacadeManage.PustTurnTableRecord(record, (int)bBord);
                     _ajv.SetValidDataValue(true);
                     _ajv.SetDataItem("reward", reward);
                 }
@@ -419,12 +445,6 @@ namespace Game.Web.WS
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", slist);
-            List<string> names = new List<string>();
-            names.Add(list[2].TurnName);
-            names.Add(list[6].TurnName);
-            names.Add(list[10].TurnName);
-            _ajv.SetDataItem("list", slist);
-            _ajv.SetDataItem("names",names);
             _ajv.SetDataItem("todayValibet",validBet.TodayValiBet);
             _ajv.SetDataItem("GrandScore", validBet.GrandScore);
         }

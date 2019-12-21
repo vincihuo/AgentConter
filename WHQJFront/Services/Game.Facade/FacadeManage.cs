@@ -13,8 +13,8 @@ namespace Game.Facade
     /// </summary>
     public class FacadeManage
     {
-        public static List<TurntableReward> bList;
-        public static List<TurntableReward> nList;
+        public static List<TurntableReward> bList=new List<TurntableReward>();
+        public static List<TurntableReward> nList=new List<TurntableReward>();
 
         private static object lockObj = new object();
 
@@ -224,32 +224,46 @@ namespace Game.Facade
                 turnIndex = 2;
             }
             TurntableConfig broad = list[4 * turnIndex + 2];
+            TurntableConfig money = list[4 * turnIndex];
             AccountsInfo android = aideAccountsFacade.RandomAndroid();
-            long reward = StartTurntable(list[4 * turnIndex + 3], list[4 * turnIndex], broad);
+            int index = StartTurntable(list[4 * turnIndex + 3], list[4 * turnIndex], broad);
             TurntableReward record = new TurntableReward();
-            record.money = reward;
+            record.money  = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
             record.time = DateTime.Now;
-            record.turnName = broad.TurnName;
+            string tName = "";
+            switch (turnIndex)
+            {
+                case 0:
+                    tName = "白银转盘";
+                    break;
+                case 1:
+                    tName = "黄金转盘";
+                    break;
+                default:
+                    tName = "钻石转盘";
+                    break;
+            }
+            record.turnName = tName;
             record.nickName = android.NickName;
-            PustTurnTableRecord(record, (int)broad.GetType().GetProperty("Money" + turnIndex).GetValue(broad, null));
+            long mm = (long)broad.GetType().GetProperty("Value" + index).GetValue(broad, null);
+            PustTurnTableRecord(record, (int)mm);
         }
 
-        public static long StartTurntable(TurntableConfig pre, TurntableConfig money, TurntableConfig broad)
+        public static int StartTurntable(TurntableConfig pre, TurntableConfig money, TurntableConfig broad)
         {
-            int r = new Random().Next(Convert.ToInt32(pre.TurnName));
+            int r = new Random().Next((int)pre.MenuVaule);
 
             int i = 1;
-            int p = 0;
-            for (; i < 14; ++i)
+            long p = 0;
+            for (; i < 13; ++i)
             {
-                p+= (int)pre.GetType().GetProperty("Money"+i).GetValue(pre, null);
+                p+= (long)pre.GetType().GetProperty("Value" + i).GetValue(pre, null);
                 if (p > r)
                 {
                     break;
                 }
             }
-            long reward = (long)money.GetType().GetProperty("Money" + i).GetValue(money,null);
-            return reward;
+            return i;
         }
         public static void PustTurnTableRecord(TurntableReward record,int big)
         {
