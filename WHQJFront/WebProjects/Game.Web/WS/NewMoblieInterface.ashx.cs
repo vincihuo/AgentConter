@@ -51,23 +51,23 @@ namespace Game.Web.WS
                     : 0;
                 _ajv = new AjaxJsonValid();
 
-                //string sign = GameRequest.GetQueryString("sign");
-                //string parama = context.Request.Url.Query;
-                //int pos = parama.LastIndexOf("&sign=");
-                //if (pos < 1)
-                //{
-                //    _ajv.code = (int)ApiCode.VertySignErrorCode;
-                //    _ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
-                //    return;
-                //}
+                string sign = GameRequest.GetQueryString("sign");
+                string parama = context.Request.Url.Query;
+                int pos = parama.LastIndexOf("&sign=");
+                if (pos < 1)
+                {
+                    _ajv.code = (int)ApiCode.VertySignErrorCode;
+                    _ajv.msg = EnumHelper.GetDesc(ApiCode.VertySignErrorCode);
+                    return;
+                }
 
-                //parama = parama.Substring(0, pos);
-                //_ajv = Fetch.VerifySignData(parama, sign);
-                //if (_ajv.code == (int)ApiCode.VertySignErrorCode)
-                //{
-                //    context.Response.Write(_ajv.SerializeToJson());
-                //    return;
-                //}
+                parama = parama.Substring(0, pos);
+                _ajv = Fetch.VerifySignData(parama, sign);
+                if (_ajv.code == (int)ApiCode.VertySignErrorCode)
+                {
+                    context.Response.Write(_ajv.SerializeToJson());
+                    return;
+                }
                 //参数验证
                 //if (context.Request.QueryString["userid"] != null && _userid <= 0)
                 //{
@@ -375,23 +375,25 @@ namespace Game.Web.WS
         {
             int index = GameRequest.GetQueryInt("index", 1);
             int size = GameRequest.GetQueryInt("size", 1);
-            PagerSet ps= FacadeManage.aideRecordFacade.GetList(RecordTurntable.Tablename,index,size, $" WHERE UserId={_userid} ", " Opentime DESC ");
+            PagerSet ps= FacadeManage.aideRecordFacade.GetList(RecordTurntable.Tablename,index,size, $" WHERE UserId={_userid} ", " ORDER BY Opentime DESC ");
             IList<RecordTurntable> list = DataHelper.ConvertDataTableToObjects<RecordTurntable>(ps.PageSet.Tables[0]);
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("records", list);
+            _ajv.SetDataItem("totalpage", ps.PageCount);
+            _ajv.SetDataItem("index", index);
         }
         private void StartTurntable()
         {
             int index= GameRequest.GetQueryInt("index", 0);
             IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
-            if (validBet.GrandScore > Convert.ToInt64(list[index * 4]) * 1000)
+            if (validBet.GrandScore > Convert.ToInt64(list[index * 5].MenuVaule) * 1000)
             {
                 AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-                TurntableConfig money = list[index * 4];
-                TurntableConfig broad = list[4 * index + 2];
+                TurntableConfig money = list[index * 5];
+                TurntableConfig broad = list[5 * index + 2];
 
-                int i = FacadeManage.StartTurntable(list[index * 4 + 1], money, list[index * 4 + 2]);
+                int i = FacadeManage.StartTurntable(list[index * 5 + 1]);
                 string tName = "";
                 switch (index)
                 {
@@ -406,20 +408,21 @@ namespace Game.Web.WS
                         break;
                 }
 
-                long reward = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
+                long reward = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
                 
-                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index,i, reward*1000, Convert.ToInt64(list[index * 4].MenuVaule)*1000);
+                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index,i, reward*1000, Convert.ToInt64(list[index * 5].MenuVaule)*1000);
                 if (mm.Success)
                 {
                     TurntableReward record = new TurntableReward();
-                    record.money = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
+                    record.money = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
                     record.time = DateTime.Now;
                     record.turnName = tName;
                     record.nickName = user.NickName;
-                    long bBord = (long)broad.GetType().GetProperty("Value" + index).GetValue(broad, null);
+                    long bBord = (long)broad.GetType().GetProperty("Value" + i).GetValue(broad, null);
                     FacadeManage.PustTurnTableRecord(record, (int)bBord);
                     _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("reward", reward);
+                    _ajv.SetDataItem("pos", i);
+                    _ajv.SetDataItem("Score", validBet.GrandScore- Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
                 }
                 else
                 {
@@ -440,11 +443,17 @@ namespace Game.Web.WS
             IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
             List<TurntableConfig> slist= new List<TurntableConfig>();
             slist.Add(list[0]);
-            slist.Add(list[4]);
-            slist.Add(list[8]);
+            slist.Add(list[5]);
+            slist.Add(list[10]);
+            List<TurntableConfig> mglist = new List<TurntableConfig>();
+            mglist.Add(list[4]);
+            mglist.Add(list[9]);
+            mglist.Add(list[14]);
+
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", slist);
+            _ajv.SetDataItem("icoList", mglist);
             _ajv.SetDataItem("todayValibet",validBet.TodayValiBet);
             _ajv.SetDataItem("GrandScore", validBet.GrandScore);
         }

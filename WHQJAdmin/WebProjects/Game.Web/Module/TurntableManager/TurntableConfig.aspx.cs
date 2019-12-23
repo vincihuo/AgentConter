@@ -25,11 +25,12 @@ namespace Game.Web.Module.TurntableManager
             int index = Convert.ToInt32(ddlProductType.SelectedValue);
             List<TurntableConfig> mm = new List<TurntableConfig>();
             IList<TurntableConfig> list= FacadeManage.aidePlatformFacade.GetTurntableConfigs();
-            index *= 4;
+            index *= 5;
             mm.Add(list[index]);
-            mm.Add(list[index+1]);
-            mm.Add(list[index+2]);
-            mm.Add(list[index+3]);
+            mm.Add(list[index + 1]);
+            mm.Add(list[index + 2]);
+            mm.Add(list[index + 3]);
+            mm.Add(list[index + 4]);
             TextBox1.Text = list[index].MenuVaule.ToString();
             TextBox2.Text = list[index + 2].MenuVaule.ToString();
             rptShareInfo.DataSource = mm;
@@ -37,7 +38,7 @@ namespace Game.Web.Module.TurntableManager
         }
         protected void btnSave_Pre(object sender, EventArgs e)
         {
-            int pp= FacadeManage.aidePlatformFacade.SaveMenuValue(Convert.ToInt32(ddlProductType.SelectedValue) * 4 + 3, Convert.ToInt32(TextBox2.Text));
+            int pp= FacadeManage.aidePlatformFacade.SaveMenuValue(Convert.ToInt32(ddlProductType.SelectedValue) * 5 + 3, Convert.ToInt32(TextBox2.Text));
             if (pp > 0)
             {
                 ShowInfo("修改成功");
@@ -49,7 +50,7 @@ namespace Game.Web.Module.TurntableManager
         }
         protected void btnSave_Score(object sender, EventArgs e)
         {
-            int pp= FacadeManage.aidePlatformFacade.SaveMenuValue(Convert.ToInt32(ddlProductType.SelectedValue) * 4+1, Convert.ToInt32(TextBox1.Text));
+            int pp= FacadeManage.aidePlatformFacade.SaveMenuValue(Convert.ToInt32(ddlProductType.SelectedValue) * 5+1, Convert.ToInt32(TextBox1.Text));
             if (pp > 0)
             {
                 ShowInfo("修改成功");

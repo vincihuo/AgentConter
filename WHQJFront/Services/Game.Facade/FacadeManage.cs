@@ -213,20 +213,20 @@ namespace Game.Facade
         public static void CreatTurnTableDate()
         {
             IList<TurntableConfig> list = aidePlatformFacade.GetTurntableConfigs();
-            int pp = new Random().Next(10);
+            int pp = new Random().Next(100);
             int turnIndex = 0;
-            if (pp > 3 && pp < 8)
+            if (pp > list[3].MenuVaule && pp < list[8].MenuVaule)
             {
                 turnIndex = 1;
             }
-            else if (pp>8)
+            else if (pp> list[8].MenuVaule)
             {
                 turnIndex = 2;
             }
-            TurntableConfig broad = list[4 * turnIndex + 2];
-            TurntableConfig money = list[4 * turnIndex];
+            TurntableConfig broad = list[5 * turnIndex + 2];
+            TurntableConfig money = list[5 * turnIndex];
             AccountsInfo android = aideAccountsFacade.RandomAndroid();
-            int index = StartTurntable(list[4 * turnIndex + 3], list[4 * turnIndex], broad);
+            int index = StartTurntable(list[5 * turnIndex + 3]);
             TurntableReward record = new TurntableReward();
             record.money  = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
             record.time = DateTime.Now;
@@ -249,7 +249,7 @@ namespace Game.Facade
             PustTurnTableRecord(record, (int)mm);
         }
 
-        public static int StartTurntable(TurntableConfig pre, TurntableConfig money, TurntableConfig broad)
+        public static int StartTurntable(TurntableConfig pre)
         {
             int r = new Random().Next((int)pre.MenuVaule);
 

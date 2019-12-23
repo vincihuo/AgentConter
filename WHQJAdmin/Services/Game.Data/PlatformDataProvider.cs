@@ -1124,7 +1124,7 @@ namespace Game.Data
             };
             prams.Add(Database.MakeInParam("id", cfg.id));
             string sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13 WHERE id=@id";
-            int mm = (cfg.id - 1) % 4;
+            int mm = (cfg.id - 1) % 5;
             if (mm == 1 || mm == 3)
             {
                 long count = cfg.Value1 + cfg.Value2 + cfg.Value3 + cfg.Value4 + cfg.Value5 + cfg.Value6 + cfg.Value7 + cfg.Value8 + cfg.Value9 + cfg.Value10 + cfg.Value11 + cfg.Value12 + cfg.Value13;

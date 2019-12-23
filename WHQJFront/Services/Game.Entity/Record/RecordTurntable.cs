@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/12/20 15:44:34
+ * 日期：2019/12/23 16:26:35
  * 
  * 描述：实体类
  * 
@@ -33,6 +33,9 @@ namespace Game.Entity.Record
         private string p_turntablename;
         private Int64 p_reward;
         private Int64 p_score;
+        private int p_openpos;
+        private int p_tableindex;
+        private DateTime p_opentime;
 
         #endregion
 
@@ -48,6 +51,9 @@ namespace Game.Entity.Record
             p_turntablename = string.Empty;
             p_reward = 0;
             p_score = 0;
+            p_openpos = 0;
+            p_tableindex = 0;
+            p_opentime = DateTime.Now;
         }
 
         #endregion
@@ -126,6 +132,51 @@ namespace Game.Entity.Record
             get
             {
                 return p_score;
+            }
+        }
+
+        /// <summary>
+        /// OpenPos
+        /// </summary>
+        public int OpenPos
+        {
+            set
+            {
+                p_openpos=value;
+            }
+            get
+            {
+                return p_openpos;
+            }
+        }
+
+        /// <summary>
+        /// TableIndex
+        /// </summary>
+        public int TableIndex
+        {
+            set
+            {
+                p_tableindex=value;
+            }
+            get
+            {
+                return p_tableindex;
+            }
+        }
+
+        /// <summary>
+        /// Opentime
+        /// </summary>
+        public DateTime Opentime
+        {
+            set
+            {
+                p_opentime=value;
+            }
+            get
+            {
+                return p_opentime;
             }
         }
 
