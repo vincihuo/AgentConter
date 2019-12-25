@@ -190,9 +190,9 @@ namespace Game.Facade
                 case 5:
                     return "购买房卡";
                 case 6:
-                    return "银行入款";
+                    return "保险箱存入";
                 case 7:
-                    return "银行出款";
+                    return "保险箱取出";
                 case 10:
                     return "提现退款";
                 case 11:
@@ -205,6 +205,10 @@ namespace Game.Facade
                     return "签到";
                 case 15:
                     return "分享";
+                case 16:
+                    return "转盘";
+                case 17:
+                    return "VIP奖励";
                 default:
                     return "未知类型";
             }

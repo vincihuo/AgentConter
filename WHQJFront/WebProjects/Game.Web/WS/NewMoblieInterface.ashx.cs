@@ -332,6 +332,9 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191109);
                         GetIdByLink();
                         break;
+                    #endregion
+
+                    #region      附加功能
                     case "getturntables":
                         _ajv.SetDataItem("apiVersion", 20191220);
                         GetTurntables();
@@ -343,14 +346,26 @@ namespace Game.Web.WS
                     case "getturntablemsg":
                         _ajv.SetValidDataValue(true);
                         _ajv.SetDataItem("apiVersion", 20191220);
-                        _ajv.SetDataItem("openList",FacadeManage.nList);
+                        _ajv.SetDataItem("openList", FacadeManage.nList);
                         _ajv.SetDataItem("bigList", FacadeManage.bList);
                         break;
                     case "getturntablerecord":
                         _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20191220);
                         GetTurntableRecord();
                         break;
+                    case "getvipinfo":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20191224);
+                        GetVipInfo();
+                        break;
+                    case "getvipreward":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20191224);
+                        GetVipReward();
+                        break;
                     #endregion
+
                     default:
                         _ajv.code = (int)ApiCode.VertyParamErrorCode;
                         _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " action 错误");
@@ -371,6 +386,67 @@ namespace Game.Web.WS
             }
             context.Response.End();
         }
+        private void GetVipReward()
+        {
+            int type = GameRequest.GetQueryInt("type", 1);
+            string ip= GameRequest.GetHost();
+            long reward = FacadeManage.aideTreasureFacade.GetVipReward(type,_userid,ip);
+            _ajv.SetDataItem("reward", reward);
+        }
+        private void GetVipInfo()
+        {
+            DataSet ds= FacadeManage.aideTreasureFacade.GetUserVip(_userid);
+            IList<VipConfig> configs = DataHelper.ConvertDataTableToObjects<VipConfig>(ds.Tables[0]);
+            MUserVip userVip = new MUserVip
+            {
+                Exp=0,
+                VipLevel = 0,
+                FresReward = 0,
+                WeekReward=0,
+                MonthReward=0,
+                DayReward=0
+            };
+            if (ds.Tables[1].Rows.Count>0)
+            {
+                DataRow row = ds.Tables[1].Rows[0];
+                userVip.VipLevel = Convert.ToInt32(row["VipLevel"]);
+                userVip.FresReward = Convert.ToInt64(row["FreshReward"]);
+                userVip.WeekReward = Convert.ToInt64(row["WeekReward"]);
+                userVip.MonthReward = Convert.ToInt64(row["MonthReward"]);
+                userVip.Exp = Convert.ToInt64(row["Score"])/1000;
+                if (Convert.ToInt32(row["CheckInReward"])!=0)
+                {
+                    int days = 1;
+                    if (row["LastTime"]!= DBNull.Value)
+                    {
+                        TimeSpan timeSpan = DateTime.Now - Convert.ToDateTime(row["LastTime"]);
+                        days = timeSpan.Days;
+                        if (days == 1)
+                        {
+                            days += 1;
+                            if (days > 7)
+                            {
+                                days = 1;
+                            }
+                        }
+                        else
+                        {
+                            days = 1;
+                        }
+                    }
+                    DataRow cfg = ds.Tables[0].Rows[userVip.VipLevel];
+                    userVip.DayReward = Convert.ToInt64(cfg["Day"+days]);
+                }
+
+            }
+            for (int i = 0; i < configs.Count-1; ++i)
+            {
+                configs[i].Integral = configs[i + 1].Integral;
+            }
+            _ajv.SetDataItem("records", configs);
+            _ajv.SetDataItem("userVip", userVip);
+        }
+
         private void GetTurntableRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DiamondDistribute.aspx.cs" Inherits="Game.Web.Module.DataStatistics.DiamondDistribute" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VipDistribute.aspx.cs" Inherits="Game.Web.Module.DataStatistics.VipDistribute" %>
 
 <!DOCTYPE html>
 
@@ -29,8 +29,8 @@
             <tr>
                 <td height="28">
                     <ul>
-                        <li class="tab2" onclick="Redirect('WealthDistribute.aspx')">金币分布</li>
-                        <li class="tab1">钻石分布</li>
+                        <li class="tab1">金币分布</li>
+                        <li class="tab2" onclick="Redirect('DiamondDistribute.aspx')">钻石分布</li>
                         <li class="tab2" onclick="Redirect('VipDistribute.aspx')">会员分布</li>
                     </ul>
                 </td>
@@ -38,16 +38,16 @@
         </table>
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
             <tr>
-                <td style="color: red; font-size: 15px; font-weight: bold; text-align: center;">总计钻石数：<%=diamond %></td>
+                <td style="color: red; font-size: 15px; font-weight: bold; text-align: center;">总计身上金币数：<%=person %></td>
             </tr>
         </table>
         <!-- 头部菜单 End -->
-        <h2 style="text-align: center; margin: 30px auto;">平台钻石分布图</h2>
-        <div id="content" data-diamond='<%=djson %>'>
+        <h2 style="text-align: center; margin: 30px auto;">平台金币分布图</h2>
+        <div id="content" data-gold='<%=gjson %>'>
         </div>
     </form>
     <script type="text/javascript">
-        var data = $.parseJSON($('#content').attr('data-diamond'));
+        var data = $.parseJSON($('#content').attr('data-gold'));
         var Stat = G2.Stat;
         var chart = new G2.Chart({
             id: 'content',

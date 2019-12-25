@@ -678,5 +678,17 @@ namespace Game.Facade
         {
             return _aidePlatformData.SaveMenuValue(id, value);
         }
+        public IList<VipConfig> GetVipConfigList()
+        {
+            return _aidePlatformData.GetVipConfigList();
+        }
+        public VipConfig GetVipConfigByLevel(int level)
+        {
+            return _aidePlatformData.GetVipConfigByLevel(level);
+        }
+        public int SaveVipConfig(VipConfig cfg)
+        {
+            return _aidePlatformData.SaveVipConfig(cfg);
+        }
     }
 }

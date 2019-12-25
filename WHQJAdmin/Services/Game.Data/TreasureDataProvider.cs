@@ -900,6 +900,11 @@ namespace Game.Data
             return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_PW_GetDiamondDistribute");
         }
 
+        public DataSet GetVIPDistribute()
+        {
+            return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_PW_GetVIPDistribute");
+        }
+
         #endregion
 
         #region 金币信息

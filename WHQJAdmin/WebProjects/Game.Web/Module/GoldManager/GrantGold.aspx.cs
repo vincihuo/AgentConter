@@ -47,6 +47,11 @@ namespace Game.Web.Module.GoldManager
                 MessageBox("打码量必须不小于0");
                 return;
             }
+            if (a>1000000)
+            {
+                MessageBox("单次赠送不能超过1000000");
+                return;
+            }
             int gold = a;
             bool flag = cbPull.Checked;
             int userid = IntParam <= 0 ? CtrlHelper.GetInt(hidUserID, 0) : IntParam;

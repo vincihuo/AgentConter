@@ -456,9 +456,11 @@ namespace Game.IData
         /// <returns></returns>
         int UpdateTaskInfo(TaskInfo info);
         #endregion
-
         IList<TurntableConfig> GetTurntableConfigs();
         TurntableConfig GetTurntableConfigByid(int uid);
+        IList<VipConfig> GetVipConfigList();
+        VipConfig GetVipConfigByLevel(int level);
+        int SaveVipConfig(VipConfig cfg);
         int SaveTurnTable(TurntableConfig cfg);
         int SaveMenuValue(int id, int value);
     }

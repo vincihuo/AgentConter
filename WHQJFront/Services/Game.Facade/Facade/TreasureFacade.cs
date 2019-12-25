@@ -114,6 +114,14 @@ namespace Game.Facade
         {
             return treasureData.DealTurnTable(uid, tableName, index, open, reward, score);
         }
+        public DataSet GetUserVip(int uid)
+        {
+            return treasureData.GetUserVip(uid);
+        }
+        public long GetVipReward(int type, int uid,string ip)
+        {
+            return treasureData.GetVipReward(type,uid,ip);
+        }
 
         #endregion
 

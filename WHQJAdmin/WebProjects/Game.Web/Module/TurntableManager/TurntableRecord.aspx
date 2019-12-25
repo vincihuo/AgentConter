@@ -190,10 +190,10 @@
                                     <%# Eval( "Faild6" )%>
                                 </td>
                                 <td>
-                                    <%# Eval( "totalMoney" )%>
+                                    <%# Eval( "MoneyCount" )%>
                                 </td>
                                 <td>
-                                    <%# Eval( "totalPerson" )%>
+                                    <%# Eval( "PersonCount" )%>
                                 </td>
                             </tr>
                         </ItemTemplate>

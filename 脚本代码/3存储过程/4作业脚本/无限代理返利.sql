@@ -24,6 +24,8 @@ SET NOCOUNT ON
 DECLARE @TempUser INT
 
 BEGIN
+    --vip统计放这里不过分吧
+    EXEC NET_PB_VipReward
     UPDATE AgentInfo SET YesterDayReward=NULL
     WHILE EXISTS(SELECT UserID FROM AgentInfo WHERE YesterDayReward IS NULL)
     BEGIN

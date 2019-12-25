@@ -460,6 +460,11 @@ namespace Game.Facade
         {
             return aideTreasureData.GetDiamondDistribute();
         }
+        public DataSet GetVIPDistribute()
+        {
+            return aideTreasureData.GetVIPDistribute();
+        }
+
         #endregion
 
         #region 金币信息

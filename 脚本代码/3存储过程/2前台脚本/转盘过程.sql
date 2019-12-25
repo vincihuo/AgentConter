@@ -50,7 +50,7 @@ BEGIN
     --写入流水
 	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
 		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 13, @BeforMoney, @BeforeInsure, @Reward, '0.0.0.0', GETDATE())
+	VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 16, @BeforMoney, @BeforeInsure, @Reward, '0.0.0.0', GETDATE())
     --增加打码量
     DECLARE @TurnMultiple INT
     SELECT @TurnMultiple=CONVERT(INT,Field9) FROM WHQJNativeWebDB.dbo.ConfigInfo (NOLOCK) WHERE ConfigID=5

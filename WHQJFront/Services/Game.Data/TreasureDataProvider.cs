@@ -191,7 +191,11 @@ namespace Game.Data
 
             return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_PW_GetMobilePayConfig", parms.ToArray());
         }
-
+        public DataSet GetUserVip(int uid)
+        {
+            string sql = $"SELECT * FROM WHQJPlatformDB.dbo.VipConfig SELECT * FROM UserVipInfo WHERE UserID={uid}";
+            return Database.ExecuteDataset(sql);
+        }
         /// <summary>
         /// 获取在线充值列表
         /// </summary>
@@ -203,6 +207,23 @@ namespace Game.Data
             return Database.ExecuteObjectList<OnLineWeChat>(sqlQuery);
         }
 
+        public long GetVipReward(int type, int uid,string ip)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("Type", type),
+                Database.MakeInParam("Ip", ip),
+                Database.MakeOutParam("Reward", typeof(long)),
+                Database.MakeOutParam("strErrorDescribe", typeof(string),127),
+            };
+            Message msg= MessageHelper.GetMessage(Database, "NET_PW_GetVipReward", prams);
+            if (msg.Success)
+            {
+                return Convert.ToInt64(prams[3].Value);
+            }
+            return 0;
+        }
         #endregion
 
 

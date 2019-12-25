@@ -35,8 +35,6 @@
                     <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                 </td>
             </tr>
-
-
         </table>
 
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">

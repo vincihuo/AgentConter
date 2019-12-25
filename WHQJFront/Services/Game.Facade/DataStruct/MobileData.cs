@@ -182,7 +182,6 @@ namespace Game.Facade.DataStruct
         public long PayMoney { get; set; }
         public int OrderStatus { get; set; }
     }
-
     public class RankInfo
     {
         public string Name { get; set; }
@@ -198,7 +197,15 @@ namespace Game.Facade.DataStruct
         public int OrderStatus { get; set; }
     }
 
-
+    public class MUserVip
+    {
+        public long Exp { get; set; }
+        public int VipLevel { get; set; }
+        public long FresReward { get; set; }
+        public long DayReward { get; set; }
+        public long WeekReward { get; set; }
+        public long MonthReward { get; set; }
+    }
     public class AgentReward
     {
         public string NicekName { get; set; }

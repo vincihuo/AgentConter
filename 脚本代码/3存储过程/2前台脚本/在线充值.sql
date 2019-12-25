@@ -128,8 +128,8 @@ BEGIN
 	INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
 		(SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
 	VALUES(dbo.WF_GetSerialNumber(), @MasterId, @UserID, 12, @BeforeScore, @BeforeInsure, @Amount+@PresentScore, @OrderAddress, @DateTime)
-	--增加打码量
-
+	--增加vip积分
+	EXEC NET_PB_VipSore @Amount,@UserID
 	--  充值打码量倍数
 	DECLARE @PayMultiple INT
 	-- 	充值送打码倍数

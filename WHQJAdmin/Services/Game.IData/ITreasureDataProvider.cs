@@ -234,6 +234,7 @@ namespace Game.IData
         /// </summary>
         /// <returns></returns>
         DataSet GetDiamondDistribute();
+        DataSet GetVIPDistribute();
         #endregion
 
         #region 金币信息

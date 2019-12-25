@@ -1099,6 +1099,41 @@ namespace Game.Data
             string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) ORDER BY id";
             return Database.ExecuteObjectList<TurntableConfig>(sql);
         }
+        public IList<VipConfig> GetVipConfigList()
+        {
+            string sql = "SELECT * FROM VipConfig ORDER BY VipLevel";
+            return Database.ExecuteObjectList<VipConfig>(sql);
+        }
+        public VipConfig GetVipConfigByLevel(int level)
+        {
+            return Database.ExecuteObject<VipConfig>($"SELECT * FROM VipConfig WHERE VipLevel={level}");
+        }
+        public int SaveVipConfig(VipConfig cfg)
+        {
+            string sqlQuery = @"UPDATE VipConfig SET Integral=@Integral,Fresh=@Fresh,
+                    Week=@Week,Month=@Month,Day1=@Day1,Day2=@Day2,
+                    Day3=@Day3,Day4=@Day4,Day5=@Day6,Day7=@Day7,
+                    WHERE VipLevel=@VipLevel";
+
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("Integral", cfg.Integral),
+                Database.MakeInParam("Fresh", cfg.Fresh),
+                Database.MakeInParam("Week", cfg.Week),
+                Database.MakeInParam("Month", cfg.Month),
+                Database.MakeInParam("Day1", cfg.Day1),
+                Database.MakeInParam("Day1",cfg.Day2),
+                Database.MakeInParam("Day1", cfg.Day3),
+                Database.MakeInParam("Day1", cfg.Day4),
+                Database.MakeInParam("Day1", cfg.Day5),
+                Database.MakeInParam("Day1", cfg.Day6),
+                Database.MakeInParam("Day1", cfg.Day7),
+                Database.MakeInParam("VipLevel", cfg.VipLevel)
+            };
+
+            return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
+        }
+
         public TurntableConfig GetTurntableConfigByid(int uid)
         {
             string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) WHERE id={uid}";

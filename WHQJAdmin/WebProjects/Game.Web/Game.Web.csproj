@@ -212,6 +212,7 @@
     <Content Include="Module\DataStatistics\SystemStat.aspx" />
     <Content Include="Module\DataStatistics\UserOnline.aspx" />
     <Content Include="Module\DataStatistics\UserRegister.aspx" />
+    <Content Include="Module\DataStatistics\VipDistribute.aspx" />
     <Content Include="Module\DataStatistics\WealthDistribute.aspx" />
     <Content Include="Module\Diamond\DiamondList.aspx" />
     <Content Include="Module\Diamond\GrantDiamond.aspx" />
@@ -275,6 +276,10 @@
     <Content Include="Module\TurntableManager\TurntableConfigInfo.aspx" />
     <Content Include="Module\TurntableManager\TurntableCount.aspx" />
     <Content Include="Module\TurntableManager\TurntableRecord.aspx" />
+    <Content Include="Module\VipManager\UserVipPage.aspx" />
+    <Content Include="Module\VipManager\VipConfigInfo.aspx" />
+    <Content Include="Module\VipManager\VipConfigList.aspx" />
+    <Content Include="Module\VipManager\VIPRewardRecord.aspx" />
     <Content Include="Module\WebManager\AddAds.aspx" />
     <Content Include="Module\WebManager\AdsList.aspx" />
     <Content Include="Module\WebManager\KindRuleInfo.aspx" />
@@ -3385,6 +3390,13 @@
     <Compile Include="Module\DataStatistics\UserRegister.aspx.designer.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\DataStatistics\VipDistribute.aspx.cs">
+      <DependentUpon>VipDistribute.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DataStatistics\VipDistribute.aspx.designer.cs">
+      <DependentUpon>VipDistribute.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\DataStatistics\WealthDistribute.aspx.cs">
       <DependentUpon>WealthDistribute.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3825,6 +3837,34 @@
     </Compile>
     <Compile Include="Module\TurntableManager\TurntableRecord.aspx.designer.cs">
       <DependentUpon>TurntableRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\VipManager\UserVipPage.aspx.cs">
+      <DependentUpon>UserVipPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\VipManager\UserVipPage.aspx.designer.cs">
+      <DependentUpon>UserVipPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\VipManager\VipConfigInfo.aspx.cs">
+      <DependentUpon>VipConfigInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\VipManager\VipConfigInfo.aspx.designer.cs">
+      <DependentUpon>VipConfigInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\VipManager\VipConfigList.aspx.cs">
+      <DependentUpon>VipConfigList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\VipManager\VipConfigList.aspx.designer.cs">
+      <DependentUpon>VipConfigList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\VipManager\VIPRewardRecord.aspx.cs">
+      <DependentUpon>VIPRewardRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\VipManager\VIPRewardRecord.aspx.designer.cs">
+      <DependentUpon>VIPRewardRecord.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\WebManager\AddAds.aspx.cs">
       <DependentUpon>AddAds.aspx</DependentUpon>

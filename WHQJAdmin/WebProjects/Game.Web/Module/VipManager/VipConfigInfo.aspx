@@ -1,9 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TurntableConfigInfo.aspx.cs" Inherits="Game.Web.Module.TurntableManager.TurntableConfigInfo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VipConfigInfo.aspx.cs" Inherits="Game.Web.Module.VipManager.VipConfigInfo" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../../styles/layout.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="../../scripts/common.js"></script>
@@ -23,11 +24,10 @@
                 </td>
             </tr>
         </table>
-
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="Redirect('TurntableConfig.aspx')" />
+                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="Redirect('VipConfigList.aspx')" />
                     <asp:Button ID="btnCreate" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
@@ -41,16 +41,14 @@
                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="listBg2">
 
                     <tr>
-                        <td class="listTdLeft">字段1：
+                        <td class="listTdLeft">等级：
                         </td>
                         <td>
-                            <asp:TextBox ID="TextBox1" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
-                            <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:Label runat="server" ID="TextLevel"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段2：
+                        <td class="listTdLeft">晋级条件：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox2" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -60,7 +58,7 @@
                     </tr>
 
                     <tr>
-                        <td class="listTdLeft">字段3：
+                        <td class="listTdLeft">晋级奖励：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox3" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -69,7 +67,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段4：
+                        <td class="listTdLeft">周奖励：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox4" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -78,7 +76,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段5：
+                        <td class="listTdLeft">月奖励：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox5" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -87,7 +85,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段6：
+                        <td class="listTdLeft">签到奖励1：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox6" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -96,7 +94,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段7：
+                        <td class="listTdLeft">签到奖励2：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox7" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -105,7 +103,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段8：
+                        <td class="listTdLeft">签到奖励3：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox8" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -114,7 +112,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段9：
+                        <td class="listTdLeft">签到奖励4：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox9" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -122,8 +120,18 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox9" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="listTdLeft">字段10：
+                        <td class="listTdLeft">签到奖励5：
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TextBox1" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
+                            <span class="hong">*</span>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="listTdLeft">签到奖励6：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox10" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -132,30 +140,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段11：
+                        <td class="listTdLeft">签到奖励7：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox11" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
                             <span class="hong">*</span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox11" ForeColor="Red"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="listTdLeft">字段12：
-                        </td>
-                        <td>
-                            <asp:TextBox ID="TextBox12" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
-                            <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox12" ForeColor="Red"></asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="listTdLeft">字段13：
-                        </td>
-                        <td>
-                            <asp:TextBox ID="TextBox13" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
-                            <span class="hong">*</span>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="不能为空" Display="Dynamic" ControlToValidate="TextBox13" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
                 </table>
@@ -165,11 +155,12 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="Redirect('TurntableConfig.aspx')" />
+                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="Redirect('VipConfigList.aspx')" />
                     <asp:Button ID="Button1" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
         </table>
+
     </form>
 </body>
 </html>

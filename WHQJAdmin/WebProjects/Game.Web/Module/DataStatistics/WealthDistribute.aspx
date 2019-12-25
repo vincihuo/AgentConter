@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/styles/layout.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/scripts/common.js"></script>
     <script src="/scripts/jquery.js"></script>
@@ -14,37 +14,37 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <!-- 头部菜单 Start -->
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
-        <tr>
-            <td width="19" height="25" valign="top" class="Lpd10">
-                <div class="arr">
-                </div>
-            </td>
-            <td width="1232" height="25" valign="top" align="left">
-                你当前位置：统计系统 - 财富分布统计
-            </td>
-        </tr>
-    </table>
-    <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="Tmg7">
-        <tr>
-            <td height="28">
-                <ul>
-                    <li class="tab1">金币分布</li>
-                    <li class="tab2" onclick="Redirect('DiamondDistribute.aspx')">钻石分布</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
-        <tr>
-            <td style="color:red; font-size:15px; font-weight:bold; text-align:center;">总计身上金币数：<%=score %>，总计银行金币数：<%=insure %></td>
-        </tr>
-    </table>
-    <!-- 头部菜单 End -->
-    <h2 style="text-align: center;margin:30px auto;">平台金币分布图</h2>
-    <div id="content" data-gold='<%=gjson %>'>
-    </div>
+        <!-- 头部菜单 Start -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
+            <tr>
+                <td width="19" height="25" valign="top" class="Lpd10">
+                    <div class="arr">
+                    </div>
+                </td>
+                <td width="1232" height="25" valign="top" align="left">你当前位置：统计系统 - 财富分布统计
+                </td>
+            </tr>
+        </table>
+        <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="Tmg7">
+            <tr>
+                <td height="28">
+                    <ul>
+                        <li class="tab1">金币分布</li>
+                        <li class="tab2" onclick="Redirect('DiamondDistribute.aspx')">钻石分布</li>
+                        <li class="tab2" onclick="Redirect('VipDistribute.aspx')">会员分布</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
+            <tr>
+                <td style="color: red; font-size: 15px; font-weight: bold; text-align: center;">总计身上金币数：<%=score %>，总计银行金币数：<%=insure %></td>
+            </tr>
+        </table>
+        <!-- 头部菜单 End -->
+        <h2 style="text-align: center; margin: 30px auto;">平台金币分布图</h2>
+        <div id="content" data-gold='<%=gjson %>'>
+        </div>
     </form>
     <script type="text/javascript">
         var data = $.parseJSON($('#content').attr('data-gold'));
@@ -78,12 +78,12 @@
             }
         });
         chart.intervalStack()
-          .position(Stat.summary.percent('value'))
-          .color('name')
-          .label('name*..percent', function (name, percent) {
-              percent = (percent * 100).toFixed(2) + '%';
-              return name + ' ' + percent;
-          });
+            .position(Stat.summary.percent('value'))
+            .color('name')
+            .label('name*..percent', function (name, percent) {
+                percent = (percent * 100).toFixed(2) + '%';
+                return name + ' ' + percent;
+            });
         chart.render();
         // 设置默认选中
         var geom = chart.getGeoms()[0]; // 获取所有的图形

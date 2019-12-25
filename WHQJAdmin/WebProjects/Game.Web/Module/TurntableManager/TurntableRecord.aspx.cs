@@ -48,7 +48,11 @@ namespace Game.Web.Module.TurntableManager
             {
                 aa.Visible = false;
                 bb.Visible = true;
-                condition.AppendFormat(" AND CountTime BETWEEN '{0}' AND '{1}' AND TurnType=3  ", RSTime, RETime);
+                if (RSTime != "" && RETime != "")
+                {
+                    condition.AppendFormat(" AND CountTime BETWEEN '{0}' AND '{1}' ", RSTime, RETime);
+                }
+                condition.Append(" AND TurnType=3  ");
                 PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("RecordCountTurn", condition.ToString(), " ORDER BY CountTime DESC ", anpPage.CurrentPageIndex, anpPage.PageSize);
                 anpPage.RecordCount = pagerSet.RecordCount;
                 Repeater1.DataSource = pagerSet.PageSet;
