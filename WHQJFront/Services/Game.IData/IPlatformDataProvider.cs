@@ -105,7 +105,8 @@ namespace Game.IData
         #endregion
 
         int SetGameVerSion(int gameID, int version);
-
         IList<TurntableConfig> GetTurntableConfigs();
+        Message SetMailState(int uid, int mid, byte state);
+
     }
 }

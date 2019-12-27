@@ -364,6 +364,16 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191224);
                         GetVipReward();
                         break;
+                    case "getmaillist":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20191225);
+                        GetMailList();
+                        break;
+                    case "setmailstate":
+                        _ajv.SetDataItem("apiVersion", 20191225);
+                        SetMailState();
+                        break;
+                        
                     #endregion
 
                     default:
@@ -385,6 +395,25 @@ namespace Game.Web.WS
                 context.Response.Write(_ajv.SerializeToJson());
             }
             context.Response.End();
+        }
+        private void SetMailState()
+        {
+            int mid= GameRequest.GetQueryInt("mid", 0);
+            int state=GameRequest.GetQueryInt("state", 0);
+            if (state > 0)
+            {
+                Message msg= FacadeManage.aidePlatformFacade.SetMailState(_userid, mid, (byte)state);
+                _ajv.SetValidDataValue(msg.Success);
+                _ajv.SetDataItem("msg",msg.Content);
+            }
+        }
+        private void GetMailList()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            int size = GameRequest.GetQueryInt("size", 1);
+            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<2", " ORDER BY MState DESC,SendTime");
+            IList<UserMail> list = DataHelper.ConvertDataTableToObjects<UserMail>(ps.PageSet.Tables[0]);
+            _ajv.SetDataItem("mails", list);
         }
         private void GetVipReward()
         {
@@ -533,7 +562,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("todayValibet",validBet.TodayValiBet);
             _ajv.SetDataItem("GrandScore", validBet.GrandScore);
         }
-
         private void AgentRank()
         {
             int type = GameRequest.GetQueryInt("type", 1);
@@ -555,7 +583,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("own", rec);
             _ajv.SetDataItem("list", list);
         }
-
         private void PayRecord()
         {
             int index = GameRequest.GetQueryInt("index", 1);
@@ -632,7 +659,6 @@ namespace Game.Web.WS
             _ajv.SetDataItem("tagVilaBet", validBet.TargetBet);
             _ajv.SetDataItem("currVilaBet", validBet.CurrentValidBet);
         }
-
         private void WithDrawal()
         {
             int drawalType = GameRequest.GetQueryInt("drawalType", 1);

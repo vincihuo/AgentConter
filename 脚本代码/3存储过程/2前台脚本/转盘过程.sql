@@ -55,7 +55,7 @@ BEGIN
     DECLARE @TurnMultiple INT
     SELECT @TurnMultiple=CONVERT(INT,Field9) FROM WHQJNativeWebDB.dbo.ConfigInfo (NOLOCK) WHERE ConfigID=5
     DECLARE @VileBet BIGINT
-    SET @VileBet=@TurnMultiple* @Reward
+    SET @VileBet=@TurnMultiple* @Reward/100
     DECLARE @ErrorDescribe	NVARCHAR(127)
 	DECLARE @Return INT
 	EXEC @Return=NET_PB_Deposit 5,@dwUserID,1,N'转盘',@VileBet,@ErrorDescribe OUTPUT

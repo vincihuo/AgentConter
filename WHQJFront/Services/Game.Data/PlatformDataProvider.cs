@@ -193,5 +193,17 @@ namespace Game.Data
             string sql = $"SELECT * FROM TurntableConfig WITH(NOLOCK) ORDER BY id";
             return Database.ExecuteObjectList<TurntableConfig>(sql);
         }
+        public Message SetMailState(int uid, int mid, byte state)
+        {
+            List<DbParameter> prams = new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid),
+                Database.MakeInParam("mId", mid),
+                Database.MakeInParam("state", state),
+  
+                Database.MakeOutParam("strErrorDescribe", typeof(string), 127)
+            };
+            return MessageHelper.GetMessage(Database, "NET_PW_DealMail", prams);
+        }
     }
 }

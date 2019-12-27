@@ -1173,5 +1173,31 @@ namespace Game.Data
             string sql = $"UPDATE [dbo].[TurntableConfig] SET MenuVaule={value} WHERE id={id}";
             return Database.ExecuteNonQuery(CommandType.Text, sql);
         }
+        public int SendMail(UserMail mail)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("Title", mail.Title),
+                Database.MakeInParam("Msg", mail.Msg),
+                Database.MakeInParam("GoldNum", mail.GoldNum),
+                Database.MakeInParam("DiamNum", mail.DiamNum),
+                Database.MakeInParam("Valibet", mail.Valibet),
+                Database.MakeInParam("UserID",mail.UserID)
+            };
+            string sql = "";
+            if (mail.UserID != 0)
+            {
+                sql = @"INSERT INTO UserMail(UserID,MState,Title,Msg,GoldNum,DiamNum,Valibet,SendTime) 
+                        VALUES(@UserID,0,@Title,@Msg,@GoldNum,@DiamNum,@Valibet,GETDATE()) ";
+            }
+            else
+            {
+                sql = @"INSERT INTO UserMail(UserID,MState,Title,Msg,GoldNum,DiamNum,Valibet,SendTime) 
+                        SELECT UserID AS UserID,0 AS MState, @Title AS Title,@Msg AS Msg, @GoldNum AS GoldNum ,@DiamNum AS DiamNum,
+                        @Valibet AS Valibet,GETDATE() AS SendTime FROM WHQJAccountsDB.dbo.AccountsInfo WHERE IsAndroid=0";
+            }
+            return Database.ExecuteNonQuery(CommandType.Text, sql, prams.ToArray());
+        }
+
     }
 }

@@ -463,5 +463,6 @@ namespace Game.IData
         int SaveVipConfig(VipConfig cfg);
         int SaveTurnTable(TurntableConfig cfg);
         int SaveMenuValue(int id, int value);
+        int SendMail(UserMail mail);
     }
 }

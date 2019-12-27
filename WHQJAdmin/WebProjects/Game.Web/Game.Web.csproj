@@ -267,6 +267,8 @@
     <Content Include="Module\GoldManager\RecordGoldExch.aspx" />
     <Content Include="Module\GoldManager\RecordUserGame.aspx" />
     <Content Include="Module\GoldManager\VilaBetList.aspx" />
+    <Content Include="Module\MailManager\MailAddPage.aspx" />
+    <Content Include="Module\MailManager\MailConfig.aspx" />
     <Content Include="Module\MallManager\MallInfo.aspx" />
     <Content Include="Module\MallManager\MallInfoList.aspx" />
     <Content Include="Module\MallManager\MallOrder.aspx" />
@@ -3774,6 +3776,20 @@
     </Compile>
     <Compile Include="Module\GoldManager\VilaBetList.aspx.designer.cs">
       <DependentUpon>VilaBetList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MailManager\MailAddPage.aspx.cs">
+      <DependentUpon>MailAddPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\MailManager\MailAddPage.aspx.designer.cs">
+      <DependentUpon>MailAddPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MailManager\MailConfig.aspx.cs">
+      <DependentUpon>MailConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\MailManager\MailConfig.aspx.designer.cs">
+      <DependentUpon>MailConfig.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\MallManager\MallInfo.aspx.cs">
       <DependentUpon>MallInfo.aspx</DependentUpon>

@@ -161,5 +161,9 @@ namespace Game.Facade
         {
             return platformData.GetTurntableConfigs();
         }
+        public Message SetMailState(int uid,int mid,byte state)
+        {
+            return platformData.SetMailState(uid,mid,state);
+        }
     }
 }

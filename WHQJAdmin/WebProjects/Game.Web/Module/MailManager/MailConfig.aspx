@@ -1,13 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VIPRewardRecord.aspx.cs" Inherits="Game.Web.Module.VipManager.VIPRewardRecord" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MailConfig.aspx.cs" Inherits="Game.Web.Module.MailManager.MailConfig" %>
 
-<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link href="../../styles/layout.css" rel="stylesheet" type="text/css" />
+
     <script type="text/javascript" src="../../scripts/common.js"></script>
+
     <script type="text/javascript" src="../../scripts/comm.js"></script>
+
     <script type="text/javascript" src="../../scripts/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
@@ -18,10 +20,20 @@
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：用户系统 - 用户管理
+                <td width="1232" height="25" valign="top" align="left">你当前位置：邮件系统 - 邮件查询
                 </td>
             </tr>
         </table>
+
+
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="titleOpBg Lpd10">
+                    <input id="btnNew1" type="button" class="btn wd1" value="新增" onclick="openWindowOwn('MailAddPage.aspx', '', 700, 400);" />
+                </td>
+            </tr>
+        </table>
+
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
             <tr>
                 <td align="center" style="width: 80px">游戏ID：
@@ -29,37 +41,21 @@
                 <td>
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="text"></asp:TextBox>
                 </td>
-                <td align="center" style="width: 80px">VIP等级：
+
+                <td align="center" style="width: 80px">邮件编号ID：
                 </td>
                 <td>
-                    <asp:DropDownList ID="DropDownList2" runat="server">
-                        <asp:ListItem Text="全部" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="VIP1" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="VIP2" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="VIP3" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="VIP4" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="VIP5" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="VIP6" Value="6"></asp:ListItem>
-                        <asp:ListItem Text="VIP7" Value="7"></asp:ListItem>
-                        <asp:ListItem Text="VIP8" Value="8"></asp:ListItem>
-                        <asp:ListItem Text="VIP9" Value="9"></asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:TextBox ID="TextBox2" runat="server" CssClass="text"></asp:TextBox>
                 </td>
-                <td align="center" style="width: 80px">特权名称：
+
+                <td align="center" style="width: 80px">状态：
                 </td>
                 <td>
                     <asp:DropDownList ID="DropDownList1" runat="server">
-                        <asp:ListItem Text="全部" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="晋级奖励" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="周奖励" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="月奖励" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="签到1" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="签到2" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="签到3" Value="6"></asp:ListItem>
-                        <asp:ListItem Text="签到4" Value="7"></asp:ListItem>
-                        <asp:ListItem Text="签到5" Value="8"></asp:ListItem>
-                        <asp:ListItem Text="签到6" Value="9"></asp:ListItem>
-                        <asp:ListItem Text="签到7" Value="10"></asp:ListItem>
+                        <asp:ListItem Text="全部" Value="-1"></asp:ListItem>
+                        <asp:ListItem Text="未读" Value="0"></asp:ListItem>
+                        <asp:ListItem Text="已读" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="已删除" Value="2"></asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td class="listTdLeft" style="width: 80px">时间：
@@ -87,15 +83,19 @@
                 <tr align="center" class="bold">
                     <td class="listTitle2">游戏ID
                     </td>
-                    <td class="listTitle2">VIP等级
+                    <td class="listTitle2">邮件id
                     </td>
-                    <td class="listTitle2">特权名称
+                    <td class="listTitle2">邮件标题
                     </td>
-                    <td class="listTitle1">领取金额
+                    <td class="listTitle2">邮件状态
                     </td>
-                    <td class="listTitle1">领取时间
+                    <td class="listTitle2">金币数量
                     </td>
-                    <td class="listTitle1">领取IP
+                    <td class="listTitle1">钻石数量
+                    </td>
+                    <td class="listTitle1">打码量
+                    </td>
+                    <td class="listTitle1">发送时间
                     </td>
                 </tr>
                 <asp:Repeater ID="rptDataList" runat="server">
@@ -106,19 +106,25 @@
                                 <%# GetAccountGameID(Convert.ToInt32(Eval("UserID")))%>
                             </td>
                             <td>
-                                <%# Eval("VIPLevel")%>
+                                <%# Eval("id")%>
                             </td>
                             <td>
-                                <%# GetRewardType(Convert.ToInt32(Eval("RewardType")))%>
+                                <%# Eval("Title")%>
                             </td>
                             <td>
-                                <%# FacadeManage.ConversionMoneyToShow(Eval("Reward").ToString())%>
+                                <%# GetMailState(Convert.ToByte(Eval("MState")))%>
                             </td>
                             <td>
-                                <%# Eval("TackTime")%>
+                                <%# Eval("GoldNum")%>
                             </td>
                             <td>
-                                <%# Eval("IP")%>
+                                <%# Eval("DiamNum")%>
+                            </td>
+                            <td>
+                                <%# Eval("Valibet")%>
+                            </td>
+                            <td>
+                                <%# Eval("SendTime")%>
                             </td>
                         </tr>
                     </ItemTemplate>

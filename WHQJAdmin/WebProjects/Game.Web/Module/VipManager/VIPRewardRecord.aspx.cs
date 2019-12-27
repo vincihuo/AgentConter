@@ -2,16 +2,34 @@
 using Game.Facade;
 using System.Text;
 using Game.Kernel;
+using Game.Web.UI;
 
 namespace Game.Web.Module.VipManager
 {
-    public partial class VIPRewardRecord : System.Web.UI.Page
+    public partial class VIPRewardRecord : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            base.moduleID = 1400;
+            if (!IsPostBack)
+            {
+                BindData();
+            }
         }
-        protected int GetGameID(int uid)
+        private void BindData()
+        {
+            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("RecordVIPReward", SearchItems, " ORDER BY TackTime ", anpNews.CurrentPageIndex, anpNews.PageSize);
+            anpNews.RecordCount = pagerSet.PageSize;
+            rptDataList.DataSource = pagerSet.PageSet.Tables[0];
+            rptDataList.DataBind();
+            litNoData.Visible = pagerSet.RecordCount == 0;
+        }
+        protected void anpNews_PageChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
+        protected int GetAccountGameID(int uid)
         {
            return FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(uid).GameID;
         }
@@ -46,10 +64,8 @@ namespace Game.Web.Module.VipManager
 
         protected void btnQuery_Click(object sender, EventArgs e)
         {
-            PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetList("RecordVIPReward",SearchItems, " ORDER BY TackTime ", anpNews.CurrentPageIndex, anpNews.PageSize);
-            anpNews.RecordCount = pagerSet.RecordCount;
-            rptDataList.DataSource = pagerSet.PageSet.Tables[0];
-            rptDataList.DataBind();
+            SetCondition();
+            BindData();
         }
 
         private void SetCondition()

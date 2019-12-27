@@ -690,5 +690,9 @@ namespace Game.Facade
         {
             return _aidePlatformData.SaveVipConfig(cfg);
         }
+        public int SendMail(UserMail mail)
+        {
+            return _aidePlatformData.SendMail(mail);
+        }
     }
 }

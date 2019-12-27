@@ -96,6 +96,7 @@
     <Compile Include="Platform\RecordBackInfo.cs" />
     <Compile Include="Platform\StreamCreateTableFeeInfo.cs" />
     <Compile Include="Platform\TurntableConfig.cs" />
+    <Compile Include="Platform\UserMail.cs" />
     <Compile Include="Platform\VipConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record\RecordAgentReward.cs" />
