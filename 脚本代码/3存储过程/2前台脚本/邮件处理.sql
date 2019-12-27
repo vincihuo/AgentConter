@@ -40,79 +40,81 @@ BEGIN
         SET @strErrorDescribe='邮件不存在'
         RETURN 1001
     END
-    IF @mState>1
+
+    IF @mState>2
     BEGIN
         SET @strErrorDescribe='邮件已经删除'
         RETURN 1002
     END
-
-    DECLARE @CheckOut TINYINT
-    IF EXISTS(SELECT 1
-    FROM WHQJTreasureDB.dbo.GameScoreLocker
-    WHERE UserID=@dwUserID)
+    
+    IF @mState<@state
     BEGIN
-        SET @strErrorDescribe='游戏中不能领取'
-        RETURN 1003
-    END
-    IF @mState=0
-    BEGIN
-        SELECT @RegisterIP=RegisterIP, @RegisterDate=RegisterDate, @RegisterMachine=RegisterMachine
-        FROM WHQJAccountsDB.dbo.AccountsInfo(NOLOCK)
-        WHERE UserID = @dwUserID
-        IF @GoldNum>0
-    BEGIN
-            DECLARE @BeforeScore BIGINT
-            DECLARE @BeforeInsure BIGINT
-            SELECT @BeforeScore = Score, @BeforeInsure=InsureScore
-            FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK)
-            WHERE UserID = @dwUserID
-            IF @BeforeScore IS NULL 
-	    BEGIN
-                INSERT WHQJTreasureDB.DBO.GameScoreInfo
-                    (UserID,Score,RegisterIP,RegisterDate,RegisterMachine)
-                VALUES
-                    (@dwUserID, 0, @RegisterIP, @RegisterDate, @RegisterMachine)
-                SET @BeforeScore = 0
-                SET @BeforeInsure =0
-            END
-            UPDATE WHQJTreasureDB.DBO.GameScoreInfo SET Score=Score+@GoldNum WHERE UserID = @dwUserID
-            INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
-                (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-            VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 15, @BeforeScore, @BeforeInsure, @GoldNum, '0.0.0.0', GETDATE())
-            --打码量
-            IF @Multiple>0
+        DECLARE @CheckOut TINYINT IF EXISTS(SELECT 1 FROM WHQJTreasureDB.dbo.GameScoreLocker WHERE UserID=@dwUserID)
         BEGIN
-                DECLARE @ErrorDescribe	NVARCHAR(127)
-                DECLARE @Return INT
-                DECLARE @Valibet BIGINT
-                SET @Valibet=@Multiple*@GoldNum
-                EXEC @Return=WHQJTreasureDB.DBO.NET_PB_Deposit 9,@dwUserID,1,'邮件',@Valibet,@ErrorDescribe OUTPUT
-            END
+            SET @strErrorDescribe='游戏中不能领取'
+            RETURN 1003
         END
-
-        IF @DimaoNum>0
-    BEGIN
-            DECLARE @BeforeDiamond   INT
-            SELECT @BeforeDiamond=Diamond
-            FROM WHQJTreasureDB.DBO.UserCurrency WITH(ROWLOCK)
-            WHERE UserID=@dwUserID
-            IF @BeforeDiamond IS NULL
-	    BEGIN
-                INSERT WHQJTreasureDB.DBO.UserCurrency
+        IF @state>1
+        BEGIN
+            SELECT @RegisterIP=RegisterIP, @RegisterDate=RegisterDate, @RegisterMachine=RegisterMachine
+            FROM WHQJAccountsDB.dbo.AccountsInfo(NOLOCK)
+            WHERE UserID = @dwUserID
+            IF @GoldNum>0
+            BEGIN
+                DECLARE @BeforeScore BIGINT
+                DECLARE @BeforeInsure BIGINT
+                SELECT @BeforeScore = Score, @BeforeInsure=InsureScore FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK) WHERE UserID = @dwUserID
+                IF @BeforeScore IS NULL 
+	            BEGIN
+                    INSERT WHQJTreasureDB.DBO.GameScoreInfo(UserID,Score,RegisterIP,RegisterDate,RegisterMachine)
+                    VALUES
+                    (@dwUserID, 0, @RegisterIP, @RegisterDate, @RegisterMachine)
+                    SET @BeforeScore = 0
+                    SET @BeforeInsure =0
+                END
+                UPDATE WHQJTreasureDB.DBO.GameScoreInfo SET Score=Score+@GoldNum WHERE UserID = @dwUserID
+                INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
+                (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
+                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 15, @BeforeScore, @BeforeInsure, @GoldNum, '0.0.0.0', GETDATE())
+                --打码量
+                IF @Multiple>0
+                BEGIN
+                    DECLARE @ErrorDescribe	NVARCHAR(127)
+                    DECLARE @Return INT
+                    DECLARE @Valibet BIGINT
+                    SET @Valibet=@Multiple*@GoldNum
+                    EXEC @Return=WHQJTreasureDB.DBO.NET_PB_Deposit 9,@dwUserID,1,'邮件',@Valibet,@ErrorDescribe OUTPUT
+                END
+            END
+            IF @DimaoNum>0
+            BEGIN
+                DECLARE @BeforeDiamond   INT
+                SELECT @BeforeDiamond=Diamond
+                FROM WHQJTreasureDB.DBO.UserCurrency WITH(ROWLOCK)
+                WHERE UserID=@dwUserID
+                IF @BeforeDiamond IS NULL
+                BEGIN
+                    INSERT WHQJTreasureDB.DBO.UserCurrency
                     (UserID,Diamond,AwardTicket)
-                VALUES
+                    VALUES
                     (@dwUserID, 0, 0)
-                SET @BeforeDiamond=0
-            END
-            UPDATE WHQJTreasureDB.DBO.UserCurrency SET Diamond = Diamond + @DimaoNum WHERE UserID = @dwUserID
+                    SET @BeforeDiamond=0
+                END
+                UPDATE WHQJTreasureDB.DBO.UserCurrency SET Diamond = Diamond + @DimaoNum WHERE UserID = @dwUserID
 
-            INSERT INTO WHQJRecordDB.dbo.RecordDiamondSerial
-                (SerialNumber,MasterID,UserID,TypeID,CurDiamond,ChangeDiamond,ClientIP,CollectDate)
-            VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 13, @BeforeDiamond, @DimaoNum, '0.0.0.0', GETDATE())
+                INSERT INTO WHQJRecordDB.dbo.RecordDiamondSerial
+                    (SerialNumber,MasterID,UserID,TypeID,CurDiamond,ChangeDiamond,ClientIP,CollectDate)
+                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 13, @BeforeDiamond, @DimaoNum, '0.0.0.0', GETDATE())
+            END
         END
+        UPDATE UserMail SET MState=@state WHERE UserID=@dwUserID AND id=@mId
+        SET @strErrorDescribe='操作成功'
     END
-    UPDATE UserMail SET MState=@state WHERE UserID=@dwUserID AND id=@mId
-    SET @strErrorDescribe='操作成功'
+    ELSE
+    BEGIN
+        SET @strErrorDescribe='邮件已经阅读'
+        RETURN 1004
+    END
 END
 RETURN 0
 GO
