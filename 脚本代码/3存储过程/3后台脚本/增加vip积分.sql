@@ -38,6 +38,11 @@ BEGIN
     SELECT TOP 1 @NewLevel=VipLevel FROM WHQJPlatformDB.dbo.VipConfig WHERE Integral*1000<=@OldScore+@PayMoney ORDER BY VipLevel DESC
     
     SELECT @Fresh=FreshReward FROM UserVipInfo WHERE UserID=@UserID
+
+    IF @NewLevel>@OldLevel AND @OldLevel=0
+    BEGIN
+    UPDATE UserVipInfo SET WeekReward=1 , MonthReward=1,CheckInReward=1 WHERE UserID=@UserID
+    END
     WHILE @NewLevel>@OldLevel
     BEGIN
         SET @OldLevel=@OldLevel+1

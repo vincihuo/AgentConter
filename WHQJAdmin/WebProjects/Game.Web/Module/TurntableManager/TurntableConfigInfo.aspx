@@ -41,7 +41,7 @@
                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="listBg2">
 
                     <tr>
-                        <td class="listTdLeft">字段1：
+                        <td class="listTdLeft">位置1：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox1" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -50,7 +50,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段2：
+                        <td class="listTdLeft">位置2：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox2" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -60,7 +60,7 @@
                     </tr>
 
                     <tr>
-                        <td class="listTdLeft">字段3：
+                        <td class="listTdLeft">位置3：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox3" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -69,7 +69,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段4：
+                        <td class="listTdLeft">位置4：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox4" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -78,7 +78,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段5：
+                        <td class="listTdLeft">位置5：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox5" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -87,7 +87,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段6：
+                        <td class="listTdLeft">位置6：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox6" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -96,7 +96,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段7：
+                        <td class="listTdLeft">位置7：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox7" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -105,7 +105,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段8：
+                        <td class="listTdLeft">位置8：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox8" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -114,7 +114,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段9：
+                        <td class="listTdLeft">位置9：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox9" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -123,7 +123,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段10：
+                        <td class="listTdLeft">位置10：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox10" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -132,7 +132,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段11：
+                        <td class="listTdLeft">位置11：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox11" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -141,7 +141,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段12：
+                        <td class="listTdLeft">位置12：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox12" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>
@@ -150,7 +150,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="listTdLeft">字段13：
+                        <td class="listTdLeft">位置13：
                         </td>
                         <td>
                             <asp:TextBox ID="TextBox13" runat="server" CssClass="text" MaxLength="10"></asp:TextBox>

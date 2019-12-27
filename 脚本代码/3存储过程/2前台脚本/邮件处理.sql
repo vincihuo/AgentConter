@@ -86,7 +86,7 @@ BEGIN
                 DECLARE @Return INT
                 DECLARE @Valibet BIGINT
                 SET @Valibet=@Multiple*@GoldNum
-                EXEC @Return=WHQJTreasureDB.DBO.NET_PB_Deposit 6,@dwUserID,1,'邮件',@Valibet,@ErrorDescribe OUTPUT
+                EXEC @Return=WHQJTreasureDB.DBO.NET_PB_Deposit 9,@dwUserID,1,'邮件',@Valibet,@ErrorDescribe OUTPUT
             END
         END
 
@@ -94,7 +94,7 @@ BEGIN
     BEGIN
             DECLARE @BeforeDiamond   INT
             SELECT @BeforeDiamond=Diamond
-            FROM UserCurrency WITH(ROWLOCK)
+            FROM WHQJTreasureDB.DBO.UserCurrency WITH(ROWLOCK)
             WHERE UserID=@dwUserID
             IF @BeforeDiamond IS NULL
 	    BEGIN

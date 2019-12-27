@@ -47,6 +47,14 @@ namespace Game.Web.Module.VipManager
             config.Day6 = Convert.ToInt64(TextBox10.Text);
             config.Day7 = Convert.ToInt64(TextBox11.Text);
             int r = FacadeManage.aidePlatformFacade.SaveVipConfig(config);
+            if (r > 0)
+            {
+                ShowInfo("配置信息操作成功", "VipConfigList.aspx", 1200);
+            }
+            else
+            {
+                ShowError("配置信息操作失败");
+            }
         }
     }
 }

@@ -1101,7 +1101,7 @@ namespace Game.Data
         }
         public IList<VipConfig> GetVipConfigList()
         {
-            string sql = "SELECT * FROM VipConfig ORDER BY VipLevel";
+            string sql = "SELECT * FROM VipConfig ORDER BY VipLevel WHERE VipLevel>0";
             return Database.ExecuteObjectList<VipConfig>(sql);
         }
         public VipConfig GetVipConfigByLevel(int level)
@@ -1112,7 +1112,7 @@ namespace Game.Data
         {
             string sqlQuery = @"UPDATE VipConfig SET Integral=@Integral,Fresh=@Fresh,
                     Week=@Week,Month=@Month,Day1=@Day1,Day2=@Day2,
-                    Day3=@Day3,Day4=@Day4,Day5=@Day6,Day7=@Day7,
+                    Day3=@Day3,Day4=@Day4,Day5=@Day5,Day6=@Day6,Day7=@Day7
                     WHERE VipLevel=@VipLevel";
 
             var prams = new List<DbParameter>
@@ -1122,12 +1122,12 @@ namespace Game.Data
                 Database.MakeInParam("Week", cfg.Week),
                 Database.MakeInParam("Month", cfg.Month),
                 Database.MakeInParam("Day1", cfg.Day1),
-                Database.MakeInParam("Day1",cfg.Day2),
-                Database.MakeInParam("Day1", cfg.Day3),
-                Database.MakeInParam("Day1", cfg.Day4),
-                Database.MakeInParam("Day1", cfg.Day5),
-                Database.MakeInParam("Day1", cfg.Day6),
-                Database.MakeInParam("Day1", cfg.Day7),
+                Database.MakeInParam("Day2",cfg.Day2),
+                Database.MakeInParam("Day3", cfg.Day3),
+                Database.MakeInParam("Day4", cfg.Day4),
+                Database.MakeInParam("Day5", cfg.Day5),
+                Database.MakeInParam("Day6", cfg.Day6),
+                Database.MakeInParam("Day7", cfg.Day7),
                 Database.MakeInParam("VipLevel", cfg.VipLevel)
             };
 
@@ -1158,7 +1158,7 @@ namespace Game.Data
                 Database.MakeInParam("Value13", cfg.Value13),
             };
             prams.Add(Database.MakeInParam("id", cfg.id));
-            string sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13 WHERE id=@id";
+            string sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value7,Value8=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13 WHERE id=@id";
             int mm = (cfg.id - 1) % 5;
             if (mm == 1 || mm == 3)
             {

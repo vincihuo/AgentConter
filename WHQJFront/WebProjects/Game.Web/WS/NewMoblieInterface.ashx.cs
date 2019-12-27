@@ -443,7 +443,7 @@ namespace Game.Web.WS
                 userVip.WeekReward = Convert.ToInt64(row["WeekReward"]);
                 userVip.MonthReward = Convert.ToInt64(row["MonthReward"]);
                 userVip.Exp = Convert.ToInt64(row["Score"])/1000;
-                if (Convert.ToInt32(row["CheckInReward"])!=0)
+                if (Convert.ToInt32(row["CheckInReward"])==1)
                 {
                     int days = 1;
                     if (row["LastTime"]!= DBNull.Value)

@@ -48,13 +48,19 @@ namespace Game.Web.Module.GoldManager
                 case 2:
                     return "官方入款";
                 case 3:
-                    return "代理入款";
+                    return "代理入款"; 
                 case 4:
                     return "每日分享";
                 case 5:
                     return "注册送";
                 case 6:
                     return "签到奖励";
+                case 7:
+                    return "转盘";
+                case 8:
+                    return "VIP奖励";
+                case 9:
+                    return "邮件发放";
                 default:
                     return "未知类型";
             }

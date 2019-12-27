@@ -19,14 +19,14 @@ WITH ENCRYPTION AS
     
 SET NOCOUNT ON
 BEGIN
-    UPDATE UserVipInfo SET DayIndex=1
+    UPDATE UserVipInfo SET CheckInReward=1
     IF DATEPART(weekday,GETDATE())='2'
     BEGIN
-        UPDATE A SET A.WeekReward=B.Week FROM UserVipInfo A,WHQJPlatformDB.dbo.VipConfig B WHERE B.VipLevel=A.VipLevel
+        UPDATE UserVipInfo SET WeekReward=1
     END
     IF DATEPART(DD,GETDATE())='1'
     BEGIN
-        UPDATE A SET A.MonthReward=B.Month FROM UserVipInfo A,WHQJPlatformDB.dbo.VipConfig B WHERE B.VipLevel=A.VipLevel
+        UPDATE UserVipInfo SET MonthReward=1
     END
 END
 RETURN 0

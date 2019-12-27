@@ -58,7 +58,7 @@ BEGIN
     SET @VileBet=@TurnMultiple* @Reward/100
     DECLARE @ErrorDescribe	NVARCHAR(127)
 	DECLARE @Return INT
-	EXEC @Return=NET_PB_Deposit 5,@dwUserID,1,N'转盘',@VileBet,@ErrorDescribe OUTPUT
+	EXEC @Return=NET_PB_Deposit 7,@dwUserID,1,N'转盘',@VileBet,@ErrorDescribe OUTPUT
 END
 RETURN 0
 GO

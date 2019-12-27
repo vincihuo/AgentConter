@@ -66,35 +66,34 @@ BEGIN
     --周奖励
     IF @Type=2
     BEGIN
-        IF @Week=0
+        IF @Week<>1
         BEGIN
         SET @strErrorDescribe=N'没有奖励可以领取！'
         RETURN 102
         END
-        UPDATE UserVipInfo SET WeekReward=0 WHERE UserID=@dwUserID
-        SET @Reward=@Week 
+        UPDATE UserVipInfo SET WeekReward=2 WHERE UserID=@dwUserID
+        SELECT @Reward= Week FROM WHQJPlatformDB.dbo.VipConfig WHERE VipLevel=@VipLevel
     END
     --月奖励
     IF @Type=3
     BEGIN
-        IF @Month=0
+        IF @Month<>1
         BEGIN
         SET @strErrorDescribe=N'没有奖励可以领取！'
         RETURN 103
         END
-        UPDATE UserVipInfo SET MonthReward=0 WHERE UserID=@dwUserID
-        SET @Reward=@Month
+        UPDATE UserVipInfo SET MonthReward=2 WHERE UserID=@dwUserID
+        SELECT @Reward= Month FROM WHQJPlatformDB.dbo.VipConfig WHERE VipLevel=@VipLevel
     END
     
     --签到奖励
-    IF @Day=3
+    IF @Type=4
     BEGIN
-        IF @Day=0
+        IF @Day<>1
         BEGIN
         SET @strErrorDescribe=N'没有奖励可以领取！'
         RETURN 104
         END
-
         IF DATEDIFF(dd,@LastTime,GETDATE())>1
         BEGIN
             SET @DayIndex=1
@@ -107,10 +106,10 @@ BEGIN
                 SET @DayIndex=1
             END
         END
-        UPDATE UserVipInfo SET CheckInReward=0,DayIndex=@DayIndex WHERE UserID=@dwUserID
+        UPDATE UserVipInfo SET CheckInReward=2,DayIndex=@DayIndex WHERE UserID=@dwUserID
         DECLARE @DayReward BIGINT
         DECLARE @cSql NVARCHAR(1000)
-        SET @cSql='SELECT @DayReward= Day'+@DayIndex+' FROM  WHQJPlatformDB.dbo.VipConfig WHERE VipLevel='+@VipLevel
+        SET @cSql='SELECT @DayReward= Day'+ CONVERT(NVARCHAR,@DayIndex)+' FROM  WHQJPlatformDB.dbo.VipConfig WHERE VipLevel='+CONVERT(NVARCHAR,@VipLevel)
         EXECUTE sp_executesql @cSql,N'@DayReward int out',@DayReward OUT
         SET @Reward=@DayReward
         IF @Reward=0
@@ -144,8 +143,8 @@ BEGIN
     SELECT  @Multiple=CONVERT(INT,Field10) FROM WHQJNativeWebDB.dbo.ConfigInfo (NOLOCK) WHERE ConfigID=5
     DECLARE @ErrorDescribe	NVARCHAR(127)
 	DECLARE @Return INT
-    SET @Valibet=@Multiple*@Reward
-	EXEC @Return=NET_PB_Deposit 10,@dwUserID,1,'vip奖励',@Valibet,@ErrorDescribe OUTPUT
+    SET @Valibet=@Multiple*@Reward/100
+	EXEC @Return=NET_PB_Deposit 8,@dwUserID,1,'vip奖励',@Valibet,@ErrorDescribe OUTPUT
 
     --写入领取记录
     INSERT INTO WHQJRecordDB.dbo.RecordVIPReward(UserID,VIPLevel,RewardType,TackTime,Reward,BeForeScore,IP)
