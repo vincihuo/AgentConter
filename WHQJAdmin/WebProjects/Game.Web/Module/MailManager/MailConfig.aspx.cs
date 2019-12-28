@@ -20,8 +20,15 @@ namespace Game.Web.Module.MailManager
         }
         protected void btnQuery_Click(object sender, EventArgs e)
         {
-            SetCondition();
-            BindData();
+            if (FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(TextBox1.Text)) != null)
+            {
+                SetCondition();
+                BindData();
+            }
+            else
+            {
+                ShowInfo("玩家不存在");
+            }
         }
         protected void anpNews_PageChanged(object sender, EventArgs e)
         {
@@ -62,6 +69,7 @@ namespace Game.Web.Module.MailManager
             if (TextBox1.Text != "")
             {
                 int uid = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(TextBox1.Text)).UserID;
+
                 condition.AppendFormat(" AND UserID={0}", uid);
             }
 
