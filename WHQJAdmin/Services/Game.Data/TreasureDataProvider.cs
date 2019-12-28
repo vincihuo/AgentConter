@@ -174,7 +174,7 @@ namespace Game.Data
                     .Append("ChanelID=@ChanelID, ")
                     .Append("ChanelName=@ChanelName, ")
                     .Append("AttaChStr1=@AttachStr1, ")
-                    .Append("AttaChStr2=@AttachStr2 ")
+                    .Append("AttaChStr2=@AttachStr2, ")
                     .Append("Nullity=@Nullity ")
                     .Append("WHERE ID=@ID");
                 sqlQuery = sql.ToString();
