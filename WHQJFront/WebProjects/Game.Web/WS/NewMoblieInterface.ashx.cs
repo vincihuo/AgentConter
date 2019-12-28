@@ -411,7 +411,7 @@ namespace Game.Web.WS
         {
             int index = GameRequest.GetQueryInt("index", 1);
             int size = GameRequest.GetQueryInt("size", 1);
-            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<2", " ORDER BY MState DESC,SendTime");
+            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<2", " ORDER BY MState ,SendTime DESC");
             IList<UserMail> list = DataHelper.ConvertDataTableToObjects<UserMail>(ps.PageSet.Tables[0]);
             _ajv.SetDataItem("mails", list);
         }

@@ -61,6 +61,7 @@ BEGIN
             WHERE UserID = @dwUserID
             IF @GoldNum>0
             BEGIN
+                SET @GoldNum=@GoldNum*1000
                 DECLARE @BeforeScore BIGINT
                 DECLARE @BeforeInsure BIGINT
                 SELECT @BeforeScore = Score, @BeforeInsure=InsureScore FROM WHQJTreasureDB.DBO.GameScoreInfo(NOLOCK) WHERE UserID = @dwUserID
