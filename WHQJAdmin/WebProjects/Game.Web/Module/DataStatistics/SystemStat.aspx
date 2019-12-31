@@ -144,22 +144,6 @@
     </td>
 </tr>
 <tr>
-    <td class="listTdLeft">
-        今日充值钻石：
-    </td>
-    <td>
-        <asp:Literal ID="ltPayDiamond" runat="server"></asp:Literal> 钻石
-    </td>
-</tr>
-<tr>
-    <td class="listTdLeft">
-        今日充值钻石金额：
-    </td>
-    <td>
-        <asp:Literal ID="ltPayDiamondAmount" runat="server"></asp:Literal> 钻石
-    </td>
-</tr>
-<tr>
     <td height="35" colspan="2" class="f14 bold Lpd10 Rpd10">
         <div class="hg3  pd7">
             充值统计
