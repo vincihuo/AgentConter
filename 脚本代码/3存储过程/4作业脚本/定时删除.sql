@@ -34,10 +34,9 @@ BEGIN
 
     INSERT INTO WHQJRecordDB.dbo.AgentCountRecord_copy1 SELECT * FROM WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
     DELETE WHQJRecordDB.dbo.AgentCountRecord WHERE DateDiff(dd,CountTime,GetDate())>15
-    
     DELETE ValiBetRecord WHERE DateDiff(dd,DepositTime,GetDate())>30
-    
     DELETE RecordAgentReward WHERE DateDiff(dd,drawalTime,GetDate())>30
+    DELETE WHQJPlatformDB WHERE DateDiff(dd,SendTime,GetDate())>15
 END
 RETURN 0
 GO
