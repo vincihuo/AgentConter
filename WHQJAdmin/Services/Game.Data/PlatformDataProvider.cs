@@ -1101,7 +1101,7 @@ namespace Game.Data
         }
         public IList<VipConfig> GetVipConfigList()
         {
-            string sql = "SELECT * FROM VipConfig ORDER BY VipLevel WHERE VipLevel>0";
+            string sql = "SELECT * FROM VipConfig WHERE VipLevel>0 ORDER BY VipLevel";
             return Database.ExecuteObjectList<VipConfig>(sql);
         }
         public VipConfig GetVipConfigByLevel(int level)

@@ -20,15 +20,8 @@ namespace Game.Web.Module.MailManager
         }
         protected void btnQuery_Click(object sender, EventArgs e)
         {
-            if (FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(TextBox1.Text)) != null)
-            {
-                SetCondition();
-                BindData();
-            }
-            else
-            {
-                ShowInfo("玩家不存在");
-            }
+            SetCondition();
+            BindData();
         }
         protected void anpNews_PageChanged(object sender, EventArgs e)
         {
@@ -68,9 +61,16 @@ namespace Game.Web.Module.MailManager
             StringBuilder condition = new StringBuilder("WHERE 1=1");
             if (TextBox1.Text != "")
             {
-                int uid = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(TextBox1.Text)).UserID;
-
-                condition.AppendFormat(" AND UserID={0}", uid);
+                AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(TextBox1.Text));
+                if (acc != null)
+                {
+                    condition.AppendFormat(" AND UserID={0}", acc.UserID);
+                }
+                else
+                {
+                    condition.AppendFormat(" AND UserID={0}", 0);
+                    ShowError("玩家id不正确");
+                }
             }
 
             if (TextBox2.Text != "")

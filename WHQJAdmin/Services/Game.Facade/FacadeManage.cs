@@ -208,14 +208,14 @@ namespace Game.Facade
         public static float ConversionMoneyToShow(string t)
         {
             Int64 a = (Int64)double.Parse(t);
-            float temp = a / 1000.0f;
-            int i = (int)(temp * 100);
+            double temp = a * 0.001;
+            Int64 i = (long)(temp * 100);
             return (i * 1.0f) / 100;
         }
         public static float ConversionMoneyToShow(Int64 a)
         {
-            float temp = a / 1000.0f;
-            Int64 i = (int)(temp * 100);
+            double temp = a*0.001;
+            Int64 i = (long)(temp * 100);
             return (i * 1.0f) / 100;
         }
         public static Int64 ConversionMoneyToReal(float a)
