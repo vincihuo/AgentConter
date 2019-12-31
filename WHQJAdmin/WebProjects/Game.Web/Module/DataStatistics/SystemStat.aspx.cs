@@ -31,7 +31,7 @@ namespace Game.Web.Module.DataStatistics
         private void BindDataStat()
         {
             DataSet ds = FacadeManage.aideTreasureFacade.GetStatInfo();
-            if (ds.Tables[0]!=null && ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0)
             {
                 DataRow row = ds.Tables[0].Rows[0];
                 ltAllRevenue.Text = FacadeManage.ConversionMoneyToShow((Convert.ToInt64(row["TotalRevenue"]) + Convert.ToInt64(row["TotalInsureRevenue"]))).ToString("N");
@@ -41,10 +41,10 @@ namespace Game.Web.Module.DataStatistics
                 ltGameRegisterUser.Text = row["GameRegisterUser"].ToString();
                 ltGoldRoomCount.Text = row["GoldRoomCount"].ToString();
                 ltH5RegisterUser.Text = row["H5RegisterUser"].ToString();
-                ltInsureRevenue.Text =FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["InsureRevenue"])).ToString("N");
+                ltInsureRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["InsureRevenue"])).ToString("N");
                 ltInsureScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["InsureScore"])).ToString("N");
-                ltPayDiamond.Text = row["PayDiamond"].ToString();
-                ltPayDiamondAmount.Text = row["PayDiamondAmount"].ToString();
+                //ltPayDiamond.Text = row["PayDiamond"].ToString();
+                //ltPayDiamondAmount.Text = row["PayDiamondAmount"].ToString();
                 ltPayScore.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["PayScore"])).ToString();
                 ltPayScoreAmount.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["PayScoreAmount"])).ToString();
                 ltRevenue.Text = FacadeManage.ConversionMoneyToShow(Convert.ToInt64(row["Revenue"])).ToString();
