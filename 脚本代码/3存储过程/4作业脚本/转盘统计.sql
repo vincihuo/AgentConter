@@ -30,7 +30,7 @@ DECLARE @TatleMoney2 BIGINT
 DECLARE @CountPerson3 INT
 DECLARE @TatleMoney3 BIGINT
 BEGIN
-     --vip统计放这里不过分吧
+    UPDATE UserValidBet SET GrandScore=TodayValiBet,TodayValiBet=0
     SELECT @Faild1= ISNULL(SUM(Reward),0) FROM RecordTurntable (NOLOCK) WHERE DATEDIFF(dd,Opentime,GETDATE())=0 AND OpenPos=1 AND TableIndex=0;
     SELECT @Faild2= ISNULL(SUM(Reward),0) FROM RecordTurntable (NOLOCK) WHERE DATEDIFF(dd,Opentime,GETDATE())=0 AND OpenPos=2 AND TableIndex=0;
     SELECT @Faild3= ISNULL(SUM(Reward),0) FROM RecordTurntable (NOLOCK) WHERE DATEDIFF(dd,Opentime,GETDATE())=0 AND OpenPos=3 AND TableIndex=0;

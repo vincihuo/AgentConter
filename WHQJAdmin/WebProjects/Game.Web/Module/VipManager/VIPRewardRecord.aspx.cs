@@ -19,7 +19,7 @@ namespace Game.Web.Module.VipManager
         private void BindData()
         {
             PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("RecordVIPReward", SearchItems, " ORDER BY TackTime ", anpNews.CurrentPageIndex, anpNews.PageSize);
-            anpNews.RecordCount = pagerSet.PageSize;
+            anpNews.RecordCount = pagerSet.RecordCount;
             rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();
             litNoData.Visible = pagerSet.RecordCount == 0;

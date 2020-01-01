@@ -64,7 +64,7 @@
                         <td class="listTdLeft">key位置：
                         </td>
                         <td>
-                            <asp:TextBox ID="SignArray" runat="server" CssClass="text" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="SignArray" runat="server" CssClass="text"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
