@@ -43,7 +43,7 @@
                         <asp:ListItem Text="VIP7" Value="7"></asp:ListItem>
                         <asp:ListItem Text="VIP8" Value="8"></asp:ListItem>
                         <asp:ListItem Text="VIP9" Value="9"></asp:ListItem>
-                        <asp:ListItem Text="VIP9" Value="10"></asp:ListItem>
+                        <asp:ListItem Text="VIP10" Value="10"></asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td align="center" style="width: 80px">特权名称：
