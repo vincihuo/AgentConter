@@ -369,7 +369,7 @@ namespace Game.Data
             {
                 prams.Add(Database.MakeInParam("id", chanel.id));
                 sqlQuery = @"UPDATE [dbo].[pay_chanel] SET sendpamar=@sendpamar,moneyPre=@moneyPre,singpos=@singpos,method=@method,respSign=@respSign,respCode=@respCode,successCode=@successCode,infoName=@infoName,
-                                    infoType=@infoType,orderkey=@orderkey,signkey=@signkey,moneykey=@moneykey,codekey=@codekey,codeSuccess=@codeSuccess,sendSign=@sendSign,backstring=@backstring,callSign=@callSign,name=@name,bankType=@bankType WHERE id=@id";
+                                    infoType=@infoType,orderkey=@orderkey,signkey=@signkey,moneykey=@moneykey,codekey=@codekey,codeSuccess=@codeSuccess,sendSign=@sendSign,backSign=@backSign,backstring=@backstring,callSign=@callSign,name=@name,bankType=@bankType WHERE id=@id";
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }

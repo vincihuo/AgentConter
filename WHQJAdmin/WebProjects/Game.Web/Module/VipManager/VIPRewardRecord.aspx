@@ -18,7 +18,7 @@
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：用户系统 - 用户管理
+                <td width="1232" height="25" valign="top" align="left">你当前位置：用户系统 - VIP领取记录
                 </td>
             </tr>
         </table>
@@ -43,6 +43,7 @@
                         <asp:ListItem Text="VIP7" Value="7"></asp:ListItem>
                         <asp:ListItem Text="VIP8" Value="8"></asp:ListItem>
                         <asp:ListItem Text="VIP9" Value="9"></asp:ListItem>
+                        <asp:ListItem Text="VIP9" Value="10"></asp:ListItem>
                     </asp:DropDownList>
                 </td>
                 <td align="center" style="width: 80px">特权名称：

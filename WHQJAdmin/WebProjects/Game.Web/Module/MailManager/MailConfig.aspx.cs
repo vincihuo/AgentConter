@@ -38,8 +38,8 @@ namespace Game.Web.Module.MailManager
         }
         protected void BindData()
         {
-            PagerSet pagerSet = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename, SearchItems, " ORDER BY SendTime ", anpNews.CurrentPageIndex, anpNews.PageSize);
-            anpNews.RecordCount = pagerSet.PageSize;
+            PagerSet pagerSet = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename, SearchItems, " ORDER BY SendTime DESC ", anpNews.CurrentPageIndex, anpNews.PageSize);
+            anpNews.RecordCount = pagerSet.RecordCount;
             rptDataList.DataSource = pagerSet.PageSet;
             rptDataList.DataBind();
             litNoData.Visible = pagerSet.RecordCount == 0;
@@ -75,7 +75,7 @@ namespace Game.Web.Module.MailManager
 
             if (TextBox2.Text != "")
             {
-                condition.AppendFormat(" AND UserID={0}", TextBox2.Text);
+                condition.AppendFormat(" AND id={0}", TextBox2.Text);
             }
 
             if (DropDownList1.SelectedValue != "-1")

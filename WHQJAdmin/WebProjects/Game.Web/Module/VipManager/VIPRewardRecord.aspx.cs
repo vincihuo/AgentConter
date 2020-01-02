@@ -18,7 +18,7 @@ namespace Game.Web.Module.VipManager
         }
         private void BindData()
         {
-            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("RecordVIPReward", SearchItems, " ORDER BY TackTime ", anpNews.CurrentPageIndex, anpNews.PageSize);
+            PagerSet pagerSet = FacadeManage.aideRecordFacade.GetList("RecordVIPReward", SearchItems, " ORDER BY TackTime DESC ", anpNews.CurrentPageIndex, anpNews.PageSize);
             anpNews.RecordCount = pagerSet.RecordCount;
             rptDataList.DataSource = pagerSet.PageSet.Tables[0];
             rptDataList.DataBind();
@@ -88,6 +88,8 @@ namespace Game.Web.Module.VipManager
             string RETime = txtEndDate.Text;
             if (RSTime != "" && RETime != "")
             {
+                RSTime += " 00:00:00";
+                RETime += " 23:59:59";
                 condition.AppendFormat(" AND TackTime BETWEEN '{0}' AND '{1}' ", RSTime, RETime);
             }
             ViewState["SearchItems"] = condition.ToString();

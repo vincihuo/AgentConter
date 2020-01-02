@@ -209,6 +209,8 @@ namespace Game.Facade
                     return "转盘";
                 case 17:
                     return "VIP奖励";
+                case 18:
+                    return "邮件";
                 default:
                     return "未知类型";
             }
