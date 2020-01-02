@@ -47,13 +47,13 @@ namespace Game.Web.Module.MailManager
                 AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(txtGameID.Text));
                 if (acc == null)
                 {
-                    ShowError("玩家不存在");
+                    MessageBox("玩家不存在");
                     return;
                 }
                 mail.UserID = acc.UserID;
             }
             int res= FacadeManage.aidePlatformFacade.SendMail(mail);
-            if (res == 1)
+            if (res > 0)
             {
                 MessageBox("发送成功");
             }
