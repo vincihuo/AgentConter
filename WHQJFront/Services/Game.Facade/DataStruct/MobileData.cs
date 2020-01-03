@@ -319,7 +319,7 @@ namespace Game.Facade.DataStruct
     {
         public DateTime time;
         public string turnName;
-        public long money;
+        public decimal money;
         public string nickName;
     }
 

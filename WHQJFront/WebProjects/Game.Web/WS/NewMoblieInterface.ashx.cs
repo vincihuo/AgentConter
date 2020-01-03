@@ -517,13 +517,13 @@ namespace Game.Web.WS
                     break;
             }
 
-            long reward = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+            decimal reward = (decimal)money.GetType().GetProperty("Value" + i).GetValue(money, null);
 
-            Message mm = FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index, i, reward * 1000, Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
+            Message mm = FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index, i,(long) (reward * 1000), Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
             if (mm.Success)
             {
                 TurntableReward record = new TurntableReward();
-                record.money = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+                record.money = (decimal)money.GetType().GetProperty("Value" + i).GetValue(money, null);
                 record.time = DateTime.Now;
                 record.turnName = tName;
                 record.nickName = user.NickName;

@@ -278,7 +278,6 @@
     <Content Include="Module\TurntableManager\TurntableConfigInfo.aspx" />
     <Content Include="Module\TurntableManager\TurntableCount.aspx" />
     <Content Include="Module\TurntableManager\TurntableRecord.aspx" />
-    <Content Include="Module\VipManager\UserVipPage.aspx" />
     <Content Include="Module\VipManager\VipConfigInfo.aspx" />
     <Content Include="Module\VipManager\VipConfigList.aspx" />
     <Content Include="Module\VipManager\VIPRewardRecord.aspx" />
@@ -3853,13 +3852,6 @@
     </Compile>
     <Compile Include="Module\TurntableManager\TurntableRecord.aspx.designer.cs">
       <DependentUpon>TurntableRecord.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Module\VipManager\UserVipPage.aspx.cs">
-      <DependentUpon>UserVipPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Module\VipManager\UserVipPage.aspx.designer.cs">
-      <DependentUpon>UserVipPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\VipManager\VipConfigInfo.aspx.cs">
       <DependentUpon>VipConfigInfo.aspx</DependentUpon>

@@ -36,19 +36,19 @@ namespace Game.Web.Module.TurntableManager
         protected void btnSave_Click(object sender, EventArgs e)
         {
             TurntableConfig cfg = new TurntableConfig();
-            cfg.Value1 = Convert.ToInt64(TextBox1.Text);
-            cfg.Value2 = Convert.ToInt64(TextBox2.Text);
-            cfg.Value3 = Convert.ToInt64(TextBox3.Text);
-            cfg.Value4 = Convert.ToInt64(TextBox4.Text);
-            cfg.Value5 = Convert.ToInt64(TextBox5.Text);
-            cfg.Value6 = Convert.ToInt64(TextBox6.Text);
-            cfg.Value7 = Convert.ToInt64(TextBox7.Text);
-            cfg.Value8 = Convert.ToInt64(TextBox8.Text);
-            cfg.Value9 = Convert.ToInt64(TextBox9.Text);
-            cfg.Value10 = Convert.ToInt64(TextBox10.Text);
-            cfg.Value11 = Convert.ToInt64(TextBox11.Text);
-            cfg.Value12 = Convert.ToInt64(TextBox12.Text);
-            cfg.Value13 = Convert.ToInt64(TextBox13.Text);
+            cfg.Value1 = Convert.ToDecimal(TextBox1.Text);
+            cfg.Value2 = Convert.ToDecimal(TextBox2.Text);
+            cfg.Value3 = Convert.ToDecimal(TextBox3.Text);
+            cfg.Value4 = Convert.ToDecimal(TextBox4.Text);
+            cfg.Value5 = Convert.ToDecimal(TextBox5.Text);
+            cfg.Value6 = Convert.ToDecimal(TextBox6.Text);
+            cfg.Value7 = Convert.ToDecimal(TextBox7.Text);
+            cfg.Value8 = Convert.ToDecimal(TextBox8.Text);
+            cfg.Value9 = Convert.ToDecimal(TextBox9.Text);
+            cfg.Value10 = Convert.ToDecimal(TextBox10.Text);
+            cfg.Value11 = Convert.ToDecimal(TextBox11.Text);
+            cfg.Value12 = Convert.ToDecimal(TextBox12.Text);
+            cfg.Value13 = Convert.ToDecimal(TextBox13.Text);
             cfg.id = IntParam;
             int mm= FacadeManage.aidePlatformFacade.SaveTurnTable(cfg);
             if (mm > 0)
