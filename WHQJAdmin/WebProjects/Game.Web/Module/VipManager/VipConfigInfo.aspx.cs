@@ -35,7 +35,7 @@ namespace Game.Web.Module.VipManager
         {
             VipConfig config = new VipConfig();
             config.VipLevel = IntParam;
-            config.Integral = Convert.ToDecimal(TextBox2.Text);
+            config.Integral = Convert.ToInt64(TextBox2.Text);
             config.Fresh = Convert.ToDecimal(TextBox3.Text);
             config.Week = Convert.ToDecimal(TextBox4.Text);
             config.Month = Convert.ToDecimal(TextBox5.Text);
