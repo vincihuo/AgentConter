@@ -411,7 +411,7 @@ namespace Game.Web.WS
         {
             int index = GameRequest.GetQueryInt("index", 1);
             int size = GameRequest.GetQueryInt("size", 1);
-            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<2", " ORDER BY MState ,SendTime DESC");
+            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<3", " ORDER BY MState ,SendTime DESC");
             IList<UserMail> list = DataHelper.ConvertDataTableToObjects<UserMail>(ps.PageSet.Tables[0]);
             _ajv.SetDataItem("mails", list);
         }
@@ -492,55 +492,53 @@ namespace Game.Web.WS
             int index= GameRequest.GetQueryInt("index", 0);
             IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
-            if (validBet.GrandScore > Convert.ToInt64(list[index * 5].MenuVaule) * 1000)
-            {
-                AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-                TurntableConfig money = list[index * 5];
-                TurntableConfig broad = list[5 * index + 2];
-
-                int i = FacadeManage.StartTurntable(list[index * 5 + 1]);
-                string tName = "";
-                switch (index)
-                {
-                    case 0:
-                        tName = "白银转盘";
-                        break;
-                    case 1:
-                        tName = "黄金转盘";
-                        break;
-                    default:
-                        tName = "钻石转盘";
-                        break;
-                }
-
-                long reward = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
-                
-                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index,i, reward*1000, Convert.ToInt64(list[index * 5].MenuVaule)*1000);
-                if (mm.Success)
-                {
-                    TurntableReward record = new TurntableReward();
-                    record.money = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
-                    record.time = DateTime.Now;
-                    record.turnName = tName;
-                    record.nickName = user.NickName;
-                    long bBord = (long)broad.GetType().GetProperty("Value" + i).GetValue(broad, null);
-                    FacadeManage.PustTurnTableRecord(record, (int)bBord);
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("pos", i);
-                    _ajv.SetDataItem("Score", validBet.GrandScore- Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
-                }
-                else
-                {
-                    _ajv.SetValidDataValue(false);
-                    _ajv.msg = mm.Content;
-                }
-            }
-            else
+            if (validBet.GrandScore < Convert.ToInt64(list[index * 5].MenuVaule) * 1000)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
                 _ajv.msg = $"积分不足";
                 return;
             }
+            AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
+            TurntableConfig money = list[index * 5];
+            TurntableConfig broad = list[5 * index + 2];
+
+            int i = FacadeManage.StartTurntable(list[index * 5 + 1]);
+            string tName = "";
+            switch (index)
+            {
+                case 0:
+                    tName = "白银转盘";
+                    break;
+                case 1:
+                    tName = "黄金转盘";
+                    break;
+                default:
+                    tName = "钻石转盘";
+                    break;
+            }
+
+            long reward = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+
+            Message mm = FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index, i, reward * 1000, Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
+            if (mm.Success)
+            {
+                TurntableReward record = new TurntableReward();
+                record.money = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+                record.time = DateTime.Now;
+                record.turnName = tName;
+                record.nickName = user.NickName;
+                long bBord = (long)broad.GetType().GetProperty("Value" + i).GetValue(broad, null);
+                FacadeManage.PustTurnTableRecord(record, (int)bBord);
+                _ajv.SetValidDataValue(true);
+                _ajv.SetDataItem("pos", i);
+                _ajv.SetDataItem("Score", validBet.GrandScore - Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
+            }
+            else
+            {
+                _ajv.SetValidDataValue(false);
+                _ajv.msg = mm.Content;
+            }
+
 
         }
         private void GetTurntables()
