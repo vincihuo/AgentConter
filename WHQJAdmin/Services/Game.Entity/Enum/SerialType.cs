@@ -88,7 +88,7 @@ namespace Game.Entity.Enum
         /// <summary>
         /// 充值赠送
         /// </summary>
-        [EnumDescription("充值赠送")]
+        [EnumDescription("金币购买")]
         钻石兑换 = 12,
 
         /// <summary>
