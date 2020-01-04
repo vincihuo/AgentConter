@@ -527,7 +527,7 @@ namespace Game.Web.WS
                 record.time = DateTime.Now;
                 record.turnName = tName;
                 record.nickName = user.NickName;
-                long bBord = (long)broad.GetType().GetProperty("Value" + i).GetValue(broad, null);
+                decimal bBord = (decimal)(broad.GetType().GetProperty("Value" + i).GetValue(broad, null));
                 FacadeManage.PustTurnTableRecord(record, (int)bBord);
                 _ajv.SetValidDataValue(true);
                 _ajv.SetDataItem("pos", i);
