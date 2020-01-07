@@ -464,5 +464,10 @@ namespace Game.IData
         int SaveTurnTable(TurntableConfig cfg);
         int SaveMenuValue(int id, int value);
         int SendMail(UserMail mail);
+        DomainName GetDomainById(int id);
+        int SaveDomain(DomainName dn);
+        int OffDownloadURL();
+        int DeleteUrl(int id);
+        int SetDomaState(int id, int state);
     }
 }

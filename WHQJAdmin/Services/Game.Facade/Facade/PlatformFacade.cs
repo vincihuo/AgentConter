@@ -694,5 +694,25 @@ namespace Game.Facade
         {
             return _aidePlatformData.SendMail(mail);
         }
+        public DomainName GetDomainById(int id)
+        {
+            return _aidePlatformData.GetDomainById(id);
+        }
+        public int SaveDomain(DomainName dn)
+        {
+            return _aidePlatformData.SaveDomain(dn);
+        }
+        public int OffDownloadURL()
+        {
+            return _aidePlatformData.OffDownloadURL();
+        }
+        public int DeleteUrl(int id)
+        {
+            return _aidePlatformData.DeleteUrl(id);
+        }
+        public int SetDomaState(int id,int state)
+        {
+            return _aidePlatformData.SetDomaState(id,state);
+        }
     }
 }

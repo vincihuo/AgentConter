@@ -1198,6 +1198,45 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sql, prams.ToArray());
         }
-
+        public DomainName GetDomainById(int id)
+        {
+            string sql = $"SELECT * FROM DomainName WHERE id={id}";
+            return Database.ExecuteObject<DomainName>(sql);
+        }
+        public int SaveDomain(DomainName dn)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("id", dn.id),
+                Database.MakeInParam("Url", dn.Url),
+                Database.MakeInParam("AgentId", dn.AgentId),
+                Database.MakeInParam("Type", dn.Type),
+                Database.MakeInParam("Mode", dn.Mode),
+                Database.MakeInParam("State", dn.State)
+            };
+            if (dn.id > 0)
+            {
+                string uSql = "UPDATE [dbo].[DomainName] SET Url=@Url,AgentId=@AgentId,Type=@Type,State=@State,Mode=@Mode WHERE id=@id";
+                return Database.ExecuteNonQuery(CommandType.Text, uSql, prams.ToArray());
+            }
+            else
+            {
+                string aSql =
+                @"INSERT INTO DomainName(Url,AgentId,Type,State,Mode) VALUES(@Url,@AgentId,@Type,@State,@Mode)";
+                return Database.ExecuteNonQuery(CommandType.Text, aSql, prams.ToArray());
+            }
+        }
+        public int OffDownloadURL()
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, "UPDATE [dbo].[DomainName] SET State=0 WHERE Type=1");
+        }
+        public int DeleteUrl(int id)
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, $"DELETE [dbo].[DomainName]  WHERE id={id}");
+        }
+        public int SetDomaState(int id, int state)
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, $"UPDATE [dbo].[DomainName] SET State={state} WHERE id={id}");
+        }
     }
 }

@@ -85,7 +85,7 @@ namespace Game.Web.Module.AgentManager
                 }
             }
             PagerSet pagerSet = FacadeManage.aideTreasureFacade.GetListLock(" WHQJAccountsDB.dbo.AccountsInfo (NOLOCK) A INNER JOIN WHQJTreasureDB.dbo.AgentInfo (NOLOCK) R ON A.UserID = R.UserID ",
-                condition.ToString(), " ORDER BY BackMoney DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "R.UserID,A.GameID,A.NickName,R.SubNumber,R.AllReward,R.ParentID,R.Reward,R.BackMoney,R.LinkUrl");
+                condition.ToString(), " ORDER BY BackMoney DESC ", anpPage.CurrentPageIndex, anpPage.PageSize, "R.UserID,A.GameID,A.NickName,R.SubNumber,R.AllReward,R.ParentID,R.Reward,R.BackMoney");
             anpPage.RecordCount = pagerSet.RecordCount;
             if (pagerSet.RecordCount > 0)
             {
