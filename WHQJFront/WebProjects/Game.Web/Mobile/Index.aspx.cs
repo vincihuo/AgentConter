@@ -79,7 +79,7 @@ namespace Game.Web.Mobile
                 Mobiledown = Fetch.GetUploadFileUrl(imgDomain, "/Site/downLoad.png");
                 MobileCase = Fetch.GetUploadFileUrl(imgDomain, "/Site/spreadcase.png");
                 Random random = new Random();
-                MobileQrcode = Fetch.GetQrCode("http://" + Request.Url.Authority + "/Mobile/DownLoad.aspx?r="+ random.Next(1000, 9999), 312);
+                MobileQrcode = Fetch.GetQrCode("http://" + Request.Url.Authority + "/Index.aspx?r="+ random.Next(1000, 9999), 312);
                 Title = AppConfig.PageTitle;
 
 
