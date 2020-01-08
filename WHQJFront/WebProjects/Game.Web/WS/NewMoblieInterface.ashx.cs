@@ -419,7 +419,7 @@ namespace Game.Web.WS
         {
             int type = GameRequest.GetQueryInt("type", 1);
             string ip= GameRequest.GetHost();
-            long reward = FacadeManage.aideTreasureFacade.GetVipReward(type,_userid,ip);
+            decimal reward = FacadeManage.aideTreasureFacade.GetVipReward(type,_userid,ip);
             _ajv.SetDataItem("reward", reward);
         }
         private void GetVipInfo()
@@ -439,33 +439,37 @@ namespace Game.Web.WS
             {
                 DataRow row = ds.Tables[1].Rows[0];
                 userVip.VipLevel = Convert.ToInt32(row["VipLevel"]);
-                userVip.FresReward = Convert.ToInt64(row["FreshReward"]);
-                userVip.WeekReward = Convert.ToInt64(row["WeekReward"]);
-                userVip.MonthReward = Convert.ToInt64(row["MonthReward"]);
+                userVip.FresReward = Convert.ToInt32(row["FreshReward"]);
+                userVip.WeekReward = Convert.ToInt32(row["WeekReward"]);
+                userVip.MonthReward = Convert.ToInt32(row["MonthReward"]);
                 userVip.Exp = Convert.ToInt64(row["Score"])/1000;
-                if (Convert.ToInt32(row["CheckInReward"])==1)
-                {
-                    int days = 1;
-                    if (row["LastTime"]!= DBNull.Value)
-                    {
-                        TimeSpan timeSpan = DateTime.Now - Convert.ToDateTime(row["LastTime"]);
-                        days = timeSpan.Days;
-                        if (days == 1)
-                        {
-                            days += 1;
-                            if (days > 7)
-                            {
-                                days = 1;
-                            }
-                        }
-                        else
-                        {
-                            days = 1;
-                        }
-                    }
-                    DataRow cfg = ds.Tables[0].Rows[userVip.VipLevel];
-                    userVip.DayReward = Convert.ToInt64(cfg["Day"+days]);
-                }
+                userVip.DayReward = Convert.ToInt32(row["CheckInReward"]);
+                //if (Convert.ToInt32(row["CheckInReward"])==1)
+                //{
+                //    int days = 1;
+                //    if (row["LastTime"]!= DBNull.Value)
+                //    {
+                //        TimeSpan timeSpan = DateTime.Now - Convert.ToDateTime(row["LastTime"]);
+                //        days = timeSpan.Days;
+                //        if (days == 1)
+                //        {
+                //            days += 1;
+                //            if (days > 7)
+                //            {
+                //                days = 1;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            days = 1;
+                //        }
+                //    }
+                //    DataRow cfg = ds.Tables[0].Rows[userVip.VipLevel];
+                //    if (Convert.ToDecimal(cfg["Day" + days]) > 0)
+                //    {
+                //        userVip.DayReward = 1;
+                //    }
+                //}
 
             }
             for (int i = 0; i < configs.Count-1; ++i)
