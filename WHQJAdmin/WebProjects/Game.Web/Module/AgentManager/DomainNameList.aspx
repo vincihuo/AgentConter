@@ -1,6 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AgentList.aspx.cs" Inherits="Game.Web.Module.AgentManager.AgentList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DomainNameList.aspx.cs" Inherits="Game.Web.Module.AgentManager.DomainNameList" %>
 
-<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,58 +11,44 @@
     <script type="text/javascript" src="../../scripts/common.js"></script>
 
     <script type="text/javascript" src="../../scripts/comm.js"></script>
-
-    <script type="text/javascript">
-        function getnickname(id) {
-            $("#txtGameID")
-        }
-    </script>
-
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- 头部菜单 Start -->
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
             <tr>
                 <td width="19" height="25" valign="top" class="Lpd10">
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：代理系统 - 代理管理
+                <td width="1232" height="25" valign="top" align="left">你当前位置：代理系统 - 域名配置
                 </td>
             </tr>
         </table>
-        <!-- 头部菜单 End -->
-        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
-                <td align="center" style="width: 80px">代理查询：
-                </td>
-                <td>
-                    <asp:TextBox ID="txtSearch" runat="server" CssClass="text"></asp:TextBox>
-                    <asp:DropDownList ID="ddlSearchType" runat="server">
-                        <asp:ListItem Text="游戏ID" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="上级ID" Value="2"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
+                <td class="titleOpBg Lpd10">
+                    <input id="btn1" type="button" class="btn wd1" value="新增域名" onclick="Redirect('DomainNameSet.aspx');" />
                 </td>
             </tr>
         </table>
+
+
         <div id="content">
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="box" id="list">
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="box Tmg7" id="list">
                 <tr align="center" class="bold">
-                    <td class="listTitle2">游戏ID
+                    <td class="listTitle2">域名类型
                     </td>
-                    <td class="listTitle2">代理昵称
+                    <td class="listTitle2">域名
                     </td>
-                    <td class="listTitle2">产生返利
+                    <td class="listTitle2">推广标识
                     </td>
-                    <td class="listTitle2">下级人数
+                    <td class="listTitle2">推广人数
                     </td>
-                    <td class="listTitle2">可领取奖励
+                    <td class="listTitle2">状态
                     </td>
-                    <td class="listTitle2">已领奖励
+                    <td class="listTitle2">模板样式
                     </td>
-                    <td class="listTitle2">代理操作
+                    <td class="listTitle2">操作
                     </td>
                 </tr>
                 <asp:Repeater ID="rptDataList" runat="server">
@@ -71,26 +56,27 @@
                         <tr align="center" class="list" onmouseover="currentcolor=this.style.backgroundColor;this.style.backgroundColor='#caebfc';this.style.cursor='default';"
                             onmouseout="this.style.backgroundColor=currentcolor">
                             <td>
-                                <%# Eval( "GameID" ) %>
+                                <%#GetUrlTyep(Convert.ToByte(Eval("Type")))%>
                             </td>
                             <td>
-                                <%# Eval( "NickName" ) %>
+                                <%# Eval("Url")%>
                             </td>
                             <td>
-                                <%#FacadeManage.ConversionMoneyToShow(Eval("BackMoney").ToString())%>
+                                <%# Eval("AgentId")%>
                             </td>
                             <td>
-                                <%# Eval( "SubNumber" ) %>
+                                <%# Eval("Number")%>
                             </td>
                             <td>
-                                <%#FacadeManage.ConversionMoneyToShow(Eval("Reward").ToString()) %>
+                                <%# Eval("State")%>
                             </td>
                             <td>
-                                <%#FacadeManage.ConversionMoneyToShow(Eval("AllReward").ToString()) %>
+                                <%# Eval("Mode")%>
                             </td>
                             <td>
-                                <a class="l" href="javascript:void(0)" onclick="Redirect('AgetRewardCount.aspx?param='+<%# Eval("UserID")%>);">返利报表</a>
-                                <a class="l" href="javascript:void(0)" style="<%# GetStyle(Convert.ToInt32(Eval("ParentID")))%>" onclick="Redirect('AgentList.aspx?param='+<%# Eval("ParentID")%>);">查看上级</a>
+                                <a class="l" href="javascript:void(0)" onclick="openWindowOwn('DomainNameSet.aspx?param=<%#Eval("id").ToString() %>','tip',600,300);">编辑</a>
+                                <asp:LinkButton runat="server" ForeColor="blue" OnClientClick='<%#SetDelete(Convert.ToByte(Eval("Type")),Eval("Url").ToString()) %>' OnClick="DeleteUrl" CommandArgument='<%#Eval("id").ToString() %>' >删除</asp:LinkButton>
+                                <asp:LinkButton runat="server" ForeColor="blue" OnClientClick='<%#SetOff(Convert.ToByte(Eval("Type")),Convert.ToByte(Eval("State")),Eval("Url").ToString()) %>' OnClick="OffUrl" CommandArgument='<%#Convert.ToInt32(Eval("id"))*10+Convert.ToInt32(Eval("State"))%>' ><%#GetState(Convert.ToByte(Eval("State"))) %></asp:LinkButton>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -98,6 +84,7 @@
                 <asp:Literal runat="server" ID="litNoData" Visible="false" Text="<tr class='tdbg'><td colspan='100' align='center'><br>没有任何信息!<br><br></td></tr>"></asp:Literal>
             </table>
         </div>
+
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="listTitleBg">

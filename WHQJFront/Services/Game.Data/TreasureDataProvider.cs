@@ -207,20 +207,20 @@ namespace Game.Data
             return Database.ExecuteObjectList<OnLineWeChat>(sqlQuery);
         }
 
-        public long GetVipReward(int type, int uid,string ip)
+        public decimal GetVipReward(int type, int uid,string ip)
         {
             var prams = new List<DbParameter>
             {
                 Database.MakeInParam("dwUserID", uid),
                 Database.MakeInParam("Type", type),
                 Database.MakeInParam("Ip", ip),
-                Database.MakeOutParam("Reward", typeof(long)),
+                Database.MakeOutParam("Reward", typeof(decimal)),
                 Database.MakeOutParam("strErrorDescribe", typeof(string),127),
             };
             Message msg= MessageHelper.GetMessage(Database, "NET_PW_GetVipReward", prams);
             if (msg.Success)
             {
-                return Convert.ToInt64(prams[3].Value);
+                return Convert.ToDecimal(prams[3].Value);
             }
             return 0;
         }

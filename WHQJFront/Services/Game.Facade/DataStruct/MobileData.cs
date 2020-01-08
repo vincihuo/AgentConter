@@ -201,10 +201,10 @@ namespace Game.Facade.DataStruct
     {
         public long Exp { get; set; }
         public int VipLevel { get; set; }
-        public long FresReward { get; set; }
-        public long DayReward { get; set; }
-        public long WeekReward { get; set; }
-        public long MonthReward { get; set; }
+        public int FresReward { get; set; }
+        public int DayReward { get; set; }
+        public int WeekReward { get; set; }
+        public int MonthReward { get; set; }
     }
     public class AgentReward
     {
@@ -319,7 +319,7 @@ namespace Game.Facade.DataStruct
     {
         public DateTime time;
         public string turnName;
-        public long money;
+        public decimal money;
         public string nickName;
     }
 

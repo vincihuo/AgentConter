@@ -103,7 +103,7 @@ namespace Game.IData
         int GetIdByLink(string link);
         Message DealTurnTable(int uid, string tableName,int index,int open, long reward, long score);
         DataSet GetUserVip(int uid);
-        long GetVipReward(int type, int uid,string ip);
+        decimal GetVipReward(int type, int uid,string ip);
         #endregion
 
         #region 钻石信息

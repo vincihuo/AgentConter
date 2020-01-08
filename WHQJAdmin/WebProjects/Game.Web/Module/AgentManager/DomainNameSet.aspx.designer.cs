@@ -7,11 +7,13 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace Game.Web.Module.MailManager {
-    
-    
-    public partial class MailAddPage {
-        
+namespace Game.Web.Module.AgentManager
+{
+
+
+    public partial class DomainNameSet
+    {
+
         /// <summary>
         /// form1 控件。
         /// </summary>
@@ -20,34 +22,52 @@ namespace Game.Web.Module.MailManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
-        /// btnSave 控件。
+        /// btnCreate 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-        
+        protected global::System.Web.UI.WebControls.Button btnCreate;
+
         /// <summary>
-        /// trGameID 控件。
+        /// ScriptManager1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trGameID;
-        
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
         /// <summary>
-        /// txtGameID 控件。
+        /// UpdatePanel1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGameID;
-        
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// ddlProductType 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProductType;
+
+        /// <summary>
+        /// TextBoxUrl 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxUrl;
+
         /// <summary>
         /// RequiredFieldValidator2 控件。
         /// </summary>
@@ -56,34 +76,16 @@ namespace Game.Web.Module.MailManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
+
         /// <summary>
-        /// TextTitle 控件。
+        /// TextSign 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextTitle;
-        
-        /// <summary>
-        /// RequiredFieldValidator3 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
-        
-        /// <summary>
-        /// TextBox1 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
-        
+        protected global::System.Web.UI.WebControls.TextBox TextSign;
+
         /// <summary>
         /// RequiredFieldValidator1 控件。
         /// </summary>
@@ -92,32 +94,32 @@ namespace Game.Web.Module.MailManager {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
+
         /// <summary>
-        /// txtGold 控件。
+        /// DropDownListState 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGold;
-        
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListState;
+
         /// <summary>
-        /// txtVileBet 控件。
+        /// LableHit 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVileBet;
-        
+        protected global::System.Web.UI.WebControls.Label LableHit;
+
         /// <summary>
-        /// TextDimao 控件。
+        /// Button1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextDimao;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

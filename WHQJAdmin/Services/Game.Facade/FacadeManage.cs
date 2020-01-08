@@ -2,6 +2,9 @@
 // ReSharper disable InconsistentNaming
 
 using System;
+using System.Net;
+using System.IO;
+using System.Text;
 
 namespace Game.Facade
 {
@@ -227,7 +230,6 @@ namespace Game.Facade
         {
             return a * 1000;
         }
-
         public static string GetBankName(int type)
         {
             switch (type)
@@ -247,6 +249,33 @@ namespace Game.Facade
                 default:
                     return "未绑定";
             }
+        }
+        public static string RequestUri(string uri, string param)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Method = "POST";
+            request.ContentType = "application/x-wwww-form-urlencoded";
+            StreamWriter write = new StreamWriter(request.GetRequestStream(), Encoding.GetEncoding("utf-8"));
+            write.Write(param);
+            write.Flush();
+            HttpWebResponse response = null;
+            try
+            {
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (Exception)
+            {
+            }
+            string strJson = string.Empty;
+            if (response != null)
+            {
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                strJson = reader.ReadToEnd();
+                reader.Close();
+                responseStream.Close();
+            }
+            return strJson;
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TurntableRecord.aspx.cs" Inherits="Game.Web.Module.TurntableManager.TurntableRecord" %>
-
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -93,46 +93,46 @@
                                     <%# Eval( "CountTime" ).ToString()%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild1" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild1" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild2" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild2" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild3" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild3" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild4" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild4" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild5" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild5" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild6" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild6" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild7" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild7" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild8" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild8" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild9" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild9" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild10" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild10" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild11" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild11" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild12" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild12" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild13" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild13" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "MoneyCount" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "MoneyCount" ).ToString())%>
                                 </td>
                                 <td>
                                     <%# Eval( "PersonCount" )%>
@@ -172,25 +172,25 @@
                                     <%# Eval( "CountTime" ).ToString()%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild1" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild1" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild2" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild2" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild3" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild3" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild4" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild4" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild5" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild5" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "Faild6" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild6" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# Eval( "MoneyCount" )%>
+                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "MoneyCount" ).ToString())%>
                                 </td>
                                 <td>
                                     <%# Eval( "PersonCount" )%>

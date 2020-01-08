@@ -198,6 +198,8 @@ namespace Game.Facade.Enum
         /// </summary>
         [EnumDescription("比赛奖励")]
         比赛奖励 = 17,
+        [EnumDescription("邮件")]
+        邮件 = 18,
     }
 
     [Serializable]

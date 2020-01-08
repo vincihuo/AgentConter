@@ -3,6 +3,7 @@ using Game.Facade;
 using Game.Web.UI;
 using Game.Entity.Enum;
 using Game.Entity.Platform;
+using Game.Entity.Accounts;
 
 namespace Game.Web.Module.MailManager
 {
@@ -43,10 +44,16 @@ namespace Game.Web.Module.MailManager
             mail.UserID = 0;
             if (Convert.ToInt32(txtGameID.Text)>0)
             {
-                mail.UserID = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(txtGameID.Text)).UserID;
+                AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(Convert.ToInt32(txtGameID.Text));
+                if (acc == null)
+                {
+                    MessageBox("玩家不存在");
+                    return;
+                }
+                mail.UserID = acc.UserID;
             }
             int res= FacadeManage.aidePlatformFacade.SendMail(mail);
-            if (res == 1)
+            if (res > 0)
             {
                 MessageBox("发送成功");
             }

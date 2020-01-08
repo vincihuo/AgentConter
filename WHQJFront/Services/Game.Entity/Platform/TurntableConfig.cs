@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/12/20 17:41:59
+ * 日期：2020/1/3 14:52:03
  * 
  * 描述：实体类
  * 
@@ -31,19 +31,19 @@ namespace Game.Entity.Platform
         private int p_id;
         private string p_menuname;
         private Int64 p_menuvaule;
-        private Int64 p_value1;
-        private Int64 p_value2;
-        private Int64 p_value3;
-        private Int64 p_value4;
-        private Int64 p_value5;
-        private Int64 p_value6;
-        private Int64 p_value7;
-        private Int64 p_value8;
-        private Int64 p_value9;
-        private Int64 p_value10;
-        private Int64 p_value11;
-        private Int64 p_value12;
-        private Int64 p_value13;
+        private decimal p_value1;
+        private decimal p_value2;
+        private decimal p_value3;
+        private decimal p_value4;
+        private decimal p_value5;
+        private decimal p_value6;
+        private decimal p_value7;
+        private decimal p_value8;
+        private decimal p_value9;
+        private decimal p_value10;
+        private decimal p_value11;
+        private decimal p_value12;
+        private decimal p_value13;
 
         #endregion
 
@@ -124,7 +124,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value1
         /// </summary>
-        public Int64 Value1
+        public decimal Value1
         {
             set
             {
@@ -139,7 +139,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value2
         /// </summary>
-        public Int64 Value2
+        public decimal Value2
         {
             set
             {
@@ -154,7 +154,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value3
         /// </summary>
-        public Int64 Value3
+        public decimal Value3
         {
             set
             {
@@ -169,7 +169,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value4
         /// </summary>
-        public Int64 Value4
+        public decimal Value4
         {
             set
             {
@@ -184,7 +184,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value5
         /// </summary>
-        public Int64 Value5
+        public decimal Value5
         {
             set
             {
@@ -199,7 +199,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value6
         /// </summary>
-        public Int64 Value6
+        public decimal Value6
         {
             set
             {
@@ -214,7 +214,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value7
         /// </summary>
-        public Int64 Value7
+        public decimal Value7
         {
             set
             {
@@ -229,7 +229,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value8
         /// </summary>
-        public Int64 Value8
+        public decimal Value8
         {
             set
             {
@@ -244,7 +244,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value9
         /// </summary>
-        public Int64 Value9
+        public decimal Value9
         {
             set
             {
@@ -259,7 +259,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value10
         /// </summary>
-        public Int64 Value10
+        public decimal Value10
         {
             set
             {
@@ -274,7 +274,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value11
         /// </summary>
-        public Int64 Value11
+        public decimal Value11
         {
             set
             {
@@ -289,7 +289,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value12
         /// </summary>
-        public Int64 Value12
+        public decimal Value12
         {
             set
             {
@@ -304,7 +304,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Value13
         /// </summary>
-        public Int64 Value13
+        public decimal Value13
         {
             set
             {

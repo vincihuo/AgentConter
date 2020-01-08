@@ -149,6 +149,8 @@
     <Content Include="Module\AgentManager\AgentReturnConfigInfo.aspx" />
     <Content Include="Module\AgentManager\AgentReturnConfigList.aspx" />
     <Content Include="Module\AgentManager\AgetRewardCount.aspx" />
+    <Content Include="Module\AgentManager\DomainNameList.aspx" />
+    <Content Include="Module\AgentManager\DomainNameSet.aspx" />
     <Content Include="Module\AgentManager\SystemSet.aspx" />
     <Content Include="Module\AppManager\DataBaseInfoInfo.aspx" />
     <Content Include="Module\AppManager\DataBaseInfoList.aspx" />
@@ -278,7 +280,7 @@
     <Content Include="Module\TurntableManager\TurntableConfigInfo.aspx" />
     <Content Include="Module\TurntableManager\TurntableCount.aspx" />
     <Content Include="Module\TurntableManager\TurntableRecord.aspx" />
-    <Content Include="Module\VipManager\UserVipPage.aspx" />
+    <Content Include="Module\TurntableManager\UserTurntableRecord.aspx" />
     <Content Include="Module\VipManager\VipConfigInfo.aspx" />
     <Content Include="Module\VipManager\VipConfigList.aspx" />
     <Content Include="Module\VipManager\VIPRewardRecord.aspx" />
@@ -2951,6 +2953,20 @@
     <Compile Include="Module\AgentManager\AgetRewardCount.aspx.designer.cs">
       <DependentUpon>AgetRewardCount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\AgentManager\DomainNameList.aspx.cs">
+      <DependentUpon>DomainNameList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\AgentManager\DomainNameList.aspx.designer.cs">
+      <DependentUpon>DomainNameList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\AgentManager\DomainNameSet.aspx.cs">
+      <DependentUpon>DomainNameSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\AgentManager\DomainNameSet.aspx.designer.cs">
+      <DependentUpon>DomainNameSet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\AgentManager\SystemSet.aspx.cs">
       <DependentUpon>SystemSet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3854,12 +3870,12 @@
     <Compile Include="Module\TurntableManager\TurntableRecord.aspx.designer.cs">
       <DependentUpon>TurntableRecord.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Module\VipManager\UserVipPage.aspx.cs">
-      <DependentUpon>UserVipPage.aspx</DependentUpon>
+    <Compile Include="Module\TurntableManager\UserTurntableRecord.aspx.cs">
+      <DependentUpon>UserTurntableRecord.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Module\VipManager\UserVipPage.aspx.designer.cs">
-      <DependentUpon>UserVipPage.aspx</DependentUpon>
+    <Compile Include="Module\TurntableManager\UserTurntableRecord.aspx.designer.cs">
+      <DependentUpon>UserTurntableRecord.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\VipManager\VipConfigInfo.aspx.cs">
       <DependentUpon>VipConfigInfo.aspx</DependentUpon>

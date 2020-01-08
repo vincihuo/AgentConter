@@ -38,6 +38,7 @@
                 <td>
                     <asp:TextBox ID="txtGameID" runat="server" CssClass="text wd4" MaxLength="7"></asp:TextBox>
                     <span class="hong">0表示发送所有玩家</span>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="请输入玩家id" Display="Dynamic" ControlToValidate="txtGameID" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
@@ -46,7 +47,7 @@
                 <td>
                     <asp:TextBox ID="TextTitle" runat="server" MaxLength="8" CssClass="text wd4"></asp:TextBox>
                     <span class="hong">8个字以内</span>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入邮件标题" Display="Dynamic" ControlToValidate="TextTitle" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="请输入玩家id" Display="Dynamic" ControlToValidate="TextTitle" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>

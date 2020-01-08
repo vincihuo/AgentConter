@@ -13,7 +13,7 @@ CREATE PROCEDURE NET_PW_GetVipReward
     -- 操作用户
     @Type               INT,
     @Ip                 NVARCHAR(15),
-    @Reward             BIGINT OUTPUT,
+    @Reward             DECIMAL(18,2) OUTPUT,
     @strErrorDescribe	NVARCHAR(127) OUTPUT
     -- 输出信息
 WITH
@@ -91,7 +91,7 @@ BEGIN
     BEGIN
         IF @Day<>1
         BEGIN
-        SET @strErrorDescribe=N'没有奖励可以领取！'
+        SET @strErrorDescribe=N'不可领取或者已经领取！'
         RETURN 104
         END
         IF DATEDIFF(dd,@LastTime,GETDATE())>1
@@ -107,14 +107,14 @@ BEGIN
             END
         END
         UPDATE UserVipInfo SET CheckInReward=2,DayIndex=@DayIndex WHERE UserID=@dwUserID
-        DECLARE @DayReward BIGINT
+        DECLARE @DayReward DECIMAL(18,2)
         DECLARE @cSql NVARCHAR(1000)
         SET @cSql='SELECT @DayReward= Day'+ CONVERT(NVARCHAR,@DayIndex)+' FROM  WHQJPlatformDB.dbo.VipConfig WHERE VipLevel='+CONVERT(NVARCHAR,@VipLevel)
-        EXECUTE sp_executesql @cSql,N'@DayReward int out',@DayReward OUT
+        EXECUTE sp_executesql @cSql,N'@DayReward DECIMAL(18,2) out',@DayReward OUT
         SET @Reward=@DayReward
         IF @Reward=0
         BEGIN
-        SET @strErrorDescribe=N'没有奖励可以领取！'
+        SET @strErrorDescribe=N'签到奖励0！'
         RETURN 1041
         END
         SET @RecordType=@DayIndex+3
@@ -122,7 +122,7 @@ BEGIN
     SET @Reward=@Reward*1000
     IF @Reward=0
     BEGIN
-        SET @strErrorDescribe=N'没有奖励奖励！'
+        SET @strErrorDescribe=N'领取到0！'
         RETURN 101
     END
 

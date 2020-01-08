@@ -209,6 +209,8 @@ namespace Game.Facade
                     return "转盘";
                 case 17:
                     return "VIP奖励";
+                case 18:
+                    return "邮件";
                 default:
                     return "未知类型";
             }
@@ -232,7 +234,7 @@ namespace Game.Facade
             AccountsInfo android = aideAccountsFacade.RandomAndroid();
             int index = StartTurntable(list[5 * turnIndex + 3]);
             TurntableReward record = new TurntableReward();
-            record.money  = (long)money.GetType().GetProperty("Value" + index).GetValue(money, null);
+            record.money  = (decimal)(money.GetType().GetProperty("Value" + index).GetValue(money, null));
             record.time = DateTime.Now;
             string tName = "";
             switch (turnIndex)
@@ -249,8 +251,8 @@ namespace Game.Facade
             }
             record.turnName = tName;
             record.nickName = android.NickName;
-            long mm = (long)broad.GetType().GetProperty("Value" + index).GetValue(broad, null);
-            PustTurnTableRecord(record, (int)mm);
+            int mm = (int)((decimal)(broad.GetType().GetProperty("Value" + index).GetValue(broad, null)));
+            PustTurnTableRecord(record, mm);
         }
 
         public static int StartTurntable(TurntableConfig pre)
@@ -261,7 +263,8 @@ namespace Game.Facade
             long p = 0;
             for (; i < 13; ++i)
             {
-                p+= (long)pre.GetType().GetProperty("Value" + i).GetValue(pre, null);
+                decimal pp = (decimal)(pre.GetType().GetProperty("Value" + i).GetValue(pre, null));
+                p += (long)pp;
                 if (p > r)
                 {
                     break;

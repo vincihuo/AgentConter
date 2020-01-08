@@ -461,6 +461,10 @@ namespace Game.Web.UI
                     return "签到";
                 case 15:
                     return "分享";
+                case 17:
+                    return "VIP奖励";
+                case 18:
+                    return "邮件";
                 default:
                     return "未知类型";
             }

@@ -119,6 +119,7 @@
     <Compile Include="PlatformManager\ModulePage.cs" />
     <Compile Include="PlatformManager\SystemSecurity.cs" />
     <Compile Include="Platform\DataBaseInfo.cs" />
+    <Compile Include="Platform\DomainName.cs" />
     <Compile Include="Platform\GameGameItem.cs" />
     <Compile Include="Platform\GameKindItem.cs" />
     <Compile Include="Platform\GameNodeItem.cs" />

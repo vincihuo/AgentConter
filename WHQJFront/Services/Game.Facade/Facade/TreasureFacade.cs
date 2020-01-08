@@ -118,7 +118,7 @@ namespace Game.Facade
         {
             return treasureData.GetUserVip(uid);
         }
-        public long GetVipReward(int type, int uid,string ip)
+        public decimal GetVipReward(int type, int uid,string ip)
         {
             return treasureData.GetVipReward(type,uid,ip);
         }

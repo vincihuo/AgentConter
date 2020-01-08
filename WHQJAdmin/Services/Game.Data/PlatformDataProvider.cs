@@ -1162,9 +1162,9 @@ namespace Game.Data
             int mm = (cfg.id - 1) % 5;
             if (mm == 1 || mm == 3)
             {
-                long count = cfg.Value1 + cfg.Value2 + cfg.Value3 + cfg.Value4 + cfg.Value5 + cfg.Value6 + cfg.Value7 + cfg.Value8 + cfg.Value9 + cfg.Value10 + cfg.Value11 + cfg.Value12 + cfg.Value13;
-                prams.Add(Database.MakeInParam("MenuVaule", count));
-                sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13,MenuVaule=@MenuVaule WHERE id=@id";
+                decimal count = cfg.Value1 + cfg.Value2 + cfg.Value3 + cfg.Value4 + cfg.Value5 + cfg.Value6 + cfg.Value7 + cfg.Value8 + cfg.Value9 + cfg.Value10 + cfg.Value11 + cfg.Value12 + cfg.Value13;
+                prams.Add(Database.MakeInParam("MenuVaule", (long)count));
+                sqlQuery = @"UPDATE [dbo].[TurntableConfig] SET Value1=@Value1,Value2=@Value2,Value3=@Value3,Value4=@Value4,Value5=@Value5,Value6=@Value6,Value7=@Value7,Value8=@Value8,Value9=@Value9,Value10=@Value10,Value11=@Value11,Value12=@Value12,Value13=@Value13,MenuVaule=@MenuVaule WHERE id=@id";
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
@@ -1198,6 +1198,45 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sql, prams.ToArray());
         }
-
+        public DomainName GetDomainById(int id)
+        {
+            string sql = $"SELECT * FROM DomainName WHERE id={id}";
+            return Database.ExecuteObject<DomainName>(sql);
+        }
+        public int SaveDomain(DomainName dn)
+        {
+            var prams = new List<DbParameter>
+            {
+                Database.MakeInParam("id", dn.id),
+                Database.MakeInParam("Url", dn.Url),
+                Database.MakeInParam("AgentId", dn.AgentId),
+                Database.MakeInParam("Type", dn.Type),
+                Database.MakeInParam("Mode", dn.Mode),
+                Database.MakeInParam("State", dn.State)
+            };
+            if (dn.id > 0)
+            {
+                string uSql = "UPDATE [dbo].[DomainName] SET Url=@Url,AgentId=@AgentId,Type=@Type,State=@State,Mode=@Mode WHERE id=@id";
+                return Database.ExecuteNonQuery(CommandType.Text, uSql, prams.ToArray());
+            }
+            else
+            {
+                string aSql =
+                @"INSERT INTO DomainName(Url,AgentId,Type,State,Mode) VALUES(@Url,@AgentId,@Type,@State,@Mode)";
+                return Database.ExecuteNonQuery(CommandType.Text, aSql, prams.ToArray());
+            }
+        }
+        public int OffDownloadURL()
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, "UPDATE [dbo].[DomainName] SET State=0 WHERE Type=1");
+        }
+        public int DeleteUrl(int id)
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, $"DELETE [dbo].[DomainName]  WHERE id={id}");
+        }
+        public int SetDomaState(int id, int state)
+        {
+            return Database.ExecuteNonQuery(CommandType.Text, $"UPDATE [dbo].[DomainName] SET State={state} WHERE id={id}");
+        }
     }
 }

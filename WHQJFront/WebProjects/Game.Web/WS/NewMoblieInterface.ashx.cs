@@ -411,7 +411,7 @@ namespace Game.Web.WS
         {
             int index = GameRequest.GetQueryInt("index", 1);
             int size = GameRequest.GetQueryInt("size", 1);
-            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<2", " ORDER BY MState ,SendTime DESC");
+            PagerSet ps = FacadeManage.aidePlatformFacade.GetList(UserMail.Tablename,index,size,$" WHERE UserID ={_userid} AND MState<3", " ORDER BY MState ,SendTime DESC");
             IList<UserMail> list = DataHelper.ConvertDataTableToObjects<UserMail>(ps.PageSet.Tables[0]);
             _ajv.SetDataItem("mails", list);
         }
@@ -419,7 +419,7 @@ namespace Game.Web.WS
         {
             int type = GameRequest.GetQueryInt("type", 1);
             string ip= GameRequest.GetHost();
-            long reward = FacadeManage.aideTreasureFacade.GetVipReward(type,_userid,ip);
+            decimal reward = FacadeManage.aideTreasureFacade.GetVipReward(type,_userid,ip);
             _ajv.SetDataItem("reward", reward);
         }
         private void GetVipInfo()
@@ -439,33 +439,37 @@ namespace Game.Web.WS
             {
                 DataRow row = ds.Tables[1].Rows[0];
                 userVip.VipLevel = Convert.ToInt32(row["VipLevel"]);
-                userVip.FresReward = Convert.ToInt64(row["FreshReward"]);
-                userVip.WeekReward = Convert.ToInt64(row["WeekReward"]);
-                userVip.MonthReward = Convert.ToInt64(row["MonthReward"]);
+                userVip.FresReward = Convert.ToInt32(row["FreshReward"]);
+                userVip.WeekReward = Convert.ToInt32(row["WeekReward"]);
+                userVip.MonthReward = Convert.ToInt32(row["MonthReward"]);
                 userVip.Exp = Convert.ToInt64(row["Score"])/1000;
-                if (Convert.ToInt32(row["CheckInReward"])==1)
-                {
-                    int days = 1;
-                    if (row["LastTime"]!= DBNull.Value)
-                    {
-                        TimeSpan timeSpan = DateTime.Now - Convert.ToDateTime(row["LastTime"]);
-                        days = timeSpan.Days;
-                        if (days == 1)
-                        {
-                            days += 1;
-                            if (days > 7)
-                            {
-                                days = 1;
-                            }
-                        }
-                        else
-                        {
-                            days = 1;
-                        }
-                    }
-                    DataRow cfg = ds.Tables[0].Rows[userVip.VipLevel];
-                    userVip.DayReward = Convert.ToInt64(cfg["Day"+days]);
-                }
+                userVip.DayReward = Convert.ToInt32(row["CheckInReward"]);
+                //if (Convert.ToInt32(row["CheckInReward"])==1)
+                //{
+                //    int days = 1;
+                //    if (row["LastTime"]!= DBNull.Value)
+                //    {
+                //        TimeSpan timeSpan = DateTime.Now - Convert.ToDateTime(row["LastTime"]);
+                //        days = timeSpan.Days;
+                //        if (days == 1)
+                //        {
+                //            days += 1;
+                //            if (days > 7)
+                //            {
+                //                days = 1;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            days = 1;
+                //        }
+                //    }
+                //    DataRow cfg = ds.Tables[0].Rows[userVip.VipLevel];
+                //    if (Convert.ToDecimal(cfg["Day" + days]) > 0)
+                //    {
+                //        userVip.DayReward = 1;
+                //    }
+                //}
 
             }
             for (int i = 0; i < configs.Count-1; ++i)
@@ -492,55 +496,53 @@ namespace Game.Web.WS
             int index= GameRequest.GetQueryInt("index", 0);
             IList<TurntableConfig> list = FacadeManage.aidePlatformFacade.GetTurntableConfigs();
             UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
-            if (validBet.GrandScore > Convert.ToInt64(list[index * 5].MenuVaule) * 1000)
-            {
-                AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
-                TurntableConfig money = list[index * 5];
-                TurntableConfig broad = list[5 * index + 2];
-
-                int i = FacadeManage.StartTurntable(list[index * 5 + 1]);
-                string tName = "";
-                switch (index)
-                {
-                    case 0:
-                        tName = "白银转盘";
-                        break;
-                    case 1:
-                        tName = "黄金转盘";
-                        break;
-                    default:
-                        tName = "钻石转盘";
-                        break;
-                }
-
-                long reward = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
-                
-                Message mm= FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index,i, reward*1000, Convert.ToInt64(list[index * 5].MenuVaule)*1000);
-                if (mm.Success)
-                {
-                    TurntableReward record = new TurntableReward();
-                    record.money = (long)money.GetType().GetProperty("Value" + i).GetValue(money, null);
-                    record.time = DateTime.Now;
-                    record.turnName = tName;
-                    record.nickName = user.NickName;
-                    long bBord = (long)broad.GetType().GetProperty("Value" + i).GetValue(broad, null);
-                    FacadeManage.PustTurnTableRecord(record, (int)bBord);
-                    _ajv.SetValidDataValue(true);
-                    _ajv.SetDataItem("pos", i);
-                    _ajv.SetDataItem("Score", validBet.GrandScore- Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
-                }
-                else
-                {
-                    _ajv.SetValidDataValue(false);
-                    _ajv.msg = mm.Content;
-                }
-            }
-            else
+            if (validBet.GrandScore < Convert.ToInt64(list[index * 5].MenuVaule) * 1000)
             {
                 _ajv.code = (int)ApiCode.LogicErrorCode;
                 _ajv.msg = $"积分不足";
                 return;
             }
+            AccountsInfo user = FacadeManage.aideAccountsFacade.GetAccountsInfoByUserID(_userid);
+            TurntableConfig money = list[index * 5];
+            TurntableConfig broad = list[5 * index + 2];
+
+            int i = FacadeManage.StartTurntable(list[index * 5 + 1]);
+            string tName = "";
+            switch (index)
+            {
+                case 0:
+                    tName = "白银转盘";
+                    break;
+                case 1:
+                    tName = "黄金转盘";
+                    break;
+                default:
+                    tName = "钻石转盘";
+                    break;
+            }
+
+            decimal reward = (decimal)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+
+            Message mm = FacadeManage.aideTreasureFacade.DealTurnTable(_userid, tName, index, i,(long) (reward * 1000), Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
+            if (mm.Success)
+            {
+                TurntableReward record = new TurntableReward();
+                record.money = (decimal)money.GetType().GetProperty("Value" + i).GetValue(money, null);
+                record.time = DateTime.Now;
+                record.turnName = tName;
+                record.nickName = user.NickName;
+                decimal bBord = (decimal)(broad.GetType().GetProperty("Value" + i).GetValue(broad, null));
+                FacadeManage.PustTurnTableRecord(record, (int)bBord);
+                _ajv.SetValidDataValue(true);
+                _ajv.SetDataItem("pos", i);
+                _ajv.SetDataItem("Score", validBet.GrandScore - Convert.ToInt64(list[index * 5].MenuVaule) * 1000);
+            }
+            else
+            {
+                _ajv.SetValidDataValue(false);
+                _ajv.msg = mm.Content;
+            }
+
 
         }
         private void GetTurntables()

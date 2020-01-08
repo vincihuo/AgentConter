@@ -1,6 +1,6 @@
 /*
  * 版本： 4.0
- * 日期：2019/12/24 11:12:30
+ * 日期：2020/1/3 14:52:03
  * 
  * 描述：实体类
  * 
@@ -30,16 +30,16 @@ namespace Game.Entity.Platform
 
         private int p_viplevel;
         private Int64 p_integral;
-        private Int64 p_fresh;
-        private Int64 p_week;
-        private Int64 p_month;
-        private Int64 p_day1;
-        private Int64 p_day2;
-        private Int64 p_day3;
-        private Int64 p_day4;
-        private Int64 p_day5;
-        private Int64 p_day6;
-        private Int64 p_day7;
+        private decimal p_fresh;
+        private decimal p_week;
+        private decimal p_month;
+        private decimal p_day1;
+        private decimal p_day2;
+        private decimal p_day3;
+        private decimal p_day4;
+        private decimal p_day5;
+        private decimal p_day6;
+        private decimal p_day7;
 
         #endregion
 
@@ -101,7 +101,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Fresh
         /// </summary>
-        public Int64 Fresh
+        public decimal Fresh
         {
             set
             {
@@ -116,7 +116,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Week
         /// </summary>
-        public Int64 Week
+        public decimal Week
         {
             set
             {
@@ -131,7 +131,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Month
         /// </summary>
-        public Int64 Month
+        public decimal Month
         {
             set
             {
@@ -146,7 +146,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day1
         /// </summary>
-        public Int64 Day1
+        public decimal Day1
         {
             set
             {
@@ -161,7 +161,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day2
         /// </summary>
-        public Int64 Day2
+        public decimal Day2
         {
             set
             {
@@ -176,7 +176,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day3
         /// </summary>
-        public Int64 Day3
+        public decimal Day3
         {
             set
             {
@@ -191,7 +191,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day4
         /// </summary>
-        public Int64 Day4
+        public decimal Day4
         {
             set
             {
@@ -206,7 +206,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day5
         /// </summary>
-        public Int64 Day5
+        public decimal Day5
         {
             set
             {
@@ -221,7 +221,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day6
         /// </summary>
-        public Int64 Day6
+        public decimal Day6
         {
             set
             {
@@ -236,7 +236,7 @@ namespace Game.Entity.Platform
         /// <summary>
         /// Day7
         /// </summary>
-        public Int64 Day7
+        public decimal Day7
         {
             set
             {

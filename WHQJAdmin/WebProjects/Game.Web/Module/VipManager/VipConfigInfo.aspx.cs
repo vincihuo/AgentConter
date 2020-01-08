@@ -36,16 +36,16 @@ namespace Game.Web.Module.VipManager
             VipConfig config = new VipConfig();
             config.VipLevel = IntParam;
             config.Integral = Convert.ToInt64(TextBox2.Text);
-            config.Fresh = Convert.ToInt64(TextBox3.Text);
-            config.Week = Convert.ToInt64(TextBox4.Text);
-            config.Month = Convert.ToInt64(TextBox5.Text);
-            config.Day1 = Convert.ToInt64(TextBox6.Text);
-            config.Day2 = Convert.ToInt64(TextBox7.Text);
-            config.Day3 = Convert.ToInt64(TextBox8.Text);
-            config.Day4 = Convert.ToInt64(TextBox9.Text);
-            config.Day5 = Convert.ToInt64(TextBox1.Text);
-            config.Day6 = Convert.ToInt64(TextBox10.Text);
-            config.Day7 = Convert.ToInt64(TextBox11.Text);
+            config.Fresh = Convert.ToDecimal(TextBox3.Text);
+            config.Week = Convert.ToDecimal(TextBox4.Text);
+            config.Month = Convert.ToDecimal(TextBox5.Text);
+            config.Day1 = Convert.ToDecimal(TextBox6.Text);
+            config.Day2 = Convert.ToDecimal(TextBox7.Text);
+            config.Day3 = Convert.ToDecimal(TextBox8.Text);
+            config.Day4 = Convert.ToDecimal(TextBox9.Text);
+            config.Day5 = Convert.ToDecimal(TextBox1.Text);
+            config.Day6 = Convert.ToDecimal(TextBox10.Text);
+            config.Day7 = Convert.ToDecimal(TextBox11.Text);
             int r = FacadeManage.aidePlatformFacade.SaveVipConfig(config);
             if (r > 0)
             {

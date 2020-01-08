@@ -54,7 +54,7 @@ BEGIN
             SET @strErrorDescribe='游戏中不能领取'
             RETURN 1003
         END
-        IF @state>1
+        IF @state>1 AND @mState<2
         BEGIN
             SELECT @RegisterIP=RegisterIP, @RegisterDate=RegisterDate, @RegisterMachine=RegisterMachine
             FROM WHQJAccountsDB.dbo.AccountsInfo(NOLOCK)
@@ -76,7 +76,7 @@ BEGIN
                 UPDATE WHQJTreasureDB.DBO.GameScoreInfo SET Score=Score+@GoldNum WHERE UserID = @dwUserID
                 INSERT INTO WHQJRecordDB.dbo.RecordTreasureSerial
                 (SerialNumber,MasterID,UserID,TypeID,CurScore,CurInsureScore,ChangeScore,ClientIP,CollectDate)
-                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 15, @BeforeScore, @BeforeInsure, @GoldNum, '0.0.0.0', GETDATE())
+                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 18, @BeforeScore, @BeforeInsure, @GoldNum, '0.0.0.0', GETDATE())
                 --打码量
                 IF @Multiple>0
                 BEGIN
@@ -105,7 +105,7 @@ BEGIN
 
                 INSERT INTO WHQJRecordDB.dbo.RecordDiamondSerial
                     (SerialNumber,MasterID,UserID,TypeID,CurDiamond,ChangeDiamond,ClientIP,CollectDate)
-                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 13, @BeforeDiamond, @DimaoNum, '0.0.0.0', GETDATE())
+                VALUES(dbo.WF_GetSerialNumber(), 0, @dwUserID, 18, @BeforeDiamond, @DimaoNum, '0.0.0.0', GETDATE())
             END
         END
         UPDATE UserMail SET MState=@state WHERE UserID=@dwUserID AND id=@mId

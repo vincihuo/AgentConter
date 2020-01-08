@@ -90,7 +90,15 @@ namespace Game.Web.Module.GoldManager
         private void SetUerBet()
         {
             UserValidBet bet = FacadeManage.aideTreasureFacade.GetUserVailBet(UserId);
-            ltTotal.Text = $"目标打码量：{FacadeManage.ConversionMoneyToShow(bet.TargetBet)} 当前打码量：{FacadeManage.ConversionMoneyToShow(bet.CurrentValidBet)}";
+            if (bet==null)
+            {
+                ltTotal.Text = $"目标打码量：0 当前打码量：0";
+            }
+            else
+            {
+                ltTotal.Text = $"目标打码量：{FacadeManage.ConversionMoneyToShow(bet.TargetBet)} 当前打码量：{FacadeManage.ConversionMoneyToShow(bet.CurrentValidBet)}";
+            }
+            
 
         }
 

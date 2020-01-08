@@ -35,7 +35,6 @@ DECLARE @TempID TABLE
 )
 
 BEGIN
-    UPDATE UserValidBet SET GrandScore=TodayValiBet,TodayValiBet=0
     SELECT @Curr=YesterDayReward ,@Tax=Tax,@Reward=Reward,@Parent=ParentID,@Beggar=BeggarNumber,@Sub=SubNumber FROM AgentInfo WHERE UserID=@dwUserID
     IF @Curr IS NULL
     BEGIN
