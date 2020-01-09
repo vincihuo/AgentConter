@@ -175,19 +175,19 @@
                                     <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild1" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild2" ).ToString())%>
+                                    <%# Eval( "Faild2" ).ToString()%>
                                 </td>
                                 <td>
                                     <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild3" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild4" ).ToString())%>
+                                    <%# Eval( "Faild4" )%>
                                 </td>
                                 <td>
                                     <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild5" ).ToString())%>
                                 </td>
                                 <td>
-                                    <%# FacadeManage.ConversionMoneyToShow(Eval( "Faild6" ).ToString())%>
+                                    <%# Eval( "Faild6" )%>
                                 </td>
                                 <td>
                                     <%# FacadeManage.ConversionMoneyToShow(Eval( "MoneyCount" ).ToString())%>

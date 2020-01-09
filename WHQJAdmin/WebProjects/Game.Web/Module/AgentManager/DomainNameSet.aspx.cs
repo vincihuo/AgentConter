@@ -73,7 +73,9 @@ namespace Game.Web.Module.AgentManager
             if (ddlProductType.SelectedValue == "1")
             {
                 uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/hn8";
-                parma = "dl_domain=" + System.Web.HttpUtility.UrlEncode(domainName.Url);
+                //parma = "dl_domain=" + System.Web.HttpUtility.UrlEncode(domainName.Url);
+
+                parma = "{\"dl_domain\":\"http://zhizhang1.com\"}";
             }
             else
             {
