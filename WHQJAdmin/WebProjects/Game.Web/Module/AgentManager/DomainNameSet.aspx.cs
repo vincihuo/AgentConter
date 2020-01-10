@@ -6,6 +6,7 @@ using Game.Entity.Platform;
 using Game.Entity.Accounts;
 using System.Web.Script.Serialization;
 using Game.Utils;
+using System.Collections.Generic;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -39,7 +40,7 @@ namespace Game.Web.Module.AgentManager
         protected void ddlProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             TextSign.Visible = ddlProductType.SelectedValue == "3";
-            LableHit.Visible = ddlProductType.SelectedValue == "1";
+            DropDownListState.Visible= LableHit.Visible = ddlProductType.SelectedValue == "1";
         }
 
 
@@ -71,11 +72,9 @@ namespace Game.Web.Module.AgentManager
             string uri = "";
             string parma = "";
             if (ddlProductType.SelectedValue == "1")
-            {
+            { 
                 uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/hn8";
-                //parma = "dl_domain=" + System.Web.HttpUtility.UrlEncode(domainName.Url);
-
-                parma = "{\"dl_domain\":\"http://zhizhang1.com\"}";
+                parma = "{\"dl_domain\":\""+ domainName.Url + "\"}";
             }
             else
             {
@@ -83,7 +82,7 @@ namespace Game.Web.Module.AgentManager
                 {
                     uri = ApplicationSettings.Get("AddUri") + "/pm_domain/hn8";
                     string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
-                    parma = "pm_domin=" + System.Web.HttpUtility.UrlEncode(mm);
+                    parma = "{\"pm_domin\":\"" + mm + "\"}";
                 }
                 else
                 {
@@ -97,7 +96,8 @@ namespace Game.Web.Module.AgentManager
                 return;
             }
             object obj = new JavaScriptSerializer().DeserializeObject(rs);
-            if (obj.GetType().GetProperties()[0].GetValue(obj, null).ToString() != "true")
+            Dictionary<string, object> json = (Dictionary<string, object>)obj;
+            if (json["success"].ToString() != "True")
             {
                 ShowError("配置请求失败");
                 return;

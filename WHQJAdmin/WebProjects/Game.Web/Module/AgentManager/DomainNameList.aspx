@@ -68,10 +68,10 @@
                                 <%# Eval("Number")%>
                             </td>
                             <td>
-                                <%# Eval("State")%>
+                                <%# Convert.ToByte(Eval("State"))==0?"禁用":"启用"%>
                             </td>
                             <td>
-                                <%# Eval("Mode")%>
+                               默认模板
                             </td>
                             <td>
                                 <a class="l" href="javascript:void(0)" onclick="openWindowOwn('DomainNameSet.aspx?param=<%#Eval("id").ToString() %>','tip',600,300);">编辑</a>

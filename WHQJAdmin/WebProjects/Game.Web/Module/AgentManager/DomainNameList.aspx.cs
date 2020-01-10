@@ -4,6 +4,9 @@ using Game.Web.UI;
 using Game.Kernel;
 using Game.Facade;
 using Game.Entity.Platform;
+using System.Web.Script.Serialization;
+using Game.Utils;
+using System.Collections.Generic;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -71,14 +74,54 @@ namespace Game.Web.Module.AgentManager
 
         protected void OffUrl(object sender, EventArgs e)
         {
-            int parma= Convert.ToInt32(((LinkButton)sender).CommandArgument);
+            int parma = Convert.ToInt32(((LinkButton)sender).CommandArgument);
             int id = parma / 10;
             int state = parma % 10;
             DomainName dm = FacadeManage.aidePlatformFacade.GetDomainById(id);
+
+            string uri = "";
+            string sparma = "";
+          
+        
             if (dm.Type == 1)
             {
+                if (state==1)
+                {
+                    ShowError("下载域名不能禁用");
+                    return;
+                }
+
                 FacadeManage.aidePlatformFacade.OffDownloadURL();
+                uri = ApplicationSettings.Get("AddUri") + "/dl_domain/hn8";
+                sparma = "{\"dl_domain\":\"" + dm.Url + "\"}";
             }
+            else
+            {
+                if (state == 1)
+                {
+                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/hn8";
+                    string mm = dm.Url.Replace("https://", "").Replace("http://", "");
+                    sparma = "{\"pm_domin\":\"" + mm + "\"}";
+                }
+                else
+                {
+                    uri = ApplicationSettings.Get("AddUri") + "/del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
+                }
+            }
+            string rs = FacadeManage.RequestUri(uri, sparma);
+            if (rs == "")
+            {
+                ShowError("配置请求失败");
+                return;
+            }
+            object obj = new JavaScriptSerializer().DeserializeObject(rs);
+            Dictionary<string, object> json = (Dictionary<string, object>)obj;
+            if (json["success"].ToString() != "True")
+            {
+                ShowError("配置请求失败");
+                return;
+            }
+
             FacadeManage.aidePlatformFacade.SetDomaState(id,state==0?1:0);
             ShowInfo("修改成功", "DomainNameList.aspx", 1200);
         }
@@ -86,11 +129,38 @@ namespace Game.Web.Module.AgentManager
         protected void DeleteUrl(object sender, EventArgs e)
         {
             string id = ((LinkButton)sender).CommandArgument;
-            int r= FacadeManage.aidePlatformFacade.DeleteUrl(Convert.ToInt32(id));
+            DomainName dm = FacadeManage.aidePlatformFacade.GetDomainById(Convert.ToInt32(id));
+            
+
+          
+            if (dm.Type == 1&&dm.State==1)
+            {
+                ShowError("使用当中的下载域名不能禁用");
+                return;
+            }
+            else
+            {
+                string uri = ApplicationSettings.Get("AddUri") + "/del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
+                string rs = FacadeManage.RequestUri(uri, "");
+                if (rs == "")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
+                object obj = new JavaScriptSerializer().DeserializeObject(rs);
+                Dictionary<string, object> json = (Dictionary<string, object>)obj;
+                if (json["success"].ToString() != "True")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
+            }
+            int r = FacadeManage.aidePlatformFacade.DeleteUrl(Convert.ToInt32(id));
             if (r > 0)
             {
                 ShowInfo("删除成功", "DomainNameList.aspx",1200);
             }
+            
         }
         protected string GetUrlTyep(byte t)
         {
