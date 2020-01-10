@@ -557,7 +557,11 @@ namespace Game.Web.WS
             mglist.Add(list[9]);
             mglist.Add(list[14]);
 
-            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(_userid);
+            UserValidBet validBet = FacadeManage.aideTreasureFacade.GetValidBetByUid(5813615);
+            if (validBet == null)
+            {
+                validBet = new UserValidBet();
+            }
             _ajv.SetValidDataValue(true);
             _ajv.SetDataItem("list", slist);
             _ajv.SetDataItem("icoList", mglist);
