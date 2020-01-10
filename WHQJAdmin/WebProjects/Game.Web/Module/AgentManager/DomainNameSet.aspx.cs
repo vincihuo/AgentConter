@@ -73,14 +73,14 @@ namespace Game.Web.Module.AgentManager
             string parma = "";
             if (ddlProductType.SelectedValue == "1")
             { 
-                uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/hn8";
+                uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/" + ApplicationSettings.Get("SitTag");
                 parma = "{\"dl_domain\":\""+ domainName.Url + "\"}";
             }
             else
             {
                 if (domainName.State == 1)
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/hn8";
+                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
                     parma = "{\"pm_domin\":\"" + mm + "\"}";
                 }

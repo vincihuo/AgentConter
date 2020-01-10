@@ -92,14 +92,14 @@ namespace Game.Web.Module.AgentManager
                 }
 
                 FacadeManage.aidePlatformFacade.OffDownloadURL();
-                uri = ApplicationSettings.Get("AddUri") + "/dl_domain/hn8";
+                uri = ApplicationSettings.Get("AddUri") + "/dl_domain/"+ApplicationSettings.Get("SitTag");
                 sparma = "{\"dl_domain\":\"" + dm.Url + "\"}";
             }
             else
             {
                 if (state == 1)
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/hn8";
+                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = dm.Url.Replace("https://", "").Replace("http://", "");
                     sparma = "{\"pm_domin\":\"" + mm + "\"}";
                 }
