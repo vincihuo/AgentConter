@@ -80,6 +80,8 @@
                     <asp:ListItem Text="签到" Value="1"></asp:ListItem>
                     <asp:ListItem Text="推广" Value="2"></asp:ListItem>
                     <asp:ListItem Text="充值" Value="3"></asp:ListItem>
+                    <asp:ListItem Text="VIP" Value="3"></asp:ListItem>
+                    <asp:ListItem Text="转盘" Value="3"></asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>
