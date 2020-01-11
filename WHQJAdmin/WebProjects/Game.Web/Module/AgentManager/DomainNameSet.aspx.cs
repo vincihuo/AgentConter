@@ -30,6 +30,15 @@ namespace Game.Web.Module.AgentManager
                 domainName = FacadeManage.aidePlatformFacade.GetDomainById(IntParam);
                 ddlProductType.SelectedValue = domainName.Type.ToString();
                 TextBoxUrl.Text = domainName.Url;
+
+                if (domainName.AgentId>0)
+                {
+                    AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(domainName.AgentId);
+                    if (acc != null)
+                    {
+                        TextSign.Text = acc.GameID.ToString();
+                    }
+                }
                 TextSign.Visible = domainName.Type == 3;
                 LableHit.Visible = domainName.Type == 1;
                 DropDownListState.SelectedValue = domainName.State.ToString();
