@@ -33,6 +33,7 @@ namespace Game.Web.Module.AgentManager
                 TextSign.Visible = domainName.Type == 3;
                 LableHit.Visible = domainName.Type == 1;
                 DropDownListState.SelectedValue = domainName.State.ToString();
+                DropDownListState.Visible = LableHit.Visible = domainName.Type != 1;
                 ddlProductType.Enabled = false;
             }
         }
@@ -40,7 +41,7 @@ namespace Game.Web.Module.AgentManager
         protected void ddlProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             TextSign.Visible = ddlProductType.SelectedValue == "3";
-            DropDownListState.Visible= LableHit.Visible = ddlProductType.SelectedValue != "1";
+           
         }
 
 
@@ -80,13 +81,13 @@ namespace Game.Web.Module.AgentManager
             {
                 if (domainName.State == 1)
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/"+ ApplicationSettings.Get("SitTag");
+                    uri = ApplicationSettings.Get("AddUri") + "pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
                     parma = "{\"pm_domin\":\"" + mm + "\"}";
                 }
                 else
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/del_domain/"+ domainName.Url.Replace("https://", "").Replace("http://", "");
+                    uri = ApplicationSettings.Get("AddUri") + "del_domain/"+ domainName.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
             string rs = FacadeManage.RequestUri(uri, parma);
@@ -110,7 +111,7 @@ namespace Game.Web.Module.AgentManager
             int pp = FacadeManage.aidePlatformFacade.SaveDomain(domainName);
             if (pp > 0)
             {
-                ShowInfo("配置信息操作成功");
+                ShowInfo("配置信息操作成功", "DomainNameList.aspx",1000);
             }
             else
             {

@@ -38,7 +38,6 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="True">
             <ContentTemplate>
                 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="listBg2">
-
                     <tr>
                         <td class="listTdLeft">域名类型：
                         </td>
@@ -64,7 +63,6 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="请输入域名地址" Display="Dynamic" ControlToValidate="TextBoxUrl" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
-
                     <tr>
                         <td class="listTdLeft">推广标识：
                         </td>
