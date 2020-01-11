@@ -92,23 +92,23 @@ namespace Game.Web.Module.AgentManager
                 }
 
                 FacadeManage.aidePlatformFacade.OffDownloadURL();
-                uri = ApplicationSettings.Get("AddUri") + "/dl_domain/"+ApplicationSettings.Get("SitTag");
+                uri = ApplicationSettings.Get("AddUri") + "dl_domain/"+ApplicationSettings.Get("SitTag");
                 sparma = "{\"dl_domain\":\"" + dm.Url + "\"}";
             }
             else
             {
-                if (state == 1)
+                if (state != 1)
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/"+ ApplicationSettings.Get("SitTag");
+                    uri = ApplicationSettings.Get("AddUri") + "pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = dm.Url.Replace("https://", "").Replace("http://", "");
                     sparma = "{\"pm_domin\":\"" + mm + "\"}";
                 }
                 else
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
+                    uri = ApplicationSettings.Get("AddUri") + "del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
-            string rs = FacadeManage.RequestUri(uri, sparma);
+            string rs = FacadeManage.RequestUri(uri, sparma, "DELETE");
             if (rs == "")
             {
                 ShowError("配置请求失败");
@@ -141,7 +141,7 @@ namespace Game.Web.Module.AgentManager
             else if(dm.Type != 1)
             {
                 string uri = ApplicationSettings.Get("AddUri") + "/del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
-                string rs = FacadeManage.RequestUri(uri, "");
+                string rs = FacadeManage.RequestUri(uri, "", "DELETE");
                 if (rs == "")
                 {
                     ShowError("配置请求失败");

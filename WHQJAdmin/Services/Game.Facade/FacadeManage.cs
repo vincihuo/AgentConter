@@ -250,10 +250,10 @@ namespace Game.Facade
                     return "未绑定";
             }
         }
-        public static string RequestUri(string uri, string param)
+        public static string RequestUri(string uri, string param,string Molde= "POST")
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Method = "POST";
+            request.Method = Molde;
             request.ContentType = "application/json";
             //StreamWriter write = new StreamWriter(request.GetRequestStream(), Encoding.GetEncoding("utf-8"));
             //write.Write(param);
