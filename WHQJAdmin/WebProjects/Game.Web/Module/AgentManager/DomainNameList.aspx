@@ -59,7 +59,7 @@
                                 <%#GetUrlTyep(Convert.ToByte(Eval("Type")))%>
                             </td>
                             <td>
-                                <%# Eval("Url")%>
+                                <a href='<%# Eval("Url")%>'target="_blank" class ="lan"><%# Eval("Url")%></a>
                             </td>
                             <td>
                                 <%# Eval("AgentId")%>
