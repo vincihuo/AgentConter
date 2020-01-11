@@ -101,14 +101,19 @@ namespace Game.Web.Module.AgentManager
                 {
                     uri = ApplicationSettings.Get("AddUri") + "pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = dm.Url.Replace("https://", "").Replace("http://", "");
-                    sparma = "{\"pm_domin\":\"" + mm + "\"}";
+                    sparma = "{\"pm_domain\":\"" + mm + "\"}";
                 }
                 else
                 {
                     uri = ApplicationSettings.Get("AddUri") + "del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
-            string rs = FacadeManage.RequestUri(uri, sparma, "DELETE");
+            string mode = "POST";
+            if (state == 1)
+            {
+                mode = "DELETE";
+            }
+            string rs = FacadeManage.RequestUri(uri, sparma, mode);
             if (rs == "")
             {
                 ShowError("配置请求失败");
