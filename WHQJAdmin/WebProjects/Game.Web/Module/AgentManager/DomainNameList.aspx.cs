@@ -7,6 +7,7 @@ using Game.Entity.Platform;
 using System.Web.Script.Serialization;
 using Game.Utils;
 using System.Collections.Generic;
+using Game.Entity.Accounts;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -70,6 +71,16 @@ namespace Game.Web.Module.AgentManager
                 }
             }
             return "return confirm('"+ state +name+ url+hit+"')";
+        }
+
+        protected string GetAgent(int id)
+        {
+            AccountsInfo info = FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(id);
+            if (info != null)
+            {
+                return info.GameID.ToString();
+            }
+            return "所有人";
         }
 
         protected void OffUrl(object sender, EventArgs e)

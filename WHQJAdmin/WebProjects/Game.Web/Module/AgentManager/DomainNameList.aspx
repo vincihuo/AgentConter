@@ -62,7 +62,7 @@
                                 <a href='<%# Eval("Url")%>'target="_blank" class ="lan"><%# Eval("Url")%></a>
                             </td>
                             <td>
-                                <%# Eval("AgentId")%>
+                                <%# GetAgent(Convert.ToInt32(Eval("AgentId")))%>
                             </td>
                             <td>
                                 <%# Eval("Number")%>

@@ -90,20 +90,22 @@ namespace Game.Web.Module.AgentManager
                     uri = ApplicationSettings.Get("AddUri") + "del_domain/"+ domainName.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
-            string rs = FacadeManage.RequestUri(uri, parma);
-            if (rs == "")
+            if (IntParam>0)
             {
-                ShowError("配置请求失败");
-                return;
+                string rs = FacadeManage.RequestUri(uri, parma);
+                if (rs == "")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
+                object obj = new JavaScriptSerializer().DeserializeObject(rs);
+                Dictionary<string, object> json = (Dictionary<string, object>)obj;
+                if (json["success"].ToString() != "True")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
             }
-            object obj = new JavaScriptSerializer().DeserializeObject(rs);
-            Dictionary<string, object> json = (Dictionary<string, object>)obj;
-            if (json["success"].ToString() != "True")
-            {
-                ShowError("配置请求失败");
-                return;
-            }
-
             if (domainName.Type == 1 && domainName.State == 1)
             {
                 FacadeManage.aidePlatformFacade.OffDownloadURL();
