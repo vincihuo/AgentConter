@@ -18,13 +18,14 @@ CREATE PROC [NET_PB_AgentRevenueRebate]
 
 WITH ENCRYPTION AS
 
--- ÊôÐÔÉèÖÃ
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 SET NOCOUNT ON
 
 DECLARE @TempUser INT
 
 BEGIN
-    --vip·µÀû
+    --vipï¿½ï¿½ï¿½ï¿½
+    UPDATE WHQJTreasureDB.dbo.UserValidBet SET GrandScore=TodayValiBet,TodayValiBet=0
     EXEC NET_PB_VipReward
     UPDATE AgentInfo SET YesterDayReward=NULL
     WHILE EXISTS(SELECT UserID FROM AgentInfo WHERE YesterDayReward IS NULL)

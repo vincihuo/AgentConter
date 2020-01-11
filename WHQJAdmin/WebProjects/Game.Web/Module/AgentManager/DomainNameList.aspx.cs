@@ -138,7 +138,7 @@ namespace Game.Web.Module.AgentManager
                 ShowError("使用当中的下载域名不能禁用");
                 return;
             }
-            else
+            else if(dm.Type != 1)
             {
                 string uri = ApplicationSettings.Get("AddUri") + "/del_domain/" + dm.Url.Replace("https://", "").Replace("http://", "");
                 string rs = FacadeManage.RequestUri(uri, "");

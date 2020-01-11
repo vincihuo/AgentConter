@@ -49,6 +49,11 @@
                                 <asp:ListItem Text="专属推广域名" Value="3"></asp:ListItem>
                             </asp:DropDownList>
                         </td>
+
+                        <td>
+                            <asp:Label runat="server" ID="typeText"></asp:Label>
+                        </td>
+
                     </tr>
                     <tr>
                         <td class="listTdLeft">域名地址：

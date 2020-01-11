@@ -33,14 +33,14 @@ namespace Game.Web.Module.AgentManager
                 TextSign.Visible = domainName.Type == 3;
                 LableHit.Visible = domainName.Type == 1;
                 DropDownListState.SelectedValue = domainName.State.ToString();
+                ddlProductType.Enabled = false;
             }
-
         }
 
         protected void ddlProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             TextSign.Visible = ddlProductType.SelectedValue == "3";
-            DropDownListState.Visible= LableHit.Visible = ddlProductType.SelectedValue == "1";
+            DropDownListState.Visible= LableHit.Visible = ddlProductType.SelectedValue != "1";
         }
 
 
@@ -73,7 +73,7 @@ namespace Game.Web.Module.AgentManager
             string parma = "";
             if (ddlProductType.SelectedValue == "1")
             { 
-                uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/" + ApplicationSettings.Get("SitTag");
+                uri = ApplicationSettings.Get("AddUri")+ "dl_domain/" + ApplicationSettings.Get("SitTag");
                 parma = "{\"dl_domain\":\""+ domainName.Url + "\"}";
             }
             else
@@ -110,7 +110,7 @@ namespace Game.Web.Module.AgentManager
             int pp = FacadeManage.aidePlatformFacade.SaveDomain(domainName);
             if (pp > 0)
             {
-                ShowInfo("配置信息操作成功", "DomainNameList.aspx", 1200);
+                ShowInfo("配置信息操作成功");
             }
             else
             {
