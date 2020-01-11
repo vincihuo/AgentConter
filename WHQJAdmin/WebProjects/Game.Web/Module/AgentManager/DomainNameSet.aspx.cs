@@ -83,7 +83,7 @@ namespace Game.Web.Module.AgentManager
                 {
                     uri = ApplicationSettings.Get("AddUri") + "pm_domain/"+ ApplicationSettings.Get("SitTag");
                     string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
-                    parma = "{\"pm_domin\":\"" + mm + "\"}";
+                    parma = "{\"pm_domain\":\"" + mm + "\"}";
                 }
                 else
                 {
