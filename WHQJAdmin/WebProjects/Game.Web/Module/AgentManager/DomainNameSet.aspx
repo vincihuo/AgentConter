@@ -59,7 +59,7 @@
                         </td>
                         <td>
                             <asp:TextBox ID="TextBoxUrl" runat="server" CssClass="text"></asp:TextBox>
-                            <span class="hong">*</span>
+                            <span class="hong">http:// 或者 https:// 开头</span>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="请输入域名地址" Display="Dynamic" ControlToValidate="TextBoxUrl" ForeColor="Red"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
