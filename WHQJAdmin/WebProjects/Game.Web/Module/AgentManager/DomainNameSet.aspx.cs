@@ -90,7 +90,7 @@ namespace Game.Web.Module.AgentManager
                     uri = ApplicationSettings.Get("AddUri") + "del_domain/"+ domainName.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
-            if (IntParam>0)
+            if (IntParam>0|| domainName.State==1)
             {
                 string rs = FacadeManage.RequestUri(uri, parma);
                 if (rs == "")
