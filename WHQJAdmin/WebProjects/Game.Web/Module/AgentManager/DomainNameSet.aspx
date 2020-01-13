@@ -19,7 +19,7 @@
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：充值系统 - 充值配置
+                <td width="1232" height="25" valign="top" align="left">你当前位置：代理系统 - 域名配置
                 </td>
             </tr>
         </table>
