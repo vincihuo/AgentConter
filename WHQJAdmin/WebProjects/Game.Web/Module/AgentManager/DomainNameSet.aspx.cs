@@ -60,6 +60,13 @@ namespace Game.Web.Module.AgentManager
             {
                 return;
             }
+            if (FacadeManage.aidePlatformFacade.CheckUrl(IntParam, TextBoxUrl.Text))
+            {
+                ShowError("域名已经被使用");
+                return;
+            }
+
+
             DomainName domainName = new DomainName();
             if (IntParam > 0)
             {

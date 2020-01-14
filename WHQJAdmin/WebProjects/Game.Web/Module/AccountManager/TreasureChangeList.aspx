@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TreasureChangeList.aspx.cs" Inherits="Game.Web.Module.AccountManager.TreasureChangeList" %>
 
+<%@ Import Namespace="Game.Facade" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -46,7 +47,7 @@
                 <asp:TextBox ID="txtEndDate" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtStartDate\')}'})"></asp:TextBox><img
                     src="../../Images/btn_calendar.gif" onclick="WdatePicker({el:'txtEndDate',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'txtStartDate\')}'})"
                     style="cursor: pointer; vertical-align: middle" />
-                     <asp:DropDownList ID="ddlSerialType" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlSerialType" runat="server"></asp:DropDownList>
                     <asp:Button ID="btnQuery" runat="server" Text="查询" CssClass="btn wd1" OnClick="btnQuery_Click" />
                     <asp:Button ID="btnQueryTD" runat="server" Text="今天" CssClass="btn wd1" OnClick="btnQueryTD_Click" />
                     <asp:Button ID="btnQueryYD" runat="server" Text="昨天" CssClass="btn wd1" OnClick="btnQueryYD_Click" />
@@ -65,11 +66,11 @@
                     <span style="color: red; font-weight: bold; line-height: 26px;">金币变化：
                     <asp:Label ID="lbChange" runat="server" Text="0 （消耗：0  增加：0）"></asp:Label>
                     </span>
-                   <%-- <input type="button" value="消耗记录" class="btn wd2" onclick="GetWindowOwn('TreasureConsume.aspx?param=' + GetRequest('param', 0), 'consume', 850, 700);" />
+                    <%-- <input type="button" value="消耗记录" class="btn wd2" onclick="GetWindowOwn('TreasureConsume.aspx?param=' + GetRequest('param', 0), 'consume', 850, 700);" />
                     <input type="button" value="增加记录" class="btn wd2" onclick="GetWindowOwn('TreasureIncome.aspx?param=' + GetRequest('param', 0), 'income', 850, 700);" />--%>
-                      <asp:Button ID="btnOut" runat="server" Text="消耗记录" CssClass="btn wd2" OnClick="btnOut_Click" />
-                     <asp:Button ID="btnIn" runat="server" Text="增加记录" CssClass="btn wd2" OnClick="btnIn_Click" />
-                    &nbsp;&nbsp;<span style="color:red; font-weight: bold; line-height: 26px;">备注：此金币流水不包含游戏中输赢和平台服务费</span>
+                    <asp:Button ID="btnOut" runat="server" Text="消耗记录" CssClass="btn wd2" OnClick="btnOut_Click" />
+                    <asp:Button ID="btnIn" runat="server" Text="增加记录" CssClass="btn wd2" OnClick="btnIn_Click" />
+                    &nbsp;&nbsp;<span style="color: red; font-weight: bold; line-height: 26px;">备注：此金币流水不包含游戏中输赢和平台服务费</span>
                 </td>
             </tr>
         </table>
@@ -80,8 +81,7 @@
                     </td>
                     <td class="listTitle">流水时间
                     </td>
-                    <td class="listTitle2">
-                        流水类型
+                    <td class="listTitle2">流水类型
                     </td>
                     <td class="listTitle2">操作前携带金币
                     </td>
@@ -118,13 +118,13 @@
                                 <%# GetGoldType(Convert.ToInt32(Eval( "TypeID" ))) %>
                             </td>
                             <td>
-                                <%# Eval( "CurScore" )%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval( "CurScore" ).ToString())%>
                             </td>
                             <td>
-                                <%# Eval( "CurInsureScore" )%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval( "CurInsureScore" ).ToString())%>
                             </td>
                             <td>
-                                <%# Convert.ToInt32(Eval( "TypeID" ))!=6&&Convert.ToInt32(Eval( "TypeID" ))!=7?Convert.ToInt32(Eval("ChangeScore"))<0?Eval("ChangeScore").ToString() : "+" + Eval("ChangeScore"):"" %>
+                                <%# Convert.ToInt32(Eval( "TypeID" ))!=6&&Convert.ToInt32(Eval( "TypeID" ))!=7?Convert.ToInt32(Eval("ChangeScore"))<0?FacadeManage.ConversionMoneyToShow(Eval("ChangeScore").ToString()).ToString() : "+" + FacadeManage.ConversionMoneyToShow(Eval("ChangeScore").ToString()).ToString():"" %>
                             </td>
                             <td>
                                 <%# Eval( "ClientIP" ) %>
@@ -144,13 +144,13 @@
                                 <%# GetGoldType(Convert.ToInt32(Eval( "TypeID" ))) %>
                             </td>
                             <td>
-                                <%# Eval( "CurScore" )%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval( "CurScore" ).ToString())%>
                             </td>
                             <td>
-                                <%# Eval( "CurInsureScore" )%>
+                                <%# FacadeManage.ConversionMoneyToShow(Eval( "CurInsureScore" ).ToString())%>
                             </td>
                             <td>
-                                <%# Convert.ToInt32(Eval( "TypeID" ))!=6&&Convert.ToInt32(Eval( "TypeID" ))!=7?Convert.ToInt32(Eval("ChangeScore"))<0?Eval("ChangeScore").ToString() : "+" + Eval("ChangeScore"):"" %>
+                                <%# Convert.ToInt32(Eval( "TypeID" ))!=6&&Convert.ToInt32(Eval( "TypeID" ))!=7?Convert.ToInt32(Eval("ChangeScore"))<0?FacadeManage.ConversionMoneyToShow(Eval("ChangeScore").ToString()).ToString() : "+" + FacadeManage.ConversionMoneyToShow(Eval("ChangeScore").ToString()).ToString():"" %>
                             </td>
                             <td>
                                 <%# Eval( "ClientIP" ) %>

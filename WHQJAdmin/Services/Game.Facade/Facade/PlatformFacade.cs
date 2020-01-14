@@ -714,5 +714,10 @@ namespace Game.Facade
         {
             return _aidePlatformData.SetDomaState(id,state);
         }
+
+        public bool CheckUrl(int id,string url)
+        {
+            return _aidePlatformData.CheckUrl(id, url);
+        }
     }
 }
