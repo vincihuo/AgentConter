@@ -79,7 +79,7 @@ namespace Game.Web.Mobile
                 Mobilelogo = Fetch.GetUploadFileUrl(imgDomain, "/Site/frontlogo.png");
                 Mobiledown = Fetch.GetUploadFileUrl(imgDomain, "/Site/downLoad.png");
                 MobileCase = Fetch.GetUploadFileUrl(imgDomain, "/Site/spreadcase.png");
-                OpenInstallKey = ApplicationSettings.Get("OpenInstallKey");
+                OpenInstallKey = Utils.ApplicationSettings.Get("OpenInstallKey");
                 Random random = new Random();
                 MobileQrcode = Fetch.GetQrCode("http://" + Request.Url.Authority + "/Index.aspx?r="+ random.Next(1000, 9999), 312);
                 Title = AppConfig.PageTitle;
