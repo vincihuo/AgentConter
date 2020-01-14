@@ -59,19 +59,19 @@
                                 <%#GetUrlTyep(Convert.ToByte(Eval("Type")))%>
                             </td>
                             <td>
-                                <%# Eval("Url")%>
+                                <a href='<%# Eval("Url")%>'target="_blank" class ="lan"><%# Eval("Url")%></a>
                             </td>
                             <td>
-                                <%# Eval("AgentId")%>
+                                <%# GetAgent(Convert.ToInt32(Eval("AgentId")))%>
                             </td>
                             <td>
                                 <%# Eval("Number")%>
                             </td>
                             <td>
-                                <%# Eval("State")%>
+                                <%# Convert.ToByte(Eval("State"))==0?"禁用":"启用"%>
                             </td>
                             <td>
-                                <%# Eval("Mode")%>
+                               默认模板
                             </td>
                             <td>
                                 <a class="l" href="javascript:void(0)" onclick="openWindowOwn('DomainNameSet.aspx?param=<%#Eval("id").ToString() %>','tip',600,300);">编辑</a>

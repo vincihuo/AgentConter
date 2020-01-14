@@ -250,22 +250,33 @@ namespace Game.Facade
                     return "未绑定";
             }
         }
-        public static string RequestUri(string uri, string param)
+        public static string RequestUri(string uri, string param,string Molde= "POST")
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Method = "POST";
-            request.ContentType = "application/x-wwww-form-urlencoded";
-            StreamWriter write = new StreamWriter(request.GetRequestStream(), Encoding.GetEncoding("utf-8"));
-            write.Write(param);
-            write.Flush();
-            HttpWebResponse response = null;
-            try
+            request.Method = Molde;
+            request.ContentType = "application/json";
+            //StreamWriter write = new StreamWriter(request.GetRequestStream(), Encoding.GetEncoding("utf-8"));
+            //write.Write(param);
+            //write.Flush();
+            //HttpWebResponse response = null;
+            //try
+            //{
+            //    response = (HttpWebResponse)request.GetResponse();
+            //}
+            //catch (Exception)
+            //{
+            //}
+
+
+            byte[] bs = Encoding.UTF8.GetBytes(param);
+            request.ContentLength = bs.Length;
+            using (Stream reqStream = request.GetRequestStream())
             {
-                response = (HttpWebResponse)request.GetResponse();
+                reqStream.Write(bs, 0, bs.Length);
+                reqStream.Close();
             }
-            catch (Exception)
-            {
-            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
             string strJson = string.Empty;
             if (response != null)
             {

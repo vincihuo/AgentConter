@@ -6,6 +6,7 @@ using Game.Entity.Platform;
 using Game.Entity.Accounts;
 using System.Web.Script.Serialization;
 using Game.Utils;
+using System.Collections.Generic;
 
 namespace Game.Web.Module.AgentManager
 {
@@ -29,17 +30,27 @@ namespace Game.Web.Module.AgentManager
                 domainName = FacadeManage.aidePlatformFacade.GetDomainById(IntParam);
                 ddlProductType.SelectedValue = domainName.Type.ToString();
                 TextBoxUrl.Text = domainName.Url;
+
+                if (domainName.AgentId>0)
+                {
+                    AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByUserId(domainName.AgentId);
+                    if (acc != null)
+                    {
+                        TextSign.Text = acc.GameID.ToString();
+                    }
+                }
                 TextSign.Visible = domainName.Type == 3;
                 LableHit.Visible = domainName.Type == 1;
                 DropDownListState.SelectedValue = domainName.State.ToString();
+                DropDownListState.Visible = LableHit.Visible = domainName.Type != 1;
+                ddlProductType.Enabled = false;
             }
-
         }
 
         protected void ddlProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             TextSign.Visible = ddlProductType.SelectedValue == "3";
-            LableHit.Visible = ddlProductType.SelectedValue == "1";
+
         }
 
 
@@ -49,7 +60,35 @@ namespace Game.Web.Module.AgentManager
             {
                 return;
             }
+            if (FacadeManage.aidePlatformFacade.CheckUrl(IntParam, TextBoxUrl.Text))
+            {
+                ShowError("域名已经被使用");
+                return;
+            }
+
+
             DomainName domainName = new DomainName();
+            if (IntParam > 0)
+            {
+                domainName = FacadeManage.aidePlatformFacade.GetDomainById(IntParam);
+                if (domainName.Url != TextBoxUrl.Text)
+                {
+                    string uriDelete = ApplicationSettings.Get("AddUri") + "del_domain/" + domainName.Url.Replace("https://", "").Replace("http://", "");
+                    string rsDelete = FacadeManage.RequestUri(uriDelete, "", "DELETE");
+                    if (rsDelete == "")
+                    {
+                        ShowError("配置请求失败");
+                        return;
+                    }
+                    object obj = new JavaScriptSerializer().DeserializeObject(rsDelete);
+                    Dictionary<string, object> json = (Dictionary<string, object>)obj;
+                    if (json["success"].ToString() != "True")
+                    {
+                        ShowError("配置请求失败");
+                        return;
+                    }
+                }
+            }
             domainName.Type = Convert.ToByte(ddlProductType.SelectedValue);
             domainName.Url = TextBoxUrl.Text;
             domainName.AgentId = 0;
@@ -72,35 +111,38 @@ namespace Game.Web.Module.AgentManager
             string parma = "";
             if (ddlProductType.SelectedValue == "1")
             {
-                uri = ApplicationSettings.Get("AddUri")+ "/dl_domain/hn8";
-                parma = "dl_domain=" + System.Web.HttpUtility.UrlEncode(domainName.Url);
+                uri = ApplicationSettings.Get("AddUri") + "dl_domain/" + ApplicationSettings.Get("SitTag");
+                parma = "{\"dl_domain\":\"" + domainName.Url + "\"}";
             }
             else
             {
                 if (domainName.State == 1)
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/pm_domain/hn8";
+                    uri = ApplicationSettings.Get("AddUri") + "pm_domain/" + ApplicationSettings.Get("SitTag");
                     string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
-                    parma = "pm_domin=" + System.Web.HttpUtility.UrlEncode(mm);
+                    parma = "{\"pm_domain\":\"" + mm + "\"}";
                 }
                 else
                 {
-                    uri = ApplicationSettings.Get("AddUri") + "/del_domain/"+ domainName.Url.Replace("https://", "").Replace("http://", "");
+                    uri = ApplicationSettings.Get("AddUri") + "del_domain/" + domainName.Url.Replace("https://", "").Replace("http://", "");
                 }
             }
-            string rs = FacadeManage.RequestUri(uri, parma);
-            if (rs == "")
+            if (IntParam > 0 || domainName.State == 1)
             {
-                ShowError("配置请求失败");
-                return;
+                string rs = FacadeManage.RequestUri(uri, parma);
+                if (rs == "")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
+                object obj = new JavaScriptSerializer().DeserializeObject(rs);
+                Dictionary<string, object> json = (Dictionary<string, object>)obj;
+                if (json["success"].ToString() != "True")
+                {
+                    ShowError("配置请求失败");
+                    return;
+                }
             }
-            object obj = new JavaScriptSerializer().DeserializeObject(rs);
-            if (obj.GetType().GetProperties()[0].GetValue(obj, null).ToString() != "true")
-            {
-                ShowError("配置请求失败");
-                return;
-            }
-
             if (domainName.Type == 1 && domainName.State == 1)
             {
                 FacadeManage.aidePlatformFacade.OffDownloadURL();
@@ -108,7 +150,7 @@ namespace Game.Web.Module.AgentManager
             int pp = FacadeManage.aidePlatformFacade.SaveDomain(domainName);
             if (pp > 0)
             {
-                ShowInfo("配置信息操作成功", "DomainNameList.aspx", 1200);
+                ShowInfo("配置信息操作成功", "DomainNameList.aspx", 1000);
             }
             else
             {

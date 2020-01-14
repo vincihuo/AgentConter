@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Game.Utils;
 using Game.Entity.Enum;
-using Game.Entity.Treasure;
 using Game.Web.UI;
 using Game.Entity.NativeWeb;
 using Game.Facade;

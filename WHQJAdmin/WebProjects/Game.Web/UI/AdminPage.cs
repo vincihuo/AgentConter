@@ -461,6 +461,8 @@ namespace Game.Web.UI
                     return "签到";
                 case 15:
                     return "分享";
+                case 16:
+                    return "转盘";
                 case 17:
                     return "VIP奖励";
                 case 18:

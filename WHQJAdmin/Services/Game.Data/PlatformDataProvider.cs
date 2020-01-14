@@ -1238,5 +1238,10 @@ namespace Game.Data
         {
             return Database.ExecuteNonQuery(CommandType.Text, $"UPDATE [dbo].[DomainName] SET State={state} WHERE id={id}");
         }
+        public bool CheckUrl(int id, string url)
+        {
+            string sql = $"SELECT * FROM DomainName (NOLOCK) WHERE  id<>{id} AND Url={url}";
+            return Database.ExecuteScalar(CommandType.Text, sql) != null;
+        }
     }
 }

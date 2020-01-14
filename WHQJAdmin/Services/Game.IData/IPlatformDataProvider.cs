@@ -469,5 +469,6 @@ namespace Game.IData
         int OffDownloadURL();
         int DeleteUrl(int id);
         int SetDomaState(int id, int state);
+        bool CheckUrl(int id, string url);
     }
 }

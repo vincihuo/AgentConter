@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <p id="OpenInstallKey"><%= OpenInstallKey %></p>
     <div class="ui-page">
         <div class="ui-contact">
             <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=2&uin=<%= Qq %>" class="ui-qq" target="_blank">
@@ -39,7 +40,7 @@
     var data = OpenInstall.parseUrlParams();//openinstall.js中提供的工具函数，解析url中的所有查询参数
     new OpenInstall({
         /*appKey必选参数，openinstall平台为每个应用分配的ID*/
-        appKey: "spjm49",
+        appKey:  document.getElementById("OpenInstallKey"),
         /*可选参数，自定义android平台的apk下载文件名，只有apk在openinstall托管时才有效；个别andriod浏览器下载时，中文文件名显示乱码，请慎用中文文件名！*/
         //apkFileName : '',
         /*可选参数，是否优先考虑拉起app，以牺牲下载体验为代价*/

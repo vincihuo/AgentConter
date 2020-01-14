@@ -20,6 +20,8 @@ namespace Game.Web
         protected string MobileQrcode = string.Empty;
         protected string MobileCase = string.Empty;
 
+        protected string OpenInstallKey = string.Empty;
+
         /// <summary>
         /// 初始化验证
         /// </summary>
@@ -74,6 +76,7 @@ namespace Game.Web
                 Mobilelogo = Fetch.GetUploadFileUrl(imgDomain, "/Site/frontlogo.png");
                 Mobiledown = Fetch.GetUploadFileUrl(imgDomain, "/Site/downLoad.png");
                 MobileCase = Fetch.GetUploadFileUrl(imgDomain, "/Site/spreadcase.png");
+                OpenInstallKey = Utils.ApplicationSettings.Get("OpenInstallKey");
                 Random random = new Random();
                 MobileQrcode = Fetch.GetQrCode("http://" + Request.Url.Authority + "/Index.aspx?r=" + random.Next(1000, 9999), 312);
                 Title = AppConfig.PageTitle;
