@@ -1240,7 +1240,7 @@ namespace Game.Data
         }
         public bool CheckUrl(int id, string url)
         {
-            string sql = $"SELECT * FROM DomainName (NOLOCK) WHERE  id<>{id} AND Url={url}";
+            string sql = $"SELECT * FROM DomainName (NOLOCK) WHERE  id<>{id} AND Url='{url}'";
             return Database.ExecuteScalar(CommandType.Text, sql) != null;
         }
     }
