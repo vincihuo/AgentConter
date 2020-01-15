@@ -32,7 +32,7 @@ namespace Game.Web
             if (Fetch.GetTerminalType(Page.Request) != 0)
             {
                 String url = Page.Request.Url.Query;
-                Response.Redirect("/Mobile/Index.aspx?shareName=123456");
+                Response.Redirect($"/Mobile/Index.aspx{url}");
             }
         }
 
