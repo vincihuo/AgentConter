@@ -31,7 +31,8 @@ namespace Game.Web
             base.OnInit(e);
             if (Fetch.GetTerminalType(Page.Request) != 0)
             {
-                Response.Redirect("/Mobile/Index.aspx");
+                String url = Page.Request.Url.Query;
+                Response.Redirect($"/Mobile/Index.aspx{url}");
             }
         }
 
