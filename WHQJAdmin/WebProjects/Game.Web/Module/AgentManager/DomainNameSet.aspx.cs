@@ -62,7 +62,7 @@ namespace Game.Web.Module.AgentManager
             }
             if (FacadeManage.aidePlatformFacade.CheckUrl(IntParam, TextBoxUrl.Text))
             {
-                ShowError("域名已经被使用");
+                MessageBox("域名已经被使用");
                 return;
             }
 
@@ -77,14 +77,14 @@ namespace Game.Web.Module.AgentManager
                     string rsDelete = FacadeManage.RequestUri(uriDelete, "", "DELETE");
                     if (rsDelete == "")
                     {
-                        ShowError("配置请求失败");
+                        MessageBox("配置请求失败");
                         return;
                     }
                     object obj = new JavaScriptSerializer().DeserializeObject(rsDelete);
                     Dictionary<string, object> json = (Dictionary<string, object>)obj;
                     if (json["success"].ToString() != "True")
                     {
-                        ShowError("配置请求失败");
+                        MessageBox("配置请求失败");
                         return;
                     }
                 }
@@ -98,7 +98,7 @@ namespace Game.Web.Module.AgentManager
                 AccountsInfo acc = FacadeManage.aideAccountsFacade.GetAccountInfoByGameId(GameId);
                 if (acc == null)
                 {
-                    ShowError("游戏id不存在");
+                    MessageBox("游戏id不存在");
                     return;
                 }
                 domainName.AgentId = acc.UserID;
@@ -132,14 +132,14 @@ namespace Game.Web.Module.AgentManager
                 string rs = FacadeManage.RequestUri(uri, parma);
                 if (rs == "")
                 {
-                    ShowError("配置请求失败");
+                    MessageBox("配置失败成功");
                     return;
                 }
                 object obj = new JavaScriptSerializer().DeserializeObject(rs);
                 Dictionary<string, object> json = (Dictionary<string, object>)obj;
                 if (json["success"].ToString() != "True")
                 {
-                    ShowError("配置请求失败");
+                    MessageBox("配置失败成功");
                     return;
                 }
             }
@@ -150,11 +150,11 @@ namespace Game.Web.Module.AgentManager
             int pp = FacadeManage.aidePlatformFacade.SaveDomain(domainName);
             if (pp > 0)
             {
-                ShowInfo("配置信息操作成功", "DomainNameList.aspx", 1000);
+                MessageBox("配置信息操作成功");
             }
             else
             {
-                ShowError("配置失败");
+                MessageBox("域名生效但是存入失败");
             }
         }
     }

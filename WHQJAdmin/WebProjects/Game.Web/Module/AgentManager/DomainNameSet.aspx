@@ -27,7 +27,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="Redirect('DomainNameList.aspx')" />
+                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="window.close();" />
                     <asp:Button ID="btnCreate" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
@@ -89,7 +89,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn1" type="button" value="返回" class="btn wd1" onclick="Redirect('DomainNameList.aspx')" />
+                    <input id="btnReturn1" type="button" value="返回" class="btn wd1" onclick="window.close();" />
                     <asp:Button ID="Button1" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
