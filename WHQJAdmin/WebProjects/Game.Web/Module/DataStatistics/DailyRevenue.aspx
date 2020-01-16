@@ -32,7 +32,7 @@
                         <li class="tab2" onclick="Redirect('UserRegister.aspx')">注册统计</li>
                         <li class="tab2" onclick="Redirect('DailyPay.aspx')">充值统计</li>
                         <li class="tab2" onclick="Redirect('DailyDiamond.aspx')">钻石统计</li>
-                        <li class="tab2" onclick="Redirect('DailyGame.aspx')">金币统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">金币统计</li>
                         <li class="tab1">服务费统计</li>
                         <li class="tab2" onclick="Redirect('DailyWaste.aspx')">损耗统计</li>
                         <li class="tab2" onclick="Redirect('DailyOpenRoom.aspx')">开房统计</li>

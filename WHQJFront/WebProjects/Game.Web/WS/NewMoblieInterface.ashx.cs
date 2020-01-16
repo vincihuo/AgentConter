@@ -875,6 +875,7 @@ namespace Game.Web.WS
             _ajv.SetDataItem("adsAlertList", alert);
             _ajv.SetDataItem("activityList", activity);
             _ajv.SetDataItem("imageServerHost", imageServerHost);
+            _ajv.SetDataItem("LoseSignature", webConfig.Field5);
             _ajv.SetDataItem("MobileConfig", MobileConfig);
         }
 
