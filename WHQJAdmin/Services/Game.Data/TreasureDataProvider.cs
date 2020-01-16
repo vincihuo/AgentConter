@@ -425,6 +425,11 @@ namespace Game.Data
             string sqlQuery = $"SELECT * FROM UserValidBet WITH(NOLOCK) WHERE  UserID={UserId}";
             return Database.ExecuteObject<UserValidBet>(sqlQuery);
         }
+        public DataSet GetGameWaste(string time,string time1)
+        {
+            string sql = $"SELECT COUNT(*) AS Times,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,KindID AS KindID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{time}' AND '{time1}' GROUP BY KindID";
+            return Database.ExecuteDataset(sql);
+        }
 
         #endregion
 

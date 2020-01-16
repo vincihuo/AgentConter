@@ -205,6 +205,7 @@
     <Content Include="Module\ClubManager\RecordDiamondList.aspx" />
     <Content Include="Module\ClubManager\SystemSet.aspx" />
     <Content Include="Module\DataStatistics\DailyDiamond.aspx" />
+    <Content Include="Module\DataStatistics\DailyGame.aspx" />
     <Content Include="Module\DataStatistics\DailyGold.aspx" />
     <Content Include="Module\DataStatistics\DailyOpenRoom.aspx" />
     <Content Include="Module\DataStatistics\DailyPay.aspx" />
@@ -3345,6 +3346,13 @@
     <Compile Include="Module\DataStatistics\DailyDiamond.aspx.designer.cs">
       <DependentUpon>DailyDiamond.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\DataStatistics\DailyGame.aspx.cs">
+      <DependentUpon>DailyGame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DataStatistics\DailyGame.aspx.designer.cs">
+      <DependentUpon>DailyGame.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\DataStatistics\DailyGold.aspx.cs">
       <DependentUpon>DailyGold.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4062,7 +4070,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Module\MatchManager\" />
     <Folder Include="scripts\kindEditor\attached\" />
     <Folder Include="Upload\Active\" />
   </ItemGroup>

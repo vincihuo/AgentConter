@@ -147,6 +147,10 @@ namespace Game.Facade
         {
             return aideTreasureData.SaveEncryption(mm);
         }
+        public DataSet GetGameWaste(string time,string time1)
+        {
+            return aideTreasureData.GetGameWaste(time, time1);
+        }
 
         #endregion
 

@@ -59,6 +59,7 @@ namespace Game.IData
 
         Message AddValiBet(int valiBet, int userID, byte type, int DepositID, string DepositName);
         UserValidBet GetUserVailBet(int UserId);
+        DataSet GetGameWaste(string time, string time1);
         #endregion
 
         #region 充值配置

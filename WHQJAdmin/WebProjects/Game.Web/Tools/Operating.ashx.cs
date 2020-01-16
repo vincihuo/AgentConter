@@ -62,10 +62,37 @@ namespace Game.Web.Tools
                 case "checkorder":
                     CheckOrder(context);
                     break;
+                case "getgamewaste":
+                    GetGameWaste(context);
+                    break;
                 default:
                     break;
             }
         }
+        private void GetGameWaste(HttpContext context)
+        {
+            DataSet gameroom = Fetch.GetKindAndRoom();
+            string stime = GameRequest.GetQueryString("stime")+ " 00:00:00";
+            string etime = GameRequest.GetQueryString("etime")+ " 23:59:59";
+            DataSet ds= FacadeManage.aideTreasureFacade.GetGameWaste(stime, etime);
+            List<StatisticsWealth> data = new List<StatisticsWealth>();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                StatisticsWealth sc = null;
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    sc = new StatisticsWealth();
+                    DataRow[] rows = gameroom.Tables[0].Select("KindID=" + item["KindID"]);
+                    sc.name = rows != null && rows.Length > 0 ? rows[0]["KindName"].ToString() : "";
+                    sc.value =Convert.ToInt64(item["Waste"])/1000;
+                    data.Add(sc);
+                }
+            }
+            ajv.SetValidDataValue(true);
+            ajv.AddDataItem("data", data);
+            context.Response.Write(ajv.SerializeToJson());
+        }
+
         private void CheckOrder(HttpContext context)
         {
             int type= GameRequest.GetFormInt("type", 0);
