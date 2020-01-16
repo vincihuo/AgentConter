@@ -68,27 +68,6 @@ namespace Game.Web.Module.AgentManager
 
 
             DomainName domainName = new DomainName();
-            if (IntParam > 0)
-            {
-                domainName = FacadeManage.aidePlatformFacade.GetDomainById(IntParam);
-                if (domainName.Url != TextBoxUrl.Text)
-                {
-                    string uriDelete = ApplicationSettings.Get("AddUri") + "del_domain/" + domainName.Url.Replace("https://", "").Replace("http://", "");
-                    string rsDelete = FacadeManage.RequestUri(uriDelete, "", "DELETE");
-                    if (rsDelete == "")
-                    {
-                        MessageBox("配置请求失败");
-                        return;
-                    }
-                    object obj = new JavaScriptSerializer().DeserializeObject(rsDelete);
-                    Dictionary<string, object> json = (Dictionary<string, object>)obj;
-                    if (json["success"].ToString() != "True")
-                    {
-                        MessageBox("配置请求失败");
-                        return;
-                    }
-                }
-            }
             domainName.Type = Convert.ToByte(ddlProductType.SelectedValue);
             domainName.Url = TextBoxUrl.Text;
             domainName.AgentId = 0;
@@ -116,33 +95,36 @@ namespace Game.Web.Module.AgentManager
             }
             else
             {
-                if (domainName.State == 1)
-                {
-                    uri = ApplicationSettings.Get("AddUri") + "pm_domain/" + ApplicationSettings.Get("SitTag");
-                    string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
-                    parma = "{\"pm_domain\":\"" + mm + "\"}";
-                }
-                else
-                {
-                    uri = ApplicationSettings.Get("AddUri") + "del_domain/" + domainName.Url.Replace("https://", "").Replace("http://", "");
-                }
+                uri = ApplicationSettings.Get("AddUri") + "pm_domain/" + ApplicationSettings.Get("SitTag");
+                string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
+                parma = "{\"pm_domain\":\"" + mm + "\"}";
+
+                //if (domainName.State == 1)
+                //{
+                //    uri = ApplicationSettings.Get("AddUri") + "pm_domain/" + ApplicationSettings.Get("SitTag");
+                //    string mm = domainName.Url.Replace("https://", "").Replace("http://", "");
+                //    parma = "{\"pm_domain\":\"" + mm + "\"}";
+                //}
+                //else
+                //{
+                //    uri = ApplicationSettings.Get("AddUri") + "del_domain/" + domainName.Url.Replace("https://", "").Replace("http://", "");
+                //}
             }
-            if (IntParam > 0 || domainName.State == 1)
+
+            string rs = FacadeManage.RequestUri(uri, parma);
+            if (rs == "")
             {
-                string rs = FacadeManage.RequestUri(uri, parma);
-                if (rs == "")
-                {
-                    MessageBox("配置失败成功");
-                    return;
-                }
-                object obj = new JavaScriptSerializer().DeserializeObject(rs);
-                Dictionary<string, object> json = (Dictionary<string, object>)obj;
-                if (json["success"].ToString() != "True")
-                {
-                    MessageBox("配置失败成功");
-                    return;
-                }
+                MessageBox("配置失败成功");
+                return;
             }
+            object obj1 = new JavaScriptSerializer().DeserializeObject(rs);
+            Dictionary<string, object> json1 = (Dictionary<string, object>)obj1;
+            if (json1["success"].ToString() != "True")
+            {
+                MessageBox("配置失败成功");
+                return;
+            }
+
             if (domainName.Type == 1 && domainName.State == 1)
             {
                 FacadeManage.aidePlatformFacade.OffDownloadURL();

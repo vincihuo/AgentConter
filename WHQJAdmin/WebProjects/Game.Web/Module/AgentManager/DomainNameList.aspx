@@ -74,7 +74,6 @@
                                默认模板
                             </td>
                             <td>
-                                <a class="l" href="javascript:void(0)" onclick="openWindowOwn('DomainNameSet.aspx?param=<%#Eval("id").ToString() %>','tip',600,300);">编辑</a>
                                 <asp:LinkButton runat="server" ForeColor="blue" OnClientClick='<%#SetDelete(Convert.ToByte(Eval("Type")),Eval("Url").ToString()) %>' OnClick="DeleteUrl" CommandArgument='<%#Eval("id").ToString() %>' >删除</asp:LinkButton>
                                 <asp:LinkButton runat="server" ForeColor="blue" OnClientClick='<%#SetOff(Convert.ToByte(Eval("Type")),Convert.ToByte(Eval("State")),Eval("Url").ToString()) %>' OnClick="OffUrl" CommandArgument='<%#Convert.ToInt32(Eval("id"))*10+Convert.ToInt32(Eval("State"))%>' ><%#GetState(Convert.ToByte(Eval("State"))) %></asp:LinkButton>
                             </td>
