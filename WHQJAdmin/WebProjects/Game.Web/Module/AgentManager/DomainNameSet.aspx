@@ -27,7 +27,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn" type="button" value="返回" class="btn wd1" onclick="window.close();" />
+                    <input id="btnReturn1" type="button" value="返回" class="btn wd1" onclick="Redirect('DomainNameList.aspx')" />
                     <asp:Button ID="btnCreate" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
@@ -79,7 +79,7 @@
                                 <asp:ListItem Text="禁用" Value="0"></asp:ListItem>
                                 <asp:ListItem Text="启用" Value="1"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:Label runat="server" ID="LableHit" class="hong" >启用新的下载域名其他下载域名将被禁用</asp:Label>
+                            <asp:Label runat="server" ID="LableHit" class="hong">启用新的下载域名其他下载域名将被禁用</asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -89,7 +89,7 @@
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="titleOpBg Lpd10">
-                    <input id="btnReturn1" type="button" value="返回" class="btn wd1" onclick="window.close();" />
+                    <input id="btnReturn1" type="button" value="返回" class="btn wd1" onclick="Redirect('DomainNameList.aspx')" />
                     <asp:Button ID="Button1" runat="server" Text="保存" CssClass="btn wd1" OnClick="btnSave_Click" />
                 </td>
             </tr>
