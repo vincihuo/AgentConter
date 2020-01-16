@@ -125,7 +125,7 @@
                 $('#ddlLink').css('display', 'none');
             }
             $('#ddlActivity').on('change', function () {
-                if ($(this).val() == '0') {
+                if ($(this).val() == '0'||$(this).val() == '6'  ) {
                     $('#txtLink').css('display', 'block');
                 }
                 else {
