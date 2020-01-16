@@ -82,6 +82,7 @@
                     <asp:ListItem Text="充值" Value="3"></asp:ListItem>
                     <asp:ListItem Text="VIP" Value="4"></asp:ListItem>
                     <asp:ListItem Text="转盘" Value="5"></asp:ListItem>
+                    <asp:ListItem Text="网页" Value="6"></asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>
