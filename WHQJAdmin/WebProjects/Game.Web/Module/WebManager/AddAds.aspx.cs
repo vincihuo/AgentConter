@@ -42,7 +42,7 @@ namespace Game.Web.Module.WebManager
                 }
             }
             ads.Type = Convert.ToByte(ddlActivity.SelectedValue);
-            if (ads.Type == 0)
+            if (ads.Type == 0|| ads.Type == 6)
             {
                 ads.LinkURL = CtrlHelper.GetText(txtLink);
             }
