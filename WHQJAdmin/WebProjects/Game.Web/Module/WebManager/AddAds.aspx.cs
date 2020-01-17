@@ -89,7 +89,7 @@ namespace Game.Web.Module.WebManager
                     //CtrlHelper.SetText(txttitle, ads.Title);
                     CtrlHelper.SetText(txtSortID, ads.SortID.ToString());
                     ddlActivity.SelectedValue = ads.Type.ToString();
-                    if (ads.Type == 0)
+                    if (ads.Type == 0|| ads.Type==6)
                     {
                         txtLink.Visible = true;
                         ddlLink.Visible = false;
