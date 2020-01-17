@@ -88,7 +88,7 @@
                 签到抽奖获得礼包的概率：
             </td>
             <td>
-                <asp:TextBox ID="txtProbability" runat="server" CssClass="text" validate="{number:true}"></asp:TextBox>%
+                <asp:TextBox ID="txtProbability" runat="server" CssClass="text" validate="{number:true}"></asp:TextBox>/10000
             </td>
         </tr> 
         <tr id="NeedDay" runat="server">

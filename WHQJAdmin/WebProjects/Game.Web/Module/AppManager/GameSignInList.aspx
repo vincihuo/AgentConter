@@ -91,7 +91,7 @@
                             <%#GetPackageName(Convert.ToInt32( Eval( "PackageID" )))%>
                         </td>                           
                         <td>
-                            <%# Eval("Probability")%>%
+                            <%# Eval("Probability")%>/10000
                         </td>  
                         <td>
                             <%#Convert.ToInt32( Eval( "NeedDay" ))%>
@@ -121,8 +121,8 @@
                             <%#GetPackageName(Convert.ToInt32( Eval( "PackageID" )))%>
                         </td>                           
                         <td>
-                            <%# Eval("Probability")%>%
-                        </td>  
+                            <%# Eval("Probability")%>/10000
+                        </td>
                         <td>
                             <%#Convert.ToInt32( Eval( "NeedDay" ))%>
                         </td>      
