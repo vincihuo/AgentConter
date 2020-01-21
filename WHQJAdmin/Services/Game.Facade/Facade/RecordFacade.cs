@@ -236,6 +236,10 @@ namespace Game.Facade
         {
             return aideRecordData.CountReward(where);
         }
+        public DataSet GetTreasureInfo(string stime,string etime)
+        {
+            return aideRecordData.GetTreasureInfo(stime,etime);
+        }
         #endregion
 
         #region 赠送靓号

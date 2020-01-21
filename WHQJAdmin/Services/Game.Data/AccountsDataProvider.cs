@@ -251,6 +251,11 @@ namespace Game.Data
 
             return MessageHelper.GetMessage(Database, "NET_PM_AddSuperUser", prams);
         }
+        public DataSet GetUserData(string st, string et)
+        {
+            string sql = $"SELECT COUNT(CASE WHEN PlatformID=2 THEN 1 END ) AS tData,COUNT(CASE WHEN PlatformID<>2 THEN 1 END ) AS nData FROM AccountsInfo WHERE IsAndroid = 0 AND LastLogonDate BETWEEN '{st}' AND '{et}'";
+            return Database.ExecuteDataset(sql);
+        }
         #endregion
 
         #region 限制管理

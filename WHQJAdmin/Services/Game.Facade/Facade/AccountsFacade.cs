@@ -348,6 +348,10 @@ namespace Game.Facade
         {
             return aideAccountsData.GetAccountsUmeng(userid);
         }
+        public DataSet GetUserData(string st,string et)
+        {
+            return aideAccountsData.GetUserData(st,et);
+        }
         #endregion
 
         #region 游戏配置

@@ -106,6 +106,7 @@
                         PageSize="20" NextPageText="下页" PrevPageText="上页" ShowBoxThreshold="0" ShowCustomInfoSection="Left" LayoutType="Table"
                         NumericButtonCount="5" CustomInfoHTML="总记录：%RecordCount%　页码：%CurrentPageIndex%/%PageCount%　每页：%PageSize%">
                     </gsp:AspNetPager>
+                    <input type="button" id="search" value="查询" class="btn wd1" />
                 </td>
             </tr>
         </table>

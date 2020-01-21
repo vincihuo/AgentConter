@@ -204,6 +204,7 @@
     <Content Include="Module\ClubManager\GroupMember.aspx" />
     <Content Include="Module\ClubManager\RecordDiamondList.aspx" />
     <Content Include="Module\ClubManager\SystemSet.aspx" />
+    <Content Include="Module\DataStatistics\ActiveData.aspx" />
     <Content Include="Module\DataStatistics\DailyDiamond.aspx" />
     <Content Include="Module\DataStatistics\DailyGame.aspx" />
     <Content Include="Module\DataStatistics\DailyGold.aspx" />
@@ -212,7 +213,9 @@
     <Content Include="Module\DataStatistics\DailyRevenue.aspx" />
     <Content Include="Module\DataStatistics\DiamondDistribute.aspx" />
     <Content Include="Module\DataStatistics\DailyWaste.aspx" />
+    <Content Include="Module\DataStatistics\GameData.aspx" />
     <Content Include="Module\DataStatistics\SystemStat.aspx" />
+    <Content Include="Module\DataStatistics\UserData.aspx" />
     <Content Include="Module\DataStatistics\UserOnline.aspx" />
     <Content Include="Module\DataStatistics\UserRegister.aspx" />
     <Content Include="Module\DataStatistics\VipDistribute.aspx" />
@@ -3339,6 +3342,13 @@
     <Compile Include="Module\ClubManager\SystemSet.aspx.designer.cs">
       <DependentUpon>SystemSet.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\DataStatistics\ActiveData.aspx.cs">
+      <DependentUpon>ActiveData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DataStatistics\ActiveData.aspx.designer.cs">
+      <DependentUpon>ActiveData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\DataStatistics\DailyDiamond.aspx.cs">
       <DependentUpon>DailyDiamond.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3395,12 +3405,26 @@
     <Compile Include="Module\DataStatistics\DailyWaste.aspx.designer.cs">
       <DependentUpon>DailyWaste.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Module\DataStatistics\GameData.aspx.cs">
+      <DependentUpon>GameData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DataStatistics\GameData.aspx.designer.cs">
+      <DependentUpon>GameData.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Module\DataStatistics\SystemStat.aspx.cs">
       <DependentUpon>SystemStat.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Module\DataStatistics\SystemStat.aspx.designer.cs">
       <DependentUpon>SystemStat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\DataStatistics\UserData.aspx.cs">
+      <DependentUpon>UserData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\DataStatistics\UserData.aspx.designer.cs">
+      <DependentUpon>UserData.aspx</DependentUpon>
     </Compile>
     <Compile Include="Module\DataStatistics\UserOnline.aspx.cs">
       <DependentUpon>UserOnline.aspx</DependentUpon>

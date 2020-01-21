@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserRegister.aspx.cs" Inherits="Game.Web.Module.DataStatistics.UserRegister" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserData.aspx.cs" Inherits="Game.Web.Module.DataStatistics.UserData" %>
 
 <!DOCTYPE html>
 
@@ -14,14 +14,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- 头部菜单 Start -->
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title">
             <tr>
                 <td width="19" height="25" valign="top" class="Lpd10">
                     <div class="arr">
                     </div>
                 </td>
-                <td width="1232" height="25" valign="top" align="left">你当前位置：统计系统 - 用户注册统计
+                <td width="1232" height="25" valign="top" align="left">你当前位置：统计系统 - 平台数据
                 </td>
             </tr>
         </table>
@@ -29,21 +28,24 @@
             <tr>
                 <td height="28">
                     <ul>
-                        <li class="tab1">注册统计</li>
-                        <li class="tab2" onclick="Redirect('DailyPay.aspx')">充值统计</li>
-                        <li class="tab2" onclick="Redirect('DailyDiamond.aspx')">钻石统计</li>
+                        <li class="tab1">用户统计</li>
+                        <li class="tab2" onclick="Redirect('DailyPay.aspx')">登录统计</li>
+                        <li class="tab2" onclick="Redirect('DailyDiamond.aspx')">新增统计</li>
                         <li class="tab2" onclick="Redirect('DailyGold.aspx')">金币统计</li>
-                        <li class="tab2" onclick="Redirect('DailyRevenue.aspx')">服务费统计</li>
-                        <li class="tab2" onclick="Redirect('DailyWaste.aspx')">损耗统计</li>
-                        <li class="tab2" onclick="Redirect('DailyOpenRoom.aspx')">开房统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">钻石统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">充值统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">提现统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">税收统计</li>
+                        <li class="tab2" onclick="Redirect('DailyGold.aspx')">库存统计</li>
+                        <li class="tab2" onclick="Redirect('ActiveData.aspx')">彩京统计</li>
                     </ul>
                 </td>
             </tr>
         </table>
-        <!-- 头部菜单 End -->
+
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
             <tr>
-                <td class="listTdLeft" style="width: 80px">日期查询：
+                <td class="listTdLeft" style="width: 80px">最后登录日期：
                 </td>
                 <td>
                     <asp:TextBox ID="txtStartDate" runat="server" CssClass="text wd2" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'txtEndDate\')}'})"></asp:TextBox><img
@@ -58,70 +60,57 @@
                 </td>
             </tr>
         </table>
-        <h2 style="text-align: center; margin-bottom: 5px;">每日用户注册</h2>
+        <h2 style="text-align: center; margin-bottom: 5px;">用户数据</h2>
         <div id="content">
         </div>
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr></tr>
         </table>
+
     </form>
     <script type="text/javascript">
         var data = [];
+        var Stat = G2.Stat;
         var chart = new G2.Chart({
             id: 'content',
             forceFit: true,
-            height: 600,
-            plotCfg: {
-                margin: [40, 80, 90, 80]
-            }
+            height: 500,
         });
-        chart.legend({
-            position: 'bottom'
+        chart.source(data);
+        // 重要：绘制饼图时，必须声明 theta 坐标系
+        chart.coord('theta', {
+            radius: 0.8 // 设置饼图的大小
         });
-        chart.axis('count', {
-            position: 'top',
-            formatter: function (dimValue) {
-                if (dimValue >= 10000 && dimValue <= 99999) {
-                    return (dimValue / 10000).toFixed(0) + '万';
-                } else if (dimValue >= 100000 && dimValue <= 999999) {
-                    return (dimValue / 100000).toFixed(0) + '十万';
-                } else if (dimValue >= 1000000 && dimValue <= 9999999) {
-                    return (dimValue / 1000000).toFixed(0) + '百万';
-                } else if (dimValue >= 10000000 && dimValue <= 99999999) {
-                    return (dimValue / 10000000).toFixed(0) + '千万';
-                } else if (dimValue >= 100000000 && dimValue <= 999999999) {
-                    return (dimValue / 100000000).toFixed(0) + '亿';
-                } else if (dimValue >= 1000000000 && dimValue <= 9999999999) {
-                    return (dimValue / 1000000000).toFixed(0) + '十亿';
-                } else if (dimValue >= 10000000000 && dimValue <= 99999999999) {
-                    return (dimValue / 10000000000).toFixed(0) + '百亿';
-                } else if (dimValue >= 100000000000 && dimValue <= 999999999999) {
-                    return (dimValue / 100000000000).toFixed(0) + '千亿';
-                } else if (dimValue >= 1000000000000 && dimValue <= 9999999999999) {
-                    return (dimValue / 1000000000000).toFixed(0) + '万亿';
-                } else {
-                    return dimValue;
+        chart.legend('name', {
+            position: 'bottom',
+            itemWrap: true,
+            formatter: function (val) {
+                for (var i = 0, len = data.length; i < len; i++) {
+                    var obj = data[i];
+                    if (obj.name === val) {
+                        return val + ': ' + obj.value + '%';
+                    }
                 }
             }
         });
-        const scale = {
-            time: {
-                alias: '统计时间',
-                type: 'time',
-                mask: 'yyyy-mm-dd',
-            },
-            count: {
-                alias: '人数'
-            },
-            type: {
-                type: 'cat'
+        chart.tooltip({
+            title: null,
+            map: {
+                value: 'value'
             }
-        };
-
-        chart.source(data, scale);
-        chart.line().position('time*count').color('type', ['#ff7f0e', '#2ca02c', '#1f77b4']).shape('smooth').size(2);
+        });
+        chart.intervalStack()
+            .position(Stat.summary.percent('value'))
+            .color('name')
+            .label('name*..percent', function (name, percent) {
+                percent = (percent * 100).toFixed(2) + '%';
+                return name + ' ' + percent;
+            });
         chart.render();
-
+        // 设置默认选中
+        var geom = chart.getGeoms()[0]; // 获取所有的图形
+        var items = geom.getData(); // 获取图形对应的数据
+        geom.setSelected(items[1]); // 设置选中
         window.onload = loadData();
 
         $('#search').on('click', function () {
@@ -131,15 +120,24 @@
         function loadData() {
             $.ajax({
                 type: "GET",
-                url: "/Tools/Operating.ashx?action=getregisterstatictics",
+                url: "/Tools/Operating.ashx?action=getuserdata",
                 data: { stime: $("#txtStartDate").val(), etime: $("#txtEndDate").val() },
                 success: function (result) {
-                    if (result.data.valid) {
+                    if (result.data.valid && result.data.data.length > 0) {
                         chart.changeData(result.data.data);
+                        $('#content').show();
+                    } else {
+                        $('#content').hide();
                     }
                 }
             });
         }
+
+
+
+
+
+
     </script>
 </body>
 </html>

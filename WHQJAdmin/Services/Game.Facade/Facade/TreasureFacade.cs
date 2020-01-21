@@ -151,6 +151,10 @@ namespace Game.Facade
         {
             return aideTreasureData.GetGameWaste(time, time1);
         }
+        public DataSet GetGameByKind(string kind,string stime,string etime)
+        {
+            return aideTreasureData.GetGameByKind(kind, stime, etime);
+        }
 
         #endregion
 

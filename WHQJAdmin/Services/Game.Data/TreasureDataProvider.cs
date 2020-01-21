@@ -427,7 +427,17 @@ namespace Game.Data
         }
         public DataSet GetGameWaste(string time,string time1)
         {
-            string sql = $"SELECT COUNT(*) AS Times,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,KindID AS KindID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{time}' AND '{time1}' GROUP BY KindID";
+            string sql = 
+                $"SELECT COUNT(*) AS Times,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,KindID AS KindID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{time}' AND '{time1}' GROUP BY KindID" +
+                $" SELECT COUNT(*) AS Times,convert(varchar(12),InsertTime,102) AS ctime,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,KindID AS KindID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{time}' AND '{time1}' GROUP BY KindID,convert(varchar(12),InsertTime,102)";
+            return Database.ExecuteDataset(sql);
+        }
+        public DataSet GetGameByKind(string kind, string stime, string etime)
+        {
+            string sql = 
+                $"SELECT COUNT(*) AS Times,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,ServerID AS ServerID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{stime}' AND '{etime}' AND KindID={kind} GROUP BY ServerID " +
+                $"SELECT COUNT(*) AS Times,convert(varchar(12),InsertTime,102) AS ctime,SUM(Waste) AS Waste,SUM(Revenue) AS Revenue ,ServerID AS ServerID  FROM RecordDrawInfo WITH(NOLOCK) WHERE InsertTime BETWEEN '{stime}' AND '{etime}' AND KindID={kind}  GROUP BY ServerID,convert(varchar(12),InsertTime,102) " +
+                $"SELECT COUNT(*) AS Person,ServerID AS ServerID FROM GameScoreLocker(NOLOCK) WHERE KindID={kind} GROUP BY ServerID";
             return Database.ExecuteDataset(sql);
         }
 

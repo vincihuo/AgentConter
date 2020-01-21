@@ -332,6 +332,15 @@ namespace Game.Data
             string sql = "SELECT Person=MAX(BeggarNumber)-MIN(BeggarNumber), ImmediateMoney= SUM(Tax),OtherMoney=SUM(CurrReward) FROM AgentCountRecord " + where;
             return Database.ExecuteDataset(CommandType.Text, sql);
         }
+        public DataSet GetTreasureInfo(string stime, string etime)
+        {
+            string sql =
+                $"SELECT SUM(ChangeScore) AS Score,TypeID AS ctype FROM [dbo].[RecordTreasureSerial] GROUP BY TypeID " +
+                $"SELECT SUM(ChangeDiamond) AS Diamond,TypeID AS ctype FROM [dbo].[RecordDiamondSerial] GROUP BY TypeID " +
+                $"SELECT SUM(ChangeScore) AS cnumber, convert(varchar(12),CollectDate,102) AS ctime ,TypeID AS ctype FROM [dbo].[RecordTreasureSerial]  WHERE CollectDate BETWEEN '{stime}' AND '{etime}'  GROUP BY convert(varchar(12),CollectDate,102),TypeID ORDER BY convert(varchar(12),CollectDate,102) " +
+                $"SELECT SUM(ChangeDiamond) AS cnumber, convert(varchar(12),CollectDate,102) AS ctime ,TypeID AS ctype FROM [dbo].[RecordDiamondSerial]  WHERE CollectDate BETWEEN '{stime}' AND '{etime}'  GROUP BY convert(varchar(12),CollectDate,102),TypeID ORDER BY convert(varchar(12),CollectDate,102)  ";
+            return Database.ExecuteDataset(CommandType.Text, sql);
+        }
 
         #endregion
 

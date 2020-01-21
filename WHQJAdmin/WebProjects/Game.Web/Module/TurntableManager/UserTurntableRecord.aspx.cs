@@ -50,6 +50,7 @@ namespace Game.Web.Module.TurntableManager
             {
                 condition.AppendFormat(" AND Opentime BETWEEN '{0}' AND '{1}' ", RSTime, RETime);
             }
+            ViewState["SearchItems"] = condition.ToString();
         }
 
         public string SearchItems

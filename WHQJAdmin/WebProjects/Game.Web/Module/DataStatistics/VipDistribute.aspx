@@ -38,11 +38,11 @@
         </table>
         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="titleQueBg">
             <tr>
-                <td style="color: red; font-size: 15px; font-weight: bold; text-align: center;">总计身上金币数：<%=person %></td>
+                <td style="color: red; font-size: 15px; font-weight: bold; text-align: center;">总人数：<%=person %></td>
             </tr>
         </table>
         <!-- 头部菜单 End -->
-        <h2 style="text-align: center; margin: 30px auto;">平台金币分布图</h2>
+        <h2 style="text-align: center; margin: 30px auto;">平台会员分布图</h2>
         <div id="content" data-gold='<%=gjson %>'>
         </div>
     </form>

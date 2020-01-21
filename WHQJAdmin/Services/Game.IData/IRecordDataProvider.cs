@@ -148,6 +148,7 @@ namespace Game.IData
         /// <returns></returns>
         long[] GetTotalDiamondExch(string where);
         DataSet CountReward(string where);
+        DataSet GetTreasureInfo(string stime, string etime);
         #endregion
 
         #region 赠送靓号

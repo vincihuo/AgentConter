@@ -65,6 +65,7 @@
             formatter: function (val) {
                 for (var i = 0, len = data.length; i < len; i++) {
                     var obj = data[i];
+                    return val + ': ' + obj.value + '%';
                     if (obj.name === val) {
                         return val + ': ' + obj.value + '%';
                     }

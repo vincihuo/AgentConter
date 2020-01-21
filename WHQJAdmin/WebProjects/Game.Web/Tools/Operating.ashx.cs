@@ -65,9 +65,178 @@ namespace Game.Web.Tools
                 case "getgamewaste":
                     GetGameWaste(context);
                     break;
+                case "getgamebykind":
+                    GetGameByKind(context);
+                    break;
+                case "getuserdata":
+                    GetUserData(context);
+                    break;
+                case "getactivedata":
+                    GetActiveData(context);
+                    break;
                 default:
                     break;
             }
+        }
+        private void GetGameByKind(HttpContext context)
+        {
+            string stime= GameRequest.GetQueryString("stime") + " 00:00:00";
+            string etime= GameRequest.GetQueryString("etime") + " 23:59:59";
+            string kindid = GameRequest.GetQueryString("kindID");
+            DataSet ds = FacadeManage.aideTreasureFacade.GetGameByKind(kindid,stime,etime);
+            DataSet gameroom = Fetch.GetKindAndRoom();
+            List<StatisticsWealth> dataWaste = new List<StatisticsWealth>();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                StatisticsWealth sc = null;
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    sc = new StatisticsWealth();
+                    DataRow[] rows = gameroom.Tables[1].Select("ServerID=" + item["ServerID"]);
+                    sc.name = rows != null && rows.Length > 0 ? rows[0]["ServerName"].ToString() : "";
+                    sc.value = Convert.ToInt64(item["Waste"]) / 1000;
+                    dataWaste.Add(sc);
+                }
+            }
+            List<StatisticsWealth> dataOnline = new List<StatisticsWealth>();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                StatisticsWealth sc = null;
+                foreach (DataRow item in ds.Tables[2].Rows)
+                {
+                    sc = new StatisticsWealth();
+                    DataRow[] rows = gameroom.Tables[1].Select("ServerID=" + item["ServerID"]);
+                    sc.name = rows != null && rows.Length > 0 ? rows[0]["ServerName"].ToString() : "";
+                    sc.value = Convert.ToInt32(item["Person"]);
+                    dataOnline.Add(sc);
+                }
+            }
+
+            List<StatisticsChart> dataTimes = new List<StatisticsChart>();
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                StatisticsChart sc = null;
+                foreach (DataRow item in ds.Tables[1].Rows)
+                {
+                    DataRow[] rows = gameroom.Tables[1].Select("ServerID=" + item["ServerID"]);
+                    sc = new StatisticsChart();
+                    sc.type = rows != null && rows.Length > 0 ? rows[0]["ServerName"].ToString() : "";
+                    sc.time = Convert.ToString(item["ctime"]);
+                    sc.count = Convert.ToInt64(item["Times"]);
+                    dataTimes.Add(sc);
+                }
+            }
+            ajv.SetValidDataValue(true);
+            ajv.AddDataItem("dataWaste", dataWaste);
+            ajv.AddDataItem("dataOnline", dataOnline);
+            ajv.AddDataItem("dataTimes", dataTimes);
+            context.Response.Write(ajv.SerializeToJson());
+        }
+        private void GetActiveData(HttpContext context)
+        {
+            string stime = GameRequest.GetQueryString("stime") + " 00:00:00";
+            string etime = GameRequest.GetQueryString("etime") + " 23:59:59";
+            int type = Convert.ToInt32(GameRequest.GetQueryString("type"));
+            DataSet ds= FacadeManage.aideRecordFacade.GetTreasureInfo(stime, etime);
+            List<StatisticsWealth> data1 = new List<StatisticsWealth>();
+
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                StatisticsWealth sc = null;
+                foreach (DataRow item in ds.Tables[0].Rows)
+                {
+                    string name = GetOperatType(Convert.ToInt32(item["ctype"]));
+                    if (name != null)
+                    {
+                        sc = new StatisticsWealth();
+                        sc.name = name;
+                        sc.value = Convert.ToInt64(item["Score"]) / 1000;
+                        data1.Add(sc);
+                    }
+                }
+            }
+            List<StatisticsWealth> data2 = new List<StatisticsWealth>();
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                StatisticsWealth sc = null;
+                foreach (DataRow item in ds.Tables[1].Rows)
+                {
+                    string name = GetOperatType(Convert.ToInt32(item["ctype"]));
+                    if (name != null)
+                    {
+                        sc = new StatisticsWealth();
+                        sc.name = name;
+                        sc.value = Convert.ToInt64(item["Diamond"]) / 1000;
+                        data2.Add(sc);
+                    }
+                }
+            }
+            List<StatisticsChart> data3 = new List<StatisticsChart>();
+            if (ds != null && ds.Tables[type+1].Rows.Count > 0)
+            {
+                StatisticsChart sc = null;
+                foreach (DataRow item in ds.Tables[1+type].Rows)
+                {
+                    string name = GetOperatType(Convert.ToInt32(item["ctype"]));
+                    if (name != null)
+                    {
+                        sc = new StatisticsChart();
+                        sc.type = name;
+                        sc.time = Convert.ToString(item["ctime"]);
+                        sc.count = Convert.ToInt64(item["cnumber"]) / 1000;
+                        data3.Add(sc);
+                    }
+                }
+            }
+            ajv.SetValidDataValue(true);
+            ajv.AddDataItem("DataScore", data1);
+            ajv.AddDataItem("DataDiamond", data2);
+            ajv.AddDataItem("data", data3);
+            context.Response.Write(ajv.SerializeToJson());
+        }
+        private string GetOperatType(int typeid)
+        {
+            switch (typeid)
+            {
+                case 1:
+                    return "注册赠送";
+                case 13:
+                    return "代理奖励";
+                case 14:
+                    return "签到";
+                case 15:
+                    return "分享";
+                case 16:
+                    return "转盘";
+                case 17:
+                    return "VIP奖励";
+                case 18:
+                    return "邮件";
+                default:
+                    return null;
+            }
+        }
+
+        private void GetUserData(HttpContext context)
+        {
+            string stime = GameRequest.GetQueryString("stime") + " 00:00:00";
+            string etime = GameRequest.GetQueryString("etime") + " 23:59:59";
+            DataSet ds = FacadeManage.aideAccountsFacade.GetUserData(stime,etime);
+            List<StatisticsWealth> data = new List<StatisticsWealth>();
+            StatisticsWealth sc = new StatisticsWealth {
+                name = "正式账号",
+                value =Convert.ToInt32(ds.Tables[0].Rows[0]["nData"])
+            };
+            data.Add(sc);
+            StatisticsWealth sc1 = new StatisticsWealth
+            {
+                name = "非正式账号",
+                value = Convert.ToInt32(ds.Tables[0].Rows[0]["tData"])
+            };
+            data.Add(sc1);
+            ajv.SetValidDataValue(true);
+            ajv.AddDataItem("data", data);
+            context.Response.Write(ajv.SerializeToJson());
         }
         private void GetGameWaste(HttpContext context)
         {
@@ -88,8 +257,39 @@ namespace Game.Web.Tools
                     data.Add(sc);
                 }
             }
+
+            List<StatisticsChart> data2 = new List<StatisticsChart>();
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                StatisticsChart sc = null;
+                foreach (DataRow item in ds.Tables[1].Rows)
+                {
+                    DataRow[] rows = gameroom.Tables[0].Select("KindID=" + item["KindID"]);
+                    sc = new StatisticsChart();
+                    sc.type = rows != null && rows.Length > 0 ? rows[0]["KindName"].ToString() : "";
+                    sc.time = Convert.ToString(item["ctime"]);
+                    sc.count = Convert.ToInt64(item["Revenue"]) / 1000;
+                    data2.Add(sc);
+                }
+            }
+            List<StatisticsChart> data3 = new List<StatisticsChart>();
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                StatisticsChart sc = null;
+                foreach (DataRow item in ds.Tables[1].Rows)
+                {
+                    DataRow[] rows = gameroom.Tables[0].Select("KindID=" + item["KindID"]);
+                    sc = new StatisticsChart();
+                    sc.type = rows != null && rows.Length > 0 ? rows[0]["KindName"].ToString() : "";
+                    sc.time = Convert.ToString(item["ctime"]);
+                    sc.count = Convert.ToInt64(item["Times"]);
+                    data3.Add(sc);
+                }
+            }
             ajv.SetValidDataValue(true);
-            ajv.AddDataItem("data", data);
+            ajv.AddDataItem("dataWaste", data);
+            ajv.AddDataItem("dataRevenue", data2);
+            ajv.AddDataItem("dataTimes", data3);
             context.Response.Write(ajv.SerializeToJson());
         }
 
