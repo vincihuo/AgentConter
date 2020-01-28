@@ -29,7 +29,7 @@ SET NOCOUNT ON
 -- 执行逻辑
 BEGIN
 	-- 获取大厅版本配置
-	SELECT Field1,Field2,Field3,Field4 FROM WHQJNativeWebDB.dbo.ConfigInfo WHERE ConfigKey=N'MobilePlatformVersion'
+	SELECT Field1,Field2,Field3,Field4,Field8 FROM WHQJNativeWebDB.dbo.ConfigInfo WHERE ConfigKey=N'MobilePlatformVersion'
 
 	-- 获取游戏列表
 	SELECT * FROM MobileKindItem WHERE Nullity=0 ORDER BY SortID ASC,KindID DESC
