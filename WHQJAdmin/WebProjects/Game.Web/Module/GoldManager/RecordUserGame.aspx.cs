@@ -178,6 +178,15 @@ namespace Game.Web.Module.GoldManager
             }
             return "<td></td><td></td>";
         }
+
+        protected string GetScore(long score,long grade)
+        {
+            if (score > 0)
+            {
+                return FacadeManage.ConversionMoneyToShow(score).ToString();
+            }
+            return grade.ToString();
+        }
         /// <summary>
         /// 子数据绑定
         /// </summary>

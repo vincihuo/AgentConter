@@ -79,7 +79,6 @@ namespace Game.Data
             string sql = $"SELECT * FROM DrawalOrder WITH(NOLOCK) WHERE OrderID ='{orderid}'";
             return Database.ExecuteObject<DrawalOrder>(sql);
         }
-
         public Message DealDralwalOrder(string orderid, int states, int master, string ip)
         {
             List<DbParameter> prams = new List<DbParameter>
@@ -92,10 +91,7 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PW_DealDrawarOrder", prams);
         }
-
         #endregion
-
-
         #region 线上充值配置
         public bool CheckOrder(int type)
         {
@@ -315,25 +311,21 @@ namespace Game.Data
             string sqlQuery = $"SELECT * FROM pay_chanel WITH(NOLOCK) WHERE  bankType={type}";
             return Database.ExecuteObjectList<pay_chanel>(sqlQuery);
         }
-
         public pay_chanel GetPay_ChanelsByID(int id)
         {
             string sqlQuery = $"SELECT * FROM pay_chanel WITH(NOLOCK) WHERE  id={id}";
             return Database.ExecuteObject<pay_chanel>(sqlQuery);
         }
-
         public IList<signtype> GetSignList()
         {
             string sqlQuery = $"SELECT * FROM signtype WITH(NOLOCK)";
             return Database.ExecuteObjectList<signtype>(sqlQuery);
         }
-
         public signtype GetSignById(int id)
         {
             string sqlQuery = $"SELECT * FROM signtype WITH(NOLOCK) WHERE  id={id}";
             return Database.ExecuteObject<signtype>(sqlQuery);
         }
-
         public int SavePayChanel(pay_chanel chanel)
         {
             var prams = new List<DbParameter>
@@ -373,7 +365,6 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
-
         public int SaveEncryption(signtype mm)
         {
             var prams = new List<DbParameter>
@@ -404,8 +395,6 @@ namespace Game.Data
             }
             return Database.ExecuteNonQuery(CommandType.Text, sqlQuery, prams.ToArray());
         }
-
-
         public Message AddValiBet(int valiBet, int userID, byte type, int DepositID, string DepositName)
         {
             var prams = new List<DbParameter>
@@ -419,7 +408,6 @@ namespace Game.Data
             };
             return MessageHelper.GetMessage(Database, "NET_PB_Deposit", prams);
         }
-
         public UserValidBet GetUserVailBet(int UserId)
         {
             string sqlQuery = $"SELECT * FROM UserValidBet WITH(NOLOCK) WHERE  UserID={UserId}";
@@ -1058,7 +1046,6 @@ namespace Game.Data
         {
             string sqlQuery =
                 @"UPDATE CurrencyExchConfig SET ConfigName=@ConfigName,Diamond=@Diamond,ExchGold=@ExchGold,ImageType=@ImageType,SortID=@SortID WHERE ConfigID=@ConfigID";
-
             var prams = new List<DbParameter>
             {
                 Database.MakeInParam("ConfigName", config.ConfigName),

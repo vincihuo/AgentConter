@@ -1388,7 +1388,7 @@ namespace Game.Web.WS
                         info.KindName = kinds != null && kinds.Length > 0 ? kinds[0]["KindName"].ToString() : "";
                         info.Score = Convert.ToInt32(item["Score"]);
                         DataRow[] draws = draw.Select("DrawID=" + item["DrawID"]);
-                        info.UserCount = draws != null && draws.Length > 0 ? Convert.ToInt32(draws[0]["UserCount"]) : 0;
+                        info.UserCount = draws != null && draws.Length > 0 ? Convert.ToInt32(draws[0]["UserCount"])+ Convert.ToInt32(draws[0]["AndroidCount"]) : 0;
                         sList.Add(info);
                     }
                 }

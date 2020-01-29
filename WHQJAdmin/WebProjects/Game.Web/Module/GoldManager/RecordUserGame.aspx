@@ -153,7 +153,7 @@
                                                 <%# ((System.Data.DataRow)Container.DataItem)["ChairID"].ToString( )%>
                                             </td>
                                             <td>
-                                                <%# ((System.Data.DataRow)Container.DataItem)["Score"].ToString( )%>
+                                                <%# GetScore(Convert.ToInt64(((System.Data.DataRow)Container.DataItem)["Score"]),Convert.ToInt64(((System.Data.DataRow)Container.DataItem)["Grade"]))%>
                                             </td>
                                             <td>
                                                 <%# ((System.Data.DataRow)Container.DataItem)["Revenue"].ToString( )%>

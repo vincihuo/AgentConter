@@ -77,7 +77,6 @@ namespace Game.Data
             List<DbParameter> parms = new List<DbParameter> {Database.MakeInParam("ConfigKey", configKey)};
             return Database.ExecuteObject<ConfigInfo>(sqlQuery, parms);
         }
-
         /// <summary>
         /// 获取配置信息集合
         /// </summary>
