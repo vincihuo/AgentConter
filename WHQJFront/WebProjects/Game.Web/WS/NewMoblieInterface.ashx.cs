@@ -1152,6 +1152,7 @@ namespace Game.Web.WS
             string downloadUrl = "";
             string resVersion = "";
             string iosUrl = "";
+            string android_url = "";
             string description = "";
             DataRow row = (ds.Tables[0] != null && ds.Tables[0].Rows.Count > 0) ? ds.Tables[0].Rows[0] : null;
             if (row != null)
@@ -1160,7 +1161,8 @@ namespace Game.Web.WS
                 version = row["Field2"].ToString();
                 resVersion = row["Field3"].ToString();
                 iosUrl = row["Field4"].ToString();
-                description= row["Field8"].ToString();
+                android_url= row["Field6"].ToString();
+                description = row["Field8"].ToString();
             }
             //获取游戏列表
             IList<MobileKindItem> list = DataHelper.ConvertDataTableToObjects<MobileKindItem>(ds.Tables[1]);
@@ -1170,6 +1172,7 @@ namespace Game.Web.WS
             _ajv.SetDataItem("clientversion", version);
             _ajv.SetDataItem("resversion", resVersion);
             _ajv.SetDataItem("ios_url", iosUrl);
+            _ajv.SetDataItem("android_url", android_url);
             _ajv.SetDataItem("description", description);
             _ajv.SetDataItem("gamelist", list);
         }
