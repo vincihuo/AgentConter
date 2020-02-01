@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------------------------------
--- °æÈ¨£º2011
--- Ê±¼ä£º2012-02-23
--- ÓÃÍ¾£ºÊÖ»ú¶Ë»ñÈ¡ÓÎÏ·ÁÐ±íºÍ°æ±¾
+-- ï¿½ï¿½È¨ï¿½ï¿½2011
+-- Ê±ï¿½ä£º2012-02-23
+-- ï¿½ï¿½Í¾ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ë»ï¿½È¡ï¿½ï¿½Ï·ï¿½Ð±ï¿½ï¿½Í°æ±¾
 ----------------------------------------------------------------------------------------------------
 
 USE WHQJPlatformDB
@@ -23,15 +23,15 @@ CREATE PROCEDURE NET_PW_GetMobileGameAndVersion
 
 WITH ENCRYPTION AS
 
--- ÊôÐÔÉèÖÃ
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 SET NOCOUNT ON
 
--- Ö´ÐÐÂß¼­
+-- Ö´ï¿½ï¿½ï¿½ß¼ï¿½
 BEGIN
-	-- »ñÈ¡´óÌü°æ±¾ÅäÖÃ
-	SELECT Field1,Field2,Field3,Field4,Field8 FROM WHQJNativeWebDB.dbo.ConfigInfo WHERE ConfigKey=N'MobilePlatformVersion'
+	-- ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½
+	SELECT Field1,Field2,Field3,Field4,Field6,Field8 FROM WHQJNativeWebDB.dbo.ConfigInfo WHERE ConfigKey=N'MobilePlatformVersion'
 
-	-- »ñÈ¡ÓÎÏ·ÁÐ±í
+	-- ï¿½ï¿½È¡ï¿½ï¿½Ï·ï¿½Ð±ï¿½
 	SELECT * FROM MobileKindItem WHERE Nullity=0 ORDER BY SortID ASC,KindID DESC
 	
 END

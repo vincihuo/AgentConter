@@ -171,6 +171,23 @@ namespace Game.Facade.DataStruct
         public long AfterGold { get; set; }
         public string Type { get; set; }
     }
+    public class AgentPlayer
+    {
+        public int GameID { get; set; }
+        public string NickName { get; set; }
+        public long TeameValibet { get; set; }
+        public long TotleValiBet { get; set; }
+        public int BeggarNumber { get; set; }
+        public int SubNumber { get; set; }
+    }
+    public class AgentCountRecord
+    {
+        public string CountTime { get; set; }
+        public long TeamPerformance { get; set; }
+        public long SubPerformance { get; set; }
+        public long CurrReward { get; set; }
+    }
+
     public class AgentDrawalBill
     {
         public string DrawalTime { get; set; }

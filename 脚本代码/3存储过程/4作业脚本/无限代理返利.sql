@@ -25,15 +25,19 @@ DECLARE @TempUser INT
 
 BEGIN
     --vip����
-    UPDATE WHQJTreasureDB.dbo.UserValidBet SET GrandScore=TodayValiBet,TodayValiBet=0
+    UPDATE WHQJTreasureDB.dbo.UserValidBet SET GrandScore=TodayValiBet
     EXEC NET_PB_VipReward
-    UPDATE AgentInfo SET YesterDayReward=NULL
+    UPDATE AgentInfo SET YesterDayReward=NULL,YesterDayPerformance=NULL
     WHILE EXISTS(SELECT UserID FROM AgentInfo WHERE YesterDayReward IS NULL)
     BEGIN
         DECLARE @tCurr BIGINT
         SELECT TOP 1 @TempUser = UserID FROM AgentInfo WHERE YesterDayReward IS NULL
         EXEC NET_PJ_CountReward @TempUser,@tCurr OUTPUT
     END
+
+    UPDATE WHQJTreasureDB.dbo.UserValidBet SET TodayValiBet=0
+
+
     EXEC NET_PJ_RankAgent 1
     IF DATEPART(weekday,GETDATE())='2'
     BEGIN

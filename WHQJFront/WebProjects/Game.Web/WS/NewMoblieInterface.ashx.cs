@@ -373,8 +373,27 @@ namespace Game.Web.WS
                         _ajv.SetDataItem("apiVersion", 20191225);
                         SetMailState();
                         break;
-                        
+
                     #endregion
+
+                    #region  //没晚饭
+                    case "getownagent":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20200130 );
+                        GetOwnAgent();
+                        break;
+                    case "getwfagenrecord":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20200130);
+                        GetWFAgenRecord();
+                        break;
+                    case "getsublist":
+                        _ajv.SetValidDataValue(true);
+                        _ajv.SetDataItem("apiVersion", 20200130);
+                        GetSubList();
+                        break;
+                    #endregion
+
 
                     default:
                         _ajv.code = (int)ApiCode.VertyParamErrorCode;
@@ -395,6 +414,41 @@ namespace Game.Web.WS
                 context.Response.Write(_ajv.SerializeToJson());
             }
             context.Response.End();
+        }
+        private void GetSubList()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            int size = GameRequest.GetQueryInt("size", 1);
+            PagerSet ps = FacadeManage.aideTreasureFacade.GetListLock(" AgentInfo A,INNER JOIN WHQJAccountsDB.dbo.AccountsInfo B ", $" WHERE B.UserID=A.UserID AND A.ParentID={_userid} "," ",index,size, " B.GameID,B.NickName,A.TeameValibet,A.TotleValiBet,A.BeggarNumber,A.SubNumber ");
+            IList<AgentPlayer> list = DataHelper.ConvertDataTableToObjects<AgentPlayer>(ps.PageSet.Tables[0]);
+            _ajv.SetDataItem("palyers", list);
+        }
+        private void GetWFAgenRecord()
+        {
+            int index = GameRequest.GetQueryInt("index", 1);
+            int size = GameRequest.GetQueryInt("size", 1);
+            PagerSet ps = FacadeManage.aideRecordFacade.GetList("WFAgentCountRecord", index, size, $" WHERE UserID={_userid}", " ORDER BY CountTime DESC");
+            IList<AgentCountRecord> list = DataHelper.ConvertDataTableToObjects<AgentCountRecord>(ps.PageSet.Tables[0]); 
+            _ajv.SetDataItem("records", list);
+        }
+        private void GetOwnAgent()
+        {
+            DataSet ds = FacadeManage.aideTreasureFacade.GetWFAgentInfo(_userid);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow row = ds.Tables[1].Rows[0];
+                _ajv.SetDataItem("Parent", Convert.ToInt32(row["Parent"]));
+                _ajv.SetDataItem("Team", Convert.ToInt32(row["Team"]));
+                _ajv.SetDataItem("Sub", Convert.ToInt32(row["Sub"]));
+                _ajv.SetDataItem("NewSub", Convert.ToInt32(row["NewSub"]));
+                _ajv.SetDataItem("Alive", Convert.ToInt32(row["Alive"]));
+                _ajv.SetDataItem("Reward", Convert.ToInt64(row["Reward"]));
+                _ajv.SetDataItem("AllReward", Convert.ToInt64(row["AllReward"]));
+            }
+            else
+            {
+                _ajv.SetValidDataValue(false);
+            }
         }
         private void SetMailState()
         {
@@ -726,7 +780,6 @@ namespace Game.Web.WS
             _ajv.SetValidDataValue(mm.Success);
             _ajv.msg = mm.Content;
         }
-
         private void CreatBankPayOrder()
         {
             int cfgID = GameRequest.GetQueryInt("cfgID", 1);
@@ -764,7 +817,6 @@ namespace Game.Web.WS
                 _ajv.msg = string.Format(EnumHelper.GetDesc(ApiCode.VertyParamErrorCode), " 参数错误");
             }
         }
-
         private void SetGameHotFix()
         {
             int gameId = GameRequest.GetQueryInt("gameId", 3);
@@ -1787,7 +1839,7 @@ namespace Game.Web.WS
             }
             else
             {
-                _ajv.SetValidDataValue(true);
+                _ajv.SetValidDataValue(false);
             }
         }
         //领取奖励

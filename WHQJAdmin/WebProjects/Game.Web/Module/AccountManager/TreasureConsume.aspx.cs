@@ -43,7 +43,6 @@ namespace Game.Web.Module.AccountManager
         {
             BindData();
         }
-
         /// <summary>
         /// 设置查询条件
         /// </summary>

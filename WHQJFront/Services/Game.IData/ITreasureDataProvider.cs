@@ -99,6 +99,7 @@ namespace Game.IData
         Message ReceiveSpreadAward(int userid, int configid, string ip);
         Message GetReward(int uid);
         DataSet GetAgentInfo(int uid);
+        DataSet GetWFAgentInfo(int uid);
         DataSet GetAgentRank(int uid, int type);
         int GetIdByLink(string link);
         Message DealTurnTable(int uid, string tableName,int index,int open, long reward, long score);

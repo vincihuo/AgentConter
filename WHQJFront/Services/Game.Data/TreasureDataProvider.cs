@@ -311,6 +311,16 @@ namespace Game.Data
 
             return MessageHelper.GetMessage(Database, "NET_PJ_ReceiveSpreadAward", parms);
         }
+        public DataSet GetWFAgentInfo(int uid)
+        {
+            List<DbParameter> parms =
+            new List<DbParameter>
+            {
+                Database.MakeInParam("dwUserID", uid)
+            };
+            return Database.ExecuteDataset(CommandType.StoredProcedure, "NET_WF_GetAgentInfo", parms.ToArray());
+        }
+
         public DataSet GetAgentInfo(int uid)
         {
             List<DbParameter> parms =

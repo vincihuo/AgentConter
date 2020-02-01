@@ -190,6 +190,11 @@ namespace Game.Facade
         #endregion
 
         #region 推广信息
+        public DataSet GetWFAgentInfo(int uid)
+        {
+            return treasureData.GetWFAgentInfo(uid);
+        }
+
 
         public DataSet GetAgentInfo(int uid)
         {
